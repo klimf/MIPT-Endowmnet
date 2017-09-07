@@ -11,14 +11,22 @@
 
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
+import Button from 'components/Button';
 import messages from './messages';
+
 
 export default class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
-      <h1>
-        <FormattedMessage {...messages.header} />
-      </h1>
+      <div>
+        <br />
+        <Button>Lol</Button>
+        <br />
+        <Button type="border">Lol</Button>
+        <h1>
+          <FormattedMessage {...messages.header} />
+        </h1>
+      </div>
     );
   }
 }
