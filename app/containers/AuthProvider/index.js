@@ -9,16 +9,19 @@
 
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { bindAll } from 'redux-act';
 import { createStructuredSelector } from 'reselect';
-import makeSelectAuthProvider, { IsLogged } from './selectors';
+import { bindAll } from 'redux-act';
+
+import makeSelectAuthProvider, { isLogged, isUnauthorized } from './selectors';
 import * as actions from './actions';
 
 
-export class AuthProvider extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+export class AuthProvider extends React.PureComponent {
+  componentDidMount() {
+    this.props.fetchUser.start();
+  }
   render() {
     const { children, ...otherProps } = this.props;
-    console.log(otherProps);
     return (
       <div>
         { React.Children.map(children, (child) => React.cloneElement(child, otherProps))}
@@ -28,14 +31,24 @@ export class AuthProvider extends React.PureComponent { // eslint-disable-line r
 }
 
 AuthProvider.propTypes = {
-  dispatch: PropTypes.func.isRequired,
   children: PropTypes.node,
-  user: PropTypes.any,
+  authProviderState: PropTypes.any,
+  fetchUser: PropTypes.any,
+  fetchLogin: PropTypes.any,
+  fetchLogout: PropTypes.any,
+  userChanged: PropTypes.any,
+  fetchRecoveryPassword: PropTypes.any,
+  fetchGetRecoveryToken: PropTypes.any,
+  fetchConfirm: PropTypes.any,
+  fetchRegistration: PropTypes.any,
+  isLogged: PropTypes.any,
+  isUnauthorized: PropTypes.any,
 };
 
 const mapStateToProps = createStructuredSelector({
-  AuthProvider: makeSelectAuthProvider(),
-  IsLogged: IsLogged(),
+  authProviderState: makeSelectAuthProvider(),
+  isLogged: isLogged(),
+  isUnauthorized: isUnauthorized(),
 });
 
 function mapDispatchToProps(dispatch) {
