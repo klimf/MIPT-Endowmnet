@@ -30,7 +30,7 @@ const PageWrapper = styled.div`
   display: inline-block;
   width: 100%;
   height: 100%;
-  min-height: calc(100% - ${15 * unit}px);
+  min-height: calc(100% - ${30 * unit}px);
 `;
 
 export default class App extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
@@ -53,11 +53,11 @@ export default class App extends React.PureComponent { // eslint-disable-line re
           ]}
         />
         {/* add dark */}
+        <Header />
         <PageWrapper>
-          <Header />
           {React.Children.toArray(this.props.children)}
-          <Footer />
         </PageWrapper>
+        <Footer />
       </AppWrapper>
     );
   }

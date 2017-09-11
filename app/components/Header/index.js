@@ -18,6 +18,7 @@ import MenuIcon from './MenuIcon';
 import Logo from '../Logo';
 import Button from '../Button';
 import FlexBox from '../FlexBox';
+import Overlay from '../Overlay';
 
 class Header extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
@@ -29,7 +30,7 @@ class Header extends React.PureComponent { // eslint-disable-line react/prefer-s
   }
 
   handleMobileMenuClick() {
-    this.setState(this.state.menuIsOpen ? {menuIsOpen: false} : {menuIsOpen: true});
+    this.setState(this.state.menuIsOpen ? { menuIsOpen: false } : { menuIsOpen: true });
   }
 
   render() {
@@ -37,17 +38,28 @@ class Header extends React.PureComponent { // eslint-disable-line react/prefer-s
       <Wrapper>
         <FlexBox horisontal="space-between">
           <Link to="/"><Logo /></Link>
-          <FlexBox vertical="center">
-            <Button to="/" type="header" mtb={9}><FormattedMessage {...messages.button} /></Button>
-            {/*<MenuIcon onClick={this.handleMobileMenuClick} noMedium noLarge />*/}
-          </FlexBox>
+          <Button noSmall to="/" type="header" mtb={9}><FormattedMessage {...messages.button} /></Button>
+          <MenuIcon noLarge noMedium onClick={this.handleMobileMenuClick} />
         </FlexBox>
         <NavList noSmall>
           {messages.navigation.map((item, index) => (
-            <NavItem key={index} to={messages.navigation[index].link}><FormattedMessage {...messages.navigation[index]} /></NavItem>
+            <NavItem key={index} to={item.link}><FormattedMessage {...item} /></NavItem>
           ))}
         </NavList>
-        {/* */}
+        <Overlay noMedium noLarge show={this.state.menuIsOpen}>
+          <Wrapper>
+            <FlexBox horisontal="space-between">
+              <Link to="/"><Logo /></Link>
+              <MenuIcon onClick={this.handleMobileMenuClick} />
+            </FlexBox>
+          </Wrapper>
+          <NavList>
+            {messages.navigation.map((item, index) => (
+              <NavItem onClick={this.handleMobileMenuClick} key={index} to={item.link}><FormattedMessage {...item} /></NavItem>
+            ))}
+          </NavList>
+          <Button to="/" type="border" onClick={this.handleMobileMenuClick} ><FormattedMessage {...messages.button} /></Button>
+        </Overlay>
       </Wrapper>
     );
   }

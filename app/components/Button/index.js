@@ -39,7 +39,7 @@ function Button(props) {
     );
   }
   return (
-    <Wrapper mtb={props.mtb}>
+    <Wrapper {...props} >
       <ThemeProvider theme={props.type ? buttonThemes[props.type] : buttonThemes.primary} >
         {button}
       </ThemeProvider>

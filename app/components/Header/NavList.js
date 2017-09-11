@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { palette } from '../../utils/constants';
-import { hideOn } from '../../utils/style-utils';
+import { hideOn, media } from '../../utils/style-utils';
 
 
 const NavList = styled.div`
@@ -11,11 +11,13 @@ const NavList = styled.div`
   padding: 0;
   width: 100%;
   color: ${(props) => props.dark ? palette.white : palette.black};
-  ${hideOn}
   & > a:hover { 
     color: ${(props) => props.dark ? palette.white : palette.primary};; 
-    background-color: ${palette.light};
   }
+  ${media.small`
+    display: block;
+  `}
+  ${hideOn}
 `;
 
 export default NavList;
