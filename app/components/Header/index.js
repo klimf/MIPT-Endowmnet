@@ -13,11 +13,12 @@ import messages from './messages';
 import Wrapper from './Wrapper';
 import NavList from './NavList';
 import NavItem from './NavItem';
-import MenuIcon from './MenuIcon';
+import Icon from '../Icon';
 
 import Logo from '../Logo';
 import Button from '../Button';
 import FlexBox from '../FlexBox';
+import Overlay from '../Overlay';
 
 class Header extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
@@ -29,7 +30,7 @@ class Header extends React.PureComponent { // eslint-disable-line react/prefer-s
   }
 
   handleMobileMenuClick() {
-    this.setState(this.state.menuIsOpen ? {menuIsOpen: false} : {menuIsOpen: true});
+    this.setState(this.state.menuIsOpen ? { menuIsOpen: false } : { menuIsOpen: true });
   }
 
   render() {
@@ -37,17 +38,34 @@ class Header extends React.PureComponent { // eslint-disable-line react/prefer-s
       <Wrapper>
         <FlexBox horisontal="space-between">
           <Link to="/"><Logo /></Link>
-          <FlexBox vertical="center">
-            <Button to="/" type="header" mtb={9}><FormattedMessage {...messages.button} /></Button>
-            {/*<MenuIcon onClick={this.handleMobileMenuClick} noMedium noLarge />*/}
+          <FlexBox horisontal="space-between">
+            <Button noSmall to="/" type="border" margin="9px 24px"><FormattedMessage {...messages.enter} /></Button>
+            <Button noSmall to="/" type="header" margin="9px 0"><FormattedMessage {...messages.action} /></Button>
           </FlexBox>
+          <Icon noLarge noMedium type="menu" onClick={this.handleMobileMenuClick} />
         </FlexBox>
         <NavList noSmall>
           {messages.navigation.map((item, index) => (
-            <NavItem key={index} to={messages.navigation[index].link}><FormattedMessage {...messages.navigation[index]} /></NavItem>
+            <NavItem key={index} to={item.link}><FormattedMessage {...item} /></NavItem>
           ))}
         </NavList>
-        {/* */}
+        <Overlay noMedium noLarge show={this.state.menuIsOpen}>
+          <Wrapper>
+            <FlexBox horisontal="space-between">
+              <Link to="/" onClick={this.handleMobileMenuClick}><Logo /></Link>
+              <Icon type="close" onClick={this.handleMobileMenuClick} />
+            </FlexBox>
+          </Wrapper>
+          <NavList>
+            {messages.navigation.map((item, index) => (
+              <NavItem onClick={this.handleMobileMenuClick} key={index} to={item.link}><FormattedMessage {...item} /></NavItem>
+            ))}
+          </NavList>
+          <FlexBox horisontal="space-between" padding="0 4%">
+            <Button to="/" type="header" onClick={this.handleMobileMenuClick} ><FormattedMessage {...messages.action} /></Button>
+            <Button to="/" type="border" onClick={this.handleMobileMenuClick} ><FormattedMessage {...messages.enter} /></Button>
+          </FlexBox>
+        </Overlay>
       </Wrapper>
     );
   }

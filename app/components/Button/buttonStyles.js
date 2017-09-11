@@ -1,5 +1,6 @@
 import { css } from 'styled-components';
 import { unit } from '../../utils/constants';
+import { media } from '../../utils/style-utils';
 
 const defaultStyle = css`
   min-width: 100px;
@@ -7,6 +8,7 @@ const defaultStyle = css`
   display: inline-block;
   box-sizing: border-box;
   padding: ${0.5 * unit}px ${1.5 * unit}px;
+  text-align: center;
   text-decoration: none;
   text-transform: uppercase;
   border-radius: ${2 * unit}px;
@@ -30,6 +32,13 @@ const defaultStyle = css`
     box-shadow: ${(props) => props.theme.shadowHover};
     transform: ${(props) => props.theme.transformHover};
   }
+  
+  ${media.small`
+    &:hover {
+      box-shadow: ${(props) => props.theme.shadow};
+      transform: none;
+    }
+  `}
 `;
 
 // defaultStyle.defaultProps = {

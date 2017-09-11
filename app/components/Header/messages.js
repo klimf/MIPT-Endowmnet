@@ -47,8 +47,12 @@ export default defineMessages({
       link: '/faq',
     },
   ],
-  button: {
-    id: 'app.components.Header.Button',
+  action: {
+    id: 'app.components.Header.Button.Action',
     defaultMessage: 'Пожертвовать',
+  },
+  enter: {
+    id: 'app.components.Header.Button.Enter',
+    defaultMessage: 'Войти',
   },
 });
