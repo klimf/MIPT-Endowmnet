@@ -14,7 +14,7 @@ import makeSelectAuthProvider from './selectors';
 
 export class AuthProvider extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
-    const {children, ...otherProps} = this.props
+    const { children, ...otherProps } = this.props;
     return (
       <div>
         { React.Children.map(children, (child) => React.cloneElement(child, otherProps))}
@@ -25,7 +25,8 @@ export class AuthProvider extends React.PureComponent { // eslint-disable-line r
 
 AuthProvider.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  kek: PropTypes.any.isRequired
+  children: PropTypes.node,
+  user: PropTypes.any,
 };
 
 const mapStateToProps = createStructuredSelector({

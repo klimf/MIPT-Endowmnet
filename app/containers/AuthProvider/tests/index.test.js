@@ -3,16 +3,16 @@ import { shallow } from 'enzyme';
 
 import { AuthProvider } from '../index';
 
-const TestChild = (props) => (
-  <div className="testChild">{ props.kek + props.number || 0 }</div>
-)
+const TestChild = () => (
+  <div className="testChild"></div>
+);
 
 
 describe('<AuthProvider />', () => {
   it('render with child', () => {
-    const AuthProviderElem = shallow(<AuthProvider dispatch={ () => { } } kek={ "kekProp" } > <TestChild number={'number' }  /> </AuthProvider>);
+    const AuthProviderElem = shallow(<AuthProvider dispatch={() => { }} user={'kekProp'} > <TestChild menuIsOpen={'number'} /> </AuthProvider>);
 
-    expect(AuthProviderElem.find(TestChild).first().props().kek).toEqual("kekProp");
-    expect(AuthProviderElem.find(TestChild).first().props().number).toEqual("number");
+    expect(AuthProviderElem.find(TestChild).first().props().user).toEqual('kekProp');
+    expect(AuthProviderElem.find(TestChild).first().props().menuIsOpen).toEqual('number');
   });
 });
