@@ -17,7 +17,7 @@ import MenuIcon from './MenuIcon';
 
 import Logo from '../Logo';
 import Button from '../Button';
-import HideOn from '../HideOn';
+import FlexBox from '../FlexBox';
 
 class Header extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
@@ -25,30 +25,29 @@ class Header extends React.PureComponent { // eslint-disable-line react/prefer-s
     this.state = {
       menuIsOpen: false,
     };
+    this.handleMobileMenuClick = this.handleMobileMenuClick.bind(this);
+  }
+
+  handleMobileMenuClick() {
+    this.setState(this.state.menuIsOpen ? {menuIsOpen: false} : {menuIsOpen: true});
   }
 
   render() {
     return (
-      <Wrapper dark={this.props.dark} >
-        <Link to="/"><Logo dark={this.props.dark} /></Link>
-        <NavList dark={this.props.dark} noSmall>
+      <Wrapper>
+        <FlexBox horisontal="space-between">
+          <Link to="/"><Logo /></Link>
+          <FlexBox vertical="center">
+            <Button to="/" type="header" mtb={9}><FormattedMessage {...messages.button} /></Button>
+            {/*<MenuIcon onClick={this.handleMobileMenuClick} noMedium noLarge />*/}
+          </FlexBox>
+        </FlexBox>
+        <NavList noSmall>
           {messages.navigation.map((item, index) => (
             <NavItem key={index} to={messages.navigation[index].link}><FormattedMessage {...messages.navigation[index]} /></NavItem>
           ))}
         </NavList>
-        <HideOn small>
-          <Button to="/" type={this.props.dark ? 'white' : 'black'}><FormattedMessage {...messages.button} /></Button>
-        </HideOn>
-        <HideOn medium large>
-          <MenuIcon dark={this.props.dark} />
-          {this.state.menuIsOpen && (
-            <NavList dark={this.props.dark} noSmall>
-              {messages.navigation.map((item, index) => (
-                <NavItem key={index} to={messages.navigation[index].link}><FormattedMessage {...messages.navigation[index]} /></NavItem>
-              ))}
-            </NavList>
-          )}
-        </HideOn>
+        {/* */}
       </Wrapper>
     );
   }

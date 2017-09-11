@@ -13,22 +13,42 @@ export default defineMessages({
   navigation: [
     {
       id: 'app.components.Header.NavList.Item1',
-      defaultMessage: 'Work',
-      link: '/work',
-    },
-    {
-      id: 'app.components.Header.NavList.Item2',
-      defaultMessage: 'About',
+      defaultMessage: 'О фонде',
       link: '/about',
     },
     {
+      id: 'app.components.Header.NavList.Item2',
+      defaultMessage: 'Новости',
+      link: '/news',
+    },
+    {
       id: 'app.components.Header.NavList.Item3',
-      defaultMessage: 'Blog',
-      link: '/blog',
+      defaultMessage: 'Дарители',
+      link: '/founders',
+    },
+    {
+      id: 'app.components.Header.NavList.Item4',
+      defaultMessage: 'Целевые-капиталы',
+      link: '/about',
+    },
+    {
+      id: 'app.components.Header.NavList.Item5',
+      defaultMessage: 'УК',
+      link: '/companies',
+    },
+    {
+      id: 'app.components.Header.NavList.Item6',
+      defaultMessage: 'Достижения',
+      link: '/achievements',
+    },
+    {
+      id: 'app.components.Header.NavList.Item7',
+      defaultMessage: 'FAQ',
+      link: '/faq',
     },
   ],
   button: {
     id: 'app.components.Header.Button',
-    defaultMessage: 'Make an order',
+    defaultMessage: 'Пожертвовать',
   },
 });
