@@ -13,7 +13,7 @@ import messages from './messages';
 import Wrapper from './Wrapper';
 import NavList from './NavList';
 import NavItem from './NavItem';
-import MenuIcon from './MenuIcon';
+import Icon from '../Icon';
 
 import Logo from '../Logo';
 import Button from '../Button';
@@ -38,8 +38,11 @@ class Header extends React.PureComponent { // eslint-disable-line react/prefer-s
       <Wrapper>
         <FlexBox horisontal="space-between">
           <Link to="/"><Logo /></Link>
-          <Button noSmall to="/" type="header" mtb={9}><FormattedMessage {...messages.button} /></Button>
-          <MenuIcon noLarge noMedium onClick={this.handleMobileMenuClick} />
+          <FlexBox horisontal="space-between">
+            <Button noSmall to="/" type="border" margin="9px 24px"><FormattedMessage {...messages.enter} /></Button>
+            <Button noSmall to="/" type="header" margin="9px 0"><FormattedMessage {...messages.action} /></Button>
+          </FlexBox>
+          <Icon noLarge noMedium type="menu" onClick={this.handleMobileMenuClick} />
         </FlexBox>
         <NavList noSmall>
           {messages.navigation.map((item, index) => (
@@ -49,8 +52,8 @@ class Header extends React.PureComponent { // eslint-disable-line react/prefer-s
         <Overlay noMedium noLarge show={this.state.menuIsOpen}>
           <Wrapper>
             <FlexBox horisontal="space-between">
-              <Link to="/"><Logo /></Link>
-              <MenuIcon onClick={this.handleMobileMenuClick} />
+              <Link to="/" onClick={this.handleMobileMenuClick}><Logo /></Link>
+              <Icon type="close" onClick={this.handleMobileMenuClick} />
             </FlexBox>
           </Wrapper>
           <NavList>
@@ -58,7 +61,10 @@ class Header extends React.PureComponent { // eslint-disable-line react/prefer-s
               <NavItem onClick={this.handleMobileMenuClick} key={index} to={item.link}><FormattedMessage {...item} /></NavItem>
             ))}
           </NavList>
-          <Button to="/" type="border" onClick={this.handleMobileMenuClick} ><FormattedMessage {...messages.button} /></Button>
+          <FlexBox horisontal="space-between" padding="0 4%">
+            <Button to="/" type="header" onClick={this.handleMobileMenuClick} ><FormattedMessage {...messages.action} /></Button>
+            <Button to="/" type="border" onClick={this.handleMobileMenuClick} ><FormattedMessage {...messages.enter} /></Button>
+          </FlexBox>
         </Overlay>
       </Wrapper>
     );

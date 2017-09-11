@@ -18,8 +18,7 @@ function Button(props) {
   const StyledLink = styled(Link)`${buttonStyles}`;
 
   const Wrapper = styled.div`
-    margin: ${props.mtb ? props.mtb : 0}px 0;
-    text-align: center;
+    margin: ${props.margin ? props.margin : 0};
     ${hideOn}
   `;
 
@@ -53,7 +52,7 @@ Button.propTypes = {
   onClick: PropTypes.func,
   children: PropTypes.node.isRequired,
   type: PropTypes.string,
-  mtb: PropTypes.number,
+  margin: PropTypes.string,
 };
 
 export default styled(Button)`${hideOn}`;
