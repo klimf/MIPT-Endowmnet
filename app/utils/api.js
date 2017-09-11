@@ -21,15 +21,26 @@ export class FetchAction {
     this.success = createAction(this.types.success, this.prePare);
     this.failed = createAction(this.types.failed, this.convertError);
   }
-  convertError(err) {
-    return err.data ? { message: err.error || err.message || err.errors, code: err.code } : { message: 'empty', code: err.code };
+  convertError({ data, status }) {
+    return { message: data.error || data.message || data.errors || data || 'no data', code: status || 0 };
+  }
+  bindTo(dispatch) {
+    this.success = this.success.bindTo(dispatch);
+    this.start = this.start.bindTo(dispatch);
+    this.failed = this.failed.bindTo(dispatch);
+    return this;
   }
 }
 
-export function fetchReducerFactory(Action, onSuccess = (state) => state, initialState = fromJS({ data: null, pending: false, error: false })) {
+export function fetchReducerFactory(Action, onSuccess = (state) => state, initState) {
+  const initialState = fromJS(Object.assign({ data: null, pending: false, error: false }, initState));
   return createReducer({
-    [Action.start]: (state, payload) => state.set('pending', true).set('req', payload || null),
-    [Action.success]: (state, payload) => state.set('pending', false).set('data', payload || null),
-    [Action.failed]: (state, payload) => state.set('pending', false).set('error', payload || null),
+    [Action.start]: (state, payload) => state.set('pending', true).set('req', payload || null).set('status', 'pending'),
+    [Action.success]: (state, payload) => state.set('pending', false).set('data', payload || null).set('status', 'success'),
+    [Action.failed]: (state, payload) => state.set('pending', false).set('error', payload || null).set('status', 'failed'),
   }, initialState);
 }
+
+export const responseStates = {
+  UNATHORIZED: { data: 'unauthorized', status: 401 },
+};

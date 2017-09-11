@@ -11,19 +11,54 @@
  * the linting exception.
  */
 
-import React from 'react';
+import React, { PropTypes } from 'react';
+import Helmet from 'react-helmet';
+import styled from 'styled-components';
+
+import Header from 'components/Header';
+import Footer from 'components/Footer';
+
+import { palette, unit } from '../../utils/constants';
+
+const AppWrapper = styled.div`
+  width:100%;
+  height: 100%;
+  background-color: ${palette.background};
+`;
+
+const PageWrapper = styled.div`
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  min-height: calc(100% - ${30 * unit}px);
+`;
 
 export default class App extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
-    children: React.PropTypes.node,
+    children: PropTypes.node,
   };
 
   render() {
     return (
-      <div>
-        {React.Children.toArray(this.props.children)}
-      </div>
+      <AppWrapper>
+        <Helmet
+          titleTemplate="%s - MIPT"
+          defaultTitle="MIPT - студия, делаем сайты и мобильные приложения"
+          meta={[
+            {
+              name: 'description',
+              content: '.',
+            },
+          ]}
+        />
+        {/* add dark */}
+        <Header />
+        <PageWrapper>
+          {React.Children.toArray(this.props.children)}
+        </PageWrapper>
+        <Footer />
+      </AppWrapper>
     );
   }
 }
