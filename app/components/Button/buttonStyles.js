@@ -2,12 +2,11 @@ import { css } from 'styled-components';
 import { unit } from '../../utils/constants';
 
 const defaultStyle = css`
-  min-width: 150px;
-  width: 150px;
+  min-width: 100px;
   height: ${3 * unit}px;
   display: inline-block;
   box-sizing: border-box;
-  padding: ${0.5 * unit}px ${0.5 * unit}px;
+  padding: ${0.5 * unit}px ${1.5 * unit}px;
   text-decoration: none;
   text-transform: uppercase;
   border-radius: ${2 * unit}px;
@@ -29,6 +28,7 @@ const defaultStyle = css`
     color: ${(props) => props.theme.textColorHover};
     border: 3px solid ${(props) => props.theme.borderColorHover};
     box-shadow: ${(props) => props.theme.shadowHover};
+    transform: ${(props) => props.theme.transformHover};
   }
 `;
 

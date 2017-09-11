@@ -18,7 +18,9 @@ function Button(props) {
   const StyledLink = styled(Link)`${buttonStyles}`;
 
   const Wrapper = styled.div`
+    margin: ${props.mtb ? props.mtb : 0}px 0;
     text-align: center;
+    ${hideOn}
   `;
 
   // Render an anchor tag
@@ -37,7 +39,7 @@ function Button(props) {
     );
   }
   return (
-    <Wrapper>
+    <Wrapper mtb={props.mtb}>
       <ThemeProvider theme={props.type ? buttonThemes[props.type] : buttonThemes.primary} >
         {button}
       </ThemeProvider>
@@ -51,6 +53,7 @@ Button.propTypes = {
   onClick: PropTypes.func,
   children: PropTypes.node.isRequired,
   type: PropTypes.string,
+  mtb: PropTypes.number,
 };
 
 export default styled(Button)`${hideOn}`;

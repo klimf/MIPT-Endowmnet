@@ -22,7 +22,7 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
         <br />
         <Button>Lol</Button>
         <br />
-        <Button type="border">Lol</Button>
+        <Button type="border">LolLolLolLol</Button>
         <h1>
           <FormattedMessage {...messages.header} />
         </h1>

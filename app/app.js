@@ -15,6 +15,7 @@ import { Provider } from 'react-redux';
 import { applyRouterMiddleware, Router, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { useScroll } from 'react-router-scroll';
+import FontFaceObserver from 'fontfaceobserver';
 import 'sanitize.css/sanitize.css';
 
 // Import root app
@@ -31,6 +32,15 @@ import LanguageProvider from 'containers/LanguageProvider';
 import '!file-loader?name=[name].[ext]!./favicon.ico';
 import '!file-loader?name=[name].[ext]!./manifest.json';
 import 'file-loader?name=[name].[ext]!./.htaccess';
+
+import 'file-loader?name=[name].[ext]!./fonts/subset-PFDinTextPro-Light.eot';
+import 'file-loader?name=[name].[ext]!./fonts/subset-PFDinTextPro-Light.ttf';
+import 'file-loader?name=[name].[ext]!./fonts/subset-PFDinTextPro-Light.woff';
+import 'file-loader?name=[name].[ext]!./fonts/subset-PFDinTextPro-Regular.eot';
+import 'file-loader?name=[name].[ext]!./fonts/subset-PFDinTextPro-Regular.ttf';
+import 'file-loader?name=[name].[ext]!./fonts/subset-PFDinTextPro-Regular.woff';
+// import * as fonts from 'fonts';
+
 /* eslint-enable import/no-unresolved, import/extensions */
 
 import configureStore from './store';
@@ -43,6 +53,17 @@ import './global-styles';
 
 // Import root routes
 import createRoutes from './routes';
+
+const PFDINObserver = new FontFaceObserver('PF DinText Pro', {});
+
+Promise.all([PFDINObserver.load()]).then(() => {
+  console.log('fontLoaded');
+  document.body.classList.add('fontLoaded');
+}, () => {
+  document.body.classList.remove('fontLoaded');
+}).catch((e) => {
+  console.log(e);
+});
 
 // Create redux store with history
 // this uses the singleton browserHistory provided by react-router
