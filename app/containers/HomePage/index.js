@@ -13,12 +13,14 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import Button from 'components/Button';
 import messages from './messages';
+import AuthProvider from '../AuthProvider';
 
 
 export default class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
       <div>
+        <AuthProvider></AuthProvider>
         <br />
         <Button>Lol</Button>
         <br />
