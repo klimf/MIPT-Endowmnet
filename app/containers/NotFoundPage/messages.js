@@ -10,4 +10,8 @@ export default defineMessages({
     id: 'app.components.NotFoundPage.Subtitle',
     defaultMessage: 'Страница не найдена',
   },
+  button: {
+    id: 'app.components.NotFoundPage.Button',
+    defaultMessage: 'На главную',
+  },
 });

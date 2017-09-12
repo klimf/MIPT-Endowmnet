@@ -22,7 +22,6 @@ class Footer extends React.PureComponent { // eslint-disable-line react/prefer-s
       <Wrapper dark={this.props.dark} >
         <Link to="/"><Logo dark={this.props.dark} /></Link>
         <Social dark={this.props.dark} noSmall />
-        <Locale dark={this.props.dark}><FormattedMessage {...messages.button} /></Locale>
       </Wrapper>
     );
   }

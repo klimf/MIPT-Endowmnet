@@ -16,6 +16,8 @@ import styled from 'styled-components';
 import { palette, unit } from '../../utils/constants';
 import messages from './messages';
 
+import Button from 'components/Button';
+
 const Wrapper = styled.div`
   margin-top: ${12 * unit}px;
   text-align: center;
@@ -43,6 +45,7 @@ export default class NotFound extends React.PureComponent { // eslint-disable-li
         <SubTitle>
           <FormattedMessage {...messages.title} />
         </SubTitle>
+        <Button type="header" to="/" margin="48px 0"><FormattedMessage {...messages.button} /></Button>
       </Wrapper>
     );
   }
