@@ -22,4 +22,8 @@ injectGlobal`
     height: 100%;
     min-width: 100%;
   }
+  
+  h1,h2,h3,h4,p {
+    line-height: 100%;
+  }
 `;

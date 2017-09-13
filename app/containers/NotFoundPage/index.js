@@ -25,6 +25,7 @@ const Wrapper = styled.div`
 const Title = styled.h1`
   font-size: ${12 * unit}px;
   font-weight: 400;
+  margin: 18px 0;
 `;
 const SubTitle = styled.h1`
   font-size: ${4 * unit}px;
@@ -47,7 +48,7 @@ export default class NotFound extends React.PureComponent { // eslint-disable-li
         <SubTitle>
           <FormattedMessage {...messages.title} />
         </SubTitle>
-        <Button type="header" to="/" margin="48px 0"><FormattedMessage {...messages.button} /></Button>
+        <Button type="header" to="/"><FormattedMessage {...messages.button} /></Button>
       </Wrapper>
     );
   }

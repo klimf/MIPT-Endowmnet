@@ -33,14 +33,14 @@ class Footer extends React.PureComponent { // eslint-disable-line react/prefer-s
         <FlexBox noMedium noLarge horisontal="space-around" vertical="center">
           <Link to="/"><Logo /></Link>
         </FlexBox>
-        <Space noLarge noMedium size={2} />
+        <Space noMedium noLarge size={2} />
         <Social noMedium noLarge center />
         <Space noMedium noLarge size={2} />
         <FlexBox noMedium noLarge horisontal="space-between" vertical="center">
           <Button noLarge type="border"><FormattedMessage {...messages.button1} /></Button>
           <Button noLarge type="border"><FormattedMessage {...messages.button2} /></Button>
         </FlexBox>
-        <Space size={2} />
+        <Space size={1} />
         <FlexBox horisontal="space-between" vertical="center">
           <Contact title="Телефон:" value="+7 (495) 486 56 93" />
           <Contact title="E-mail:" value="mail@ef.mipt.ru" />
