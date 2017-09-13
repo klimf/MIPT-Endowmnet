@@ -2,8 +2,9 @@ import { take, call, put } from 'redux-saga/effects';
 import api, { responseStates } from '../../utils/api';
 import * as actions from './actions';
 
-export function* getUser(action) {
+export function* getUser() {
   try {
+    const action = yield take(actions.fetchUser.types.start);
     const user = action.payload ? action.payload : yield call(fetchCurrentUser);
     yield put(actions.fetchUser.success(user));
   } catch (e) {
@@ -111,26 +112,9 @@ function sendConfirmationEmailToken({ token }) {
 }
 
 // Individual exports for testing
-export function* defaultSaga() {
-  // @ts-ignore
-  yield take(actions.fetchUser.types.start, getUser);
-    // @ts-ignore
-  yield take(actions.userChanged.getType(), getUser);
-    // @ts-ignore
-  yield take(actions.fetchLogin.types.start, login);
-    // @ts-ignore
-  yield take(actions.fetchLogout.types.start, logout);
-    // @ts-ignore
-  yield take(actions.fetchConfirm.types.start, confirmEmail);
-    // @ts-ignore
-  yield take(actions.fetchGetRecoveryToken.types.start, getRecoveryPasswordToken);
-    // @ts-ignore
-  yield take(actions.fetchRecoveryPassword.types.start, recoveryPassword);
-    // @ts-ignore
-  yield take(actions.fetchRegistration.types.start, registration);
-}
+
 
 // All sagas to be loaded
 export default [
-  defaultSaga,
+  getUser,
 ];

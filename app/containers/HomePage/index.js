@@ -15,6 +15,7 @@ import Helmet from 'react-helmet';
 import Button from 'components/Button';
 import Content from 'components/Content';
 import messages from './messages';
+import AuthProvider from '../AuthProvider';
 
 
 export default class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
@@ -22,6 +23,7 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
     return (
       <div>
         <Helmet />
+        <AuthProvider></AuthProvider>
         <Content>
           <br />
           <Button>Lol</Button>

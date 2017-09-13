@@ -12,6 +12,11 @@ const loadModule = (cb) => (componentModule) => {
   cb(null, componentModule.default);
 };
 
+const commonModules = [
+  import('containers/AuthProvider/reducer'),
+  import('containers/AuthProvider/sagas'),
+];
+
 export default function createRoutes(store) {
   // Create reusable async injectors using getAsyncInjectors factory
   const { injectReducer, injectSagas } = getAsyncInjectors(store); // eslint-disable-line no-unused-vars
@@ -34,12 +39,41 @@ export default function createRoutes(store) {
         importModules.catch(errorLoading);
       },
     }, {
+      path: '/test',
+      name: 'authProvider',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          import('containers/AuthProvider/reducer'),
+          import('containers/AuthProvider/sagas'),
+          import('containers/AuthProvider'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('authProvider', reducer.default);
+          injectSagas(sagas.default);
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    }, {
       path: '*',
       name: 'notfound',
       getComponent(nextState, cb) {
-        import('containers/NotFoundPage')
-          .then(loadModule(cb))
-          .catch(errorLoading);
+        const importModules = Promise.all([
+          ...commonModules,
+          import('containers/NotFoundPage'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([component]) => {
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
       },
     },
   ];
