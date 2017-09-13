@@ -38,9 +38,9 @@ class Header extends React.PureComponent { // eslint-disable-line react/prefer-s
       <Wrapper>
         <FlexBox horisontal="space-between">
           <Link to="/"><Logo /></Link>
-          <FlexBox horisontal="space-between">
-            <Button noSmall to="/" type="border" margin="9px 24px"><FormattedMessage {...messages.enter} /></Button>
-            <Button noSmall to="/" type="header" margin="9px 0"><FormattedMessage {...messages.action} /></Button>
+          <FlexBox noSmall horisontal="space-between">
+            <Button to="/" type="border" margin="9px 24px"><FormattedMessage {...messages.enter} /></Button>
+            <Button to="/" type="header" margin="9px 0"><FormattedMessage {...messages.action} /></Button>
           </FlexBox>
           <Icon noLarge noMedium type="menu" onClick={this.handleMobileMenuClick} />
         </FlexBox>

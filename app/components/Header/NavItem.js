@@ -8,7 +8,7 @@ const NavItem = styled(Link)`
   text-transform: uppercase;
   text-decoration: none;
   font-size: ${1.2 * unit}px;
-  transition: 0.3s ease;
+  transition: 0.2s;
   
   &:link { color: inherit; }
   &:visited { color: inherit; }

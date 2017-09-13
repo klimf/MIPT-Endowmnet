@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { hideOn } from '../../utils/style-utils';
 
 const StyledIcon = styled.svg`
+  cursor: pointer;
   margin: 9px 0;
   ${hideOn}
 `;
