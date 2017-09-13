@@ -30,7 +30,7 @@ const PageWrapper = styled.div`
   display: inline-block;
   width: 100%;
   background-color: ${palette.background};
-  min-height: calc(100% - ${27 * unit}px);
+  min-height: calc(100% - ${30 * unit}px);
 `;
 
 export default class App extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function

@@ -5,11 +5,7 @@ import { unit, palette } from '../../utils/constants';
 const Wrapper = styled.div`
   background-color: ${palette.white};
   position: relative;
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-  padding: ${6 * unit}px ${unit / 3}%;
-  ${hideOn}
+  padding: ${2.5 * unit}px ${unit / 3}%;
 `;
 
 export default Wrapper;

@@ -18,7 +18,7 @@ function Button(props) {
   const StyledLink = styled(Link)`${buttonStyles}`;
 
   const Wrapper = styled.div`
-    margin: ${props.margin ? props.margin : 0};
+    margin: ${props.margin ? props.margin : '0'};
     ${hideOn}
   `;
 

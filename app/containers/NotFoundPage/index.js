@@ -28,6 +28,8 @@ const Title = styled.h1`
 `;
 const SubTitle = styled.h1`
   font-size: ${4 * unit}px;
+  line-height: 60px;
+  margin-top: -${2 * unit}px;
   font-weight: 400;
 `;
 const Color = styled.b`

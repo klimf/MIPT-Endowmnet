@@ -6,8 +6,12 @@
 import { defineMessages } from 'react-intl';
 
 export default defineMessages({
-  button: {
-    id: 'app.components.Header.Button',
-    defaultMessage: 'In english',
+  button1: {
+    id: 'app.components.Header.Button1',
+    defaultMessage: 'Заказать звонок',
+  },
+  button2: {
+    id: 'app.components.Header.Button2',
+    defaultMessage: 'Написать нам',
   },
 });

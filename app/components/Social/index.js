@@ -15,18 +15,19 @@ import TgIcon from './TgIcon';
 
 const Wrapper = styled.div`
   display: flex;
-  justify-content: ${(props) => props.expand ? 'space-between' : 'space-around'};
+  justify-content: space-between;
   align-items: center;
-  margin: 0;
+  margin: 0 ${(props) => props.center && 'auto'};
   padding: 0;
   width: 100%;
   height: 36px;
-  ${(props) => !props.expand && 'max-width: 400px;'}
+  ${(props) => !props.expand && 'max-width: 240px;'}
   ${hideOn}
 `;
 
 const Link = styled.a`
   transition: 0.3s ease;
+  padding: 12px;
   
   & path {
     transition: 0.3s ease;
@@ -52,7 +53,6 @@ function Social(props) {
 
 Social.propTypes = {
   dark: PropTypes.bool,
-  expand: PropTypes.bool,
 };
 
 export default Social;

@@ -11,6 +11,8 @@ const defaultStyle = css`
   text-align: center;
   text-decoration: none;
   text-transform: uppercase;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   border-radius: ${2 * unit}px;
   -webkit-font-smoothing: antialiased;
   -webkit-touch-callout: none;
