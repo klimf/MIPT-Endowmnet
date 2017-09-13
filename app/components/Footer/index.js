@@ -33,8 +33,8 @@ class Footer extends React.PureComponent { // eslint-disable-line react/prefer-s
         <FlexBox noMedium noLarge horisontal="space-around" vertical="center">
           <Link to="/"><Logo /></Link>
         </FlexBox>
-        <Space noLarge size={2} />
-        <Social noLarge center />
+        <Space noLarge noMedium size={2} />
+        <Social noMedium noLarge center />
         <Space noMedium noLarge size={2} />
         <FlexBox noMedium noLarge horisontal="space-between" vertical="center">
           <Button noLarge type="border"><FormattedMessage {...messages.button1} /></Button>
@@ -48,6 +48,8 @@ class Footer extends React.PureComponent { // eslint-disable-line react/prefer-s
           <Button noSmall noMedium type="border"><FormattedMessage {...messages.button1} /></Button>
           <Button noSmall noMedium type="border"><FormattedMessage {...messages.button2} /></Button>
         </FlexBox>
+        <Space noSmall noLarge size={2} />
+        <Social noSmall noLarge center />
       </Wrapper>
     );
   }
