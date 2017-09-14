@@ -6,7 +6,6 @@ import config from './config';
 export default axios.create({
   baseURL: config.API_ADRESS,
   withCredentials: true,
-  transformResponse: [catchNetworkError],
 });
 
 export class FetchAction {
@@ -44,11 +43,12 @@ export function fetchReducerFactory(Action, onSuccess = (state) => state, initSt
 }
 
 export function catchNetworkError(data) {
-  if (data instanceof Error && data.message === 'Network Error') {
+  if (data.request && data.request.status === 0) {
     return responseStates.NETWORK_ERROR;
   }
   return data;
 }
+
 
 export const responseStates = {
   UNATHORIZED: { data: 'unauthorized', status: 401 },

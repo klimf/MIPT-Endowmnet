@@ -8,13 +8,17 @@ export function* getUser() {
     const user = action.payload ? action.payload : yield call(fetchCurrentUser);
     yield put(actions.fetchUser.success(user));
   } catch (e) {
-    switch (e.status) {
-      case 401:
-        yield put(actions.fetchUser.failed(responseStates.UNATHORIZED));
-        break;
-      default:
-        yield put(actions.fetchUser.failed(e));
-        break;
+    if (e.response) {
+      switch (e.response.status) {
+        case 401:
+          yield put(actions.fetchUser.failed(responseStates.UNATHORIZED));
+          break;
+        default:
+          yield put(actions.fetchUser.failed(e.response));
+          break;
+      }
+    } else {
+      yield put(actions.fetchUser.failed(responseStates.NETWORK_ERROR));
     }
   }
 }
@@ -79,7 +83,7 @@ export function* confirmEmail(action) {
 // All sagas to be loaded
 
 function fetchCurrentUser() {
-  return api.get('/users').then((res) => res.data);
+  return api.get('/users/current').then((res) => res.data);
 }
 
 function sendLogin(credentials) {
