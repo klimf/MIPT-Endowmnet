@@ -4,15 +4,27 @@ import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 import { palette } from '../../utils/constants';
+import { media } from '../../utils/helpers';
+
+const Wrapper = styled.div`
+    width: 240px;
+    ${media.small`
+      width: 60%;
+      margin: 0 20%;
+    `}
+`;
 
 const Circle = styled.div`
   position: relative;
+  overflow: hidden;
+  float: left;
   z-index: 10;
   background-color: ${palette.secondary};
-  width: 240px;
-  height: 240px;
+  width: 100%;
+  padding: 50% 0;
   border-radius: 50%;
   box-shadow: 0 12px 24px ${palette.dark};
+  
 `;
 
 const CircleInner = styled.div`
@@ -29,8 +41,8 @@ const CircleInner = styled.div`
 const Value = styled.h1`
   position: absolute;
   width: 100%;
-  top: 104px;
-  margin: 0;
+  top: 50%;
+  margin: -16px 0;
   font-weight: 300;
   font-size: 42px;
   text-align: center;
@@ -39,10 +51,12 @@ const Value = styled.h1`
 
 function Progress(props) {
   return (
-    <Circle>
-      <CircleInner progress={props.progress} />
-      <Value>{props.progress}%</Value>
-    </Circle>
+    <Wrapper>
+      <Circle>
+        <CircleInner progress={props.progress} />
+        <Value>{props.progress}%</Value>
+      </Circle>
+    </Wrapper>
   );
 }
 

@@ -1,6 +1,6 @@
 import { css } from 'styled-components';
 import { unit } from '../../utils/constants';
-import { media } from '../../utils/style-utils';
+import { media } from '../../utils/helpers';
 
 const defaultStyle = css`
   min-width: 100px;

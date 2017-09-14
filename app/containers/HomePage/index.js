@@ -15,6 +15,7 @@ import Helmet from 'react-helmet';
 import Button from 'components/Button';
 import Content from 'components/Content';
 import Masthead from 'components/Masthead';
+import Space from 'components/Space';
 import messages from './messages';
 
 
@@ -24,11 +25,8 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
       <div>
         <Helmet />
         <Content>
-          <Masthead />
-          <br />
-          <Button>Lol</Button>
-          <br />
-          <Button type="border">LolLolLolLol</Button>
+          <Masthead purpose={783400000} collected={1000000000} />
+          <Space size={3} />
           <h1>
             <FormattedMessage {...messages.header} />
           </h1>

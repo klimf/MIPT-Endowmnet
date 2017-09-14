@@ -11,7 +11,7 @@ import { Link } from 'react-router';
 import buttonStyles from './buttonStyles';
 import buttonThemes from './buttonThemes';
 
-import { hideOn } from '../../utils/style-utils';
+import { hideOn } from '../../utils/helpers';
 
 function Button(props) {
   const A = styled.a`${buttonStyles}`;

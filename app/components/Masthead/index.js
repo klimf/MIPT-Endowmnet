@@ -4,7 +4,7 @@
 *
 */
 
-import React from 'react';
+import React, { PropTypes } from 'react';
 // import styled from 'styled-components';
 
 import { FormattedMessage } from 'react-intl';
@@ -14,20 +14,21 @@ import FlexBox from '../FlexBox';
 import Space from '../Space';
 import Block from './Block';
 
-function Masthead() {
+function Masthead(props) {
   return (
     <div>
       <Space size={4} />
       <FlexBox horisontal="space-between">
-        <Progress progress={87} />
-        <Block />
+        <Progress progress={Math.round((props.purpose / props.collected) * 100)} />
+        <Block collected={props.collected} purpose={props.purpose} />
       </FlexBox>
     </div>
   );
 }
 
 Masthead.propTypes = {
-
+  collected: PropTypes.number,
+  purpose: PropTypes.number,
 };
 
 export default Masthead;

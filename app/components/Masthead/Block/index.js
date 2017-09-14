@@ -4,7 +4,7 @@
  *
  */
 
-import React from 'react';
+import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router';
 import { FormattedMessage } from 'react-intl';
@@ -14,13 +14,17 @@ import FlexBox from 'components/FlexBox';
 import messages from './messages';
 import { palette } from '../../../utils/constants';
 import Formula from './Formula';
-import { hideOn } from '../../../utils/style-utils';
+import { media, hideOn, formatMoney } from '../../../utils/helpers';
 
 const Wrapper = styled.div`
+  float:right;
   width: calc(100% - 280px);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  ${media.small`
+    width: 100%;
+  `}
 `;
 
 const StyledLink = styled(Link)`
@@ -34,6 +38,8 @@ const StyledLink = styled(Link)`
 const Info = styled(FlexBox)`
   position:relative;
   width: 100%;
+  flex-flow: row-reverse;
+  flex-wrap: nowrap;
   border-bottom: 3px solid ${palette.disabled};
   &:after {
     width: 20px;
@@ -53,6 +59,11 @@ const Info = styled(FlexBox)`
     font-style: normal;
     color: ${palette.primary};
   }
+  ${hideOn}
+  ${media.small`
+    flex-flow: row;
+    flex-wrap: wrap;
+  `}
 `;
 
 const Decor = styled.div`
@@ -63,16 +74,52 @@ const Decor = styled.div`
   width: 120px;
   border-bottom: 3px solid ${palette.disabled};
   transform: rotate(-30deg);
+  ${hideOn}
 `;
 
-const Hideable = styled.u`text-decoration: none; ${hideOn}`;
+const InLine = styled.div`display: inline-block; white-space: nowrap;`;
 
-function Masthead() {
+const Hideable = styled.u`
+  text-decoration: none; 
+  @media (min-width: 40em) and (max-width: 49.999em) {
+    display: none;
+  }
+`;
+
+function Masthead(props) {
   return (
     <Wrapper>
-      <Info horisontal="space-between"><Hideable noMedium ><h2><b>Цель:</b> <i>10 000 000 000</i> ₽</h2></Hideable><h2><b>Собрано:</b> 134 000 000 ₽</h2><Decor /></Info>
+      <Space noMedium noLarge size={3} />
+      <Formula noMedium noLarge />
+      <Info noSmall horisontal="space-between">
+        <Hideable ><h2>
+          <b>Цель:</b> <InLine><i>{formatMoney(props.collected)}</i> ₽</InLine>
+        </h2></Hideable>
+        <h2>
+          <b>Собрано:</b> <InLine>{formatMoney(props.purpose)} ₽</InLine>
+        </h2>
+        <Decor />
+      </Info>
+      <Space noMedium noLarge size={3} />
+      <Info noMedium noLarge horisontal="space-between">
+        <h2>
+          <b>Цель:</b>
+        </h2>
+        <h2>
+          <InLine><i>{formatMoney(props.collected)}</i> ₽</InLine>
+        </h2>
+      </Info>
+      <Space noMedium noLarge size={2} />
+      <Info noMedium noLarge horisontal="space-between">
+        <h2>
+          <b>Собрано:</b>
+        </h2>
+        <h2>
+          <InLine>{formatMoney(props.purpose)} ₽</InLine>
+        </h2>
+      </Info>
       <Space size={2} />
-      <Formula />
+      <Formula noSmall />
       <Space size={2} />
       <FlexBox horisontal="space-between" vertical="center">
         <StyledLink to="/"><FormattedMessage {...messages.link} /></StyledLink>
@@ -83,7 +130,8 @@ function Masthead() {
 }
 
 Masthead.propTypes = {
-
+  collected: PropTypes.number,
+  purpose: PropTypes.number,
 };
 
 export default Masthead;
