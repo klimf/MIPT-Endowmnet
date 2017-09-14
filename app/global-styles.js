@@ -14,7 +14,7 @@ injectGlobal`
 
   body {
     font-family: 'PF DinText Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    line-height: 140%;
+    line-height: 150%;
     font-weight: 400;
   }
 
@@ -23,7 +23,8 @@ injectGlobal`
     min-width: 100%;
   }
   
-  h1,h2,h3,h4,p {
+  h1, h2, h3, h4, p {
     line-height: 100%;
+    font-weight: 400;
   }
 `;

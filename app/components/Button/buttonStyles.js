@@ -19,7 +19,7 @@ const defaultStyle = css`
   user-select: none;
   cursor: pointer;
   outline: 0;
-  font-size: ${1 * unit}px;
+  font-size: ${1.2 * unit}px;
   font-weight: 500;
   border: 3px solid ${(props) => props.theme.borderColor};
   background-color: ${(props) => props.theme.bgColor};

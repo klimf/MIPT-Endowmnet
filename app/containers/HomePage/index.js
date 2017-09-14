@@ -14,6 +14,7 @@ import { FormattedMessage } from 'react-intl';
 import Helmet from 'react-helmet';
 import Button from 'components/Button';
 import Content from 'components/Content';
+import Masthead from 'components/Masthead';
 import messages from './messages';
 
 
@@ -23,6 +24,7 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
       <div>
         <Helmet />
         <Content>
+          <Masthead />
           <br />
           <Button>Lol</Button>
           <br />
