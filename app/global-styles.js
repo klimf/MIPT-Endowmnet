@@ -45,7 +45,7 @@ injectGlobal`
   
   body.fontLoaded {
     font-family: 'PF DinText Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    line-height: 150%;
+    line-height: 140%;
   }
 
   #app {
