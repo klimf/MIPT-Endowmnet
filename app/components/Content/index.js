@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { hideOn } from '../../utils/helpers';
+import { hideOn, media } from '../../utils/helpers';
 import { unit } from '../../utils/constants';
 
 const Content = styled.div`
@@ -7,6 +7,7 @@ const Content = styled.div`
   margin: 0 auto;
   padding: 0 ${unit / 3}%;
   ${hideOn}
+  ${media.large`padding: 0 ${3.2 * unit}px;`}
 `;
 
 export default Content;

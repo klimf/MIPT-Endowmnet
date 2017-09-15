@@ -33,14 +33,6 @@ import '!file-loader?name=[name].[ext]!./favicon.ico';
 import '!file-loader?name=[name].[ext]!./manifest.json';
 import 'file-loader?name=[name].[ext]!./.htaccess';
 
-import 'file-loader?name=[name].[ext]!./fonts/subset-PFDinTextPro-Light.eot';
-import 'file-loader?name=[name].[ext]!./fonts/subset-PFDinTextPro-Light.ttf';
-import 'file-loader?name=[name].[ext]!./fonts/subset-PFDinTextPro-Light.woff';
-import 'file-loader?name=[name].[ext]!./fonts/subset-PFDinTextPro-Regular.eot';
-import 'file-loader?name=[name].[ext]!./fonts/subset-PFDinTextPro-Regular.ttf';
-import 'file-loader?name=[name].[ext]!./fonts/subset-PFDinTextPro-Regular.woff';
-// import * as fonts from 'fonts';
-
 /* eslint-enable import/no-unresolved, import/extensions */
 
 import configureStore from './store';

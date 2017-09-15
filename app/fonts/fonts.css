@@ -1,19 +1,21 @@
 @font-face {
-	font-family: 'PF DinText Pro';
-	src: url('subset-PFDinTextPro-Light.eot');
-	src: url('subset-PFDinTextPro-Light.eot?#iefix') format('embedded-opentype'),
-		url('subset-PFDinTextPro-Light.woff') format('woff'),
-		url('subset-PFDinTextPro-Light.ttf') format('truetype');
-	font-weight: 300;
-	font-style: normal;
+  font-family: 'PF DinText Pro';
+  src: url('PFDinTextPro-Regular.eot');
+  src: local('PFDinTextPro-Regular'),
+  url('PFDinTextPro-Regular.eot?#iefix') format('embedded-opentype'),
+  url('PFDinTextPro-Regular.woff') format('woff'),
+  url('PFDinTextPro-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
 
 @font-face {
-	font-family: 'PF DinText Pro';
-	src: url('subset-PFDinTextPro-Regular.eot');
-	src: url('subset-PFDinTextPro-Regular.eot?#iefix') format('embedded-opentype'),
-		url('subset-PFDinTextPro-Regular.woff') format('woff'),
-		url('subset-PFDinTextPro-Regular.ttf') format('truetype');
-	font-weight: 400;
-	font-style: normal;
+  font-family: 'PF DinText Pro';
+  src: url('PFDinTextPro-Light.eot');
+  src: local('PFDinTextPro-Light'),
+  url('PFDinTextPro-Light.eot?#iefix') format('embedded-opentype'),
+  url('PFDinTextPro-Light.woff') format('woff'),
+  url('PFDinTextPro-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
 }

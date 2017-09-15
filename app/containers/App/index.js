@@ -45,7 +45,7 @@ export default class App extends React.PureComponent { // eslint-disable-line re
       <AppWrapper>
         <Helmet
           titleTemplate="%s - MIPT"
-          defaultTitle="MIPT - студия, делаем сайты и мобильные приложения"
+          defaultTitle="MIPT - фонд, делаем универ лучше"
           meta={[
             {
               name: 'description',

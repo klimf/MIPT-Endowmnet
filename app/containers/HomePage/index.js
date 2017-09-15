@@ -16,7 +16,11 @@ import Button from 'components/Button';
 import Content from 'components/Content';
 import Masthead from 'components/Masthead';
 import Space from 'components/Space';
+import Image from 'components/Image';
+import Title from 'components/Title';
 import messages from './messages';
+import howML from '../../images/how.png';
+import howS from '../../images/how_mobile.png';
 
 
 export default class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
@@ -25,8 +29,12 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
       <div>
         <Helmet />
         <Content>
+          <Space size={5} />
           <Masthead purpose={783400000} collected={1000000000} />
-          <Space size={3} />
+          <Space size={5} />
+          <Title>Как это работает?</Title>
+          <Image src={howML} noSmall />
+          <Image src={howS} noMedium noLarge />
           <h1>
             <FormattedMessage {...messages.header} />
           </h1>

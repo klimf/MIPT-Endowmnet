@@ -5,10 +5,7 @@
 */
 
 import React, { PropTypes } from 'react';
-// import styled from 'styled-components';
 
-import { FormattedMessage } from 'react-intl';
-import messages from './messages';
 import Progress from './Progress';
 import FlexBox from '../FlexBox';
 import Space from '../Space';
@@ -17,7 +14,6 @@ import Block from './Block';
 function Masthead(props) {
   return (
     <div>
-      <Space size={4} />
       <FlexBox horisontal="space-between">
         <Progress progress={Math.round((props.purpose / props.collected) * 100)} />
         <Block collected={props.collected} purpose={props.purpose} />
