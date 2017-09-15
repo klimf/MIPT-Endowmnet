@@ -8,10 +8,12 @@ import React, { PropTypes } from 'react';
 import styled, { css } from 'styled-components';
 import { Link } from 'react-router';
 import { block, palette, unit } from '../../utils/constants';
-import { media } from '../../utils/helpers';
+import { hideOn, media } from '../../utils/helpers';
 import FlexBox from '../FlexBox/index';
 
-const Wrapper = styled(FlexBox)`
+const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
   position:relative;
   width: 100%;
   margin: ${3 * unit}px 0;
@@ -42,6 +44,24 @@ const Description = styled.p`
   font-size: 20px;
 `;
 
+const Date = styled.h2`
+  width: 280px;
+  text-align: right;
+  color: ${palette.black};
+  font-size: 24px;
+  margin: 10px;
+  padding-top: 8px;
+  & b{
+    color: ${palette.primary};
+    font-weight: 300;
+    font-size: 36px;
+  }
+  ${media.small`
+    margin-top: 280px;
+  `}
+  ${hideOn}
+`;
+
 const Image = styled.div`
   position:absolute;
   width: 180px;
@@ -67,6 +87,7 @@ function Item(props) {
           <Title>{props.title}</Title>
           <Description>{props.description}</Description>
         </TextBlock>
+        <Date noAll={!(props.month && props.date) && 'noAll'}><b>{props.date} </b>{props.month}</Date>
       </Wrapper>
     </StyledLink>
   );
@@ -75,6 +96,8 @@ function Item(props) {
 Item.propTypes = {
   link: PropTypes.string,
   title: PropTypes.string,
+  date: PropTypes.string,
+  month: PropTypes.string,
   description: PropTypes.string,
   image: PropTypes.string,
 };

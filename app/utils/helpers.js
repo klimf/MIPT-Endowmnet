@@ -31,6 +31,7 @@ export const media = {
 
 
 export const hideOn = css`
+  ${(props) => props.noAll && 'display: none'};
   ${media.small`
      ${(props) => props.noSmall && 'display: none'};
   `}
