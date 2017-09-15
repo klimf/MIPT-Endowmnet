@@ -1,9 +1,7 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 
-import { FormattedMessage } from 'react-intl';
-import messages from './messages';
-import { palette } from '../../utils/constants';
+import { palette, shadow } from '../../utils/constants';
 import { media } from '../../utils/helpers';
 
 const Wrapper = styled.div`
@@ -23,8 +21,7 @@ const Circle = styled.div`
   width: 100%;
   padding: 50% 0;
   border-radius: 50%;
-  box-shadow: 0 12px 24px ${palette.dark};
-  
+  ${shadow}
 `;
 
 const CircleInner = styled.div`

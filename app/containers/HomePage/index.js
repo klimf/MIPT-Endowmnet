@@ -12,12 +12,12 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import Helmet from 'react-helmet';
-import Button from 'components/Button';
 import Content from 'components/Content';
 import Masthead from 'components/Masthead';
 import Space from 'components/Space';
 import Image from 'components/Image';
 import Title from 'components/Title';
+import News from 'components/News';
 import messages from './messages';
 import howML from '../../images/how.png';
 import howS from '../../images/how_mobile.png';
@@ -35,6 +35,9 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
           <Title>Как это работает?</Title>
           <Image src={howML} noSmall />
           <Image src={howS} noMedium noLarge />
+          <Space size={5} />
+          <News />
+          <Space size={5} />
           <h1>
             <FormattedMessage {...messages.header} />
           </h1>
