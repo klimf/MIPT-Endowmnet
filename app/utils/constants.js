@@ -1,4 +1,4 @@
-import { css } from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const palette = {
   accent: '#B84646',
@@ -24,4 +24,14 @@ export const block = css`
   background-color: ${palette.white};
   border-radius: 8px;
   ${shadow}
+`;
+
+export const Block = styled.div`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  bottom: 10px;
+  left: 10px;
+  padding: ${(props) => props.padding ? props.padding : '24px'};
+  ${block}
 `;

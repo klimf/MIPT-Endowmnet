@@ -41,11 +41,6 @@ const Info = styled(FlexBox)`
   flex-flow: row-reverse;
   flex-wrap: nowrap;
   border-bottom: 3px solid ${palette.disabled};
-  &:after {
-    width: 20px;
-    height: 20px;
-    border-bottom: 3px solid ${palette.disabled};
-  }
   & h2 {
     font-size: 36px;
     font-weight: 300;

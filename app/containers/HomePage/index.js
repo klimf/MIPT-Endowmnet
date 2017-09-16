@@ -92,6 +92,9 @@ const quotes = [
   },
 ];
 
+const purpose = 1000000000;
+const collected = 783400000;
+
 
 export default class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
@@ -100,7 +103,7 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
         <Helmet />
         <Content>
           <Space size={5} />
-          <Masthead purpose={1000000000} collected={783400000} />
+          <Masthead purpose={purpose} collected={collected} />
           <Space size={5} />
           <Title>Как это работает?</Title>
           <Image src={howML} noSmall />

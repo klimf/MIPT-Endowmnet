@@ -81,7 +81,7 @@ const Image = styled.div`
   position:relative;
   width: 100%;
   padding: 50% 0;
-  border: 3px solid ${palette.primary};
+  border: 3px solid ${palette.gray};
   border-radius: 50%;
   overflow: hidden;
   background-color: ${palette.primary};
