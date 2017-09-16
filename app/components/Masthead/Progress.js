@@ -5,23 +5,26 @@ import { palette, shadow } from '../../utils/constants';
 import { media } from '../../utils/helpers';
 
 const Wrapper = styled.div`
-    width: 240px;
-    ${media.small`
-      width: 60%;
-      margin: 0 20%;
-    `}
+  float: left;
+  width: 240px;
+  ${media.small`
+    width: 60%;
+    margin: 0 20%;
+  `}
 `;
 
 const Circle = styled.div`
   position: relative;
   overflow: hidden;
-  float: left;
   z-index: 10;
   background-color: ${palette.secondary};
   width: 100%;
   padding: 50% 0;
   border-radius: 50%;
   ${shadow}
+  &:hover>div {
+    transform: scale(1.1);
+  }
 `;
 
 const CircleInner = styled.div`
@@ -33,6 +36,8 @@ const CircleInner = styled.div`
   height: ${(props) => props.progress}%;
   border-radius: 50%;
   box-shadow: 0 0 8px 0 rgba(70,116,184,0.63);
+  transition: 0.3s cubic-bezier(0.57, 0.01, 0.37, 1.64); 
+  
 `;
 
 const Value = styled.h1`

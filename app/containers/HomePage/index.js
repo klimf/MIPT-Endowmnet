@@ -18,9 +18,65 @@ import Space from 'components/Space';
 import Image from 'components/Image';
 import Title from 'components/Title';
 import News from 'components/News';
+import Quotes from 'components/Quotes';
 import messages from './messages';
 import howML from '../../images/how.png';
 import howS from '../../images/how_mobile.png';
+
+import img1 from '../../images/Bitmap1.jpg';
+import img2 from '../../images/Bitmap2.jpg';
+import img3 from '../../images/Bitmap3.jpg';
+
+import face1 from '../../images/Face1.jpg';
+import face2 from '../../images/Face2.jpg';
+import face3 from '../../images/Face3.jpg';
+
+const news = [
+  {
+    title: 'Заголовок новости',
+    description: 'Краткое описание этой новости. Краткое описание этой новости. Краткое описание этой новости. Краткое описание этой новости. ',
+    image: img1,
+    link: '/',
+  },
+  {
+    title: 'Заголовок новости',
+    description: 'Краткое описание этой новости. Краткое описание этой новости. Краткое описание Краткое описание Краткое описание этой новости. Краткое описание этой новости. ',
+    image: img2,
+    link: '/',
+  },
+  {
+    title: 'Заголовок новости',
+    description: 'Краткое описание этой новости. Краткое описание этой новости. Краткое описание этой новости. Краткое описание этой новости. ',
+    image: img3,
+    link: '/',
+    date: '14',
+    month: 'Сентября',
+  },
+];
+
+const quotes = [
+  {
+    name: 'Сергей Гуз',
+    status: 'Зав. кафедры физики',
+    quote: 'Развитие факультета проблем физики и энергетики - важная составляющая работы фонда университета МФТИ',
+    image: face1,
+    link: '/',
+  },
+  {
+    name: 'Сергей Гуз',
+    status: 'Зав. кафедры физики',
+    quote: 'Развитие факультета проблем физики и энергетики - важная составляющая работы фонда университета МФТИ',
+    image: face2,
+    link: '/',
+  },
+  {
+    name: 'Сергей Гуз',
+    status: 'Зав. кафедры физики',
+    quote: 'Развитие факультета проблем физики и энергетики - важная составляющая работы фонда университета МФТИ',
+    image: face3,
+    link: '/',
+  },
+];
 
 
 export default class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
@@ -36,11 +92,14 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
           <Image src={howML} noSmall />
           <Image src={howS} noMedium noLarge />
           <Space size={5} />
-          <News />
+          <News items={news} title="Последние новости и мероприятия" />
           <Space size={5} />
-          <h1>
+          <Quotes items={quotes} title="Почетные спонсоры" />
+          <Space size={5} />
+          <Title>
             <FormattedMessage {...messages.header} />
-          </h1>
+          </Title>
+          <Space size={5} />
         </Content>
       </div>
     );

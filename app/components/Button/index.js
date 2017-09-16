@@ -19,6 +19,7 @@ function Button(props) {
 
   const Wrapper = styled.div`
     margin: ${props.margin ? props.margin : '0'};
+    text-align: ${props.centred ? 'center' : 'left'};
     ${hideOn}
   `;
 
@@ -53,6 +54,7 @@ Button.propTypes = {
   children: PropTypes.node.isRequired,
   type: PropTypes.string,
   margin: PropTypes.string,
+  centred: PropTypes.bool,
 };
 
 export default styled(Button)`${hideOn}`;

@@ -48,7 +48,7 @@ export default class NotFound extends React.PureComponent { // eslint-disable-li
         <SubTitle>
           <FormattedMessage {...messages.title} />
         </SubTitle>
-        <Button type="header" to="/"><FormattedMessage {...messages.button} /></Button>
+        <Button centred type="header" to="/"><FormattedMessage {...messages.button} /></Button>
       </Wrapper>
     );
   }

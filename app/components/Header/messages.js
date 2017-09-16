@@ -19,7 +19,7 @@ export default defineMessages({
     {
       id: 'app.components.Header.NavList.Item2',
       defaultMessage: 'Новости',
-      link: '/news',
+      link: '/items',
     },
     {
       id: 'app.components.Header.NavList.Item3',

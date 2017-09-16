@@ -28,7 +28,7 @@ const StyledLink = styled(Link)`
 `;
 
 const TextBlock = styled.div`
-  margin: 0 10px 10px 180px;
+  margin: 10px 10px 10px 180px;
   ${media.small`
     margin: 280px 10px 10px 10px;
   `}
@@ -95,11 +95,11 @@ function Item(props) {
 
 Item.propTypes = {
   link: PropTypes.string,
-  title: PropTypes.string,
+  title: PropTypes.string.isRequired,
   date: PropTypes.string,
   month: PropTypes.string,
   description: PropTypes.string,
-  image: PropTypes.string,
+  image: PropTypes.string.isRequired,
 };
 
 export default Item;
