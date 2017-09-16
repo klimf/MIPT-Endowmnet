@@ -17,7 +17,6 @@ function Quotes(props) {
       {props.items.map((item, index) => (
         <Item key={index} index={index} {...item} />
       ))}
-      <Button centred type="border" to="/news">Все новости</Button>
     </div>
   );
 }
