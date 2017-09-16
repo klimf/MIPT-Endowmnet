@@ -13,15 +13,15 @@ import Block from './Block';
 function Masthead(props) {
   return (
     <FlexBox horisontal="space-between">
-      <Progress progress={Math.round((props.purpose / props.collected) * 100)} />
-      <Block collected={props.collected} purpose={props.purpose} />
+      <Progress progress={Math.round((props.collected / props.purpose) * 100)} />
+      <Block collected={props.purpose} purpose={props.collected} />
     </FlexBox>
   );
 }
 
 Masthead.propTypes = {
-  collected: PropTypes.number,
   purpose: PropTypes.number,
+  collected: PropTypes.number,
 };
 
 export default Masthead;

@@ -34,6 +34,26 @@ export default function createRoutes(store) {
         importModules.catch(errorLoading);
       },
     }, {
+      path: '/capitals',
+      name: 'capitalsPage',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          import('containers/CapitalsPage/reducer'),
+          import('containers/CapitalsPage/sagas'),
+          import('containers/CapitalsPage'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('capitalsPage', reducer.default);
+          injectSagas(sagas.default);
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    }, {
       path: '*',
       name: 'notfound',
       getComponent(nextState, cb) {

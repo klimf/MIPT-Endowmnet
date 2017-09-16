@@ -93,10 +93,10 @@ function Masthead(props) {
       <Formula noMedium noLarge />
       <Info noSmall horisontal="space-between">
         <Hideable ><h2>
-          <b>Цель:</b> <InLine><i>{formatMoney(props.collected)}</i> ₽</InLine>
+          <b>Цель:</b> <InLine>{formatMoney(props.collected)} ₽</InLine>
         </h2></Hideable>
         <h2>
-          <b>Собрано:</b> <InLine>{formatMoney(props.purpose)} ₽</InLine>
+          <b>Собрано:</b> <InLine><i>{formatMoney(props.purpose)}</i> ₽</InLine>
         </h2>
         <Decor />
       </Info>
@@ -106,7 +106,7 @@ function Masthead(props) {
           <b>Цель:</b>
         </h2>
         <h2>
-          <InLine><i>{formatMoney(props.collected)}</i> ₽</InLine>
+          <InLine>{formatMoney(props.collected)} ₽</InLine>
         </h2>
       </Info>
       <Space noMedium noLarge size={2} />
@@ -115,7 +115,7 @@ function Masthead(props) {
           <b>Собрано:</b>
         </h2>
         <h2>
-          <InLine>{formatMoney(props.purpose)} ₽</InLine>
+          <InLine><i>{formatMoney(props.purpose)}</i> ₽</InLine>
         </h2>
       </Info>
       <Space size={2} />
@@ -130,8 +130,8 @@ function Masthead(props) {
 }
 
 Masthead.propTypes = {
-  collected: PropTypes.number,
   purpose: PropTypes.number,
+  collected: PropTypes.number,
 };
 
 export default Masthead;
