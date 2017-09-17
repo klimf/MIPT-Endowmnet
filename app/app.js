@@ -15,25 +15,39 @@ import { Provider } from 'react-redux';
 import { applyRouterMiddleware, Router, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { useScroll } from 'react-router-scroll';
+import FontFaceObserver from 'fontfaceobserver';
 import 'sanitize.css/sanitize.css';
 
-// Import root app
-import App from 'containers/App';
-
-// Import selector for `syncHistoryWithStore`
-import { makeSelectLocationState } from 'containers/App/selectors';
-
-// Import Language Provider
-import LanguageProvider from 'containers/LanguageProvider';
 
 // Load the favicon, the manifest.json file and the .htaccess file
 /* eslint-disable import/no-unresolved, import/extensions */
 import '!file-loader?name=[name].[ext]!./favicon.ico';
 import '!file-loader?name=[name].[ext]!./manifest.json';
 import 'file-loader?name=[name].[ext]!./.htaccess';
+
+import 'file-loader?name=[name].[ext]!./fonts/subset-PFDinTextPro-Light.eot';
+import 'file-loader?name=[name].[ext]!./fonts/subset-PFDinTextPro-Light.ttf';
+import 'file-loader?name=[name].[ext]!./fonts/subset-PFDinTextPro-Light.woff';
+import 'file-loader?name=[name].[ext]!./fonts/subset-PFDinTextPro-Regular.eot';
+import 'file-loader?name=[name].[ext]!./fonts/subset-PFDinTextPro-Regular.ttf';
+import 'file-loader?name=[name].[ext]!./fonts/subset-PFDinTextPro-Regular.woff';
+// import * as fonts from 'fonts';
+
 /* eslint-enable import/no-unresolved, import/extensions */
 
+import { getAsyncInjectors } from './utils/asyncInjectors';
+
+// Import root app
+import App from './containers/App';
+
+// Import selector for `syncHistoryWithStore`
+import { makeSelectLocationState } from './containers/App/selectors';
+
+// Import Language Provider
+import LanguageProvider from './containers/LanguageProvider';
+
 import configureStore from './store';
+
 
 // Import i18n messages
 import { translationMessages } from './i18n';
@@ -44,12 +58,46 @@ import './global-styles';
 // Import root routes
 import createRoutes from './routes';
 
+const PFDINObserver = new FontFaceObserver('PF DinText Pro', {});
+
+Promise.all([PFDINObserver.load()]).then(() => {
+  console.log('fontLoaded');
+  document.body.classList.add('fontLoaded');
+}, () => {
+  document.body.classList.remove('fontLoaded');
+}).catch((e) => {
+  console.log(e);
+});
+
 // Create redux store with history
 // this uses the singleton browserHistory provided by react-router
 // Optionally, this could be changed to leverage a created history
 // e.g. `const browserHistory = useRouterHistory(createBrowserHistory)();`
 const initialState = {};
 const store = configureStore(initialState, browserHistory);
+const { injectReducer, injectSagas } = getAsyncInjectors(store);
+
+
+const commonStoreExtensions = {
+  reducers: [
+    import('./containers/AuthProvider/reducer'),
+  ],
+  sagas: [
+    import('./containers/AuthProvider/sagas'),
+  ],
+};
+
+const commonStoreExtensionsLoading = [Promise.all(commonStoreExtensions.reducers)
+  .then((reducers) =>
+    reducers.map((reducer) =>
+      Promise.resolve(injectReducer(reducer.stateName, reducer.default))
+    )),
+  Promise.all(commonStoreExtensions.sagas)
+  .then((sagas) =>
+    sagas.map((saga) =>
+      Promise.resolve(injectSagas(saga.default))
+      )),
+];
 
 // Sync history and store, as the react-router-redux reducer
 // is under the non-default key ("routing"), selectLocationState
@@ -63,6 +111,7 @@ const rootRoute = {
   component: App,
   childRoutes: createRoutes(store),
 };
+
 
 const render = (messages) => {
   ReactDOM.render(
@@ -83,34 +132,37 @@ const render = (messages) => {
   );
 };
 
-// Hot reloadable translation json files
-if (module.hot) {
-  // modules.hot.accept does not accept dynamic dependencies,
-  // have to be constants at compile-time
-  module.hot.accept('./i18n', () => {
-    render(translationMessages);
+Promise.all(commonStoreExtensionsLoading)
+  .then(() => {
+  // Hot reloadable translation json files
+    if (module.hot) {
+    // modules.hot.accept does not accept dynamic dependencies,
+    // have to be constants at compile-time
+      module.hot.accept('./i18n', () => {
+        render(translationMessages);
+      });
+    }
+
+  // Chunked polyfill for browsers without Intl support
+    if (!window.Intl) {
+      (new Promise((resolve) => {
+        resolve(import('intl'));
+      }))
+      .then(() => Promise.all([
+        import('intl/locale-data/jsonp/en.js'),
+      ]))
+      .then(() => render(translationMessages))
+      .catch((err) => {
+        throw err;
+      });
+    } else {
+      render(translationMessages);
+    }
+
+  // Install ServiceWorker and AppCache in the end since
+  // it's not most important operation and if main code fails,
+  // we do not want it installed
+    if (process.env.NODE_ENV === 'production') {
+      require('offline-plugin/runtime').install(); // eslint-disable-line global-require
+    }
   });
-}
-
-// Chunked polyfill for browsers without Intl support
-if (!window.Intl) {
-  (new Promise((resolve) => {
-    resolve(import('intl'));
-  }))
-    .then(() => Promise.all([
-      import('intl/locale-data/jsonp/en.js'),
-    ]))
-    .then(() => render(translationMessages))
-    .catch((err) => {
-      throw err;
-    });
-} else {
-  render(translationMessages);
-}
-
-// Install ServiceWorker and AppCache in the end since
-// it's not most important operation and if main code fails,
-// we do not want it installed
-if (process.env.NODE_ENV === 'production') {
-  require('offline-plugin/runtime').install(); // eslint-disable-line global-require
-}

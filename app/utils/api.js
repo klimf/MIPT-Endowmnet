@@ -1,9 +1,10 @@
 import axios from 'axios';
 import { fromJS } from 'immutable';
 import { createAction, createReducer } from 'redux-act';
+import config from './config';
 
 export default axios.create({
-  baseURL: 'http://localhost:5000',
+  baseURL: config.API_ADRESS,
   withCredentials: true,
 });
 
@@ -22,7 +23,7 @@ export class FetchAction {
     this.failed = createAction(this.types.failed, this.convertError);
   }
   convertError({ data, status }) {
-    return { message: data.error || data.message || data.errors || data || 'no data', code: status || 0 };
+    return { data: data ? data.error || data.message || data.errors || data : 'no data', status: status || 0 };
   }
   bindTo(dispatch) {
     this.success = this.success.bindTo(dispatch);
@@ -41,6 +42,15 @@ export function fetchReducerFactory(Action, onSuccess = (state) => state, initSt
   }, initialState);
 }
 
+export function catchNetworkError(data) {
+  if (data.request && data.request.status === 0) {
+    return responseStates.NETWORK_ERROR;
+  }
+  return data;
+}
+
+
 export const responseStates = {
   UNATHORIZED: { data: 'unauthorized', status: 401 },
+  NETWORK_ERROR: { data: 'network error', status: 600 },
 };

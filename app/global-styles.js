@@ -8,23 +8,22 @@ injectGlobal`
     width: 100%;
   }
 
-  body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  }
+  // body.fontLoaded {
+  //   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  // }
 
-  body.fontLoaded {
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  body {
+    font-family: 'PF DinText Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    line-height: 140%;
+    font-weight: 400;
   }
 
   #app {
-    background-color: #fafafa;
-    min-height: 100%;
+    height: 100%;
     min-width: 100%;
   }
-
-  p,
-  label {
-    font-family: Georgia, Times, 'Times New Roman', serif;
-    line-height: 1.5em;
+  
+  h1,h2,h3,h4,p {
+    line-height: 100%;
   }
 `;

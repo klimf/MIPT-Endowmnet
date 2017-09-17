@@ -18,7 +18,8 @@ function Button(props) {
   const StyledLink = styled(Link)`${buttonStyles}`;
 
   const Wrapper = styled.div`
-    text-align: center;
+    margin: ${props.margin ? props.margin : '0'};
+    ${hideOn}
   `;
 
   // Render an anchor tag
@@ -37,7 +38,7 @@ function Button(props) {
     );
   }
   return (
-    <Wrapper>
+    <Wrapper {...props} >
       <ThemeProvider theme={props.type ? buttonThemes[props.type] : buttonThemes.primary} >
         {button}
       </ThemeProvider>
@@ -51,6 +52,7 @@ Button.propTypes = {
   onClick: PropTypes.func,
   children: PropTypes.node.isRequired,
   type: PropTypes.string,
+  margin: PropTypes.string,
 };
 
 export default styled(Button)`${hideOn}`;

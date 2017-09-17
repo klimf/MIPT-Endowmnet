@@ -11,23 +11,29 @@
 
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
+import Helmet from 'react-helmet';
 import Button from 'components/Button';
+import Content from 'components/Content';
 import messages from './messages';
-import AuthProvider from '../AuthProvider';
+import AuthProvider, { ProtectedContent } from '../AuthProvider';
 
 
 export default class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
       <div>
-        <AuthProvider></AuthProvider>
-        <br />
-        <Button>Lol</Button>
-        <br />
-        <Button type="border">Lol</Button>
-        <h1>
-          <FormattedMessage {...messages.header} />
-        </h1>
+        <Helmet />
+        <AuthProvider ></AuthProvider>
+        <ProtectedContent stateSelector={(state) => state.get('authProvider').get('user')} UnauthorizedComponent={Button}></ProtectedContent>
+        <Content>
+          <br />
+          <Button>Lol</Button>
+          <br />
+          <Button type="border"></Button>
+          <h1>
+            <FormattedMessage {...messages.header} />
+          </h1>
+        </Content>
       </div>
     );
   }
