@@ -1,3 +1,3 @@
 export default {
-  API_ADRESS: 'http://185.189.14.156:5000',
+  API_ADRESS: 'http://ef.misis.ru/api',
 };

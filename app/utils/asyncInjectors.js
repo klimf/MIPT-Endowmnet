@@ -60,7 +60,6 @@ export function injectAsyncSagas(store, isValid) {
       !isEmpty(sagas),
       '(app/utils...) injectAsyncSagas: Received an empty `sagas` array'
     );
-    console.log(sagas);
     sagas.map(store.runSaga);
   };
 }

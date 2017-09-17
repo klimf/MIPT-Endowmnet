@@ -17,15 +17,16 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import { useScroll } from 'react-router-scroll';
 import FontFaceObserver from 'fontfaceobserver';
 import 'sanitize.css/sanitize.css';
+import { getAsyncInjectors } from './utils/asyncInjectors';
 
 // Import root app
-import App from 'containers/App';
+import App from './containers/App';
 
 // Import selector for `syncHistoryWithStore`
-import { makeSelectLocationState } from 'containers/App/selectors';
+import { makeSelectLocationState } from './containers/App/selectors';
 
 // Import Language Provider
-import LanguageProvider from 'containers/LanguageProvider';
+import LanguageProvider from './containers/LanguageProvider';
 
 // Load the favicon, the manifest.json file and the .htaccess file
 /* eslint-disable import/no-unresolved, import/extensions */
@@ -44,6 +45,8 @@ import 'file-loader?name=[name].[ext]!./fonts/subset-PFDinTextPro-Regular.woff';
 /* eslint-enable import/no-unresolved, import/extensions */
 
 import configureStore from './store';
+import AuthProviderReducer from './containers/AuthProvider/reducer';
+import AuthProviderSagas from './containers/AuthProvider/sagas';
 
 // Import i18n messages
 import { translationMessages } from './i18n';
@@ -71,6 +74,26 @@ Promise.all([PFDINObserver.load()]).then(() => {
 // e.g. `const browserHistory = useRouterHistory(createBrowserHistory)();`
 const initialState = {};
 const store = configureStore(initialState, browserHistory);
+const { injectReducer, injectSagas } = getAsyncInjectors(store);
+
+const commonStoreExtensions = {
+  reducers: [
+    {
+      name: 'authProvider',
+      reducer: AuthProviderReducer,
+    },
+  ],
+  sagas: [
+    AuthProviderSagas,
+  ],
+};
+
+commonStoreExtensions.reducers.forEach((reducer) => {
+  injectReducer(reducer.name, reducer.reducer);
+});
+commonStoreExtensions.sagas.forEach((saga) => {
+  injectSagas(saga);
+});
 
 // Sync history and store, as the react-router-redux reducer
 // is under the non-default key ("routing"), selectLocationState
@@ -84,6 +107,7 @@ const rootRoute = {
   component: App,
   childRoutes: createRoutes(store),
 };
+
 
 const render = (messages) => {
   ReactDOM.render(

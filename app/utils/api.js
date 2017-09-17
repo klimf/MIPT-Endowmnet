@@ -23,7 +23,7 @@ export class FetchAction {
     this.failed = createAction(this.types.failed, this.convertError);
   }
   convertError({ data, status }) {
-    return { message: data ? data.error || data.message || data.errors || data : 'no data', code: status || 0 };
+    return { data: data ? data.error || data.message || data.errors || data : 'no data', status: status || 0 };
   }
   bindTo(dispatch) {
     this.success = this.success.bindTo(dispatch);

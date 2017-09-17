@@ -12,10 +12,6 @@ const loadModule = (cb) => (componentModule) => {
   cb(null, componentModule.default);
 };
 
-const commonModules = [
-  import('containers/AuthProvider/reducer'),
-  import('containers/AuthProvider/sagas'),
-];
 
 export default function createRoutes(store) {
   // Create reusable async injectors using getAsyncInjectors factory
@@ -63,7 +59,6 @@ export default function createRoutes(store) {
       name: 'notfound',
       getComponent(nextState, cb) {
         const importModules = Promise.all([
-          ...commonModules,
           import('containers/NotFoundPage'),
         ]);
 

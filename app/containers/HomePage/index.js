@@ -15,7 +15,7 @@ import Helmet from 'react-helmet';
 import Button from 'components/Button';
 import Content from 'components/Content';
 import messages from './messages';
-import AuthProvider from '../AuthProvider';
+import AuthProvider, { ProtectedContent } from '../AuthProvider';
 
 
 export default class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
@@ -23,12 +23,13 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
     return (
       <div>
         <Helmet />
-        <AuthProvider></AuthProvider>
+        <AuthProvider ></AuthProvider>
+        <ProtectedContent stateSelector={(state) => state.get('authProvider').get('user')} UnauthorizedComponent={Button}></ProtectedContent>
         <Content>
           <br />
           <Button>Lol</Button>
           <br />
-          <Button type="border">LolLolLolLol</Button>
+          <Button type="border"></Button>
           <h1>
             <FormattedMessage {...messages.header} />
           </h1>

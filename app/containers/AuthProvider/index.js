@@ -30,6 +30,7 @@ export class AuthProvider extends React.PureComponent {
   }
 }
 
+
 AuthProvider.propTypes = {
   children: PropTypes.node,
   authProviderState: PropTypes.any,
@@ -45,10 +46,10 @@ AuthProvider.propTypes = {
   isUnauthorized: PropTypes.any,
 };
 
+
 const mapStateToProps = createStructuredSelector({
   authProviderState: makeSelectAuthProvider(),
   isLogged: isLogged(),
-  isUnauthorized: isUnauthorized(),
 });
 
 function mapDispatchToProps(dispatch) {

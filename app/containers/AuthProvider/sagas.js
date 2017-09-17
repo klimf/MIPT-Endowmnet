@@ -23,8 +23,9 @@ export function* getUser() {
   }
 }
 
-export function* login(action) {
+export function* login() {
   try {
+    const action = yield take(actions.fetchLogin.types.start);
     const user = yield call(sendLogin, action.payload);
     yield put(actions.fetchLogin.success(null));
     yield put(actions.userChanged(user));
@@ -35,6 +36,7 @@ export function* login(action) {
 
 export function* logout() {
   try {
+    yield take(actions.fetchLogout.types.start);
     yield call(sendLogout);
     yield put(actions.fetchLogout.success(null));
     yield put(actions.userChanged(null));
@@ -43,9 +45,9 @@ export function* logout() {
   }
 }
 
-
 export function* registration(action) {
   try {
+    yield take(actions.fetchRegistration.types.start);
     const { id } = yield call(sendRegistrationData, action.payload);
     yield put(actions.fetchRegistration.success({ id }));
   } catch (e) {
@@ -55,6 +57,7 @@ export function* registration(action) {
 
 export function* recoveryPassword(action) {
   try {
+    yield take(actions.fetchRecoveryPassword.types.start);
     yield call(sendRecoveryPasswordToken, action.payload);
     yield put(actions.fetchRecoveryPassword.success());
   } catch (e) {
@@ -64,6 +67,7 @@ export function* recoveryPassword(action) {
 
 export function* getRecoveryPasswordToken(action) {
   try {
+    yield take(actions.fetchGetRecoveryToken.types.start);
     yield call(sendRecoveryPasswordTokenRequest, action.payload);
     yield put(actions.fetchGetRecoveryToken.success());
   } catch (e) {
@@ -73,6 +77,7 @@ export function* getRecoveryPasswordToken(action) {
 
 export function* confirmEmail(action) {
   try {
+    yield take(actions.fetchConfirm.types.start);
     yield call(sendConfirmationEmailToken, action.payload);
     yield put(actions.fetchConfirm.success());
   } catch (e) {
@@ -83,7 +88,7 @@ export function* confirmEmail(action) {
 // All sagas to be loaded
 
 function fetchCurrentUser() {
-  return api.get('/users/current').then((res) => res.data);
+  return api.get('/user/current').then((res) => res.data);
 }
 
 function sendLogin(credentials) {
@@ -121,4 +126,10 @@ function sendConfirmationEmailToken({ token }) {
 // All sagas to be loaded
 export default [
   getUser,
+  login,
+  logout,
+  confirmEmail,
+  recoveryPassword,
+  getRecoveryPasswordToken,
+  registration,
 ];
