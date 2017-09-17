@@ -1,6 +1,6 @@
 /**
  *
- * NewsItem
+ * Capital
  *
  */
 
@@ -8,6 +8,8 @@ import React, { PropTypes } from 'react';
 import styled, { css } from 'styled-components';
 import { Link } from 'react-router';
 import { Block, palette, shadow, unit } from '../../utils/constants';
+import FlexBox from '../../components/FlexBox/index';
+import { formatMoney } from '../../utils/helpers';
 
 const Wrapper = styled.div`
   position: relative;
@@ -19,14 +21,14 @@ const Wrapper = styled.div`
 
 
 const StyledLink = styled(Link)`
-  //position: relative;
   text-decoration: none;
   font-weight: 300;
 `;
 
-const Title = styled.h2`
+const Name = styled.h2`
+  margin: 0;
   font-size: 24px;
-  font-weight: 400;
+  font-weight: 300;
 `;
 
 const Info = styled.p`
@@ -40,22 +42,25 @@ const Info = styled.p`
   }
 `;
 
-function Item(props) {
+function Capital(props) {
   return (
     <Wrapper>
       <StyledLink to={props.link}>
         <Block>
-          <Title>{props.title}</Title>
+          <FlexBox>
+            <Name>{props.name}</Name>
+            <Info>{formatMoney(props.collected)}</Info>
+          </FlexBox>
         </Block>
       </StyledLink>
     </Wrapper>
   );
 }
 
-Item.propTypes = {
+Capital.propTypes = {
   link: PropTypes.string,
-  title: PropTypes.string,
+  name: PropTypes.string,
   collected: PropTypes.number,
 };
 
-export default Item;
+export default Capital;

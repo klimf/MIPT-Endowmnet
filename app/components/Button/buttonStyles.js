@@ -4,11 +4,11 @@ import { media } from '../../utils/helpers';
 
 const defaultStyle = css`
   min-width: 100px;
+  ${(props) => props.expanded && 'width:100%;'}
   height: ${3 * unit}px;
   display: inline-block;
   box-sizing: border-box;
   padding: ${0.5 * unit}px ${1.5 * unit}px;
-  margin: ${(props) => props.centred ? '0 auto' : '0'};
   text-align: center;
   text-decoration: none;
   //text-transform: uppercase;

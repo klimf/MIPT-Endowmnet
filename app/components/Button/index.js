@@ -16,10 +16,14 @@ import { hideOn } from '../../utils/helpers';
 function Button(props) {
   const A = styled.a`${buttonStyles}`;
   const StyledLink = styled(Link)`${buttonStyles}`;
+  const StyledDiv = styled.div`${buttonStyles}`;
 
   const Wrapper = styled.div`
     margin: ${props.margin ? props.margin : '0'};
     text-align: ${props.centred ? 'center' : 'left'};
+    & > * {
+      ${props.expanded && 'width:100%;'}
+    }
     ${hideOn}
   `;
 
@@ -36,6 +40,13 @@ function Button(props) {
       <StyledLink to={props.to}>
         {Children.toArray(props.children)}
       </StyledLink>
+    );
+  }
+  if (props.fake) {
+    button = (
+      <StyledDiv>
+        {Children.toArray(props.children)}
+      </StyledDiv>
     );
   }
   return (
@@ -55,6 +66,8 @@ Button.propTypes = {
   type: PropTypes.string,
   margin: PropTypes.string,
   centred: PropTypes.bool,
+  expanded: PropTypes.bool,
+  fake: PropTypes.bool,
 };
 
 export default styled(Button)`${hideOn}`;
