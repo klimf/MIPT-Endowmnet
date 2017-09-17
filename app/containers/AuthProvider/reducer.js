@@ -26,3 +26,5 @@ export default combineReducers({
   recoveryToken: fetchReducerFactory(fetchGetRecoveryToken),
   registration: fetchReducerFactory(fetchRegistration),
 }, fromJS({}));
+
+export const stateName = 'authProvider';

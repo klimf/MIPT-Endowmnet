@@ -12,7 +12,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { bindAll } from 'redux-act';
 
-import makeSelectAuthProvider, { isLogged, isUnauthorized } from './selectors';
+import makeSelectAuthProvider, { isLogged } from './selectors';
 import * as actions from './actions';
 
 
@@ -44,6 +44,11 @@ AuthProvider.propTypes = {
   fetchRegistration: PropTypes.any,
   isLogged: PropTypes.any,
   isUnauthorized: PropTypes.any,
+  stateSelector: PropTypes.any,
+};
+
+AuthProvider.defaultProps = {
+  stateSelector: (state) => state.get('authProvider').get('user'),
 };
 
 
@@ -57,3 +62,5 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AuthProvider);
+
+export { default as ProtectedContent } from './ProtectedContent';
