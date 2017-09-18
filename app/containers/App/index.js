@@ -32,6 +32,7 @@ const PageWrapper = styled.div`
   background-color: ${palette.background};
   min-height: 100%;
   overflow: hidden;
+  padding-bottom: 48px;
 `;
 
 export default class App extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function

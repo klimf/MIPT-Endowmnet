@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import {media} from "./helpers";
 
 export const palette = {
   accent: '#B84646',
@@ -45,4 +46,7 @@ export const Block = styled.div`
   left: 10px;
   padding: ${(props) => props.padding ? props.padding : '24px'};
   ${block}
+  ${media.small`
+    padding: ${(props) => props.paddingSmall ? props.paddingSmall : '24px'};
+  `}
 `;

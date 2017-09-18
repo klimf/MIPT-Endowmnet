@@ -117,8 +117,8 @@ function Masthead(props) {
       <Formula noSmall />
       <Space size={2} />
       <FlexBox horisontal="space-between" vertical="center">
-        <StyledLink to="/"><FormattedMessage {...messages.link} /></StyledLink>
-        <Button to="/"><FormattedMessage {...messages.button} /></Button>
+        <StyledLink to="/capitals"><FormattedMessage {...messages.link} /></StyledLink>
+        <Button to="/capitals"><FormattedMessage {...messages.button} /></Button>
       </FlexBox>
     </Wrapper>
   );

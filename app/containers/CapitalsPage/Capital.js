@@ -9,7 +9,7 @@ import styled, { css } from 'styled-components';
 import { Link } from 'react-router';
 import { Block, palette, shadow, unit } from '../../utils/constants';
 import FlexBox from '../../components/FlexBox/index';
-import { formatMoney } from '../../utils/helpers';
+import { formatMoney, media } from '../../utils/helpers';
 
 const Wrapper = styled.div`
   position: relative;
@@ -17,10 +17,17 @@ const Wrapper = styled.div`
   display: inline-block;
   width: 33.333333%;
   height: 200px;
+  ${media.medium`
+    width: 50%;
+  `}
+  ${media.small`
+    width: 100%;
+  `}
 `;
 
 
 const StyledLink = styled(Link)`
+  color: ${palette.black};
   text-decoration: none;
   font-weight: 300;
 `;
@@ -45,6 +52,7 @@ const Info = styled.p`
 
 const More = styled.p`
   position: relative;
+  width: 100%;
   margin: 16px 0 0 0;
   color: ${palette.primary};
   text-decoration: underline;
@@ -55,12 +63,11 @@ const More = styled.p`
 function Capital(props) {
   return (
     <Wrapper>
-      <StyledLink to={props.link}>
+      <StyledLink to={props.to}>
         <Block>
           <FlexBox>
             <Name>{props.name}</Name>
             <Info>Собрано: <b>{formatMoney(props.collected)}</b> ₽</Info>
-            <br />
             <More>Подробнее</More>
           </FlexBox>
         </Block>
@@ -70,7 +77,7 @@ function Capital(props) {
 }
 
 Capital.propTypes = {
-  link: PropTypes.string,
+  to: PropTypes.string,
   name: PropTypes.string,
   collected: PropTypes.number,
 };
