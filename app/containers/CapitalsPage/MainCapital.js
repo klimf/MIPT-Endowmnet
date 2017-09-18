@@ -21,6 +21,13 @@ const Wrapper = styled.div`
   display: inline-block;
   width: 66.666666%;
   height: 400px;
+  ${media.medium`
+    width: 100%;
+  `}
+  ${media.small`
+    width: 100%;
+    height: 300px;
+  `}
 `;
 
 const StyledLink = styled(Link)`
@@ -35,14 +42,20 @@ const Info = styled.div`
   padding: 24px 0;
   width: calc(100% - 180px);
   position: relative;
+  height: 140px;
+  ${media.small`
+    width: 100%;
+    height: auto;
+    padding:0;
+  `}
 `;
 
 const More = styled.p`
   position: relative;
-  margin: 16px 0 0 0;
+  margin: 0 0 16px 0;
   color: ${palette.primary};
   text-decoration: underline;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 300;
 `;
 
@@ -75,10 +88,7 @@ const Stats = styled(FlexBox)`
 const ImgWrapper = styled.div`
   display: inline-block;
   width: 140px;
-  ${media.small`
-    width: 40%;
-    margin: 0 30%;
-  `}
+  ${hideOn}
 `;
 
 const Image = styled.div`
@@ -102,6 +112,8 @@ const Bar = styled.div`
   border-radius: 12px;
 `;
 
+const HideableH2 = styled.h2`${hideOn}`;
+
 const InLine = styled.div`display: inline-block; white-space: nowrap;`;
 
 function MainCapital(props) {
@@ -110,7 +122,7 @@ function MainCapital(props) {
       <StyledLink to={props.to}>
         <Block padding="40px">
           <FlexBox horisontal="space-between">
-            <ImgWrapper>
+            <ImgWrapper noSmall>
               <Image style={{ backgroundImage: `url(${props.image})` }} />
             </ImgWrapper>
             <Info>
@@ -118,25 +130,22 @@ function MainCapital(props) {
                 {props.name}
               </Name>
               <More>
-              Подробнее
-            </More>
+                Подробнее
+              </More>
             </Info>
           </FlexBox>
-          <Space size={2} />
-          <Stats noSmall horisontal="space-between">
-            <h2>
+          <Stats horisontal="space-between">
+            <HideableH2 noSmall>
               <b>Цель:</b> <InLine><i>{formatMoney(props.purpose)}</i> ₽</InLine>
-            </h2>
+            </HideableH2>
             <h2>
               <b>Осталось:</b> <InLine>{formatMoney(props.purpose - props.collected)} ₽</InLine>
             </h2>
           </Stats>
-          <Space size={2} />
           <Bar>
             <Bar progress={78} />
           </Bar>
-          <Space size={2} />
-          <Button fake expanded type="border">Пожертвовать в общий фонд</Button>
+          <Button fake expanded type="border" margin="0 0 -28px 0">Пожертвовать в общий фонд</Button>
         </Block>
       </StyledLink>
     </Wrapper>

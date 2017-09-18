@@ -19,7 +19,12 @@ const List = styled.div`
     & img {
       margin: ${unit}px ${2 * unit}px;
       height: 60px;
-      width: auto;
+      width: auto;    
+      transition: 0.3s ease;
+      filter: grayscale(100%) sepia(100%) hue-rotate(181deg);
+      &:hover {
+        filter: none;
+      }
     }
 `;
 
