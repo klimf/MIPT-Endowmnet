@@ -26,7 +26,7 @@ class Header extends React.PureComponent { // eslint-disable-line react/prefer-s
     super(props);
     this.state = {
       menuIsOpen: false,
-      formIsOpen: 'login',
+      formIsOpen: false,
     };
     this.handleMobileMenuClick = this.handleMobileMenuClick.bind(this);
     this.handleLoginClick = this.handleLoginClick.bind(this);
