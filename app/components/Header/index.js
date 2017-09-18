@@ -19,18 +19,31 @@ import Logo from '../Logo';
 import Button from '../Button';
 import FlexBox from '../FlexBox';
 import Overlay from '../Overlay';
+import Form from '../Form';
 
 class Header extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
     super(props);
     this.state = {
       menuIsOpen: false,
+      formIsOpen: 'login',
     };
     this.handleMobileMenuClick = this.handleMobileMenuClick.bind(this);
+    this.handleLoginClick = this.handleLoginClick.bind(this);
   }
 
   handleMobileMenuClick() {
-    this.setState({ menuIsOpen: !this.state.menuIsOpen });
+    this.setState({
+      menuIsOpen: !this.state.menuIsOpen,
+      formIsOpen: this.state.formIsOpen,
+    });
+  }
+
+  handleLoginClick() {
+    this.setState({
+      menuIsOpen: this.state.menuIsOpen,
+      formIsOpen: this.state.formIsOpen ? false : 'login',
+    });
   }
 
   render() {
@@ -39,7 +52,7 @@ class Header extends React.PureComponent { // eslint-disable-line react/prefer-s
         <FlexBox horisontal="space-between">
           <Link to="/"><Logo /></Link>
           <FlexBox noSmall horisontal="space-between">
-            <Button to="/" type="border" margin="9px 24px"><FormattedMessage {...messages.enter} /></Button>
+            <Button onClick={this.handleLoginClick} type="border" margin="9px 24px"><FormattedMessage {...messages.enter} /></Button>
             <Button to="/" type="header" margin="9px 0"><FormattedMessage {...messages.action} /></Button>
           </FlexBox>
           <Icon noLarge noMedium type="menu" onClick={this.handleMobileMenuClick} />
@@ -63,8 +76,18 @@ class Header extends React.PureComponent { // eslint-disable-line react/prefer-s
           </NavList>
           <FlexBox horisontal="space-between" padding="0 4%">
             <Button to="/" type="header" onClick={this.handleMobileMenuClick} ><FormattedMessage {...messages.action} /></Button>
-            <Button to="/" type="border" onClick={this.handleMobileMenuClick} ><FormattedMessage {...messages.enter} /></Button>
+            <Button onClick={this.handleLoginClick} type="border" ><FormattedMessage {...messages.enter} /></Button>
           </FlexBox>
+        </Overlay>
+        <Overlay background show={this.state.formIsOpen}>
+          <Wrapper>
+            <FlexBox horisontal="space-between">
+              <Link to="/" onClick={this.handleLoginClick}><Logo /></Link>
+              <Icon type="close" onClick={this.handleLoginClick} />
+            </FlexBox>
+            <Form />
+          </Wrapper>
+
         </Overlay>
       </Wrapper>
     );
