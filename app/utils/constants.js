@@ -19,14 +19,25 @@ export const unit = 12;
 export const shadow = css`
   box-shadow: 0 ${unit}px ${2 * unit}px ${palette.dark};
 `;
+export const bigShadow = css`
+  box-shadow: 0 ${2 * unit}px ${4 * unit}px ${palette.dark};
+`;
 
 export const block = css`
   background-color: ${palette.white};
   border-radius: 8px;
+  transition: 0.3s ease;
   ${shadow}
+  &:hover {
+    transform: scale(1.01);
+    ${bigShadow}
+  }
 `;
 
 export const Block = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
   position: absolute;
   top: 10px;
   right: 10px;

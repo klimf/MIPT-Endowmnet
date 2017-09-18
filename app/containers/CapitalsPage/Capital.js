@@ -27,19 +27,29 @@ const StyledLink = styled(Link)`
 
 const Name = styled.h2`
   margin: 0;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 300;
 `;
 
 const Info = styled.p`
   position: relative;
   margin: 16px 0 0 0;
-  color: ${palette.gray};
+  color: ${palette.black};
+  font-weight: 300;
   font-size: 20px;
   & b {
     font-weight: 400;
-    color: ${palette.black};
+    color: ${palette.primary};
   }
+`;
+
+const More = styled.p`
+  position: relative;
+  margin: 16px 0 0 0;
+  color: ${palette.primary};
+  text-decoration: underline;
+  font-size: 18px;
+  font-weight: 300;
 `;
 
 function Capital(props) {
@@ -49,7 +59,9 @@ function Capital(props) {
         <Block>
           <FlexBox>
             <Name>{props.name}</Name>
-            <Info>{formatMoney(props.collected)}</Info>
+            <Info>Собрано: <b>{formatMoney(props.collected)}</b> ₽</Info>
+            <br />
+            <More>Подробнее</More>
           </FlexBox>
         </Block>
       </StyledLink>

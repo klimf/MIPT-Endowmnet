@@ -71,6 +71,7 @@ const Image = styled.div`
   background-color: ${palette.primary};
   background-size: cover;
   background-position: center;
+  border-radius: 8px 0 0 8px;
   ${media.small`
     width: 100%;
     height: 280px;

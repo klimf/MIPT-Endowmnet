@@ -42,7 +42,7 @@ const More = styled.p`
   margin: 16px 0 0 0;
   color: ${palette.primary};
   text-decoration: underline;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 300;
 `;
 
@@ -122,7 +122,6 @@ function MainCapital(props) {
             </More>
             </Info>
           </FlexBox>
-          <Space size={2} />
           <Stats noSmall horisontal="space-between">
             <h2>
               <b>Цель:</b> <InLine><i>{formatMoney(props.purpose)}</i> ₽</InLine>
@@ -131,12 +130,10 @@ function MainCapital(props) {
               <b>Осталось:</b> <InLine>{formatMoney(props.purpose - props.collected)} ₽</InLine>
             </h2>
           </Stats>
-          <Space size={2} />
           <Bar>
             <Bar progress={78} />
           </Bar>
-          <Space size={2} />
-          <Button fake expanded type="border">Пожертвовать в общий фонд</Button>
+          <Button fake expanded type="border" margin="0 0 -24px 0">Пожертвовать в общий фонд</Button>
         </Block>
       </StyledLink>
     </Wrapper>
