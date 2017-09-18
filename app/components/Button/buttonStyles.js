@@ -20,6 +20,8 @@ const defaultStyle = css`
   user-select: none;
   cursor: pointer;
   outline: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
   font-size: ${1.4 * unit}px;
   font-weight: 500;
   border: 3px solid ${(props) => props.theme.borderColor};

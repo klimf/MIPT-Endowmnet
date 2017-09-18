@@ -21,6 +21,7 @@ function Button(props) {
   const Wrapper = styled.div`
     margin: ${props.margin ? props.margin : '0'};
     text-align: ${props.centred ? 'center' : 'left'};
+    ${props.expanded && 'width:100%;'}
     & > * {
       ${props.expanded && 'width:100%;'}
     }

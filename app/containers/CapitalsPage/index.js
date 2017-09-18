@@ -83,9 +83,10 @@ export class CapitalsPage extends React.PureComponent { // eslint-disable-line r
         <Content>
           <MainCapital {...capital} />
           {capitals.map((item, index) => (
-            <Capital key={index} name={item.name} collected={item.collected} to={item.link} />
+            <Capital key={index} name={item.name} collected={item.collected} to={item.to} />
           ))}
         </Content>
+        <Space size={4} />
       </div>
     );
   }
