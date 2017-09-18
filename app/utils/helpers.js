@@ -7,6 +7,13 @@ import { css } from 'styled-components';
 //   small: 640,
 // };
 
+export function formatMoney(value) {
+  if (value) {
+    return value.toFixed().replace(/./g, (c, i, a) => (i && c !== '.' && ((a.length - i) % 3 === 0) ? ` ${c}` : c));
+  }
+  return '0';
+}
+
 export const media = {
   small: (...args) => css`
     @media (max-width: 39.999em) {
@@ -24,6 +31,7 @@ export const media = {
 
 
 export const hideOn = css`
+  ${(props) => props.noAll && 'display: none'};
   ${media.small`
      ${(props) => props.noSmall && 'display: none'};
   `}

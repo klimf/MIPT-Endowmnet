@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { palette } from '../../utils/constants';
-import { hideOn, media } from '../../utils/style-utils';
+import { hideOn, media } from '../../utils/helpers';
 
 
 const NavList = styled.div`

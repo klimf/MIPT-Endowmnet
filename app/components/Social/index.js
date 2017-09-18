@@ -7,7 +7,7 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import { palette } from '../../utils/constants';
-import { hideOn } from '../../utils/style-utils';
+import { hideOn } from '../../utils/helpers';
 
 import VkIcon from './VkIcon';
 import FbIcon from './FbIcon';
@@ -21,7 +21,7 @@ const Wrapper = styled.div`
   padding: 0;
   width: 100%;
   height: 36px;
-  ${(props) => !props.expand && 'max-width: 240px;'}
+  ${(props) => !props.expand && 'width: 240px;'}
   ${hideOn}
 `;
 

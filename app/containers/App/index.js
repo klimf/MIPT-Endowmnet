@@ -18,7 +18,7 @@ import styled from 'styled-components';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
 
-import { palette, unit } from '../../utils/constants';
+import { palette } from '../../utils/constants';
 
 const AppWrapper = styled.div`
   width:100%;
@@ -31,6 +31,7 @@ const PageWrapper = styled.div`
   width: 100%;
   background-color: ${palette.background};
   min-height: 100%;
+  overflow: hidden;
 `;
 
 export default class App extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
@@ -44,7 +45,7 @@ export default class App extends React.PureComponent { // eslint-disable-line re
       <AppWrapper>
         <Helmet
           titleTemplate="%s - MIPT"
-          defaultTitle="MIPT - студия, делаем сайты и мобильные приложения"
+          defaultTitle="MIPT - фонд, делаем универ лучше"
           meta={[
             {
               name: 'description',

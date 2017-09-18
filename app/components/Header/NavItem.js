@@ -1,7 +1,7 @@
 import { Link } from 'react-router';
 import styled from 'styled-components';
 import { palette, unit } from '../../utils/constants';
-import { media } from '../../utils/style-utils';
+import { media } from '../../utils/helpers';
 
 
 const NavItem = styled(Link)`

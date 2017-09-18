@@ -1,16 +1,17 @@
 import { css } from 'styled-components';
 import { unit } from '../../utils/constants';
-import { media } from '../../utils/style-utils';
+import { media } from '../../utils/helpers';
 
 const defaultStyle = css`
   min-width: 100px;
+  ${(props) => props.expanded && 'width:100%;'}
   height: ${3 * unit}px;
   display: inline-block;
   box-sizing: border-box;
   padding: ${0.5 * unit}px ${1.5 * unit}px;
   text-align: center;
   text-decoration: none;
-  text-transform: uppercase;
+  //text-transform: uppercase;
   text-overflow: ellipsis;
   white-space: nowrap;
   border-radius: ${2 * unit}px;
@@ -19,7 +20,7 @@ const defaultStyle = css`
   user-select: none;
   cursor: pointer;
   outline: 0;
-  font-size: ${1 * unit}px;
+  font-size: ${1.4 * unit}px;
   font-weight: 500;
   border: 3px solid ${(props) => props.theme.borderColor};
   background-color: ${(props) => props.theme.bgColor};

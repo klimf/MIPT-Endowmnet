@@ -30,7 +30,7 @@ class Header extends React.PureComponent { // eslint-disable-line react/prefer-s
   }
 
   handleMobileMenuClick() {
-    this.setState(this.state.menuIsOpen ? { menuIsOpen: false } : { menuIsOpen: true });
+    this.setState({ menuIsOpen: !this.state.menuIsOpen });
   }
 
   render() {

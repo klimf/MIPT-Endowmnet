@@ -35,19 +35,19 @@ export default function createRoutes(store) {
         importModules.catch(errorLoading);
       },
     }, {
-      path: '/test',
-      name: 'authProvider',
+      path: '/capitals',
+      name: 'capitalsPage',
       getComponent(nextState, cb) {
         const importModules = Promise.all([
-          import('containers/AuthProvider/reducer'),
-          import('containers/AuthProvider/sagas'),
-          import('containers/AuthProvider'),
+          import('containers/CapitalsPage/reducer'),
+          import('containers/CapitalsPage/sagas'),
+          import('containers/CapitalsPage'),
         ]);
 
         const renderRoute = loadModule(cb);
 
         importModules.then(([reducer, sagas, component]) => {
-          injectReducer('authProvider', reducer.default);
+          injectReducer('capitalsPage', reducer.default);
           injectSagas(sagas.default);
           renderRoute(component);
         });

@@ -12,11 +12,10 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import styled from 'styled-components';
-
+import Button from 'components/Button';
 import { palette, unit } from '../../utils/constants';
 import messages from './messages';
 
-import Button from 'components/Button';
 
 const Wrapper = styled.div`
   margin-top: ${12 * unit}px;
@@ -48,7 +47,7 @@ export default class NotFound extends React.PureComponent { // eslint-disable-li
         <SubTitle>
           <FormattedMessage {...messages.title} />
         </SubTitle>
-        <Button type="header" to="/"><FormattedMessage {...messages.button} /></Button>
+        <Button centred type="header" to="/"><FormattedMessage {...messages.button} /></Button>
       </Wrapper>
     );
   }
