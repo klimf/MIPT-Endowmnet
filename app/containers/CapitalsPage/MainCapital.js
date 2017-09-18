@@ -5,14 +5,14 @@
  */
 
 import React, { PropTypes } from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { Link } from 'react-router';
 
 import FlexBox from 'components/FlexBox';
 import Space from 'components/Space';
 import Button from 'components/Button';
 
-import { Block, palette, shadow, unit } from '../../utils/constants';
+import { Block, palette } from '../../utils/constants';
 import { formatMoney, hideOn, media } from '../../utils/helpers';
 
 const Wrapper = styled.div`

@@ -5,11 +5,11 @@
  */
 
 import React, { PropTypes } from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { Link } from 'react-router';
 import { block, palette, unit } from '../../utils/constants';
 import { hideOn, media } from '../../utils/helpers';
-import FlexBox from '../FlexBox/index';
+// import FlexBox from '../FlexBox/index';
 
 const Wrapper = styled.div`
   display: flex;

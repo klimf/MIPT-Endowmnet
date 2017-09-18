@@ -12,11 +12,10 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import styled from 'styled-components';
-
+import Button from 'components/Button';
 import { palette, unit } from '../../utils/constants';
 import messages from './messages';
 
-import Button from 'components/Button';
 
 const Wrapper = styled.div`
   margin-top: ${12 * unit}px;

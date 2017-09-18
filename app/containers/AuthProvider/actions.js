@@ -23,3 +23,4 @@ export const fetchRecoveryPassword = new FetchAction('USER_RECOVERY_PASSWORD');
 export const fetchGetRecoveryToken = new FetchAction('USER_GET_RECOVERY_TOKEN');
 
 export const userChanged = createAction('USER_CHANGED', (data) => data);
+

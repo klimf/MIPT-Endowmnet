@@ -5,9 +5,9 @@
  */
 
 import React, { PropTypes } from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { Link } from 'react-router';
-import { Block, palette, shadow, unit } from '../../utils/constants';
+import { Block, palette } from '../../utils/constants';
 import FlexBox from '../../components/FlexBox/index';
 import { formatMoney } from '../../utils/helpers';
 

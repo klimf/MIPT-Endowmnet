@@ -2,24 +2,30 @@ import { take, call, put } from 'redux-saga/effects';
 import api, { responseStates } from '../../utils/api';
 import * as actions from './actions';
 
-export function* getUser(action) {
+export function* getUser() {
   try {
+    const action = yield take(actions.fetchUser.types.start);
     const user = action.payload ? action.payload : yield call(fetchCurrentUser);
     yield put(actions.fetchUser.success(user));
   } catch (e) {
-    switch (e.status) {
-      case 401:
-        yield put(actions.fetchUser.failed(responseStates.UNATHORIZED));
-        break;
-      default:
-        yield put(actions.fetchUser.failed(e));
-        break;
+    if (e.response) {
+      switch (e.response.status) {
+        case 401:
+          yield put(actions.fetchUser.failed(responseStates.UNATHORIZED));
+          break;
+        default:
+          yield put(actions.fetchUser.failed(e.response));
+          break;
+      }
+    } else {
+      yield put(actions.fetchUser.failed(responseStates.NETWORK_ERROR));
     }
   }
 }
 
-export function* login(action) {
+export function* login() {
   try {
+    const action = yield take(actions.fetchLogin.types.start);
     const user = yield call(sendLogin, action.payload);
     yield put(actions.fetchLogin.success(null));
     yield put(actions.userChanged(user));
@@ -30,6 +36,7 @@ export function* login(action) {
 
 export function* logout() {
   try {
+    yield take(actions.fetchLogout.types.start);
     yield call(sendLogout);
     yield put(actions.fetchLogout.success(null));
     yield put(actions.userChanged(null));
@@ -38,9 +45,9 @@ export function* logout() {
   }
 }
 
-
 export function* registration(action) {
   try {
+    yield take(actions.fetchRegistration.types.start);
     const { id } = yield call(sendRegistrationData, action.payload);
     yield put(actions.fetchRegistration.success({ id }));
   } catch (e) {
@@ -50,6 +57,7 @@ export function* registration(action) {
 
 export function* recoveryPassword(action) {
   try {
+    yield take(actions.fetchRecoveryPassword.types.start);
     yield call(sendRecoveryPasswordToken, action.payload);
     yield put(actions.fetchRecoveryPassword.success());
   } catch (e) {
@@ -59,6 +67,7 @@ export function* recoveryPassword(action) {
 
 export function* getRecoveryPasswordToken(action) {
   try {
+    yield take(actions.fetchGetRecoveryToken.types.start);
     yield call(sendRecoveryPasswordTokenRequest, action.payload);
     yield put(actions.fetchGetRecoveryToken.success());
   } catch (e) {
@@ -68,6 +77,7 @@ export function* getRecoveryPasswordToken(action) {
 
 export function* confirmEmail(action) {
   try {
+    yield take(actions.fetchConfirm.types.start);
     yield call(sendConfirmationEmailToken, action.payload);
     yield put(actions.fetchConfirm.success());
   } catch (e) {
@@ -78,7 +88,7 @@ export function* confirmEmail(action) {
 // All sagas to be loaded
 
 function fetchCurrentUser() {
-  return api.get('/users').then((res) => res.data);
+  return api.get('/user/current').then((res) => res.data);
 }
 
 function sendLogin(credentials) {
@@ -111,26 +121,15 @@ function sendConfirmationEmailToken({ token }) {
 }
 
 // Individual exports for testing
-export function* defaultSaga() {
-  // @ts-ignore
-  yield take(actions.fetchUser.types.start, getUser);
-    // @ts-ignore
-  yield take(actions.userChanged.getType(), getUser);
-    // @ts-ignore
-  yield take(actions.fetchLogin.types.start, login);
-    // @ts-ignore
-  yield take(actions.fetchLogout.types.start, logout);
-    // @ts-ignore
-  yield take(actions.fetchConfirm.types.start, confirmEmail);
-    // @ts-ignore
-  yield take(actions.fetchGetRecoveryToken.types.start, getRecoveryPasswordToken);
-    // @ts-ignore
-  yield take(actions.fetchRecoveryPassword.types.start, recoveryPassword);
-    // @ts-ignore
-  yield take(actions.fetchRegistration.types.start, registration);
-}
+
 
 // All sagas to be loaded
 export default [
-  defaultSaga,
+  getUser,
+  login,
+  logout,
+  confirmEmail,
+  recoveryPassword,
+  getRecoveryPasswordToken,
+  registration,
 ];

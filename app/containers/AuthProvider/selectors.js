@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect';
+import _ from 'lodash';
 import { responseStates } from '../../utils/api';
 
 
@@ -6,19 +7,30 @@ import { responseStates } from '../../utils/api';
  * Direct selector to the authProvider state domain
  */
 const selectAuthProviderDomain = () => (state) => state.get('authProvider');
+const selectUser = () => (state) => state.get('authProvider').get('user');
+const selectAnyFetchStatus = () => (state, { stateSelector }) => stateSelector(state);
 
 /**
  * Other specific selectors
  */
 
 const isLogged = () => createSelector(
-  selectAuthProviderDomain(),
-  (substate) => substate.toJS().user.data && true
+  selectUser(),
+  (substate) => substate.toJS().data && true
 );
 
 const isUnauthorized = () => createSelector(
-  selectAuthProviderDomain(),
-  (substate) => substate.toJS().user.error === responseStates.UNATHORIZED
+  selectAnyFetchStatus(),
+  (substate) => {
+    const targetState = substate.toJS();
+    return Object.keys(targetState).reduce((result, stateName) => {
+      const currentState = targetState[stateName] ? targetState[stateName].error || targetState[stateName] : {};
+      if (_.isEqual(currentState, responseStates.UNATHORIZED)) {
+        return true;
+      }
+      return result;
+    }, false);
+  }
 );
 
 
