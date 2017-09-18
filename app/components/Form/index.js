@@ -8,7 +8,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { palette, unit } from '../../utils/constants';
 import { media } from '../../utils/helpers';
-import Input from '../Input';
 import Title from '../Title';
 import Space from '../Space';
 import Button from '../Button';
@@ -29,25 +28,32 @@ const Container = styled.div`
   padding: 40px;
 `;
 
-function Form() {
+const Field = (Node) => (
+  <div>
+    <Space size={3} />
+    <Node />
+  </ div>
+);
+
+
+function Form(props) {
   return (
     <Wrapper>
       <Space size={5} />
       <Container>
-        <Title noMargin>Вход</Title>
-        <Space size={3} />
-        <Input label="E-mail" />
-        <Space size={0.5} />
-        <Input label="Пароль" type="password" />
-        <Space size={2} />
-        <Button expanded>Войти</Button>
+        <Title noMargin>{props.title}</Title>
+        { React.Children.map(props.children, Field)}
+        <Button expanded onClick={props.onActionButtonClick}>{props.actionLabel}</Button>
       </Container>
     </Wrapper>
   );
 }
 
 Form.propTypes = {
-
+  title: React.PropTypes.string.isRequired,
+  children: React.PropTypes.any,
+  onActionButtonClick: React.PropTypes.any.isRequired,
+  actionLabel: React.PropTypes.any.isRequired,
 };
 
 export default Form;

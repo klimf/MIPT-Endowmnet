@@ -8,6 +8,7 @@ import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import { palette } from '../../utils/constants';
 
+
 const StyledInput = styled.input`
   width: 100%;
   height: 36px;
@@ -35,7 +36,7 @@ function Input(props) {
   return (
     <div>
       <StyledLabel noAll={!props.label} >{props.label}</StyledLabel>
-      <StyledInput placeholder={props.placeholder && props.placeholder} type={props.type ? props.type : 'text'}>
+      <StyledInput placeholder={props.placeholder && props.placeholder} type={props.type || 'text'}>
         {props.value && props.value}
       </StyledInput>
     </div>

@@ -7,6 +7,7 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 
+
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 
@@ -19,32 +20,23 @@ import Logo from '../Logo';
 import Button from '../Button';
 import FlexBox from '../FlexBox';
 import Overlay from '../Overlay';
-import Form from '../Form';
+
 
 class Header extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
     super(props);
     this.state = {
       menuIsOpen: false,
-      formIsOpen: false,
     };
     this.handleMobileMenuClick = this.handleMobileMenuClick.bind(this);
-    this.handleLoginClick = this.handleLoginClick.bind(this);
   }
 
   handleMobileMenuClick() {
     this.setState({
       menuIsOpen: !this.state.menuIsOpen,
-      formIsOpen: this.state.formIsOpen,
     });
   }
 
-  handleLoginClick() {
-    this.setState({
-      menuIsOpen: this.state.menuIsOpen,
-      formIsOpen: this.state.formIsOpen ? false : 'login',
-    });
-  }
 
   render() {
     return (
@@ -78,16 +70,6 @@ class Header extends React.PureComponent { // eslint-disable-line react/prefer-s
             <Button to="/" type="header" onClick={this.handleMobileMenuClick} ><FormattedMessage {...messages.action} /></Button>
             <Button onClick={this.handleLoginClick} type="border" ><FormattedMessage {...messages.enter} /></Button>
           </FlexBox>
-        </Overlay>
-        <Overlay background show={this.state.formIsOpen}>
-          <Wrapper>
-            <FlexBox horisontal="space-between">
-              <Link to="/" onClick={this.handleLoginClick}><Logo /></Link>
-              <Icon type="close" onClick={this.handleLoginClick} />
-            </FlexBox>
-            <Form />
-          </Wrapper>
-
         </Overlay>
       </Wrapper>
     );
