@@ -5,19 +5,21 @@
  */
 
 import { fromJS } from 'immutable';
+import { combineReducers } from 'redux-immutable';
+import { fetchReducerFactory } from '../../utils/api';
 import {
-  DEFAULT_ACTION,
-} from './constants';
+  fetchCapital,
+  fetchUpdateCapital,
+  fetchDeleteCapital,
+  fetchCapitals,
+  fetchMainCapital,
+} from './actions';
 
-const initialState = fromJS({});
 
-function capitalsPageReducer(state = initialState, action) {
-  switch (action.type) {
-    case DEFAULT_ACTION:
-      return state;
-    default:
-      return state;
-  }
-}
-
-export default capitalsPageReducer;
+export default combineReducers({
+  currentCapital: fetchReducerFactory(fetchCapital),
+  mainCapital: fetchReducerFactory(fetchMainCapital),
+  updateCapital: fetchReducerFactory(fetchUpdateCapital),
+  deleteCapital: fetchReducerFactory(fetchDeleteCapital),
+  capitals: fetchReducerFactory(fetchCapitals),
+}, fromJS({}));
