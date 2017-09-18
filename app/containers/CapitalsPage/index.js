@@ -5,7 +5,7 @@
  */
 
 import React, { PropTypes } from 'react';
-import styled from 'styled-components';
+// import styled from 'styled-components';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { FormattedMessage } from 'react-intl';
@@ -14,17 +14,17 @@ import { createStructuredSelector } from 'reselect';
 import Title from 'components/Title';
 import Space from 'components/Space/index';
 import Content from 'components/Content';
-import FlexBox from 'components/FlexBox';
+// import FlexBox from 'components/FlexBox';
 
 import Capital from './Capital';
 
 import makeSelectCapitalsPage from './selectors';
 import messages from './messages';
-import { palette, Block } from '../../utils/constants';
-import { formatMoney, hideOn, media } from '../../utils/helpers';
+// import { palette, Block } from '../../utils/constants';
+// import { formatMoney, hideOn, media } from '../../utils/helpers';
 
 import logo from '../../images/MiptLogo.jpg';
-import MainCapital from "./MainCapital";
+import MainCapital from './MainCapital';
 
 const capitals = [
   {
@@ -64,23 +64,16 @@ const capital = {
 
 
 export class CapitalsPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
-  constructor(props) {
-    super(props);
-  }
-  summCollected(array) {
-    let sum = 0;
-    for (let i = 0; i < array.length; i += 1) {
-      sum += array[i].collected;
-    }
-    return sum;
-  }
 
+  sumCollected(array) {
+    return array.reduce((result, item) => (result + item.collected), 0);
+  }
 
   render() {
     return (
       <div>
         <Helmet
-          title="Капиталы"
+          title={'Капиталы'}
           meta={[
             { name: 'description', content: 'Капиталы фонда МФТИ' },
           ]}

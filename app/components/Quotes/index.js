@@ -7,7 +7,7 @@
 import React, { PropTypes } from 'react';
 
 import Title from 'components/Title';
-import Button from 'components/Button';
+// import Button from 'components/Button';
 import Item from './Item';
 
 function Quotes(props) {
