@@ -17,6 +17,7 @@ function Button(props) {
   const A = styled.a`${buttonStyles}`;
   const StyledLink = styled(Link)`${buttonStyles}`;
   const StyledDiv = styled.div`${buttonStyles}`;
+  const StyledButton = styled.button`${buttonStyles}`;
 
   const Wrapper = styled.div`
     margin: ${props.margin ? props.margin : '0'};
@@ -50,6 +51,13 @@ function Button(props) {
       </StyledDiv>
     );
   }
+  if (props.submit) {
+    button = (
+      <StyledButton type="submit">
+        { Children.toArray(props.children) }
+      </StyledButton>
+    );
+  }
   return (
     <Wrapper {...props} >
       <ThemeProvider theme={props.type ? buttonThemes[props.type] : buttonThemes.primary} >
@@ -69,6 +77,7 @@ Button.propTypes = {
   centred: PropTypes.bool,
   expanded: PropTypes.bool,
   fake: PropTypes.bool,
+  submit: PropTypes.bool,
 };
 
 export default styled(Button)`${hideOn}`;

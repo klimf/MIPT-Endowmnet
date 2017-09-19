@@ -4,39 +4,40 @@
  *
  */
 
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 // import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import makeSelectSignIn from './selectors';
-import messages from './messages';
-import Form from '../../components/Form';
-import Input from '../../components/Input';
+// import messages from './messages';
+
+import AuthProvider from '../AuthProvider';
+import LoginForm from './LoginForm';
 
 export class SignIn extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+  componentDidMount() {
+    console.log(this.props);
+  }
   render() {
     return (
       <div>
         <Helmet
-          title="SignIn"
+          title="Вход на сайт"
           meta={[
-            { name: 'description', content: 'Description of SignIn' },
+            { name: 'description', content: 'Вход на сайт' },
           ]}
         />
-
-        <Form title={messages.formTitle.defaultMessage} actionLabel={messages.signIButton.defaultMessage}>
-          <Input name={'login'} label={messages.loginLabel.defaultMessage} validations={['required', 'email']} type="email" placeholder={'jambul@mail.ru'}></Input>
-          <Input name={'password'} validations={['required', 'password']} label={messages.passwordLabel.defaultMessage} type="password" placeholder={'jambul@mail.ru'}></Input>
-        </Form>
-
+        <AuthProvider>
+          <LoginForm></LoginForm>
+        </AuthProvider>
       </div>
     );
   }
 }
 
 SignIn.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+ // dispatch: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({

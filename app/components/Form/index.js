@@ -37,29 +37,46 @@ const Field = (Node) => (
   </ div>
 );
 
-const Submit = styled(Validation.Button)``.withComponent(Button);
 
-function Form(props) {
-  return (
-    <Wrapper>
-      <Space size={5} />
-      <Container>
-        <Title noMargin>{ props.title }</Title>
-        <Space size={3} />
-        <Validation.Form >
-          { React.Children.map(props.children, Field) }
-          <Submit expanded onClick={props.onActionButtonClick}>{ props.actionLabel }</Submit>
-        </Validation.Form >
-      </Container>
-    </Wrapper>
-  );
+class Form extends React.PureComponent {
+  constructor(props) {
+    super(props);
+    this.onSubmit = this.onSubmit.bind(this);
+  }
+  onSubmit(e) {
+    e.preventDefault();
+    if (Object.keys(this.form.validateAll()).length === 0) {
+      this.props.handleSubmit(this.form);
+    }
+  }
+  render() {
+    return (
+      <Wrapper>
+        <Space size={5} />
+        <Container>
+          <Title noMargin>{ this.props.title }</Title>
+          <Space size={3} />
+          <Validation.Form
+            ref={(c) => { this.form = c; }}
+            onSubmit={this.onSubmit}
+          >
+            { React.Children.map(this.props.children, Field) }
+            <Button expanded submit >
+              { this.props.actionLabel }
+            </Button>
+          </Validation.Form >
+        </Container>
+      </Wrapper>
+    );
+  }
 }
+
 
 Form.propTypes = {
   title: React.PropTypes.string.isRequired,
   children: React.PropTypes.any,
-  onActionButtonClick: React.PropTypes.any.isRequired,
   actionLabel: React.PropTypes.any.isRequired,
+  handleSubmit: React.PropTypes.func.isRequired,
 };
 
 export default Form;
