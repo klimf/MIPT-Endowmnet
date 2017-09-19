@@ -5,10 +5,10 @@
 */
 
 import React, { PropTypes } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { palette } from '../../utils/constants';
 
-const StyledInput = styled.input`
+const TextStyle = css`
   width: 100%;
   height: 36px;
   margin: 8px 0;
@@ -23,6 +23,12 @@ const StyledInput = styled.input`
   }
 `;
 
+const CheckStyle = css`
+  margin: 4px;
+  outline: none;
+  float: left;
+`;
+
 const StyledLabel = styled.label`
   width: 100%;
   margin: 8px 2px ;
@@ -32,17 +38,23 @@ const StyledLabel = styled.label`
 `;
 
 function Input(props) {
+  let StyledInput = styled.input`${TextStyle}`;
+  if (props.type === 'checkbox') StyledInput = styled.input`${CheckStyle}`;
   return (
     <div>
-      <StyledLabel noAll={!props.label} >{props.label}</StyledLabel>
-      <StyledInput placeholder={props.placeholder && props.placeholder} type={props.type ? props.type : 'text'}>
-        {props.value && props.value}
-      </StyledInput>
+      <StyledLabel>
+        {props.label && props.label}
+        <StyledInput checked={props.checked} onChange={props.onClick} placeholder={props.placeholder && props.placeholder} type={props.type ? props.type : 'text'}>
+          {props.value && props.value}
+        </StyledInput>
+      </StyledLabel>
     </div>
   );
 }
 
 Input.propTypes = {
+  onClick: PropTypes.func,
+  checked: PropTypes.bool,
   label: PropTypes.string,
   type: PropTypes.string,
   value: PropTypes.string,

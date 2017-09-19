@@ -53,7 +53,7 @@ class Header extends React.PureComponent { // eslint-disable-line react/prefer-s
           <Link to="/"><Logo /></Link>
           <FlexBox noSmall horisontal="space-between">
             <Button onClick={this.handleLoginClick} type="border" margin="9px 24px"><FormattedMessage {...messages.enter} /></Button>
-            <Button to="/" type="header" margin="9px 0"><FormattedMessage {...messages.action} /></Button>
+            <Button to="/donate" type="header" margin="9px 0"><FormattedMessage {...messages.action} /></Button>
           </FlexBox>
           <Icon noLarge noMedium type="menu" onClick={this.handleMobileMenuClick} />
         </FlexBox>
@@ -75,7 +75,7 @@ class Header extends React.PureComponent { // eslint-disable-line react/prefer-s
             ))}
           </NavList>
           <FlexBox horisontal="space-between" padding="0 4%">
-            <Button to="/" type="header" onClick={this.handleMobileMenuClick} ><FormattedMessage {...messages.action} /></Button>
+            <Button to="/donate" type="header" onClick={this.handleMobileMenuClick} ><FormattedMessage {...messages.action} /></Button>
             <Button onClick={this.handleLoginClick} type="border" ><FormattedMessage {...messages.enter} /></Button>
           </FlexBox>
         </Overlay>
