@@ -6,11 +6,13 @@
 
 import React from 'react';
 import styled from 'styled-components';
+import * as Validation from 'react-validation/lib/build/validation.rc';
 import { palette, unit } from '../../utils/constants';
 import { media } from '../../utils/helpers';
 import Title from '../Title';
 import Space from '../Space';
 import Button from '../Button';
+
 
 const Wrapper = styled.div`
   max-width: 32em;
@@ -30,20 +32,24 @@ const Container = styled.div`
 
 const Field = (Node) => (
   <div>
+    { Node }
     <Space size={3} />
-    <Node />
   </ div>
 );
 
+const Submit = styled(Validation.Button)``.withComponent(Button);
 
 function Form(props) {
   return (
     <Wrapper>
       <Space size={5} />
       <Container>
-        <Title noMargin>{props.title}</Title>
-        { React.Children.map(props.children, Field)}
-        <Button expanded onClick={props.onActionButtonClick}>{props.actionLabel}</Button>
+        <Title noMargin>{ props.title }</Title>
+        <Space size={3} />
+        <Validation.Form >
+          { React.Children.map(props.children, Field) }
+          <Submit expanded onClick={props.onActionButtonClick}>{ props.actionLabel }</Submit>
+        </Validation.Form >
       </Container>
     </Wrapper>
   );

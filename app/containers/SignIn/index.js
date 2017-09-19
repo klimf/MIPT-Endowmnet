@@ -7,12 +7,12 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
-import { FormattedMessage } from 'react-intl';
+// import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import makeSelectSignIn from './selectors';
 import messages from './messages';
 import Form from '../../components/Form';
-
+import Input from '../../components/Input';
 
 export class SignIn extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
@@ -25,11 +25,11 @@ export class SignIn extends React.PureComponent { // eslint-disable-line react/p
           ]}
         />
 
+        <Form title={messages.formTitle.defaultMessage} actionLabel={messages.signIButton.defaultMessage}>
+          <Input name={'login'} label={messages.loginLabel.defaultMessage} validations={['required', 'email']} type="email" placeholder={'jambul@mail.ru'}></Input>
+          <Input name={'password'} validations={['required', 'password']} label={messages.passwordLabel.defaultMessage} type="password" placeholder={'jambul@mail.ru'}></Input>
+        </Form>
 
-        <Form />
-
-
-        <FormattedMessage {...messages.formTitle} />
       </div>
     );
   }

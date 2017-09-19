@@ -25,4 +25,8 @@ export default defineMessages({
     id: 'app.containers.SignIn.emailIsInvalid',
     defaultMessage: 'E-mail должен быть валидным',
   },
+  requiredIsInvalid: {
+    id: 'app.containers.SignIn.emailIsInvalid',
+    defaultMessage: 'Обязательное поле',
+  },
 });
