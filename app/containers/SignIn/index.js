@@ -16,9 +16,7 @@ import AuthProvider from '../AuthProvider';
 import LoginForm from './LoginForm';
 
 export class SignIn extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
-  componentDidMount() {
-    console.log(this.props);
-  }
+
   render() {
     return (
       <div>

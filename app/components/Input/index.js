@@ -11,7 +11,9 @@ import { palette } from '../../utils/constants';
 // ebanuy crutch by react-validation developer
 import validations from './validations'; // eslint-disable-line
 
-const StyledInput = styled(Validation.Input)`
+const StyledInput = styled(Validation.Input).attrs({
+  type: (props) => props.type || 'text',
+})`
   width: 100%;
   height: 36px;
   margin: 8px 0;
