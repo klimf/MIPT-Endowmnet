@@ -23,7 +23,7 @@ import Overlay from '../Overlay';
 import { ProtectedContent } from '../../containers/AuthProvider';
 
 const LoginButton = () => (
-  <Button to="/sign-in" type="border" ><FormattedMessage {...messages.enter} /></Button>
+  <Button to="/sign-in" type="border" margin="9px 24px" ><FormattedMessage {...messages.enter} /></Button>
 );
 
 class Header extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function

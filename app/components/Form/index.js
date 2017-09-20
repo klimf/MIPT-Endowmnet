@@ -16,7 +16,7 @@ import Button from '../Button';
 export const Field = (Node) => (
   <div>
     { Node }
-    <Space size={3} />
+    <Space size={1} />
   </ div>
 );
 
