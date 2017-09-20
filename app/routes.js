@@ -75,6 +75,26 @@ export default function createRoutes(store) {
         importModules.catch(errorLoading);
       },
     }, {
+      path: '/donate',
+      name: 'donationPage',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          import('containers/DonationPage/reducer'),
+          import('containers/DonationPage/sagas'),
+          import('containers/DonationPage'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('donationPage', reducer.default);
+          injectSagas(sagas.default);
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    }, {
       path: '*',
       name: 'notfound',
       getComponent(nextState, cb) {

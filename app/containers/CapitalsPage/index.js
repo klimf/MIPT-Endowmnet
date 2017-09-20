@@ -55,7 +55,7 @@ const capitals = [
 ];
 
 const capital = {
-  to: '/capital',
+  to: '/donate',
   name: 'Общий фонд целевого капитала фонда МФТИ',
   image: logo,
   purpose: 1000000000,

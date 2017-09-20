@@ -5,7 +5,7 @@
 */
 
 import React, { PropTypes } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import * as Validation from 'react-validation/lib/build/validation.rc';
 import { palette } from '../../utils/constants';
 // ebanuy crutch by react-validation developer
@@ -22,10 +22,19 @@ const StyledInput = styled(Validation.Input).attrs({
   border-radius: 8px;
   border: 3px solid ${palette.disabled};
   transition: 0.3s;
+  &:hover {
+    border: 3px solid ${palette.gray};
+  }
   &:focus {
     border: 3px solid ${palette.primary};
     padding: 0 24px;
   }
+`;
+
+const CheckStyle = css`
+  margin: 4px;
+  outline: none;
+  float: left;
 `;
 
 const StyledLabel = styled.label`
@@ -36,11 +45,18 @@ const StyledLabel = styled.label`
   height: 36px;
 `;
 
+const CheckBox = styled.input`${CheckStyle}`;
+
 function Input(props) {
   return (
     <div>
-      <StyledLabel for={props.name} noAll={!props.label} >{props.label}</StyledLabel>
-      <StyledInput {...props}></StyledInput>
+      <StyledLabel for={props.name} noAll={!props.label} >
+        { props.label }
+        { props.type === 'checkbox'
+          ? <CheckBox {...props}></CheckBox>
+          : <StyledInput {...props}></StyledInput>
+          }
+      </StyledLabel>
     </div>
   );
 }
@@ -48,6 +64,7 @@ function Input(props) {
 Input.propTypes = {
   name: PropTypes.string.isRequired,
   label: PropTypes.string,
+  type: PropTypes.string,
 };
 
 export default Input;
