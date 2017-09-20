@@ -6,12 +6,70 @@
 
 import React from 'react';
 import styled from 'styled-components';
+import * as Validation from 'react-validation/lib/build/validation.rc';
 import { palette, unit } from '../../utils/constants';
 import { media } from '../../utils/helpers';
-import Input from '../Input';
 import Title from '../Title';
 import Space from '../Space';
 import Button from '../Button';
+
+export const Field = (Node) => (
+  <div>
+    { Node }
+    <Space size={3} />
+  </ div>
+);
+
+export const Submit = (props) =>
+  (<Button expanded submit >
+    {props.actionLabel }
+  </Button>);
+
+Submit.propTypes = {
+  actionLabel: React.PropTypes.string,
+};
+
+export class Form extends React.PureComponent {
+
+  constructor(props) {
+    super(props);
+    this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  componentDidUpdate() {
+    const errors = this.props.handleErrors();
+    if (errors.length > 0) {
+      errors.forEach((err) => {
+        this.form.showError(err.name, err.error);
+      });
+    }
+  }
+  onSubmit(e) {
+    e.preventDefault();
+    if (Object.keys(this.form.validateAll()).length === 0) {
+      this.props.handleSubmit(this.form);
+    }
+  }
+
+  render() {
+    return (
+      <Validation.Form
+        ref={(c) => { this.form = c; }}
+        onSubmit={this.onSubmit}
+      >
+        {this.props.children}
+      </Validation.Form >
+    );
+  }
+}
+
+
+Form.propTypes = {
+  children: React.PropTypes.any,
+  handleSubmit: React.PropTypes.func.isRequired,
+  handleErrors: React.PropTypes.func.isRequired,
+};
+
 
 const Wrapper = styled.div`
   max-width: 32em;
@@ -29,25 +87,30 @@ const Container = styled.div`
   padding: 40px;
 `;
 
-function Form() {
-  return (
-    <Wrapper>
-      <Space size={5} />
-      <Container>
-        <Title noMargin>Вход</Title>
-        <Space size={3} />
-        <Input label="E-mail" />
-        <Space size={0.5} />
-        <Input label="Пароль" type="password" />
-        <Space size={2} />
-        <Button expanded>Войти</Button>
-      </Container>
-    </Wrapper>
-  );
+
+export class SimpleForm extends React.PureComponent { // eslint-disable-line
+  render() {
+    return (
+      <Wrapper>
+        <Space size={5} />
+        <Container>
+          <Title noMargin>{ this.props.title }</Title>
+          <Space size={3} />
+          <Form {...this.props} >
+            { React.Children.map(this.props.children, Field) }
+            <Submit actionLabel={this.props.actionLabel} ></Submit>
+          </Form >
+        </Container>
+      </Wrapper>
+    );
+  }
 }
 
-Form.propTypes = {
 
+SimpleForm.propTypes = {
+  title: React.PropTypes.string.isRequired,
+  children: React.PropTypes.any,
+  actionLabel: React.PropTypes.any.isRequired,
 };
 
 export default Form;

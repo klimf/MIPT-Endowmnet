@@ -6,9 +6,14 @@
 
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
+import * as Validation from 'react-validation/lib/build/validation.rc';
 import { palette } from '../../utils/constants';
+// ebanuy crutch by react-validation developer
+import validations from './validations'; // eslint-disable-line
 
-const StyledInput = styled.input`
+const StyledInput = styled(Validation.Input).attrs({
+  type: (props) => props.type || 'text',
+})`
   width: 100%;
   height: 36px;
   margin: 8px 0;
@@ -34,19 +39,15 @@ const StyledLabel = styled.label`
 function Input(props) {
   return (
     <div>
-      <StyledLabel noAll={!props.label} >{props.label}</StyledLabel>
-      <StyledInput placeholder={props.placeholder && props.placeholder} type={props.type ? props.type : 'text'}>
-        {props.value && props.value}
-      </StyledInput>
+      <StyledLabel for={props.name} noAll={!props.label} >{props.label}</StyledLabel>
+      <StyledInput {...props}></StyledInput>
     </div>
   );
 }
 
 Input.propTypes = {
+  name: PropTypes.string.isRequired,
   label: PropTypes.string,
-  type: PropTypes.string,
-  value: PropTypes.string,
-  placeholder: PropTypes.string,
 };
 
 export default Input;
