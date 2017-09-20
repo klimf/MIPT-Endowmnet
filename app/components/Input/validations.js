@@ -6,6 +6,7 @@ import messages from './messages';
 const Hint = (message) => (
   <FormattedMessage {...message} />
 );
+
 export default Object.assign(rules, {
   required: {
     rule: (val) => val || false,
