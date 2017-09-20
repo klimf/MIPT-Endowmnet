@@ -17,6 +17,10 @@ const Wrapper = styled.div`
   min-height: 36px;
   overflow: hidden;
   background-color: ${palette.disabled};
+  transition: 0.3s;
+  &:hover {
+    background-color: ${palette.gray};
+  }
 `;
 
 const Part = styled.div`

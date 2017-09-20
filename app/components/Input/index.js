@@ -17,6 +17,9 @@ const TextStyle = css`
   border-radius: 8px;
   border: 3px solid ${palette.disabled};
   transition: 0.3s;
+  &:hover {
+    border: 3px solid ${palette.gray};
+  }
   &:focus {
     border: 3px solid ${palette.primary};
     padding: 0 24px;

@@ -82,29 +82,30 @@ export class DonationForm extends React.PureComponent { // eslint-disable-line r
     this.state = {
       isStudent: true,
       isCardPayment: true,
-      selectIndex: 1,
+      isOneTime: true,
+      selectIndex: 2,
     };
     this.handleCheckBoxClick = this.handleCheckBoxClick.bind(this);
-    this.handleSelectClick = this.handleSelectClick.bind(this);
+    this.handleCardPaymentClick = this.handleCardPaymentClick.bind(this);
+    this.handleOneTimeClick = this.handleOneTimeClick.bind(this);
   }
   handleCheckBoxClick() {
     this.setState({
       isStudent: !this.state.isStudent,
-      isCardPayment: this.state.isCardPayment,
-      selectIndex: this.state.selectIndex,
     });
   }
-  handleSelectClick() {
+  handleCardPaymentClick() {
     this.setState({
-      isStudent: this.state.isStudent,
       isCardPayment: !this.state.isCardPayment,
-      selectIndex: this.state.selectIndex,
+    });
+  }
+  handleOneTimeClick() {
+    this.setState({
+      isOneTime: !this.state.isOneTime,
     });
   }
   handleSelectMoney(index) {
     this.setState({
-      isStudent: this.state.isStudent,
-      isCardPayment: this.state.isCardPayment,
       selectIndex: index,
     });
   }
@@ -112,7 +113,7 @@ export class DonationForm extends React.PureComponent { // eslint-disable-line r
     return (
       <div>
         <Column padding={p}>
-          <Select isRight={this.state.isCardPayment} onClick={this.handleSelectClick} left="Банковской картой" right="Безналичным переводом" />
+          <Select isRight={this.state.isCardPayment} onClick={this.handleCardPaymentClick} left="Банковской картой" right="Безналичным переводом" />
         </Column>
         <Space size={2} />
         <FlexBox>
@@ -127,7 +128,7 @@ export class DonationForm extends React.PureComponent { // eslint-disable-line r
           </Column>
           <Space size={2} />
           <Column all={4} small={12} padding={p}>
-            <Input onClick={this.handleCheckBoxClick} checked={this.state.isStudent} label="Я не выпускник МФТИ" type="checkbox" />
+            <Input onClick={this.handleCheckBoxClick} checked={this.state.isStudent} label="Я выпускник МФТИ" type="checkbox" />
             <Space size={2} />
           </Column>
           <Hideable all={8} small={12} hide={!this.state.isStudent} >
@@ -142,12 +143,12 @@ export class DonationForm extends React.PureComponent { // eslint-disable-line r
           <Column all={9} small={12} padding={p}>
             <MoneySelect>
               {prices.map((item, index) => (
-                <MoneyButton key={index}>{formatMoney(item)}₽</MoneyButton>
+                <MoneyButton active={this.state.selectIndex === index} key={index} onClick={() => this.handleSelectMoney(index)}>{formatMoney(item)}₽</MoneyButton>
               ))}
             </MoneySelect>
           </Column>
           <Column all={3} small={12} padding={p}>
-            <MoneyInput placeholder="Другая сумма" />
+            <MoneyInput active={this.state.selectIndex === 31} onClick={() => this.handleSelectMoney(31)} placeholder="Другая сумма" />
           </Column>
           <Space size={2} />
           <Column small={12} medium={12} large={5} padding={p}>
@@ -155,7 +156,7 @@ export class DonationForm extends React.PureComponent { // eslint-disable-line r
             <Space size={2} />
           </Column>
           <Column small={12} medium={6} large={4} padding={p}>
-            <Select left="Разовая" right="В месяц" />
+            <Select isRight={this.state.isOneTime} onClick={this.handleOneTimeClick} left="Разовая" right="В месяц" />
             <Space size={2} />
           </Column>
           <Column small={12} medium={6} large={3} padding={p}>
