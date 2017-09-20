@@ -15,7 +15,6 @@ import Wrapper from './Wrapper';
 import Logo from '../Logo';
 import Button from '../Button';
 import FlexBox from '../FlexBox';
-// import Overlay from '../Overlay';
 import Social from '../Social';
 import Space from '../Space';
 import Contact from './Contact';

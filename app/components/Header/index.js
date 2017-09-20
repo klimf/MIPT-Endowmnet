@@ -77,8 +77,8 @@ class Header extends React.PureComponent { // eslint-disable-line react/prefer-s
             ))}
           </NavList>
           <FlexBox horisontal="space-between" padding="0 4%">
-            <Button to="/" type="header" onClick={this.handleMobileMenuClick} ><FormattedMessage {...messages.action} /></Button>
-            <Button to="/sign-in" type="border" ><FormattedMessage {...messages.enter} /></Button>
+            <Button to="/donate" type="header" onClick={this.handleMobileMenuClick} ><FormattedMessage {...messages.action} /></Button>
+            <Button onClick={this.handleLoginClick} type="border" ><FormattedMessage {...messages.enter} /></Button>
           </FlexBox>
         </Overlay>
       </Wrapper>
