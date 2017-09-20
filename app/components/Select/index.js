@@ -16,9 +16,11 @@ const Wrapper = styled.div`
   border-radius: 18px;
   min-height: 36px;
   overflow: hidden;
+  background-color: ${palette.disabled};
 `;
 
 const Part = styled.div`
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -28,15 +30,26 @@ const Part = styled.div`
   font-size: 20px;
   padding: 8px 12px 4px;
   color: ${palette.white};
-  background-color: ${(props) => props.active ? palette.primary : palette.disabled};
-  font-weight: ${(props) => props.active ? 300 : 400};
+  font-weight: 400;
+`;
+
+const Die = styled.div`
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  border-radius: 18px;
+  transition: 0.3s ease;
+  background-color: ${palette.primary};
+  ${(props) => props.active ? 'left: 0;' : 'left: 50%;'}
 `;
 
 function Select(props) {
   return (
-    <Wrapper>
-      <Part active={!props.isRight}>{props.left}</Part>
-      <Part active={props.isRight}>{props.right}</Part>
+    <Wrapper onClick={props.onClick}>
+      <Die active={props.isRight} />
+      <Part>{props.left}</Part>
+      <Part>{props.right}</Part>
     </Wrapper>
   );
 }
@@ -45,6 +58,7 @@ Select.propTypes = {
   left: PropTypes.string,
   right: PropTypes.string,
   isRight: PropTypes.bool,
+  onClick: PropTypes.func,
 };
 
 export default Select;

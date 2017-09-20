@@ -40,7 +40,7 @@ function Form() {
         <Space size={0.5} />
         <Input label="Пароль" type="password" />
         <Space size={2} />
-        <Button expanded>Войти</Button>
+        <Button type="header" expanded>Войти</Button>
       </Container>
     </Wrapper>
   );

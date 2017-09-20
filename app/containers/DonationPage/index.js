@@ -25,8 +25,14 @@ import FlexBox from '../../components/FlexBox/index';
 const p = '0 12px';
 
 const Hideable = styled(Column)`
-  transition: 0.3s;
-  opacity: ${(props) => props.hide ? 0 : 100};
+  & > div{
+    transition: 0.3s ease;
+    opacity: ${(props) => props.hide ? 0 : 100};
+    transform: translateY(${(props) => props.hide ? '-32px' : '0'});
+  }
+  & > div:nth-child(2){
+    transition-delay: 0.1s;
+  }
 `;
 
 export class DonationPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
@@ -34,13 +40,21 @@ export class DonationPage extends React.PureComponent { // eslint-disable-line r
     super(props);
     this.state = {
       isStudent: true,
+      isCardPayment: true,
     };
     this.handleCheckBoxClick = this.handleCheckBoxClick.bind(this);
+    this.handleSelectClick = this.handleSelectClick.bind(this);
   }
   handleCheckBoxClick() {
-    console.log('click');
     this.setState({
       isStudent: !this.state.isStudent,
+      isCardPayment: this.state.isCardPayment,
+    });
+  }
+  handleSelectClick() {
+    this.setState({
+      isStudent: this.state.isStudent,
+      isCardPayment: !this.state.isCardPayment,
     });
   }
   render() {
@@ -53,9 +67,10 @@ export class DonationPage extends React.PureComponent { // eslint-disable-line r
           ]}
         />
         <Content>
+          <Space size={4} />
           <Title><FormattedMessage {...messages.header} /></Title>
           <Column padding={p}>
-            <Select left="Банковской картой" right="Безналичным переводом" />
+            <Select isRight={this.state.isCardPayment} onClick={this.handleSelectClick} left="Банковской картой" right="Безналичным переводом" />
           </Column>
           <Space size={2} />
           <FlexBox>
@@ -75,12 +90,13 @@ export class DonationPage extends React.PureComponent { // eslint-disable-line r
             </Column>
             <Hideable all={8} small={12} hide={!this.state.isStudent} >
               <Column all={6} small={12} padding={p}>
-                <Input label="Фамилия" />
+                <Input label="Год выпуска" />
               </Column>
               <Column all={6} small={12} padding={p}>
-                <Input label="E-mail" />
+                <Input label="Факультет" />
               </Column>
             </Hideable>
+            <p>Нажимая на кнопку оплаты вы соглашаетесь c условиями оплаты, обработки персональных данных и офертой</p>
           </FlexBox>
         </Content>
       </div>
