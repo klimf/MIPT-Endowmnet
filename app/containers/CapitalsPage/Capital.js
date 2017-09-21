@@ -7,9 +7,10 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router';
-import { Block, palette } from '../../utils/constants';
+import { palette } from '../../utils/constants';
 import FlexBox from '../../components/FlexBox/index';
 import { formatMoney, media } from '../../utils/helpers';
+import Block from '../../components/Block';
 
 const Wrapper = styled.div`
   position: relative;
