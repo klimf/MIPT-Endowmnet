@@ -8,6 +8,10 @@ const Hint = (message) => (
 );
 
 export default Object.assign(rules, {
+  nothing: {
+    rule: () => true,
+    hint: () => Hint(messages.requiredIsInvalid),
+  },
   required: {
     rule: (val) => val || false,
     hint: () => Hint(messages.requiredIsInvalid),

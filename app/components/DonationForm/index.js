@@ -15,6 +15,7 @@ import Column from 'components/Column';
 import FlexBox from 'components/FlexBox';
 import { palette } from '../../utils/constants';
 import { formatMoney } from '../../utils/helpers';
+import { Form } from '../Form';
 
 
 const p = '0 12px';
@@ -111,32 +112,32 @@ export class DonationForm extends React.PureComponent { // eslint-disable-line r
   }
   render() {
     return (
-      <div>
+      <Form>
         <Column padding={p}>
           <Select isRight={this.state.isCardPayment} onClick={this.handleCardPaymentClick} left="Банковской картой" right="Безналичным переводом" />
         </Column>
         <Space size={2} />
         <FlexBox>
           <Column all={4} small={12} padding={p}>
-            <Input label="Имя" />
+            <Input name="name" label="Имя" validations={['nothing']} />
           </Column>
           <Column all={4} small={12} padding={p}>
-            <Input label="Фамилия" />
+            <Input name="surname" label="Фамилия" validations={['nothing']} />
           </Column>
           <Column all={4} small={12} padding={p}>
-            <Input label="E-mail" />
+            <Input name="email" label="E-mail" validations={['nothing']} />
           </Column>
           <Space size={2} />
           <Column all={4} small={12} padding={p}>
-            <Input onClick={this.handleCheckBoxClick} checked={this.state.isStudent} label="Я выпускник МФТИ" type="checkbox" />
+            <Input name="checkStudent" onClick={this.handleCheckBoxClick} checked={this.state.isStudent} label="Я выпускник МФТИ" type="checkbox" validations={['nothing']} />
             <Space size={2} />
           </Column>
           <Hideable all={8} small={12} hide={!this.state.isStudent} >
             <Column all={6} small={12} padding={p}>
-              <Input label="Год выпуска" />
+              <Input name="year" label="Год выпуска" validations={['nothing']} />
             </Column>
             <Column all={6} small={12} padding={p}>
-              <Input label="Факультет" />
+              <Input name="department" label="Факультет" validations={['nothing']} />
             </Column>
           </Hideable>
           <Space size={2} />
@@ -164,7 +165,7 @@ export class DonationForm extends React.PureComponent { // eslint-disable-line r
             <Space size={2} />
           </Column>
         </FlexBox>
-      </div>
+      </Form>
     );
   }
 }

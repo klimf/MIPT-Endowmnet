@@ -28,7 +28,7 @@ export default defineMessages({
     },
     {
       id: 'app.components.Header.NavList.Item4',
-      defaultMessage: 'Целевые-капиталы',
+      defaultMessage: 'Целевые капиталы',
       link: '/capitals',
     },
     {
