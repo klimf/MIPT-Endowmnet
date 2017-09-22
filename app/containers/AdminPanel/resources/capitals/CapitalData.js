@@ -14,8 +14,8 @@ import {
   FormTab,
 } from 'admin-on-rest';
 import { required, onlyDigits, onlyLatin } from '../validation';
-// import PeopleInput from './PeopleInput';
 import PeopleSection from './PeopleSection';
+import Editor from '../../Editor';
 // import { formatMoney, parseMoney } from '../../../../utils/helpers';
 
 export const CapitalsList = (props) => (
@@ -49,6 +49,7 @@ export const CapitalsCreate = (props) => (
         <TextInput label={'Название'} validate={[required]} source="name" />
         <TextInput label={'Название для ссылки'} validate={[required, onlyLatin]} source="linkName" />
         <TextInput label={'Собрано'} validate={[required, onlyDigits]} source="purpose" />
+        <Editor></Editor>
       </FormTab>
       <FormTab label="Основатели">
         <PeopleSection name={'founders'}></PeopleSection>

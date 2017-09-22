@@ -209,6 +209,10 @@
     "testRegex": "tests/.*\\.test\\.js$"
   },
   "dependencies": {
+    "draft-js": "^0.10.1",
+    "draft-js-buttons": "^2.0.0-beta6",
+    "draft-js-inline-toolbar-plugin": "^2.0.0-rc5",
+    "draft-js-plugins-editor": "^2.0.0-beta1",
     "aor-language-russian": "^1.0.4",
     "axios": "^0.16.2",
     "babel-polyfill": "6.20.0",
