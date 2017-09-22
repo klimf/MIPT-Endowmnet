@@ -1,5 +1,6 @@
 import React from 'react';
 import { RaisedButton } from 'material-ui';
+import { FieldArray } from 'redux-form';
 import _ from 'lodash';
 import styled from 'styled-components';
 import PeopleInput from './PeopleInput';
@@ -27,9 +28,19 @@ const AddButton = styled(RaisedButton)`
   margin: 0 50%;
 `;
 
-const DeleteButton = styled(RaisedButton)`
-  right: 0;
-`;
+const renderPeopleFields = ({ fields }) => {
+  console.log(fields);
+  return (
+    <div>
+      { fields.map(PeopleInput) }
+      <AddButton onClick={() => fields.push({})}>Добавить</AddButton>
+    </div>
+  );
+};
+
+renderPeopleFields.propTypes = {
+  fields: React.propTypes.array,
+};
 
 class PeopleSection extends React.PureComponent {
   constructor(props) {
@@ -57,17 +68,11 @@ class PeopleSection extends React.PureComponent {
     });
   }
 
+
   render() {
     return (
       <div>
-        { this.state.items.map((item, index) => (
-          <div key={index}>
-            <DeleteButton onClick={this.deleteItem(index)}>Удалить</DeleteButton>
-            <PeopleInput {...item}></PeopleInput>
-          </div>
-
-        )) }
-        <AddButton onClick={this.addItem}>Добавить</AddButton>
+        <FieldArray name={'founders'} component={renderPeopleFields}></FieldArray>
       </div>
     );
   }
