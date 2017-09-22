@@ -36,6 +36,7 @@ export const LabeledBlock = ({ children, title, className, titleAlign }) => (
     {children}
   </RelativeBlock>
 );
+
 LabeledBlock.propTypes = {
   children: React.PropTypes.any,
   title: React.PropTypes.string.isRequired,

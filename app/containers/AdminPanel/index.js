@@ -7,12 +7,15 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
-import { FormattedMessage } from 'react-intl';
+import { simpleRestClient, Admin } from 'admin-on-rest';
 import { createStructuredSelector } from 'reselect';
+import theme from './theme';
+import { aorMessagesRu } from './messages';
 import makeSelectAdminPanel from './selectors';
-import messages from './messages';
-import { LabeledBlock } from '../../components/Block';
 
+const messages = {
+  ru: aorMessagesRu,
+};
 
 export class AdminPanel extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
@@ -24,10 +27,14 @@ export class AdminPanel extends React.Component { // eslint-disable-line react/p
             { name: 'description', content: 'Description of AdminPanel' },
           ]}
         />
-        <LabeledBlock title={'Панель администратора'}>
-          kek
-        </LabeledBlock>
-        <FormattedMessage {...messages.header} />
+        <Admin
+          locale="ru"
+          messages={messages}
+          theme={theme}
+          restClient={simpleRestClient('http://localhost:3000')}
+        >
+
+        </Admin>
       </div>
     );
   }
