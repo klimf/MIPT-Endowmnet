@@ -9,7 +9,6 @@ import {
   EditButton,
   DisabledInput,
   TextInput,
-  LongTextInput,
   NumberField,
   TabbedForm,
   FormTab,
@@ -52,10 +51,10 @@ export const CapitalsCreate = (props) => (
         <TextInput label={'Собрано'} validate={[required, onlyDigits]} source="purpose" />
       </FormTab>
       <FormTab label="Основатели">
-        <PeopleSection></PeopleSection>
+        <PeopleSection name={'founders'}></PeopleSection>
       </FormTab>
       <FormTab label="Получатели">
-        <LongTextInput source="shortDescription" label="Короткое описание" />
+        <PeopleSection name={'receivers'}></PeopleSection>
       </FormTab>
     </TabbedForm>
   </Create>

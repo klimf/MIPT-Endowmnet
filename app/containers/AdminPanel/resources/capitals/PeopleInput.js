@@ -3,6 +3,7 @@ import { Field } from 'redux-form';
 import Dropzone from 'react-dropzone';
 import styled from 'styled-components';
 import { RaisedButton } from 'material-ui';
+import { palette } from 'utils/constants';
 import {
   LongTextInput,
   TextInput,
@@ -18,30 +19,43 @@ import {
 } from '../../../../components/Quotes/Item';
 import FlexBox from '../../../../components/FlexBox';
 
+const HoverableImageWrapper = styled(Dropzone)`
+  position: relative;
+  border-radius: 50%;
+  &:hover {
+    cursor: pointer;
+    &:after {
+      opacity: 1;
+    }
+  }
+  &:after {
+    transition: 0.3s ease;
+    content: 'Загрузить фото';
+    position: absolute;
+    border-radius: 50%;
+    top: 0;
+    padding-top: 45%;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    color: ${palette.white};
+    background: rgba(0, 0, 0, .6);
+  }
+`;
 
-const ImageDrop = (field) => {
-  console.log(field);
-  return (
-    <Dropzone onDrop={(files) => field.input.onChange(files[0].preview)} >
-      <ImgWrapper>
-        <HoverableImageWrapper style={{ backgroundImage: `url(${field.input.value})` }} >
-        </HoverableImageWrapper>
-      </ImgWrapper>
-    </Dropzone>
+const ImageDrop = (field) => (
+  <HoverableImageWrapper onDrop={(files) => field.input.onChange({ preview: files[0].preview, file: files[0] })} >
+    <ImgWrapper>
+      <Image src={field.input.value && field.input.value.preview} />
+    </ImgWrapper>
+  </HoverableImageWrapper>
   );
-};
 
 const DeleteButton = styled(RaisedButton) `
   right: 0;
 `;
 
-const HoverableImageWrapper = styled(Image)`
-  transition: 0.3s ease;
-  &:hover {
-    background: rgba(0, 0, 0, .6);
-    cursor: pointer;
-  }
-`;
 
 const PeopleInput = (man, index, fields) => (
   <Wrapper key={index} isLeft horisontal="space-between">

@@ -10,6 +10,7 @@ import { Link } from 'react-router';
 import { block, palette, shadow, unit } from '../../utils/constants';
 import { media } from '../../utils/helpers';
 import FlexBox from '../FlexBox';
+import placeholder from '../../images/placeholder.png';
 // import Space from '../Space';
 
 export const Wrapper = styled(FlexBox)`
@@ -81,12 +82,12 @@ export const Image = styled.div`
   position:relative;
   width: 100%;
   padding: 50% 0;
-  border: 3px solid ${palette.gray};
   border-radius: 50%;
   overflow: hidden;
   background-color: ${palette.primary};
   background-size: cover;
   background-position: center;
+  background-image: url(${(props) => props.src || placeholder});
   ${shadow}
 `;
 
