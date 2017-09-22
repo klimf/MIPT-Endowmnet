@@ -8,8 +8,12 @@ import russianMessages from 'aor-language-russian';
 
 export default defineMessages({
   header: {
-    id: 'app.containers.AdminPanel.header',
-    defaultMessage: 'This is AdminPanel container !',
+    id: 'app.containers.AdminPanel.heade  r',
+    defaultMessage: 'Кабинет редактора',
+  },
+  capitalsLabel: {
+    id: 'app.containers.AdminPanel.capitalsLabel',
+    defaultMessage: 'Капиталы',
   },
 });
 

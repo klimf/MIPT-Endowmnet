@@ -10,11 +10,16 @@ import {
   DisabledInput,
   TextInput,
   LongTextInput,
-  DateInput,
   NumberField,
+  TabbedForm,
+  FormTab,
 } from 'admin-on-rest';
+import { required, onlyDigits, onlyLatin } from '../validation';
+// import PeopleInput from './PeopleInput';
+import PeopleSection from './PeopleSection';
+// import { formatMoney, parseMoney } from '../../../../utils/helpers';
 
-export const CapitalList = (props) => (
+export const CapitalsList = (props) => (
   <List title={'Капиталы'} {...props}>
     <Datagrid>
       <TextField label={'Название'} source="name" />
@@ -22,33 +27,36 @@ export const CapitalList = (props) => (
         label="Цель"
         source="purpose" options={{ style: 'currency', currency: 'RUB' }}
       />
-      <EditButton label={'Редактировать'} basePath="/posts" />
+      <EditButton label={'Редактировать'} basePath="/capitals" />
     </Datagrid>
   </List>
 );
 
-export const CapitalEdit = (props) => (
+export const CapitalsEdit = (props) => (
   <Edit title={'Редактирование капитала'} {...props}>
     <SimpleForm>
       <DisabledInput source="id" />
-      <TextInput source="title" />
-      <TextInput source="teaser" options={{ multiLine: true }} />
-      <LongTextInput source="body" />
-      <DateInput label="Publication date" source="published_at" />
-      <TextInput source="average_note" />
-      <DisabledInput label="Nb views" source="views" />
+      <TextInput label={'Название'} validate={[required]} source="name" />
+      <TextInput label={'Название для ссылки'} validate={[required, onlyLatin]} source="linkName" />
+      <TextInput label={'Собрано'} validate={[required, onlyDigits]} source="purpose" />
     </SimpleForm>
   </Edit>
 );
 
-export const CapitalCreate = (props) => (
+export const CapitalsCreate = (props) => (
   <Create title={'Создание капитала'} {...props}>
-    <SimpleForm>
-      <TextInput source="title" />
-      <TextInput source="teaser" options={{ multiLine: true }} />
-      <LongTextInput source="body" />
-      <TextInput label="Publication date" source="published_at" />
-      <TextInput source="average_note" />
-    </SimpleForm>
+    <TabbedForm>
+      <FormTab label="Общая информация">
+        <TextInput label={'Название'} validate={[required]} source="name" />
+        <TextInput label={'Название для ссылки'} validate={[required, onlyLatin]} source="linkName" />
+        <TextInput label={'Собрано'} validate={[required, onlyDigits]} source="purpose" />
+      </FormTab>
+      <FormTab label="Основатели">
+        <PeopleSection></PeopleSection>
+      </FormTab>
+      <FormTab label="Получатели">
+        <LongTextInput source="shortDescription" label="Короткое описание" />
+      </FormTab>
+    </TabbedForm>
   </Create>
 );

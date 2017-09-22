@@ -12,7 +12,7 @@ import { media } from '../../utils/helpers';
 import FlexBox from '../FlexBox';
 // import Space from '../Space';
 
-const Wrapper = styled(FlexBox)`
+export const Wrapper = styled(FlexBox)`
   display: flex;
   flex-direction: ${(props) => props.isLeft ? 'row' : 'row-reverse'};
   align-items: center;
@@ -22,12 +22,12 @@ const Wrapper = styled(FlexBox)`
   padding: 0 ${2 * unit}px;
 `;
 
-const StyledLink = styled(Link)`
+export const StyledLink = styled(Link)`
   text-decoration: none;
   font-weight: 300;
 `;
 
-const TextBlock = styled.div`
+export const TextBlock = styled.div`
   position:relative;
   margin: 0;
   padding: 24px;
@@ -43,14 +43,14 @@ const TextBlock = styled.div`
   `}
 `;
 
-const Quote = styled.h2`
+export const Quote = styled.h2`
   position: relative;
   margin: 0;
   color: ${palette.black};
   font-size: 24px;
 `;
 
-const More = styled.p`
+export const More = styled.p`
   position: relative;
   margin: 16px 0 0 0;
   color: ${palette.primary};
@@ -58,7 +58,7 @@ const More = styled.p`
   font-size: 20px;
 `;
 
-const Info = styled.p`
+export const Info = styled.p`
   position: relative;
   margin: 16px 0 0 0;
   color: ${palette.gray};
@@ -69,7 +69,7 @@ const Info = styled.p`
   }
 `;
 
-const ImgWrapper = styled.div`
+export const ImgWrapper = styled.div`
   width: 200px;
   ${media.small`
     width: 40%;
@@ -77,7 +77,7 @@ const ImgWrapper = styled.div`
   `}
 `;
 
-const Image = styled.div`
+export const Image = styled.div`
   position:relative;
   width: 100%;
   padding: 50% 0;
@@ -90,7 +90,7 @@ const Image = styled.div`
   ${shadow}
 `;
 
-const Decoration = styled.div`
+export const Decoration = styled.div`
   position: absolute;
   ${(props) => props.isLeft ? 'left: 0' : 'right: 0'};
   top: 50%;

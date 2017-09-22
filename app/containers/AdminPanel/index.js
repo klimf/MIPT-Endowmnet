@@ -7,13 +7,14 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
-import { simpleRestClient, Admin } from 'admin-on-rest';
+import { simpleRestClient, Admin, Resource, Delete } from 'admin-on-rest';
 import { createStructuredSelector } from 'reselect';
 import theme from './theme';
-import { aorMessagesRu } from './messages';
+import messages, { aorMessagesRu } from './messages';
 import makeSelectAdminPanel from './selectors';
+import * as CapitalResource from './resources/capitals/CapitalData';
 
-const messages = {
+const aorMessages = {
   ru: aorMessagesRu,
 };
 
@@ -22,18 +23,23 @@ export class AdminPanel extends React.Component { // eslint-disable-line react/p
     return (
       <div>
         <Helmet
-          title="AdminPanel"
-          meta={[
-            { name: 'description', content: 'Description of AdminPanel' },
-          ]}
+          title={messages.header.defaultMessage}
         />
         <Admin
+          title={messages.header.defaultMessage}
           locale="ru"
-          messages={messages}
+          messages={aorMessages}
           theme={theme}
           restClient={simpleRestClient('http://localhost:3000')}
         >
-
+          <Resource
+            name="capitals"
+            options={{ label: messages.capitalsLabel.defaultMessage }}
+            list={CapitalResource.CapitalsList}
+            edit={CapitalResource.CapitalsEdit}
+            create={CapitalResource.CapitalsCreate}
+            remove={Delete}
+          />
         </Admin>
       </div>
     );
