@@ -76,7 +76,8 @@ const Image = styled.div`
     width: 100%;
     height: 280px;
     bottom: auto;
-  `}
+    border-radius: 8px 8px 0 0;
+`}
 `;
 
 function Item(props) {

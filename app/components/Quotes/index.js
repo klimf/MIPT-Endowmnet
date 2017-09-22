@@ -10,6 +10,10 @@ import Title from 'components/Title';
 // import Button from 'components/Button';
 import Item from './Item';
 
+import face1 from '../../images/Face1.jpg';
+import face2 from '../../images/Face2.jpg';
+import face3 from '../../images/Face3.jpg';
+
 function Quotes(props) {
   return (
     <div>
@@ -20,6 +24,32 @@ function Quotes(props) {
     </div>
   );
 }
+
+Quotes.defaultProps = {
+  items: [
+    {
+      name: 'Сергей Гуз',
+      status: 'Зав. кафедры физики',
+      quote: 'Развитие факультета проблем физики и энергетики - важная составляющая работы фонда университета МФТИ',
+      image: face1,
+      link: '/',
+    },
+    {
+      name: 'Сергей Гуз',
+      status: 'Зав. кафедры физики',
+      quote: 'Развитие факультета проблем физики и энергетики - важная составляющая работы фонда университета МФТИ',
+      image: face2,
+      link: '/',
+    },
+    {
+      name: 'Сергей Гуз',
+      status: 'Зав. кафедры физики',
+      quote: 'Развитие факультета проблем физики и энергетики - важная составляющая работы фонда университета МФТИ',
+      image: face3,
+      link: '/',
+    },
+  ],
+};
 
 Quotes.propTypes = {
   items: PropTypes.array,
