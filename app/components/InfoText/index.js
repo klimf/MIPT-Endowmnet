@@ -6,6 +6,7 @@ import { hideOn, media } from '../../utils/helpers';
 const InfoText = styled(FlexBox)`
   position:relative;
   flex-wrap: nowrap;
+  height:36px;
   & h2 {
     font-size: 36px;
     font-weight: 300;

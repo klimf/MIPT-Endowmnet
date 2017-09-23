@@ -22,10 +22,10 @@ function WdH(props) {
     right: 0;
     border-radius: ${props.rounded ? '8px' : '0'};
     ${props.src && image}
-    ${props.src && shadow}
+    ${props.shadow && shadow}
   `;
   return (
-    <Wrapper>
+    <Wrapper {...props}>
       <img role="presentation" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" />
       <Content src={props.src}>
         { Children.toArray(props.children) }

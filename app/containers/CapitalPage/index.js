@@ -27,6 +27,7 @@ import FlexBox from '../../components/FlexBox';
 import InfoText from '../../components/InfoText/index';
 import Button from '../../components/Button/index';
 import Title from '../../components/Title/index';
+import Image from "../../components/Image/index";
 
 const About = styled.div`
   position: relative;
@@ -37,11 +38,14 @@ const About = styled.div`
   `}
 `;
 
-const Head = styled.div`
+const Head = styled(FlexBox)`
   position: relative;
   height: 240px;
   ${media.medium`
     height: 300px;
+  `}
+  ${media.small`
+    height: auto;
   `}
   ${hideOn}
 `;
@@ -71,32 +75,50 @@ const AboutImage = styled.div`
   `}
 `;
 
-const Info = styled(FlexBox)`
+const Info = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   height: 100%;
-  padding: 0 0 0 24px;
+  padding: 0 0 0 48px;
+  ${media.small`
+    padding: 24px 0 0 0;
+  `}
 `;
 
 const Name = styled.h2`
   font-size: 36px;
   margin: 0;
+  ${hideOn}
+  ${media.small`
+    margin: 0 0 24px 0;
+  `}
+  ${media.medium`
+    margin: 0 0 24px 0;
+  `}
 `;
 
 const ShortDesc = styled.p`
   font-size: 20px;
   margin: 0;
+  ${media.small`
+    margin: 0 0 24px 0
+  `}
 `;
 
 const InfoAction = styled.div`
-  margin-bottom: -48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
   width: 100%;
   & > * {
     display: inline-block;
   }
 `;
 
-const Float = styled.div`
-  ${(props) => props.left && 'float: left'}
-  ${(props) => props.right && 'float: right'}
+const BtnFix = styled.div`
+    position: relative;
+    top: 4px;
 `;
 
 
@@ -113,10 +135,12 @@ export class CapitalPage extends React.PureComponent { // eslint-disable-line re
         <Content>
           <Space size={4} />
           <Space size={2} />
-          <Head noSmall noMedium>
-            <WdH float="left" rounded src={this.props.data.image} />
-            <Info verticall="stretch">
-              <Name>{this.props.data.name}</Name>
+          <Name noLarge>{this.props.data.name}</Name>
+          <Image noMedium noLarge rounded shadow src={this.props.data.image} />
+          <Head horisontal="space-between" noWrap >
+            <WdH noSmall rounded shadow src={this.props.data.image} />
+            <Info >
+              <Name noSmall noMedium>{this.props.data.name}</Name>
               <ShortDesc>{this.props.data.shortdesc}</ShortDesc>
               <InfoAction>
                 <InfoText>
@@ -125,23 +149,9 @@ export class CapitalPage extends React.PureComponent { // eslint-disable-line re
                     <i> 100 ₽</i>
                   </h2>
                 </InfoText>
-                <Float right><Button type="header">Пожертвовать</Button></Float>
-              </InfoAction>
-            </Info>
-          </Head>
-          <Head noSmall noLarge>
-            <Name>{this.props.data.name}</Name>
-            <WdH float="left" rounded src={this.props.data.image} />
-            <Info verticall="stretch">
-              <ShortDesc>{this.props.data.shortdesc}</ShortDesc>
-              <InfoAction>
-                <InfoText>
-                  <h2>
-                    <b>Собрано:</b>
-                    <i> 100 ₽</i>
-                  </h2>
-                </InfoText>
-                <Button type="header">Пожертвовать</Button>
+                <BtnFix>
+                  <Button type="header">Пожертвовать</Button>
+                </BtnFix>
               </InfoAction>
             </Info>
           </Head>

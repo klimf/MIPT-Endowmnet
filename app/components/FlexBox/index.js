@@ -5,8 +5,8 @@ const FlexBox = styled.div`
   display: flex;
   width: ${(props) => props.expanded ? '100%' : 'auto'};
   flex-wrap: ${(props) => props.noWrap ? 'nowrap' : 'wrap'};
-  justify-content: ${(props) => props.horisontal ? props.horisontal : 'auto'};
-  align-items: ${(props) => props.vertical ? props.vertical : 'auto'};
+  justify-content: ${(props) => props.horisontal ? props.horisontal : 'normal'};
+  align-items: ${(props) => props.vertical ? props.vertical : 'normal'};
   padding: ${(props) => props.padding ? props.padding : 0};
   margin: ${(props) => props.margin ? props.margin : 0};
   ${hideOn}
