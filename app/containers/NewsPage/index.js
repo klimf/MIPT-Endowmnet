@@ -1,6 +1,6 @@
 /*
  *
- * StoriesPage
+ * NewsPage
  *
  */
 
@@ -9,14 +9,14 @@ import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 
-import Quotes from 'components/Quotes';
+import News from 'components/News';
 import Content from 'components/Content';
 import Space from 'components/Space';
 
-import makeSelectStoriesPage from './selectors';
+import makeSelectNewsPage from './selectors';
 import messages from './messages';
 
-export class StoriesPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+export class NewsPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
       <div>
@@ -28,19 +28,19 @@ export class StoriesPage extends React.PureComponent { // eslint-disable-line re
         />
         <Content>
           <Space size={4} />
-          <Quotes title={messages.header.defaultMessage} />
+          <News title={messages.header.defaultMessage} />
         </Content>
       </div>
     );
   }
 }
 
-StoriesPage.propTypes = {
+NewsPage.propTypes = {
   dispatch: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
-  StoriesPage: makeSelectStoriesPage(),
+  NewsPage: makeSelectNewsPage(),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -49,4 +49,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(StoriesPage);
+export default connect(mapStateToProps, mapDispatchToProps)(NewsPage);
