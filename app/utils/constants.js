@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
-import {media} from "./helpers";
+import { media } from './helpers';
+import placeholder from '../images/placeholder.png';
 
 export const palette = {
   accent: '#B84646',
@@ -24,10 +25,13 @@ export const bigShadow = css`
   box-shadow: 0 ${2 * unit}px ${4 * unit}px ${palette.dark};
 `;
 
+export const rounded = css`
+  border-radius: 8px;
+`;
 export const block = css`
   background-color: ${palette.white};
-  border-radius: 8px;
   transition: 0.3s ease;
+  ${rounded}
   ${shadow}
   ${(props) => !props.noHover && `
     &:hover {
@@ -36,6 +40,11 @@ export const block = css`
     }`
   } 
   
+`;
+
+export const image = css`
+  background: ${palette.primary} url(${(props) => props.src ? props.src : placeholder}) center no-repeat;
+  background-size: cover;
 `;
 
 export const Block = styled.div`

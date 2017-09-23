@@ -4,7 +4,7 @@
 *
 */
 
-import React from 'react';
+import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 
 import Space from 'components/Space';
@@ -13,6 +13,7 @@ import Button from 'components/Button';
 import Input from 'components/Input';
 import Column from 'components/Column';
 import FlexBox from 'components/FlexBox';
+import Title from 'components/Title';
 import { palette } from '../../utils/constants';
 import { formatMoney } from '../../utils/helpers';
 import { Form } from '../Form';
@@ -113,6 +114,7 @@ export class DonationForm extends React.PureComponent { // eslint-disable-line r
   render() {
     return (
       <Form>
+        <Title>{this.props.title}</Title>
         <Column padding={p}>
           <Select isRight={this.state.isCardPayment} onClick={this.handleCardPaymentClick} left="Банковской картой" right="Безналичным переводом" />
         </Column>
@@ -170,8 +172,11 @@ export class DonationForm extends React.PureComponent { // eslint-disable-line r
   }
 }
 
+DonationForm.defaultProps = {
+  title: 'Пожертвовать',
+};
 DonationForm.propTypes = {
-
+  title: PropTypes.string,
 };
 
 export default DonationForm;

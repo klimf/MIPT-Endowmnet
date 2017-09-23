@@ -10,12 +10,18 @@ import { Link } from 'react-router';
 import { FormattedMessage } from 'react-intl';
 import Button from 'components/Button';
 import Space from 'components/Space';
+import InfoText from 'components/InfoText';
 import FlexBox from 'components/FlexBox';
 import messages from './messages';
 import { palette } from '../../../utils/constants';
 import Formula from './Formula';
 import { media, hideOn, formatMoney } from '../../../utils/helpers';
 
+const Info = styled(InfoText)`
+  width: 100%;
+  border-bottom: 3px solid ${palette.disabled};
+  flex-flow: row-reverse;
+`;
 const Wrapper = styled.div`
   float:right;
   width: calc(100% - 280px);
@@ -33,32 +39,6 @@ const StyledLink = styled(Link)`
   &:link, &:visited, &:hover, &:active {
     color: ${palette.primary};
   }
-`;
-
-const Info = styled(FlexBox)`
-  position:relative;
-  width: 100%;
-  flex-flow: row-reverse;
-  flex-wrap: nowrap;
-  border-bottom: 3px solid ${palette.disabled};
-  & h2 {
-    font-size: 36px;
-    font-weight: 300;
-    margin: 0;
-  }
-  & b {
-    font-size: 24px;
-    font-weight: 300;
-  }
-  & i {
-    font-style: normal;
-    color: ${palette.primary};
-  }
-  ${hideOn}
-  ${media.small`
-    flex-flow: row;
-    flex-wrap: wrap;
-  `}
 `;
 
 const Decor = styled.div`
