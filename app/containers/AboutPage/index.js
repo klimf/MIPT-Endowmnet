@@ -22,19 +22,22 @@ import Content from '../../components/Content/index';
 const Navigation = styled.div`
   ${block}
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
-  border-radius: 18px;
-  min-height: 36px;
+  border-radius: 21px;
+  min-height: 42px;
   overflow: hidden;
 `;
 
 const NavItem = styled.div`
   background-color: ${(props) => props.active ? palette.primary : palette.transparent};
   color: ${(props) => props.active ? palette.white : palette.black};
+  cursor: pointer;
   font-size: 20px;
-  padding: 9px 24px 0;
+  padding: 11px 24px 0;
+  min-height: 42px;
   transition: 0.3s ease;
-  border-radius: 18px;
+  border-radius: 21px;
   &:hover {
     background-color: ${(props) => props.active ? palette.primary : palette.dark};
   }
