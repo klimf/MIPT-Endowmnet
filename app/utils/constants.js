@@ -29,10 +29,13 @@ export const block = css`
   border-radius: 8px;
   transition: 0.3s ease;
   ${shadow}
-  &:hover {
-    transform: scale(1.01);
-    ${bigShadow}
-  }
+  ${(props) => !props.noHover && `
+    &:hover {
+      transform: scale(1.01);
+      ${bigShadow}
+    }`
+  } 
+  
 `;
 
 export const Block = styled.div`
