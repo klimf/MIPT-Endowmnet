@@ -54,3 +54,17 @@ export const responseStates = {
   UNATHORIZED: { data: 'unauthorized', status: 401 },
   NETWORK_ERROR: { data: 'network error', status: 600 },
 };
+
+export const responseConstants = {
+  UNATHORIZED: 'UNATHORIZED',
+  NETWORK_ERROR: 'NETWORK_ERROR',
+  SUCCESS: 'SUCCESS',
+};
+
+export const responseMapStatuses = {
+  200: responseConstants.SUCCESS,
+  304: responseConstants.SUCCESS,
+  401: responseConstants.UNATHORIZED,
+};
+
+export const responseValidation = (res) => responseMapStatuses[res.status];
