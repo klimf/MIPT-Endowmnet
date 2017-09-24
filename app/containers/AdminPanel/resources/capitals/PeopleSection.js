@@ -17,7 +17,7 @@ const renderPeopleFields = ({ fields }) => (
   );
 
 renderPeopleFields.propTypes = {
-  fields: React.PropTypes.array,
+  fields: React.PropTypes.object,
 };
 
 const PeopleSection = ({ name }) => (

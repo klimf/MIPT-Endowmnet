@@ -17,8 +17,7 @@ const requestReducer = createReducer({
   [GET_ONE]: (params) =>
     params.set('resource', `${params.get('resource')}/${params.id}`),
   [CREATE]: (params) =>
-    params.set('resource', `${params.get('resource')}/${params.id}`)
-      .set('method', 'post'),
+    params.set('method', 'post'),
   [UPDATE]: (params) => params.set('resource', `${params.get('resource')}/${params.id}`)
     .set('method', 'put'),
   [DELETE]: (params) => params.set('resource', `${params.get('resource')}/${params.id}`)
