@@ -24,7 +24,7 @@ const requestReducer = createReducer({
     .set('method', 'delete'),
 }, null);
 
-const responseFormatReducer = (res) => res ? res.data : null;
+const responseFormatReducer = (res) => res;
 
 const createRequest = (type, resource, params) => {
   const rawParams = fromJS({
@@ -46,14 +46,11 @@ const createRequest = (type, resource, params) => {
 };
 
 const formatResponse = (response, type, resource, params) => {
-  if (responseValidation(response) !== responseConstants.SUCCESS) {
-    return Promise.reject(new Error('api request error'));
-  }
   const responseData = responseFormatReducer(response);
   if (!responseData) {
-    return Promise.reject(new Error('invalid response body'));
+    throw new Error('invalid response body');
   }
-  return Promise.resolve(responseData);
+  return responseData;
 };
 
 
@@ -71,7 +68,10 @@ export default (showNotification) =>
         requestParams.params.filter || {}
       ),
     })
-      .then((response) => formatResponse(response, type, resource, params))
+      .then((response) => {
+        console.log(formatResponse(response, type, resource, params));
+        return formatResponse(response, type, resource, params);
+      })
       .catch((e) => {
         console.log(e.message);
         return Promise.reject(e);

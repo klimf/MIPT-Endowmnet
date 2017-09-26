@@ -13,7 +13,7 @@ import theme from './theme';
 import messages, { aorMessagesRu } from './messages';
 import makeSelectAdminPanel from './selectors';
 import * as CapitalResource from './resources/capitals/CapitalData';
-
+import restClient from './restClient';
 
 const aorMessages = {
   ru: aorMessagesRu,
@@ -31,7 +31,7 @@ export class AdminPanel extends React.Component { // eslint-disable-line react/p
           locale="ru"
           messages={aorMessages}
           theme={theme}
-          restClient={simpleRestClient('http://ef.misis.ru')}
+          restClient={restClient()}
         >
           <Resource
             name="capitals"

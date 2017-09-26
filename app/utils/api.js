@@ -77,13 +77,15 @@ export const responseValidation = (res) => responseMapStatuses[res.status];
 function resolveParams(query) {
   const haveQuery = (query && query !== {});
   if (haveQuery) {
-    return Object.keys(query).map((key) => `${key}=${query[key]}`).join('&&');
+    return `?${Object.keys(query).map((key) => `${key}=${query[key]}`).join('&&')}`;
   }
   return '';
 }
 
 function request(url, { method = 'GET', body = null, params = {} }) {
-  const requestUrl = config.API_ADRESS + url + resolveParams(params);
+  const correctUrl = url[0] === '/' ? url : `/${url}`;
+  const requestUrl = config.API_ADRESS + correctUrl + resolveParams(params);
+
   let headers = {};
   let bodyToSend = null;
 
@@ -94,25 +96,26 @@ function request(url, { method = 'GET', body = null, params = {} }) {
     bodyToSend = JSON.stringify(body);
     headers = { 'Content-Type': 'application/json' };
   }
+
   return fetch(requestUrl, {
     credentials: 'include',
     method,
     headers,
     body: bodyToSend || undefined,
   })
-  .then((res) => {
-    if (responseMapStatuses[res.status] === responseConstants.SUCCESS) {
-      return res.json ? res.json() : res.text();
-    }
-    const errPromise = res.json ? res.json() : res.text();
-    const error = new Error(res.statusText);
-    error.status = res.status;
-    return errPromise
+    .then((res) => {
+      if (responseMapStatuses[res.status] === responseConstants.SUCCESS) {
+        return res.json ? res.json() : res.text();
+      }
+      const errPromise = res.json ? res.json() : res.text();
+      const error = new Error(res.statusText);
+      error.status = res.status;
+      return errPromise
       .then((data) => {
         error.data = data;
         return Promise.reject(error);
       })
       .catch((e) => Promise.reject(error));
-  })
-    .catch((e) => Promise.resolve(null));
+    })
+    .catch((e) => Promise.resolve(e));
 }
