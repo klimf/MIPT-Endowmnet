@@ -8,21 +8,15 @@ const propTypes = {
   children: React.PropTypes.any,
   UnauthorizedComponent: React.PropTypes.any,
   isUnauthorized: React.PropTypes.any,
-  targetState: React.PropTypes.any,
-  stateSelector: React.PropTypes.any,
+  stateSelector: React.PropTypes.any, // eslint-disable-line
   isLogged: React.PropTypes.any,
 };
 
 
 const ProtectedContent = (props) => {
-  const { children, UnauthorizedComponent, ...otherProps } = props;
-  return !props.isLogged || props.isUnauthorized ?
-    <UnauthorizedComponent {...otherProps} />
-      : (
-        <div>
-          { React.Children.map(children, (child) => React.cloneElement(child, otherProps)) }
-        </div>
-    );
+  const { children, UnauthorizedComponent } = props;
+  return (!props.isLogged || props.isUnauthorized) ?
+    <UnauthorizedComponent /> : children;
 };
 
 

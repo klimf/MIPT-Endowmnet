@@ -7,6 +7,7 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 
+
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 
@@ -19,32 +20,27 @@ import Logo from '../Logo';
 import Button from '../Button';
 import FlexBox from '../FlexBox';
 import Overlay from '../Overlay';
-import Form from '../Form';
+import { ProtectedContent } from '../../containers/AuthProvider';
+
+const LoginButton = () => (
+  <Button to="/sign-in" type="border" margin="9px 24px" ><FormattedMessage {...messages.enter} /></Button>
+);
 
 class Header extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
     super(props);
     this.state = {
       menuIsOpen: false,
-      formIsOpen: false,
     };
     this.handleMobileMenuClick = this.handleMobileMenuClick.bind(this);
-    this.handleLoginClick = this.handleLoginClick.bind(this);
   }
 
   handleMobileMenuClick() {
     this.setState({
       menuIsOpen: !this.state.menuIsOpen,
-      formIsOpen: this.state.formIsOpen,
     });
   }
 
-  handleLoginClick() {
-    this.setState({
-      menuIsOpen: this.state.menuIsOpen,
-      formIsOpen: this.state.formIsOpen ? false : 'login',
-    });
-  }
 
   render() {
     return (
@@ -52,7 +48,13 @@ class Header extends React.PureComponent { // eslint-disable-line react/prefer-s
         <FlexBox horisontal="space-between">
           <Link to="/"><Logo /></Link>
           <FlexBox noSmall horisontal="space-between">
-            <Button onClick={this.handleLoginClick} type="border" margin="9px 24px"><FormattedMessage {...messages.enter} /></Button>
+            <ProtectedContent
+              stateSelector={(state) => state.get('authProvider').get('user')}
+              UnauthorizedComponent={LoginButton}
+            >
+              <div className="kekek">Залогинились</div>
+            </ProtectedContent>
+
             <Button to="/" type="header" margin="9px 0"><FormattedMessage {...messages.action} /></Button>
           </FlexBox>
           <Icon noLarge noMedium type="menu" onClick={this.handleMobileMenuClick} />
@@ -75,19 +77,9 @@ class Header extends React.PureComponent { // eslint-disable-line react/prefer-s
             ))}
           </NavList>
           <FlexBox horisontal="space-between" padding="0 4%">
-            <Button to="/" type="header" onClick={this.handleMobileMenuClick} ><FormattedMessage {...messages.action} /></Button>
+            <Button to="/donate" type="header" onClick={this.handleMobileMenuClick} ><FormattedMessage {...messages.action} /></Button>
             <Button onClick={this.handleLoginClick} type="border" ><FormattedMessage {...messages.enter} /></Button>
           </FlexBox>
-        </Overlay>
-        <Overlay background show={this.state.formIsOpen}>
-          <Wrapper>
-            <FlexBox horisontal="space-between">
-              <Link to="/" onClick={this.handleLoginClick}><Logo /></Link>
-              <Icon type="close" onClick={this.handleLoginClick} />
-            </FlexBox>
-            <Form />
-          </Wrapper>
-
         </Overlay>
       </Wrapper>
     );

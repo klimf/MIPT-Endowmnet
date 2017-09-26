@@ -55,6 +55,66 @@ export default function createRoutes(store) {
         importModules.catch(errorLoading);
       },
     }, {
+      path: '/sign-in',
+      name: 'signIn',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          import('containers/SignIn/reducer'),
+          import('containers/SignIn/sagas'),
+          import('containers/SignIn'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('signIn', reducer.default);
+          injectSagas(sagas.default);
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    }, {
+      path: '/donate',
+      name: 'donationPage',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          import('containers/DonationPage/reducer'),
+          import('containers/DonationPage/sagas'),
+          import('containers/DonationPage'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('donationPage', reducer.default);
+          injectSagas(sagas.default);
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    }, {
+      path: '/admin',
+      name: 'adminPanel',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          import('containers/AdminPanel/reducer'),
+          import('containers/AdminPanel/sagas'),
+          import('containers/AdminPanel'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('adminPanel', reducer.default);
+          injectSagas(sagas.default);
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    }, {
       path: '*',
       name: 'notfound',
       getComponent(nextState, cb) {

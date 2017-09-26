@@ -8,10 +8,15 @@ import { css } from 'styled-components';
 // };
 
 export function formatMoney(value) {
-  if (value) {
-    return value.toFixed().replace(/./g, (c, i, a) => (i && c !== '.' && ((a.length - i) % 3 === 0) ? ` ${c}` : c));
+  const number = parseFloat(value);
+  if (number) {
+    return number.toFixed().replace(/./g, (c, i, a) => (i && c !== '.' && ((a.length - i) % 3 === 0) ? ` ${c}` : c));
   }
   return '0';
+}
+
+export function parseMoney(money) {
+  return parseFloat(money.trim());
 }
 
 export const media = {

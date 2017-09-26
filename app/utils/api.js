@@ -2,11 +2,16 @@ import axios from 'axios';
 import { fromJS } from 'immutable';
 import { createAction, createReducer } from 'redux-act';
 import config from './config';
+import fetch from 'isomorphic-fetch';
 
-export default axios.create({
-  baseURL: config.API_ADRESS,
-  withCredentials: true,
-});
+
+export default {
+  get: (url, params) => request(url, { method: 'GET', params }),
+  post: (url, data) => request(url, { method: 'POST', body: data }),
+  put: (url, data) => request(url, { method: 'PUT', body: data }),
+  delete: (url) => request(url, { method: 'DELETE' }),
+  request: ({ url, ...options }) => request(url, options),
+};
 
 export class FetchAction {
   constructor(resource, method, prePare = (data) => data) {
@@ -54,3 +59,56 @@ export const responseStates = {
   UNATHORIZED: { data: 'unauthorized', status: 401 },
   NETWORK_ERROR: { data: 'network error', status: 600 },
 };
+
+export const responseConstants = {
+  UNATHORIZED: 'UNATHORIZED',
+  NETWORK_ERROR: 'NETWORK_ERROR',
+  SUCCESS: 'SUCCESS',
+};
+
+export const responseMapStatuses = {
+  200: responseConstants.SUCCESS,
+  304: responseConstants.SUCCESS,
+  401: responseConstants.UNATHORIZED,
+};
+
+export const responseValidation = (res) => responseMapStatuses[res.status];
+
+function resolveParams(query) {
+  const haveQuery = (query && query !== {});
+  if (haveQuery) {
+    return Object.keys(query).map((key) => `${key}=${query[key]}`).join('&&');
+  }
+  return '';
+}
+
+function request(url, { method = 'GET', body = null, params = {} }) {
+  const requestUrl = config.API_ADRESS + url + resolveParams(params);
+  let headers = {};
+  let bodyToSend = null;
+  if (body && (body instanceof FormData)) {
+    headers = { 'Content-Type': 'application/form-data' };
+    bodyToSend = body;
+  } else if (body) {
+    bodyToSend = JSON.stringify(body);
+    headers = { 'Content-Type': 'application/json' };
+  }
+  return fetch(requestUrl, {
+    method,
+    headers,
+    body: bodyToSend || undefined,
+    credentials: 'include',
+  })
+    .then((res) => {
+      if (responseMapStatuses[res.status] === responseConstants.SUCCESS) {
+        return res.json();
+      }
+      const error = new Error(res.statusText);
+      error.errors = res;
+      error.status = res.status;
+      return Promise.reject(error);
+    }).catch((e) => {
+      console.log(e);
+      return Promise.reject(e);
+    });
+}

@@ -17,6 +17,7 @@ import styled from 'styled-components';
 
 import Header from 'components/Header';
 import Footer from 'components/Footer';
+import AuthProvider from '../AuthProvider';
 
 import { palette } from '../../utils/constants';
 
@@ -44,6 +45,7 @@ export default class App extends React.PureComponent { // eslint-disable-line re
   render() {
     return (
       <AppWrapper>
+        <AuthProvider emitAuth />
         <Helmet
           titleTemplate="%s - MIPT"
           defaultTitle="MIPT - фонд, делаем универ лучше"

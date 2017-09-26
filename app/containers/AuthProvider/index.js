@@ -15,10 +15,11 @@ import { bindAll } from 'redux-act';
 import makeSelectAuthProvider, { isLogged } from './selectors';
 import * as actions from './actions';
 
-
 export class AuthProvider extends React.PureComponent {
-  componentDidMount() {
-    this.props.fetchUser.start();
+  componentWillMount() {
+    if (this.props.emitAuth) {
+      this.props.fetchUser.start();
+    }
   }
   render() {
     const { children, ...otherProps } = this.props;
@@ -45,6 +46,7 @@ AuthProvider.propTypes = {
   isLogged: PropTypes.any,
   isUnauthorized: PropTypes.any,
   stateSelector: PropTypes.any,
+  emitAuth: PropTypes.any,
 };
 
 AuthProvider.defaultProps = {
@@ -64,3 +66,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(mapStateToProps, mapDispatchToProps)(AuthProvider);
 
 export { default as ProtectedContent } from './ProtectedContent';
+

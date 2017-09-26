@@ -1,5 +1,4 @@
-import styled, { css } from 'styled-components';
-import {media} from "./helpers";
+import { css } from 'styled-components';
 
 export const palette = {
   accent: '#B84646',
@@ -24,29 +23,22 @@ export const bigShadow = css`
   box-shadow: 0 ${2 * unit}px ${4 * unit}px ${palette.dark};
 `;
 
-export const block = css`
-  background-color: ${palette.white};
-  border-radius: 8px;
-  transition: 0.3s ease;
-  ${shadow}
-  &:hover {
+export const hoverScaleUp = css`
+&:hover {
     transform: scale(1.01);
     ${bigShadow}
   }
 `;
 
-export const Block = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  align-items: stretch;
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  bottom: 10px;
-  left: 10px;
-  padding: ${(props) => props.padding ? props.padding : '24px'};
-  ${block}
-  ${media.small`
-    padding: ${(props) => props.paddingSmall ? props.paddingSmall : '24px'};
-  `}
+export const card = css`
+  background-color: ${palette.white};
+  border-radius: 8px;
+  transition: 0.3s ease;
+  ${shadow}
 `;
+
+export const block = css`
+  ${card}
+  ${hoverScaleUp}
+`;
+

@@ -28,7 +28,7 @@ export function* login() {
     const action = yield take(actions.fetchLogin.types.start);
     const user = yield call(sendLogin, action.payload);
     yield put(actions.fetchLogin.success(null));
-    yield put(actions.userChanged(user));
+    yield put(actions.fetchUser.start(user));
   } catch (e) {
     yield put(actions.fetchLogin.failed(e));
   }
@@ -88,15 +88,15 @@ export function* confirmEmail(action) {
 // All sagas to be loaded
 
 function fetchCurrentUser() {
-  return api.get('/user/current').then((res) => res.data);
+  return api.get('/me').then((res) => res.data);
 }
 
 function sendLogin(credentials) {
-  return api.post('/users/login', credentials).then((res) => res.data);
+  return api.post('/login', credentials).then((res) => res.data);
 }
 
 function sendLogout() {
-  return api.post('/users/logout').then((res) => res.data);
+  return api.post('/logout').then((res) => res.data);
 }
 
 function sendRegistrationData(data) {

@@ -9,11 +9,12 @@ import styled from 'styled-components';
 import { Link } from 'react-router';
 
 import FlexBox from 'components/FlexBox';
-import Space from 'components/Space';
+
 import Button from 'components/Button';
 
-import { Block, palette } from '../../utils/constants';
+import { palette } from '../../utils/constants';
 import { formatMoney, hideOn, media } from '../../utils/helpers';
+import Block from '../../components/Block';
 
 const Wrapper = styled.div`
   position: relative;
