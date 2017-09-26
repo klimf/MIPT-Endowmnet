@@ -175,7 +175,7 @@ export default function createRoutes(store) {
         importModules.catch(errorLoading);
       },
     }, {
-      path: '/capital',
+      path: '/capital(/:capitalName)',
       name: 'capitalPage',
       getComponent(nextState, cb) {
         const importModules = Promise.all([

@@ -10,6 +10,7 @@ import { Link } from 'react-router';
 import { block, palette, shadow, unit } from '../../utils/constants';
 import { media } from '../../utils/helpers';
 import FlexBox from '../FlexBox';
+import placeholder from '../../images/placeholder.png';
 
 export const Wrapper = styled(FlexBox)`
   display: flex;

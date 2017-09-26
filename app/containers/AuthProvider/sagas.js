@@ -3,34 +3,39 @@ import api, { responseStates } from '../../utils/api';
 import * as actions from './actions';
 
 export function* getUser() {
-  try {
-    const action = yield take(actions.fetchUser.types.start);
-    const user = action.payload ? action.payload : yield call(fetchCurrentUser);
-    yield put(actions.fetchUser.success(user));
-  } catch (e) {
-    if (e.response) {
-      switch (e.response.status) {
-        case 401:
-          yield put(actions.fetchUser.failed(responseStates.UNATHORIZED));
-          break;
-        default:
-          yield put(actions.fetchUser.failed(e.response));
-          break;
+  while (true) {
+    try {
+      yield take(actions.fetchUser.types.start);
+      const user = yield call(fetchCurrentUser);
+      yield put(actions.fetchUser.success(user));
+    } catch (e) {
+      console.log(e);
+      if (e) {
+        switch (e.status) {
+          case 401:
+            yield put(actions.fetchUser.failed(responseStates.UNATHORIZED));
+            break;
+          default:
+            yield put(actions.fetchUser.failed(e));
+            break;
+        }
+      } else {
+        yield put(actions.fetchUser.failed(responseStates.NETWORK_ERROR));
       }
-    } else {
-      yield put(actions.fetchUser.failed(responseStates.NETWORK_ERROR));
     }
   }
 }
 
 export function* login() {
-  try {
-    const action = yield take(actions.fetchLogin.types.start);
-    const user = yield call(sendLogin, action.payload);
-    yield put(actions.fetchLogin.success(null));
-    yield put(actions.fetchUser.start(user));
-  } catch (e) {
-    yield put(actions.fetchLogin.failed(e));
+  while (true) {
+    try {
+      const action = yield take(actions.fetchLogin.types.start);
+      yield call(sendLogin, action.payload);
+      yield put(actions.fetchLogin.success());
+      yield put(actions.fetchUser.start());
+    } catch (e) {
+      yield put(actions.fetchLogin.failed(e));
+    }
   }
 }
 
@@ -88,19 +93,19 @@ export function* confirmEmail(action) {
 // All sagas to be loaded
 
 function fetchCurrentUser() {
-  return api.get('/me').then((res) => res.data);
+  return api.get('/me');
 }
 
 function sendLogin(credentials) {
-  return api.post('/login', credentials).then((res) => res.data);
+  return api.post('/login', credentials);
 }
 
 function sendLogout() {
-  return api.post('/logout').then((res) => res.data);
+  return api.post('/logout');
 }
 
 function sendRegistrationData(data) {
-  return api.post('/users', data).then((res) => res.data);
+  return api.post('/users', data);
 }
 
 function sendRecoveryPasswordTokenRequest({ email }) {

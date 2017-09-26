@@ -10,6 +10,8 @@ import Helmet from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import styled from 'styled-components';
 import makeSelectCapitalPage from './selectors';
+import { bindAll } from 'redux-act';
+import * as actions from './actions';
 
 import img from '../../images/CapitalImage.jpg';
 import face from '../../images/Face.jpg';
@@ -27,7 +29,7 @@ import FlexBox from '../../components/FlexBox';
 import InfoText from '../../components/InfoText/index';
 import Button from '../../components/Button/index';
 import Title from '../../components/Title/index';
-import Image from "../../components/Image/index";
+import Image from '../../components/Image/index';
 
 const About = styled.div`
   position: relative;
@@ -123,6 +125,10 @@ const BtnFix = styled.div`
 
 
 export class CapitalPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+
+  componentWillMount() {
+    this.props.fetchCapital.start({ capitalName: this.props.routeParams.capitalName });
+  }
   render() {
     return (
       <div>
@@ -133,8 +139,7 @@ export class CapitalPage extends React.PureComponent { // eslint-disable-line re
           ]}
         />
         <Content>
-          <Space size={4} />
-          <Space size={2} />
+          <Space size={6} />
           <Name noLarge>{this.props.data.name}</Name>
           <Image noMedium noLarge rounded shadow src={this.props.data.image} />
           <Head horisontal="space-between" noWrap >
@@ -178,12 +183,17 @@ CapitalPage.defaultProps = {
     description: 'Ежегодно МФТИ выпускает более 2.5 тысяч студентов во взрослую жизнь. Одно из главных событий университетского учебного года - церемония вручения почетных наград МФТИ и красных дипломов.\n\n День выпускника - это ряд зрелищных мероприятий, разработанных университетом для того, чтобы ребята запомнили этот день не только умом, но и душой, и сердцем! Весь вечер для молодых людей выступают почетные приглашенные гости. Одно из главных событий университетского учебного года - церемония вручения почетных наград МФТИ и красных дипломов.\n\n День выпускника - это ряд зрелищных мероприятий, разработанных университетом для того, чтобы ребята запомнили этот день не только умом, но и душой, и сердцем! Весь вечер для молодых людей выступают почетные приглашенные гости.',
     collected: 1435000,
     image: img,
-    founder: {
+    founders: [{
       name: 'Сергей Гуз',
       status: 'Зав. кафедры физики',
       quote: 'Развитие факультета проблем физики и энергетики - важная составляющая работы фонда университета МФТИ',
       image: face,
-    },
+    }, {
+      name: 'Сергей Гуз',
+      status: 'Зав. кафедры физики',
+      quote: 'Развитие факультета проблем физики и энергетики - важная составляющая работы фонда университета МФТИ',
+      image: face,
+    }],
     receivers: [
       {
         name: 'Сергей Гуз',
@@ -220,9 +230,7 @@ const mapStateToProps = createStructuredSelector({
 });
 
 function mapDispatchToProps(dispatch) {
-  return {
-    dispatch,
-  };
+  return bindAll(actions, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CapitalPage);

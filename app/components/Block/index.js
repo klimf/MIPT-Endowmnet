@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { block, card } from '../../utils/constants';
+import { block } from '../../utils/constants';
 import { media } from '../../utils/helpers';
 import Title from '../Title';
 
@@ -23,7 +23,6 @@ const Block = styled.div`
 const RelativeBlock = styled.div`
   padding: ${(props) => props.padding ? props.padding : '24px'};
   position: relative;
-  ${card}
   margin: ${(props) => props.margin || '0px'}
   ${media.small`
     padding: ${(props) => props.paddingSmall ? props.paddingSmall : '24px'};

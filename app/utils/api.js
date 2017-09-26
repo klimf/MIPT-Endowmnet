@@ -2,9 +2,9 @@ import axios from 'axios';
 import { fromJS } from 'immutable';
 import { createAction, createReducer } from 'redux-act';
 import config from './config';
-import fetch from 'isomorphic-fetch';
 
-
+axios.defaults.baseURL = config.API_ADRESS;
+axios.defaults.withCredentials = true;
 export default {
   get: (url, params) => request(url, { method: 'GET', params }),
   post: (url, data) => request(url, { method: 'POST', body: data }),
@@ -12,7 +12,7 @@ export default {
   delete: (url) => request(url, { method: 'DELETE' }),
   request: ({ url, ...options }) => request(url, options),
 };
-
+// FIXME: fix error body interpolation
 export class FetchAction {
   constructor(resource, method, prePare = (data) => data) {
     this.resource = resource;
@@ -86,6 +86,7 @@ function request(url, { method = 'GET', body = null, params = {} }) {
   const requestUrl = config.API_ADRESS + url + resolveParams(params);
   let headers = {};
   let bodyToSend = null;
+
   if (body && (body instanceof FormData)) {
     headers = { 'Content-Type': 'application/form-data' };
     bodyToSend = body;
@@ -94,21 +95,21 @@ function request(url, { method = 'GET', body = null, params = {} }) {
     headers = { 'Content-Type': 'application/json' };
   }
   return fetch(requestUrl, {
+    credentials: 'include',
     method,
     headers,
     body: bodyToSend || undefined,
-    credentials: 'include',
   })
-    .then((res) => {
-      if (responseMapStatuses[res.status] === responseConstants.SUCCESS) {
-        return res.json();
-      }
+  .then((res) => {
+    if (responseMapStatuses[res.status] === responseConstants.SUCCESS) {
+      return res.json ? res.json() : res.text();
+    }
+    const errPromise = res.json ? res.json() : res.text();
+    return errPromise.then((data) => {
       const error = new Error(res.statusText);
-      error.errors = res;
+      error.data = data;
       error.status = res.status;
       return Promise.reject(error);
-    }).catch((e) => {
-      console.log(e);
-      return Promise.reject(e);
     });
+  });
 }

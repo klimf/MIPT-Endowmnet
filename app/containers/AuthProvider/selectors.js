@@ -33,6 +33,10 @@ const isUnauthorized = () => createSelector(
   }
 );
 
+const user = () => createSelector(
+  selectUser(),
+  (substate) => substate.toJS()
+);
 
 /**
  * Default selector used by AuthProvider
@@ -49,4 +53,5 @@ export {
   selectAuthProviderDomain,
   isLogged,
   isUnauthorized,
+  user,
 };

@@ -23,21 +23,6 @@ export function* getMainCapital() {
   }
 }
 
-export function* getCapital() {
-  try {
-    const action = yield take(actions.fetchCapital.types.start);
-    const { id } = action.payload;
-    if (!id) {
-      const err = new Error('id is not specified');
-      err.status = 600;
-      throw err;
-    }
-    const capital = yield call(() => api.get(`capitals/${id}`).then((res) => res.data));
-    yield put(actions.fetchCapital.success(capital));
-  } catch (e) {
-    yield put(actions.fetchCapital.failed(e));
-  }
-}
 
 export function* updateCapital() {
   try {
