@@ -3,7 +3,6 @@
 * Input
 *
 */
-
 import React, { PropTypes } from 'react';
 import styled, { css } from 'styled-components';
 import * as Validation from 'react-validation/lib/build/validation.rc';
@@ -11,9 +10,7 @@ import { palette } from '../../utils/constants';
 // ebanuy crutch by react-validation developer
 import validations from './validations'; // eslint-disable-line
 
-const StyledInput = styled(Validation.Input).attrs({
-  type: (props) => props.type || 'text',
-})`
+const StyledInput = styled(Validation.Input)`
   width: 100%;
   height: 36px;
   margin: 8px 0;

@@ -12,7 +12,6 @@ import { media } from '../../utils/helpers';
 import Title from '../Title';
 import Space from '../Space';
 import Button from '../Button';
-
 export const Field = (Node) => (
   <div>
     { Node }
@@ -20,14 +19,6 @@ export const Field = (Node) => (
   </ div>
 );
 
-export const Submit = (props) =>
-  (<Button expanded submit >
-    {props.actionLabel }
-  </Button>);
-
-Submit.propTypes = {
-  actionLabel: React.PropTypes.string,
-};
 
 export class Form extends React.PureComponent {
 
@@ -44,6 +35,7 @@ export class Form extends React.PureComponent {
       });
     }
   }
+
   onSubmit(e) {
     e.preventDefault();
     if (Object.keys(this.form.validateAll()).length === 0) {
@@ -98,7 +90,9 @@ export class SimpleForm extends React.PureComponent { // eslint-disable-line
           <Space size={3} />
           <Form {...this.props} >
             { React.Children.map(this.props.children, Field) }
-            <Submit actionLabel={this.props.actionLabel} ></Submit>
+            (<Button expanded submit >
+              { this.props.actionLabel }
+            </Button>)
           </Form >
         </Container>
       </Wrapper>
