@@ -44,11 +44,12 @@ class AccountButton extends React.PureComponent {
   render() {
     const role = this.props.user.data ? this.props.user.data.role : null;
     return (
-      role &&
-      <Wrapper className={this.props.className}>
-        <Button to={mapRoleToLink[role].link} {...this.props} >{ mapRoleToLink[role].label }</Button>
-        <Button onClick={this.logout} type="border" {...this.props}>Выход</Button>
-      </Wrapper>
+      role ?
+        <Wrapper className={this.props.className}>
+          <Button to={mapRoleToLink[role].link} {...this.props} >{ mapRoleToLink[role].label }</Button>
+          <Button onClick={this.logout} type="border" {...this.props}>Выход</Button>
+        </Wrapper>
+      : null
     );
   }
 

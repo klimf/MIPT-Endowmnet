@@ -4,12 +4,14 @@ import api from '../../utils/api';
 
 
 export function* getAllCapitals() {
-  try {
-    yield take(actions.fetchCapitals.types.start);
-    const capitals = yield call(() => api.get('capitals').then((res) => res.data));
-    yield put(actions.fetchCapitals.success(capitals));
-  } catch (e) {
-    yield put(actions.fetchCapitals.failed(e));
+  while (true) {
+    try {
+      yield take(actions.fetchCapitals.types.start);
+      const capitals = yield call(() => api.get('capitals').then((res) => res.data));
+      yield put(actions.fetchCapitals.success(capitals));
+    } catch (e) {
+      yield put(actions.fetchCapitals.failed(e));
+    }
   }
 }
 

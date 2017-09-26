@@ -102,14 +102,23 @@ function request(url, { method = 'GET', body = null, params = {} }) {
   })
   .then((res) => {
     if (responseMapStatuses[res.status] === responseConstants.SUCCESS) {
+      console.log(res);
       return res.json ? res.json() : res.text();
     }
     const errPromise = res.json ? res.json() : res.text();
-    return errPromise.then((data) => {
-      const error = new Error(res.statusText);
-      error.data = data;
-      error.status = res.status;
-      return Promise.reject(error);
-    });
-  });
+    return errPromise
+      .then((data) => {
+        const error = new Error(res.statusText);
+        error.data = data;
+        error.status = res.status;
+        return Promise.reject(error);
+      })
+      .catch((e) => {
+        const error = new Error(res.statusText);
+        error.data = 'no data';
+        error.status = res.status;
+        return Promise.reject(error);
+      });
+  })
+    .catch((e) => Promise.resolve(null));
 }
