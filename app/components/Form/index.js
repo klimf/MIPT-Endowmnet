@@ -12,13 +12,14 @@ import { media } from '../../utils/helpers';
 import Title from '../Title';
 import Space from '../Space';
 import Button from '../Button';
+
+
 export const Field = (Node) => (
   <div>
     { Node }
     <Space size={1} />
   </ div>
 );
-
 
 export class Form extends React.PureComponent {
 
@@ -90,9 +91,9 @@ export class SimpleForm extends React.PureComponent { // eslint-disable-line
           <Space size={3} />
           <Form {...this.props} >
             { React.Children.map(this.props.children, Field) }
-            (<Button expanded submit >
+            <Button expanded submit >
               { this.props.actionLabel }
-            </Button>)
+            </Button>
           </Form >
         </Container>
       </Wrapper>
