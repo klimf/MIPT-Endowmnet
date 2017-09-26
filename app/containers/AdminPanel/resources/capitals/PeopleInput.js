@@ -17,6 +17,8 @@ import {
   Info,
   Decoration,
 } from '../../../../components/Quotes/Item';
+import { required } from '../validation';
+
 import FlexBox from '../../../../components/FlexBox';
 
 const HoverableImageWrapper = styled(Dropzone)`
@@ -59,16 +61,16 @@ const DeleteButton = styled(RaisedButton) `
 
 const PeopleInput = (man, index, fields) => (
   <Wrapper key={index} isLeft horisontal="space-between">
-    <Field name={`${man}.picture`} component={ImageDrop} />
+    <Field validate={[required]} name={`${man}.picture`} component={ImageDrop} />
     <TextBlock>
       <Quote>
-        <Field name={`${man}.quote`} component={LongTextInput} label="Цитата" />
+        <Field validate={[required]} name={`${man}.quote`} component={LongTextInput} label="Цитата" />
       </Quote>
       <FlexBox horisontal="space-between" vertical="center">
         <Info>
-          <Field name={`${man}.status`} component={TextInput} label="Статус" />
+          <Field validate={[required]} name={`${man}.status`} component={TextInput} label="Статус" />
           <b>
-            <Field name={`${man}.name`} component={TextInput} label="Имя" />
+            <Field validate={[required]} name={`${man}.name`} component={TextInput} label="Имя" />
           </b>
         </Info>
       </FlexBox>

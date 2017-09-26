@@ -13,7 +13,7 @@ export default Object.assign(rules, {
     hint: () => Hint(messages.requiredIsInvalid),
   },
   password: {
-    rule: (val) => val && (val.length < 16 && val.length > 8),
+    rule: (val) => val && (val.length <= 16 && val.length >= 8),
     hint: () => Hint(messages.passwordIsInvalid),
   },
   email: {

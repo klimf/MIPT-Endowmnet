@@ -7,13 +7,13 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
-import { Admin, Resource, Delete, showNotification } from 'admin-on-rest';
+import { Admin, Resource, Delete, showNotification, simpleRestClient } from 'admin-on-rest';
 import { createStructuredSelector } from 'reselect';
 import theme from './theme';
 import messages, { aorMessagesRu } from './messages';
 import makeSelectAdminPanel from './selectors';
 import * as CapitalResource from './resources/capitals/CapitalData';
-import restClient from './restClient';
+
 
 const aorMessages = {
   ru: aorMessagesRu,
@@ -31,7 +31,7 @@ export class AdminPanel extends React.Component { // eslint-disable-line react/p
           locale="ru"
           messages={aorMessages}
           theme={theme}
-          restClient={restClient()}
+          restClient={simpleRestClient('http://ef.misis.ru')}
         >
           <Resource
             name="capitals"

@@ -15,7 +15,6 @@ import { bindAll } from 'redux-act';
 import makeSelectAuthProvider, { isLogged } from './selectors';
 import * as actions from './actions';
 
-
 export class AuthProvider extends React.PureComponent {
   componentWillMount() {
     if (this.props.emitAuth) {

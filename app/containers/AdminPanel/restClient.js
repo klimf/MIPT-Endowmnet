@@ -60,11 +60,10 @@ const formatResponse = (response, type, resource, params) => {
 export default (showNotification) =>
   (type, resource, params) => {
     const requestParams = createRequest(type, resource, params).toJS();
-    console.log(requestParams);
     api.request({
       method: requestParams.method,
       url: requestParams.resource,
-      data: requestParams.params.data || null,
+      body: requestParams.params.data || null,
       params: Object.assign(
         requestParams.params.query || {},
         requestParams.params.pagination || {},
