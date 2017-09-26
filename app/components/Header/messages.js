@@ -19,16 +19,16 @@ export default defineMessages({
     {
       id: 'app.components.Header.NavList.Item2',
       defaultMessage: 'Новости',
-      link: '/items',
+      link: '/news',
     },
     {
       id: 'app.components.Header.NavList.Item3',
       defaultMessage: 'Дарители',
-      link: '/founders',
+      link: '/stories',
     },
     {
       id: 'app.components.Header.NavList.Item4',
-      defaultMessage: 'Целевые-капиталы',
+      defaultMessage: 'Целевые капиталы',
       link: '/capitals',
     },
     {

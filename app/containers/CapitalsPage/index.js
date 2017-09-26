@@ -5,7 +5,6 @@
  */
 
 import React, { PropTypes } from 'react';
-// import styled from 'styled-components';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { FormattedMessage } from 'react-intl';
@@ -14,14 +13,11 @@ import { createStructuredSelector } from 'reselect';
 import Title from 'components/Title';
 import Space from 'components/Space/index';
 import Content from 'components/Content';
-// import FlexBox from 'components/FlexBox';
 
 import Capital from './Capital';
 
 import makeSelectCapitalsPage from './selectors';
 import messages from './messages';
-// import { palette, Block } from '../../utils/constants';
-// import { formatMoney, hideOn, media } from '../../utils/helpers';
 
 import logo from '../../images/MiptLogo.jpg';
 import MainCapital from './MainCapital';
@@ -29,6 +25,7 @@ import MainCapital from './MainCapital';
 const capitals = [
   {
     name: 'Развитие факультета проблем физики и энергетики',
+    description: 'Ежегодно МФТИ выпускает более 2.5 тысяч студентов во взрослую жизнь. Одно из главных событий университетского учебного года - церемония вручения почетных наград МФТИ и красных дипломов. ',
     collected: 1435000,
     to: '/capital',
   },

@@ -1,4 +1,6 @@
-import { css } from 'styled-components';
+import placeholder from '../images/placeholder.png';
+import styled, { css } from 'styled-components';
+import { media } from './helpers';
 
 export const palette = {
   accent: '#B84646',
@@ -23,22 +25,41 @@ export const bigShadow = css`
   box-shadow: 0 ${2 * unit}px ${4 * unit}px ${palette.dark};
 `;
 
-export const hoverScaleUp = css`
-&:hover {
-    transform: scale(1.01);
-    ${bigShadow}
-  }
-`;
-
-export const card = css`
-  background-color: ${palette.white};
+export const rounded = css`
   border-radius: 8px;
+`;
+export const block = css`
+  background-color: ${palette.white};
   transition: 0.3s ease;
+  ${rounded}
   ${shadow}
+  ${(props) => !props.noHover && `
+    &:hover {
+      transform: scale(1.01);
+      ${bigShadow}
+    }`
+  } 
+  
 `;
 
-export const block = css`
-  ${card}
-  ${hoverScaleUp}
+export const image = css`
+  background: ${palette.primary} url(${(props) => props.src ? props.src : placeholder}) center no-repeat;
+  background-size: cover;
+`;
+
+export const Block = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  bottom: 10px;
+  left: 10px;
+  padding: ${(props) => props.padding ? props.padding : '24px'};
+  ${block}
+  ${media.small`
+    padding: ${(props) => props.paddingSmall ? props.paddingSmall : '24px'};
+  `}
 `;
 

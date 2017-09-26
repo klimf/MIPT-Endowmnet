@@ -12,6 +12,6 @@ export default defineMessages({
   },
   link: {
     id: 'app.components.Masthead.Block.Link',
-    defaultMessage: 'Подробнее об общем капитале',
+    defaultMessage: 'Подробнее о капиталах',
   },
 });

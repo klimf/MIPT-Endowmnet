@@ -10,8 +10,6 @@ import { Link } from 'react-router';
 import { block, palette, shadow, unit } from '../../utils/constants';
 import { media } from '../../utils/helpers';
 import FlexBox from '../FlexBox';
-import placeholder from '../../images/placeholder.png';
-// import Space from '../Space';
 
 export const Wrapper = styled(FlexBox)`
   display: flex;
@@ -20,7 +18,7 @@ export const Wrapper = styled(FlexBox)`
   position: relative;
   width: 100%;
   margin: ${3 * unit}px 0;
-  padding: 0 ${2 * unit}px;
+  padding: 0;
 `;
 
 export const StyledLink = styled(Link)`
