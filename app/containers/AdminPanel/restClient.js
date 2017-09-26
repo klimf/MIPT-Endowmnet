@@ -68,10 +68,7 @@ export default (showNotification) =>
         requestParams.params.filter || {}
       ),
     })
-      .then((response) => {
-        console.log(formatResponse(response, type, resource, params));
-        return formatResponse(response, type, resource, params);
-      })
+      .then((response) => formatResponse(response, type, resource, params))
       .catch((e) => {
         console.log(e.message);
         return Promise.reject(e);
