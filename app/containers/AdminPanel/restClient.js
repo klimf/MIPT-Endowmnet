@@ -70,7 +70,7 @@ export default (showNotification) =>
     })
       .then((response) => formatResponse(response, type, resource, params))
       .catch((e) => {
-        console.log(e.message);
+        console.log(e);
         return Promise.reject(e);
       });
   };

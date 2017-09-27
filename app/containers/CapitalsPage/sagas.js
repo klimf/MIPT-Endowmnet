@@ -75,5 +75,4 @@ export default [
   createCapital,
   updateCapital,
   deleteCapital,
-  getCapital,
 ];

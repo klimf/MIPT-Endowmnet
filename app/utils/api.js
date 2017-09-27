@@ -114,8 +114,7 @@ function request(url, { method = 'GET', body = null, params = {} }) {
       .then((data) => {
         error.data = data;
         return Promise.reject(error);
-      })
-      .catch((e) => Promise.reject(error));
+      });
     })
-    .catch((e) => Promise.resolve(e));
+    .catch((e) => e instanceof Error ? Promise.reject(e) : Promise.resolve(e));
 }
