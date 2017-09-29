@@ -163,7 +163,7 @@ function MainCapital(props) {
             { props.description }
           </Description>
         </Stats>
-        <Button fake expanded type="border" margin="0 0 -28px 0">Пожертвовать</Button>
+        <Button to={'/donation'} expanded type="border" margin="0 0 -28px 0">Пожертвовать</Button>
       </Block>
     </Wrapper>
   );

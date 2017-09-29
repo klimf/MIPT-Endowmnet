@@ -12,21 +12,19 @@ import { createStructuredSelector } from 'reselect';
 import Title from 'components/Title';
 import Space from 'components/Space/index';
 import Content from 'components/Content';
-import CapitalSmall from './components/CapitalSmall';
 import makeSelectCapitalsPage from './selectors';
 import messages from './messages';
-import CapitalLarge from './components/CapitalLarge';
-import CapitalMedium from './components/CapitalMedium';
 import Capital from './components/Capital';
 import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
 import { Responsive, WidthProvider } from 'react-grid-layout';
+import Button from '../../components/Button'
 
 const capitals = {
   lg: [
-  { id: 'a', x: 0, y: 0, w: 4, h: 2, minW: 2 },
-  { id: 'b', x: 5, y: 0, w: 2, h: 1, minW: 2 },
-  { id: 'c', x: 5, y: 1, w: 2, h: 1, minW: 2 },
+    { id: 'a', x: 0, y: 0, w: 4, h: 2, minW: 2 },
+    { id: 'b', x: 5, y: 0, w: 2, h: 1, minW: 2 },
+    { id: 'c', x: 5, y: 1, w: 2, h: 1, minW: 2 },
     { id: 'f', x: 5, y: 0, w: 3, h: 2, minW: 2 },
     { id: 'g', x: 5, y: 1, w: 3, h: 2, minW: 2 },
   ],
@@ -45,12 +43,48 @@ const capitals = {
     { id: 'g', x: 5, y: 1, w: 2, h: 1, },
   ],
 };
-WidthProvider.measureBeforeMount = true;
+
+const capitalsData = [
+  { id: 'a', },
+  { id: 'b',},
+  { id: 'c', },
+  { id: 'f', },
+  { id: 'g', },
+];
+
+const mapCapitals = (data, layout) => {
+  return data.map(item => ({
+    data: item,
+    'data-grid': layout.find(grid => grid.id === item.id)
+  }))
+};
+
+const editableGridStyle = {
+  border:'1px dotted #000'
+};
+
 const GridLayout = WidthProvider(Responsive);
 export class CapitalsPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+  constructor(props) {
+    super(props);
+    this.state = {
+      editable: false
+    };
+    this.toggleEditable = this.toggleEditable.bind(this);
+    this.capitals = mapCapitals(capitalsData, capitals.lg)
+    console.log(this.capitals)
+  }
+
+  toggleEditable() {
+    this.setState({editable: !this.state.editable})
+  }
 
   sumCollected(array) {
     return array.reduce((result, item) => (result + item.collected), 0);
+  }
+
+  componentWillUpdate() {
+
   }
 
   render() {
@@ -65,31 +99,26 @@ export class CapitalsPage extends React.PureComponent { // eslint-disable-line r
         <Space size={4} />
         <Title><FormattedMessage {...messages.header} /></Title>
         <Content>
+          <Button onClick={this.toggleEditable}>{!this.state.editable ? 'Редактировать' : 'Сохранить'}</Button>
           <GridLayout
+            layouts={capitals}
+            style={this.state.editable && editableGridStyle}
             breakpoints={{ lg: 1024, md: 996, sm: 768, xs: 480, xxs: 0 }}
             cols={{ lg: 6, md: 6, sm: 6, xs: 1, xxs: 3 }}
             rowHeight={200}
+            isDraggable={this.state.editable}
+            isResizable={false}
             onLayoutChange={(layout) => console.log(layout)}
           >
-            { capitals.lg.map((v) => (
+            { this.capitals.map((v) => (
               <Capital
-                key={v.id}x
-                data-grid={{ x: v.x, y: v.y, h: v.h, w: v.w }}
+                key={v.data.id}
+                editable={this.state.editable}
+                {...v}
               ></Capital>
             ))}
           </GridLayout>
         </Content>
-        {/* <MainCapital {...capital} />
-          {capitals.map((item, index) => (
-            <Capital key={index} name={item.name} collected={item.collected} to={item.to} />
-          )) }
-          <CapitalMedium {...capital}></CapitalMedium>
-          <CapitalMedium {...capital}></CapitalMedium> */}
-        {/* <CapitalLarge></CapitalLarge>
-          <CapitalSmall></CapitalSmall>
-          <CapitalSmall></CapitalSmall>
-          <CapitalMedium></CapitalMedium>
-          <CapitalMedium></CapitalMedium> */}
         <Space size={4} />
       </div>
     );

@@ -11,32 +11,35 @@ const capitals = [CapitalSmall, CapitalMedium, CapitalLarge];
 const StyledLink = styled(Link)`
   color: ${palette.black};
   text-decoration: none;
-  font-weight: 300;
+  touch-action: manipulate !important;
 `;
 
 const EditableWrap = styled(StyledLink)``.withComponent('div');
+const capitalMap = {
+  '2:1': CapitalSmall,
+  '3:2': CapitalMedium,
+  '4:2': CapitalLarge,
+  '6:2': CapitalLarge,
+};
 
-function resolveCapital(dataGrid) {
-  if(dataGrid.w === 2 && dataGrid.h === 1) {
-    return CapitalSmall
-  } else if (dataGrid.w === 3 && dataGrid.h === 2) {
-    return CapitalMedium
-  } else if(dataGrid.w === 4 && dataGrid.h === 2) {
-    return CapitalLarge
-  } else if (dataGrid.w === 6 && dataGrid.h === 1) {
-    return CapitalLarge
-  }
-}
 
 function Capital(props) {
-  const Component = resolveCapital(props['data-grid']);
+  console.log(props);
+  const {w, h} = props['data-grid'];
+  const Component = capitalMap[`${w}:${h}`];
   const Wrap = props.editable ? EditableWrap : StyledLink;
 
   return (
-    <Wrap {...props}>
-      <Component  {...props} />
+    <Wrap to={`capital/${props.data.id}`} {...props}>
+      <Component  {...props.data} />
     </Wrap>
   );
 }
+
+Capital.propTypes = {
+  'data-grid': React.PropTypes.object.isRequired,
+  editable: React.PropTypes.bool.isRequired,
+  data: React.PropTypes.object.isRequired,
+};
 
 export default Capital;

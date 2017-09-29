@@ -16,9 +16,6 @@ const Wrapper = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
-  ${media.medium`
-    width: 50%;
-  `}
   ${media.small`
     width: 100%;
   `}
@@ -35,6 +32,7 @@ const Info = styled.p`
   margin: 16px 0 0 0;
   color: ${palette.black};
   font-weight: 300;
+  width: 100%;
   font-size: 20px;
   & b {
     font-weight: 400;
