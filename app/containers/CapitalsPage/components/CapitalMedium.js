@@ -22,6 +22,11 @@ const Wrapper = styled.div`
   display: inline-block;
   width: 100%;
   height: 100%;
+  position: relative;
+  ${(props) => props.preview && `
+  width: 500px;
+  height: 400px;
+`}
   ${media.medium`
     width: 100%;
   `}
@@ -142,7 +147,7 @@ const InLine = styled.div`display: inline-block; white-space: nowrap;`;
 
 function MainCapital(props) {
   return (
-    <Wrapper>
+    <Wrapper preview={props.preview}>
       <Block padding="30px">
         <FlexBox style={{ height: '120px' }} column >
           <ImgWrapper noSmall>

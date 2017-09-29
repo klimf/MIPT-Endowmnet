@@ -18,6 +18,10 @@ import Image from '../../../components/Image/index';
 import Block from '../../../components/Block';
 
 const Wrapper = styled.div`
+  ${(props) => props.preview && `
+    width: 600px;
+    height: 400px;
+  `}
   ${media.medium`
     width: 100%;
   `}
@@ -25,6 +29,7 @@ const Wrapper = styled.div`
     width: 100%;
     height: 300px;
   `}
+  position: relative;
 `;
 
 const StyledLink = styled(Link)`
@@ -135,7 +140,7 @@ const InLine = styled.div`display: inline-block; white-space: nowrap;`;
 
 function CapitalLarge(props) {
   return (
-    <Wrapper >
+    <Wrapper preview={props.preview} >
       <Block padding="40px">
         <FlexBox style={{ height: '140px' }}>
           <ImgWrapper noSmall>

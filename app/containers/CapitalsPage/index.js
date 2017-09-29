@@ -18,7 +18,8 @@ import Capital from './components/Capital';
 import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
 import { Responsive, WidthProvider } from 'react-grid-layout';
-import Button from '../../components/Button'
+import Button from '../../components/Button';
+import Popup from './components/SetCapitalComponent';
 
 const capitals = {
   lg: [
@@ -39,28 +40,26 @@ const capitals = {
     { id: 'a', x: 0, y: 0, w: 4, h: 2 },
     { id: 'b', x: 5, y: 0, w: 2, h: 1 },
     { id: 'c', x: 5, y: 1, w: 2, h: 1 },
-    { id: 'f', x: 5, y: 0, w: 2, h: 1,},
-    { id: 'g', x: 5, y: 1, w: 2, h: 1, },
+    { id: 'f', x: 5, y: 0, w: 2, h: 1 },
+    { id: 'g', x: 5, y: 1, w: 2, h: 1 },
   ],
 };
 
 const capitalsData = [
-  { id: 'a', },
-  { id: 'b',},
-  { id: 'c', },
-  { id: 'f', },
-  { id: 'g', },
+  { id: 'a' },
+  { id: 'b' },
+  { id: 'c' },
+  { id: 'f' },
+  { id: 'g' },
 ];
 
-const mapCapitals = (data, layout) => {
-  return data.map(item => ({
-    data: item,
-    'data-grid': layout.find(grid => grid.id === item.id)
-  }))
-};
+const mapCapitals = (data, layout) => data.map((item) => ({
+  data: item,
+  'data-grid': layout.find((grid) => grid.id === item.id),
+}));
 
 const editableGridStyle = {
-  border:'1px dotted #000'
+  border: '1px dotted #000',
 };
 
 const GridLayout = WidthProvider(Responsive);
@@ -68,24 +67,21 @@ export class CapitalsPage extends React.PureComponent { // eslint-disable-line r
   constructor(props) {
     super(props);
     this.state = {
-      editable: false
+      editable: false,
     };
     this.toggleEditable = this.toggleEditable.bind(this);
-    this.capitals = mapCapitals(capitalsData, capitals.lg)
-    console.log(this.capitals)
+    this.capitals = mapCapitals(capitalsData, capitals.lg);
+    console.log(this.capitals);
   }
 
   toggleEditable() {
-    this.setState({editable: !this.state.editable})
+    this.setState({ editable: !this.state.editable });
   }
 
   sumCollected(array) {
     return array.reduce((result, item) => (result + item.collected), 0);
   }
 
-  componentWillUpdate() {
-
-  }
 
   render() {
     return (
@@ -120,6 +116,7 @@ export class CapitalsPage extends React.PureComponent { // eslint-disable-line r
           </GridLayout>
         </Content>
         <Space size={4} />
+        <Popup capitalData={capitalsData[0]}></Popup>
       </div>
     );
   }

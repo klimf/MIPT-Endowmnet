@@ -13,9 +13,13 @@ import Block from '../../../components/Block';
 
 const Wrapper = styled.div`
   display: block;
-  position: absolute;
+  position: relative;
   width: 100%;
   height: 100%;
+  ${(props) => props.preview && `
+  width: 300px;
+  height: 200px;
+`}
   ${media.small`
     width: 100%;
   `}
@@ -52,14 +56,14 @@ const More = styled.p`
 
 function Capital(props) {
   return (
-    <Wrapper >
-        <Block>
-          <FlexBox>
-            <Name>{props.name}</Name>
-            <Info>Собрано: <b>{formatMoney(props.collected)}</b> ₽</Info>
-            <More>Подробнее</More>
-          </FlexBox>
-        </Block>
+    <Wrapper preview={props.preview}>
+      <Block>
+        <FlexBox>
+          <Name>{props.name}</Name>
+          <Info>Собрано: <b>{formatMoney(props.collected)}</b> ₽</Info>
+          <More>Подробнее</More>
+        </FlexBox>
+      </Block>
     </Wrapper>
   );
 }

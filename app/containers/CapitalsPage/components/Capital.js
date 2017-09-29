@@ -15,7 +15,8 @@ const StyledLink = styled(Link)`
 `;
 
 const EditableWrap = styled(StyledLink)``.withComponent('div');
-const capitalMap = {
+
+export const capitalMap = {
   '2:1': CapitalSmall,
   '3:2': CapitalMedium,
   '4:2': CapitalLarge,
@@ -24,14 +25,12 @@ const capitalMap = {
 
 
 function Capital(props) {
-  console.log(props);
-  const {w, h} = props['data-grid'];
+  const { w, h } = props['data-grid'];
   const Component = capitalMap[`${w}:${h}`];
   const Wrap = props.editable ? EditableWrap : StyledLink;
-
   return (
     <Wrap to={`capital/${props.data.id}`} {...props}>
-      <Component  {...props.data} />
+      <Component {...props.data} preview={props.preview} />
     </Wrap>
   );
 }
