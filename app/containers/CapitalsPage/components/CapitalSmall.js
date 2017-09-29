@@ -6,18 +6,16 @@
 
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router';
-import { palette } from '../../utils/constants';
-import FlexBox from '../../components/FlexBox/index';
-import { formatMoney, media } from '../../utils/helpers';
-import Block from '../../components/Block';
+import { palette } from '../../../utils/constants';
+import FlexBox from '../../../components/FlexBox/index';
+import { formatMoney, media } from '../../../utils/helpers';
+import Block from '../../../components/Block';
 
 const Wrapper = styled.div`
-  position: relative;
-  float: left;
-  display: inline-block;
-  width: 33.333333%;
-  height: 200px;
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
   ${media.medium`
     width: 50%;
   `}
@@ -26,17 +24,10 @@ const Wrapper = styled.div`
   `}
 `;
 
-
-const StyledLink = styled(Link)`
-  color: ${palette.black};
-  text-decoration: none;
-  font-weight: 300;
-`;
-
 const Name = styled.h2`
   margin: 0;
   font-size: 20px;
-  font-weight: 300;
+  font-weight: bold;
 `;
 
 const Info = styled.p`
@@ -63,8 +54,7 @@ const More = styled.p`
 
 function Capital(props) {
   return (
-    <Wrapper>
-      <StyledLink to={props.to}>
+    <Wrapper >
         <Block>
           <FlexBox>
             <Name>{props.name}</Name>
@@ -72,15 +62,22 @@ function Capital(props) {
             <More>Подробнее</More>
           </FlexBox>
         </Block>
-      </StyledLink>
     </Wrapper>
   );
 }
+
 
 Capital.propTypes = {
   to: PropTypes.string,
   name: PropTypes.string,
   collected: PropTypes.number,
+};
+
+Capital.defaultProps = {
+  name: 'Развитие факультета проблем физики и энергетики',
+  description: 'Ежегодно МФТИ выпускает более 2.5 тысяч студентов во взрослую жизнь. Одно из главных событий университетского учебного года - церемония вручения почетных наград МФТИ и красных дипломов. ',
+  collected: 1435000,
+  to: '/capital/kek',
 };
 
 export default Capital;

@@ -104,17 +104,18 @@ function request(url, { method = 'GET', body = null, params = {} }) {
     body: bodyToSend || undefined,
   })
     .then((res) => {
-      if (responseMapStatuses[res.status] === responseConstants.SUCCESS) {
+      if (res.ok) {
         return res.json ? res.json() : res.text();
       }
       const errPromise = res.json ? res.json() : res.text();
       const error = new Error(res.statusText);
       error.status = res.status;
       return errPromise
-      .then((data) => {
-        error.data = data;
-        return Promise.reject(error);
-      });
+        .then((data) => {
+          error.data = data;
+          return Promise.reject(error);
+        })
+        .catch((e) => Promise.reject(error));
     })
-    .catch((e) => e instanceof Error ? Promise.reject(e) : Promise.resolve(e));
+    .catch((e) => e.status ? Promise.reject(e) : Promise.resolve(e));
 }
