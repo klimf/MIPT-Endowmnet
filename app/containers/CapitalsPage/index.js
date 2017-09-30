@@ -63,6 +63,7 @@ const editableGridStyle = {
 };
 
 const GridLayout = WidthProvider(Responsive);
+
 export class CapitalsPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
     super(props);
@@ -71,11 +72,14 @@ export class CapitalsPage extends React.PureComponent { // eslint-disable-line r
     };
     this.toggleEditable = this.toggleEditable.bind(this);
     this.capitals = mapCapitals(capitalsData, capitals.lg);
-    console.log(this.capitals);
   }
 
   toggleEditable() {
     this.setState({ editable: !this.state.editable });
+  }
+
+  startSelectCapitalComponent(capitalData) {
+
   }
 
   sumCollected(array) {
