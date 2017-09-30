@@ -46,7 +46,6 @@ export function* logout() {
       yield put(actions.fetchLogout.success(null));
       yield put(actions.fetchUser.start());
     } catch (e) {
-      console.log(e);
       yield put(actions.fetchLogout.failed(e));
     }
   }

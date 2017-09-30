@@ -4,8 +4,8 @@ import { createSelector } from 'reselect';
  * Direct selector to the capitalsPage state domain
  */
 const selectCapitalsPageDomain = () => (state) => state.get('capitalsPage');
-const capitalsDataItems = () => (state) => state.get('capitals');
-const capitalsGridItems = () => (state) => state.get('capitalsGrid').get('grid');
+const capitalsDataItems = () => (state) => state.get('capitalsPage').get('capitals');
+const capitalsGridItems = () => (state) => state.get('capitalsPage').get('capitalsGrid').get('grid');
 
 /**
  * Other specific selectors
@@ -19,7 +19,7 @@ const makeSelectCapitalsGrid = () => createSelector(
       return [];
     }
     const dataItems = dataItemsState.get('data').toJS();
-    const gridItems = gridItemsState.get('data').toJS();
+    const gridItems = gridItemsState.toJS();
     return gridItems.map((gridParams) => ({
       'data-grid': gridParams,
       data: dataItems.find((x) => x.id === gridParams.id),

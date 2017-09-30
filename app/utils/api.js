@@ -41,9 +41,19 @@ export class FetchAction {
 export function fetchReducerFactory(Action, onSuccess = (state) => state, initState) {
   const initialState = fromJS(Object.assign({ data: null, pending: false, error: false }, initState));
   return createReducer({
-    [Action.start]: (state, payload) => state.set('pending', true).set('req', payload || null).set('status', 'pending'),
-    [Action.success]: (state, payload) => state.set('pending', false).set('data', payload || null).set('status', 'success'),
-    [Action.failed]: (state, payload) => state.set('pending', false).set('error', payload || null).set('status', 'failed'),
+    [Action.start]: (state, payload) => state
+    .set('pending', true)
+    .set('req', payload || null)
+    .set('status', 'pending'),
+    [Action.success]: (state, payload) => state
+    .set('pending', false)
+    .set('data', payload || null)
+    .set('status', 'success')
+    .set('error', null),
+    [Action.failed]: (state, payload) => state
+    .set('pending', false)
+    .set('error', payload)
+    .set('status', 'failed'),
   }, initialState);
 }
 
@@ -115,7 +125,7 @@ function request(url, { method = 'GET', body = null, params = {} }) {
           error.data = data;
           return Promise.reject(error);
         })
-        .catch((e) => Promise.reject(error));
+        .catch(() => Promise.reject(error));
     })
-    .catch((e) => e.status ? Promise.reject(e) : Promise.resolve(e));
+    .catch((e) => e.status ? Promise.reject(e) : Promise.resolve({}));
 }

@@ -7,17 +7,17 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
+import 'react-grid-layout/css/styles.css';
+import 'react-resizable/css/styles.css';
 import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import Title from 'components/Title';
 import Space from 'components/Space/index';
+import { Responsive, WidthProvider } from 'react-grid-layout';
 import Content from 'components/Content';
-import makeSelectCapitalsPage from './selectors';
+import makeSelectCapitalsPage, { makeSelectCapitalsGrid } from './selectors';
 import messages from './messages';
 import Capital from './components/Capital';
-import 'react-grid-layout/css/styles.css';
-import 'react-resizable/css/styles.css';
-import { Responsive, WidthProvider } from 'react-grid-layout';
 import Button from '../../components/Button';
 import Popup from './components/SetCapitalComponent';
 
@@ -79,7 +79,7 @@ export class CapitalsPage extends React.PureComponent { // eslint-disable-line r
   }
 
   startSelectCapitalComponent(capitalData) {
-
+    return capitalData;
   }
 
   sumCollected(array) {
@@ -132,6 +132,7 @@ CapitalsPage.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   CapitalsPage: makeSelectCapitalsPage(),
+  capitalsGrid: makeSelectCapitalsGrid(),
 });
 
 function mapDispatchToProps(dispatch) {

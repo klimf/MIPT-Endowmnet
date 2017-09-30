@@ -16,7 +16,7 @@ const selectAnyFetchStatus = () => (state, { stateSelector }) => stateSelector(s
 
 const isLogged = () => createSelector(
   selectUser(),
-  (substate) => substate.toJS().data && true
+  (substate) => substate.toJS().data || false
 );
 
 const isUnauthorized = () => createSelector(

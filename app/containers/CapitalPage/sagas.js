@@ -18,7 +18,6 @@ export function* getCapital() {
       const capital = yield call(() => api.get(`/capitals/${capitalName}`));
       yield put(actions.fetchCapital.success(capital));
     } catch (e) {
-      console.log(e);
       yield put(actions.fetchCapital.failed(e));
     }
   }
