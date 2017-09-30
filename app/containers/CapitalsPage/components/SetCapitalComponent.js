@@ -1,10 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
-import { block, palette } from '../../../utils/constants';
+import Title from 'components/Title';
+import { block, palette, unit, rounded } from '../../../utils/constants';
 import Overlay from '../../../components/Overlay';
 import Capital, { capitalMap } from './Capital';
-import Title from 'components/Title';
+import cancelIcon from '../../../images/cancel.svg';
+import Button from '../../../components/Button';
 
+
+const CancelButton = () => (
+  <Button fake expanded>
+    Отмена
+  </Button>
+);
 
 const PopupWrap = styled.div`
     display: block;
@@ -15,7 +23,21 @@ const PopupWrap = styled.div`
 `;
 
 const ComponentWrap = styled.div`
-    backgroud: ${palette.primary}
+    background: ${palette.dark};
+    ${(props) => props.selected && `background: ${palette.primary} !important;`}
+    padding: ${unit}px;
+    margin-bottom: ${unit}px;
+    ${rounded};
+    position: relative;
+    transition: .3s all ease-in-out;
+    &:hover {
+      cursor: pointer;
+      background: ${palette.gray};
+    }
+    &:after {
+      content: ${(props) => props.sizeProperty};
+      position: absolute;
+    }
 `;
 
 const capitalComponents = (capitalData) => Object.keys(capitalMap).map((componentParam, index) => {
@@ -33,50 +55,58 @@ const capitalComponents = (capitalData) => Object.keys(capitalMap).map((componen
 export const Popup = (props) => (
   <Overlay show>
     <PopupWrap>
-      <Title>Выбор вида блока</Title>
+      <Title>{props.title}</Title>
+      <CancelButton onClick={props.onCancel}></CancelButton>
       {props.children}
     </PopupWrap>
   </Overlay>
 );
 
+Popup.propTypes = {
+  onCancel: React.PropTypes.any.isRequired,
+  children: React.PropTypes.any,
+  title: React.PropTypes.string.isRequired,
+};
 
-const propTypes = {};
-
-const defaultProps = {};
 
 class SetCapitalComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      selected: null,
     };
   }
 
-  onComponentSelect(componentParam) {
-    console.log(componentParam);
+  onComponentClick(componentParam) {
+    this.setState({ selected: componentParam });
+    this.props.onComponentSelect(componentParam);
   }
 
   render() {
     return (
-      <Popup>
+      <Popup
+        onCancel={this.props.onCancel}
+        title={'Выберите типа блока'}
+      >
         {
             capitalComponents(this.props.capitalData).map((properties, index) =>
-              <ComponentWrap>
+              <ComponentWrap
+                onClick={() => this.onComponentClick(properties)}
+                selected={this.state.selected && this.state.selected['data-grid'].w === properties['data-grid'].w}
+              >
                 <Capital preview editable key={index} {...properties}></Capital>
               </ComponentWrap>
-              )
+            )
         }
       </Popup>
     );
   }
 }
 
-SetCapitalComponent.propTypes = propTypes;
 
-SetCapitalComponent.defaultProps = defaultProps;
-
-
-Popup.propTypes = {
-  children: React.PropTypes.any,
+SetCapitalComponent.propTypes = {
+  onComponentSelect: React.PropTypes.any.isRequired,
+  onCancel: React.PropTypes.any.isRequired,
 };
 
 
