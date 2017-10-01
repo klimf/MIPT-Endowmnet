@@ -20,37 +20,37 @@ import {
   fetchCapitalsGrid,
 } from './actions';
 
-const capitalsGridReducer = createReducer({
+export const capitalsGridReducer = createReducer({
   [startSelectCapitalComponent]: (state, payload) => state
-  .set('configureCapital', payload)
-  .set('selectedGridComponent', null)
-  .set('showComponentsPopup', true),
+  .set('configureCapital', fromJS(payload))
+  .set('selectedGridComponent', null),
 
   [cancelCapitalComponentSelection]: (state) => state
-  .set('configureCapital', null)
-  .set('showComponentsPopup', false),
+  .set('configureCapital', null),
 
   [setCapitalComponent]: (state, payload) => state
-  .set('selectedGridComponent', payload)
-  .set('showComponentsPopup', false),
+  .set('selectedGridComponent', fromJS(payload)),
 
   [saveCapitalConfiguration]: (state) => {
     const currentGrid = state.get('grid');
-    const newDataGrid = state.get('selectedGridComponent');
-    const newGrid = currentGrid.map((x) => x.id !== newDataGrid.id ? x : Object.assign({}, x, newDataGrid));
-    return state.set('grid', newGrid);
+    const newDataGridItem = state.get('selectedGridComponent');
+    if (!newDataGridItem) {
+      return state.set('configureCapital', null).set('selectedGridComponent', null);
+    }
+    const oldItemIndex = currentGrid.findIndex((item) => item.get('id') === newDataGridItem.get('id'));
+    const newGrid = currentGrid.update(oldItemIndex, newDataGridItem, (old) => old.merge(newDataGridItem));
+    return state.set('grid', newGrid).set('configureCapital', null).set('selectedGridComponent', null);
   },
 
-  [capitalsGridChange]: (state, payload) => state.set('grid', payload),
+  [capitalsGridChange]: (state, payload) => state.set('grid', fromJS(payload)),
 
-  [toggleGridEditable]: (state) => state.set('editable', !state.get('editable')),
+  [toggleGridEditable]: (state) => state.update('editable', (option) => !option),
 
-  [fetchCapitalsGrid.success]: (state, payload) => state.set('grid', payload),
+  [fetchCapitalsGrid.success]: (state, payload) => state.set('grid', fromJS(payload)),
 
 }, fromJS({
   configureCapital: null,
   selectedGridComponent: null,
-  showComponentsPopup: false,
   editable: false,
   grid: [],
 }));

@@ -6,7 +6,6 @@
 
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router';
 
 import FlexBox from 'components/FlexBox';
 
@@ -18,6 +17,7 @@ import Image from '../../../components/Image/index';
 import Block from '../../../components/Block';
 
 const Wrapper = styled.div`
+  height: 100%;
   ${(props) => props.preview && `
     width: 600px;
     height: 400px;
@@ -32,10 +32,6 @@ const Wrapper = styled.div`
   position: relative;
 `;
 
-const StyledLink = styled(Link)`
-  text-decoration: none;
-  color: ${palette.black};
-`;
 
 const Info = styled.div`
   display: flex;
@@ -103,15 +99,6 @@ const ImgWrapper = styled.div`
   ${hideOn}
 `;
 
-// const Image = styled.div`
-//   position:relative;
-//   width: 100%;
-//   padding: 50% 0;
-//   overflow: hidden;
-//   background-color: ${palette.primary};
-//   background-size: cover;
-//   background-position: center;
-// `;
 
 const Money = styled.div`
   width: 100%;
@@ -124,19 +111,6 @@ const CollectedLabel = styled.span`
   font-weigh: 300;
 `;
 
-const Bar = styled.div`
-  position:relative;
-  width: ${(props) => props.progress ? props.progress : '100'}%;
-  background-color: ${(props) => props.progress ? palette.primary : palette.disabled};
-  margin: 0;
-  padding: 0;
-  height: 24px;
-  border-radius: 12px;
-`;
-
-const HideableH2 = styled.h2`${hideOn}`;
-
-const InLine = styled.div`display: inline-block; white-space: nowrap;`;
 
 function CapitalLarge(props) {
   return (
@@ -168,11 +142,11 @@ function CapitalLarge(props) {
 }
 
 CapitalLarge.propTypes = {
-  to: PropTypes.string,
-  name: PropTypes.string,
-  image: PropTypes.string,
-  purpose: PropTypes.number,
-  collected: PropTypes.number,
+  preview: PropTypes.bool.isRequired,
+  name: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+  collected: PropTypes.number.isRequired,
 };
 
 CapitalLarge.defaultProps = {

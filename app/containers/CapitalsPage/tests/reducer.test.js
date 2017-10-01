@@ -1,9 +1,32 @@
 
 import { fromJS } from 'immutable';
-import capitalsPageReducer from '../reducer';
+import { capitalsGridReducer } from '../reducer';
+import * as actions from '../actions';
 
+let state = {};
 describe('capitalsPageReducer', () => {
   it('returns the initial state', () => {
-    expect(capitalsPageReducer(undefined, {})).toEqual(fromJS({}));
+    state = capitalsGridReducer(undefined, {});
+    expect(state).toEqual(fromJS({
+      configureCapital: null,
+      selectedGridComponent: null,
+      editable: false,
+      grid: [] }));
+  });
+
+  it('start changing capitalComponent', () => {
+    const capitalToConfigure = {
+      id: 'someId',
+      name: 'some name',
+      isNew: false,
+    };
+
+    state = capitalsGridReducer(state, actions.startSelectCapitalComponent(capitalToConfigure));
+    console.log(state);
+    expect(state).toEqual(fromJS({
+      configureCapital: capitalToConfigure,
+      selectedGridComponent: null,
+      editable: false,
+      grid: [] }));
   });
 });

@@ -1,10 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import Title from 'components/Title';
-import { block, palette, unit, rounded } from '../../../utils/constants';
+import { palette, unit, rounded } from '../../../utils/constants';
 import Overlay from '../../../components/Overlay';
 import Capital, { capitalMap } from './Capital';
-import cancelIcon from '../../../images/cancel.svg';
 import Button from '../../../components/Button';
 
 
@@ -53,7 +52,7 @@ const capitalComponents = (capitalData) => Object.keys(capitalMap).map((componen
 });
 
 export const Popup = (props) => (
-  <Overlay show>
+  <Overlay show={props.show}>
     <PopupWrap>
       <Title>{props.title}</Title>
       <CancelButton onClick={props.onCancel}></CancelButton>
@@ -66,6 +65,7 @@ Popup.propTypes = {
   onCancel: React.PropTypes.any.isRequired,
   children: React.PropTypes.any,
   title: React.PropTypes.string.isRequired,
+  show: React.PropTypes.bool.isRequired,
 };
 
 
@@ -87,6 +87,7 @@ class SetCapitalComponent extends React.Component {
       <Popup
         onCancel={this.props.onCancel}
         title={'Выберите типа блока'}
+        show={this.props.show}
       >
         {
             capitalComponents(this.props.capitalData).map((properties, index) =>
@@ -107,6 +108,8 @@ class SetCapitalComponent extends React.Component {
 SetCapitalComponent.propTypes = {
   onComponentSelect: React.PropTypes.any.isRequired,
   onCancel: React.PropTypes.any.isRequired,
+  show: React.PropTypes.bool.isRequired,
+  capitalData: React.PropTypes.object.isRequired,
 };
 
 

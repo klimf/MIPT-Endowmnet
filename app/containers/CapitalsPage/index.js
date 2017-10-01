@@ -4,9 +4,10 @@
  *
  */
 
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
+import { bindAll } from 'redux-act';
 import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
 import { FormattedMessage } from 'react-intl';
@@ -19,7 +20,8 @@ import makeSelectCapitalsPage, { makeSelectCapitalsGrid } from './selectors';
 import messages from './messages';
 import Capital from './components/Capital';
 import Button from '../../components/Button';
-import Popup from './components/SetCapitalComponent';
+import ComponentSetPopup from './components/SetCapitalComponent';
+import * as actions from './actions';
 
 const capitals = {
   lg: [
@@ -120,14 +122,19 @@ export class CapitalsPage extends React.PureComponent { // eslint-disable-line r
           </GridLayout>
         </Content>
         <Space size={4} />
-        <Popup capitalData={capitalsData[0]}></Popup>
+        <ComponentSetPopup
+          capitalData={capitalsData[0]}
+          onCancel={this.props.cancelCapitalComponentSelection}
+          show={this.props.CapitalsPage.capitalsGrid.editable}
+        ></ComponentSetPopup>
       </div>
     );
   }
 }
 
 CapitalsPage.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  cancelCapitalComponentSelection: React.PropTypes.any,
+  CapitalsPage: React.PropTypes.any,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -136,9 +143,7 @@ const mapStateToProps = createStructuredSelector({
 });
 
 function mapDispatchToProps(dispatch) {
-  return {
-    dispatch,
-  };
+  return bindAll(actions, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CapitalsPage);
