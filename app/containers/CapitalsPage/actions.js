@@ -5,8 +5,8 @@
  */
 
 
-import { FetchAction } from '../../utils/api';
 import { createAction } from 'redux-act';
+import { FetchAction } from '../../utils/api';
 
 export const fetchCapitals = new FetchAction('FETCH_CAPITALS');
 
@@ -18,7 +18,6 @@ export const fetchUpdateCapital = new FetchAction('UPDATE_CAPITAL');
 
 export const fetchDeleteCapital = new FetchAction('DELETE_CAPITAL');
 
-export const fetchCapital = new FetchAction('FETCH_CAPITAL');
 
 export const startSelectCapitalComponent = createAction('СAPITAL_COMOPENT_SELECT_START');
 
