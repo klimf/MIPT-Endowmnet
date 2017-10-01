@@ -17,7 +17,6 @@ import face1 from '../../images/Face1.jpg';
 import face2 from '../../images/Face2.jpg';
 import face3 from '../../images/Face3.jpg';
 import Content from '../../components/Content/index';
-import { image, rounded, shadow } from '../../utils/constants';
 import Space from '../../components/Space/index';
 import { hideOn, media } from '../../utils/helpers';
 import Quotes from '../../components/Quotes/index';
@@ -27,16 +26,9 @@ import FlexBox from '../../components/FlexBox';
 import InfoText from '../../components/InfoText/index';
 import Button from '../../components/Button/index';
 import Title from '../../components/Title/index';
-import Image from "../../components/Image/index";
+import Image from '../../components/Image/index';
+import ImgDesc from '../../components/ImgDesc/index';
 
-const About = styled.div`
-  position: relative;
-  display: flex;
-  ${media.small`
-    flex-direction: column-reverse;
-    flex-wrap:wrap;
-  `}
-`;
 
 const Head = styled(FlexBox)`
   position: relative;
@@ -48,31 +40,6 @@ const Head = styled(FlexBox)`
     height: auto;
   `}
   ${hideOn}
-`;
-
-const Description = styled.p`
-  font-size: 20px;
-  margin: 0;
-  height: 100%;
-`;
-
-const AboutImage = styled.div`
-  min-width: 400px;
-  margin: 0 0 0 24px;
-  min-height: 100%;
-  max-height: 400px;
-  ${image}
-  ${rounded}
-  ${shadow}
-  ${media.medium`
-    min-width: 300px;
-  `}
-  ${media.small`
-    height: 320px;
-    margin: 0 0 24px 0;
-    min-width: 100%;
-    max-width: 100%;
-  `}
 `;
 
 const Info = styled.div`
@@ -157,10 +124,7 @@ export class CapitalPage extends React.PureComponent { // eslint-disable-line re
           </Head>
           <Space size={2} />
           <Title>О фонде</Title>
-          <About>
-            <Description>{this.props.data.description}</Description>
-            <AboutImage src={this.props.data.image} />
-          </About>
+          <ImgDesc image={this.props.data.image} description={this.props.data.description} />
           <Space size={3} />
           <Quotes title="Получатели" items={this.props.data.receivers} />
           <Space size={2} />
@@ -212,7 +176,7 @@ CapitalPage.defaultProps = {
 
 CapitalPage.propTypes = {
   data: PropTypes.object,
-  dispatch: PropTypes.func.isRequired,
+  // dispatch: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
