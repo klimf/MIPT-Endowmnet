@@ -7,8 +7,8 @@ import Capital, { capitalMap } from './Capital';
 import Button from '../../../components/Button';
 
 
-const CancelButton = () => (
-  <Button fake expanded>
+const CancelButton = (props) => (
+  <Button {...props} fake expanded>
     Отмена
   </Button>
 );
@@ -39,11 +39,10 @@ const ComponentWrap = styled.div`
     }
 `;
 
-const capitalComponents = (capitalData) => Object.keys(capitalMap).map((componentParam, index) => {
+const capitalComponents = (capitalData) => Object.keys(capitalMap).map((componentParam) => {
   const dataGrid = {
     w: componentParam.split(':')[0],
     h: componentParam.split(':')[1],
-    id: index,
   };
   return {
     'data-grid': dataGrid,
@@ -87,15 +86,16 @@ class SetCapitalComponent extends React.Component {
       <Popup
         onCancel={this.props.onCancel}
         title={'Выберите типа блока'}
-        show={this.props.show}
+        show={this.props.capitalData}
       >
-        {
+        { this.props.capitalData &&
             capitalComponents(this.props.capitalData).map((properties, index) =>
               <ComponentWrap
+                key={index}
                 onClick={() => this.onComponentClick(properties)}
                 selected={this.state.selected && this.state.selected['data-grid'].w === properties['data-grid'].w}
               >
-                <Capital preview editable key={index} {...properties}></Capital>
+                <Capital type={'preview'} editable {...properties}></Capital>
               </ComponentWrap>
             )
         }
@@ -108,7 +108,6 @@ class SetCapitalComponent extends React.Component {
 SetCapitalComponent.propTypes = {
   onComponentSelect: React.PropTypes.any.isRequired,
   onCancel: React.PropTypes.any.isRequired,
-  show: React.PropTypes.bool.isRequired,
   capitalData: React.PropTypes.object.isRequired,
 };
 

@@ -74,20 +74,24 @@ export class CapitalsPage extends React.PureComponent { // eslint-disable-line r
     };
     this.toggleEditable = this.toggleEditable.bind(this);
     this.capitals = mapCapitals(capitalsData, capitals.lg);
+    this.startSelectCapitalComponent = this.startSelectCapitalComponent.bind(this);
+    this.onComponentSelect = this.onComponentSelect.bind(this);
+  }
+
+
+  onComponentSelect(componentParams) {
+    this.props.setCapitalComponent(componentParams);
+    this.props.saveCapitalConfiguration();
+  }
+
+
+  startSelectCapitalComponent(capitalData) {
+    return this.props.startSelectCapitalComponent(capitalData);
   }
 
   toggleEditable() {
     this.setState({ editable: !this.state.editable });
   }
-
-  startSelectCapitalComponent(capitalData) {
-    return capitalData;
-  }
-
-  sumCollected(array) {
-    return array.reduce((result, item) => (result + item.collected), 0);
-  }
-
 
   render() {
     return (
@@ -115,7 +119,8 @@ export class CapitalsPage extends React.PureComponent { // eslint-disable-line r
             { this.capitals.map((v) => (
               <Capital
                 key={v.data.id}
-                editable={this.state.editable}
+                type={this.state.editable ? 'editable' : 'link'}
+                onBlockEditStart={this.startSelectCapitalComponent}
                 {...v}
               ></Capital>
             ))}
@@ -123,9 +128,9 @@ export class CapitalsPage extends React.PureComponent { // eslint-disable-line r
         </Content>
         <Space size={4} />
         <ComponentSetPopup
-          capitalData={capitalsData[0]}
           onCancel={this.props.cancelCapitalComponentSelection}
-          show={this.props.CapitalsPage.capitalsGrid.editable}
+          capitalData={this.props.CapitalsPage.capitalsGrid.configureCapital}
+          onComponentSelect={this.onComponentSelect}
         ></ComponentSetPopup>
       </div>
     );
@@ -135,6 +140,10 @@ export class CapitalsPage extends React.PureComponent { // eslint-disable-line r
 CapitalsPage.propTypes = {
   cancelCapitalComponentSelection: React.PropTypes.any,
   CapitalsPage: React.PropTypes.any,
+  setCapitalComponent: React.PropTypes.any,
+  saveCapitalConfiguration: React.PropTypes.any,
+  startSelectCapitalComponent: React.PropTypes.any,
+
 };
 
 const mapStateToProps = createStructuredSelector({

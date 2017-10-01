@@ -34,11 +34,17 @@ export const capitalsGridReducer = createReducer({
   [saveCapitalConfiguration]: (state) => {
     const currentGrid = state.get('grid');
     const newDataGridItem = state.get('selectedGridComponent');
+
     if (!newDataGridItem) {
       return state.set('configureCapital', null).set('selectedGridComponent', null);
     }
+
     const oldItemIndex = currentGrid.findIndex((item) => item.get('id') === newDataGridItem.get('id'));
-    const newGrid = currentGrid.update(oldItemIndex, newDataGridItem, (old) => old.merge(newDataGridItem));
+
+    const newGrid = oldItemIndex < 0
+    ? currentGrid.push(newDataGridItem.setIn(['data-grid', 'x'], 0).setIn(['data-grid', 'y'], 0))
+    : currentGrid.update(oldItemIndex, newDataGridItem, (old) => old.merge(newDataGridItem));
+
     return state.set('grid', newGrid).set('configureCapital', null).set('selectedGridComponent', null);
   },
 

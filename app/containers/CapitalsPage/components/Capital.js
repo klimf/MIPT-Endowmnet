@@ -5,7 +5,7 @@ import CapitalSmall from './CapitalSmall';
 import CapitalMedium from './CapitalMedium';
 import CapitalLarge from './CapitalLarge';
 import CapitalLargest from './СapitalLargest';
-import { palette } from '../../../utils/constants';
+import { palette, unit } from '../../../utils/constants';
 import Button from '../../../components/Button';
 
 
@@ -17,11 +17,41 @@ const StyledLink = styled(Link)`
 
 const EditableWrap = styled(StyledLink)``.withComponent('div');
 
-// const Editable = (props) => (
-//   <EditableWrap {...props} onCick={(e) => console.log(e)}>
-//     {props.children}
-//   </EditableWrap>
-// );
+const EditToolBarWrap = styled.div`
+  position: absolute;
+  z-index: 5;
+  top: ${unit * 2}px;
+  right: ${unit * 2}px;
+  display: flex;
+`;
+
+const Editable = (props) => (
+  <EditableWrap {...props}>
+    <EditToolBarWrap>
+      <Button
+        onMouseDown={(e) => {
+          e.stopPropagation();
+          props.onBlockEditStart(props.data);
+        }}
+      >...</Button>
+      <Button
+        onMouseDown={(e) => {
+          e.stopPropagation();
+          props.onBlockDeleteStart(props.data);
+        }}
+      >/</Button>
+    </EditToolBarWrap>
+    {props.children}
+  </EditableWrap>
+);
+
+Editable.propTypes = {
+  onBlockDeleteStart: React.PropTypes.func,
+  data: React.PropTypes.object,
+  children: React.PropTypes.any,
+};
+
+const PreviewWrap = styled(StyledLink)``.withComponent('div');
 
 export const capitalMap = {
   '2:1': CapitalSmall,
@@ -30,46 +60,29 @@ export const capitalMap = {
   '6:2': CapitalLargest,
 };
 
+const wrapMap = {
+  preview: PreviewWrap,
+  editable: Editable,
+  link: StyledLink,
+};
 
 function Capital(props) {
   const { w, h } = props['data-grid'];
   const Component = capitalMap[`${w}:${h}`];
-  const Wrap = props.editable ? EditableWrap : StyledLink;
+  const Wrap = wrapMap[props.type] || wrapMap.link;
   return (
     <Wrap
-      onMouseDown={(e) => {
-        e.stopPropagation();
-        props.onMouseDown();
-      }}
-      onMouseUp={(e) => {
-        e.stopPropagation();
-        props.onMouseUp();
-      }}
-      onTouchStart={(e) => {
-        e.stopPropagation();
-        props.onTouchStart();
-      }}
-      onClick={(e) => {
-        e.stopPropagation();
-      }}
-      to={`capital/${props.data.id}`} {...props}
+      to={`capital/${props.data.id}`}
+      {...props}
     >
-
-      <Component />
-      <Button
-
-        onMouseDown={(e) => {
-          e.stopPropagation();
-          console.log(e);
-        }}
-      ></Button>
+      <Component preview={props.type === 'preview'} data={props.data} />
     </Wrap>
   );
 }
 
 Capital.propTypes = {
   'data-grid': React.PropTypes.object.isRequired,
-  editable: React.PropTypes.bool.isRequired,
+  type: React.PropTypes.string.isRequired,
   data: React.PropTypes.object.isRequired,
 };
 
