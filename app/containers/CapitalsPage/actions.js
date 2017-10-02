@@ -25,3 +25,5 @@ export const toggleGridEditable = createAction('TOGGLE_GRID_EDITABLE');
 export const fetchCapitalsGrid = new FetchAction('FETCH_CAPITALS_GRID');
 
 export const capitalsGridChange = createAction('CAPITALS_GRID_CHANGED');
+
+export const deleteCapitalBlock = createAction('DElETE_CAPITAL_BLOCK');

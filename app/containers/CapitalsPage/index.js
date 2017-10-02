@@ -60,7 +60,6 @@ export class CapitalsPage extends React.PureComponent { // eslint-disable-line r
     };
     this.toggleEditable = this.toggleEditable.bind(this);
     this.capitals = mapCapitals(capitalsData, capitals.lg);
-    this.startSelectCapitalComponent = this.startSelectCapitalComponent.bind(this);
     this.onComponentSelect = this.onComponentSelect.bind(this);
   }
 
@@ -70,10 +69,6 @@ export class CapitalsPage extends React.PureComponent { // eslint-disable-line r
     this.props.saveCapitalConfiguration();
   }
 
-
-  startSelectCapitalComponent(capitalData) {
-    return this.props.startSelectCapitalComponent(capitalData);
-  }
 
   toggleEditable() {
     this.setState({ editable: !this.state.editable });
@@ -106,7 +101,8 @@ export class CapitalsPage extends React.PureComponent { // eslint-disable-line r
               <Capital
                 key={v.data.id}
                 type={this.state.editable ? 'editable' : 'link'}
-                onBlockEditStart={this.startSelectCapitalComponent}
+                onBlockEditStart={this.props.startSelectCapitalComponent}
+                onBlockDeleteStart={this.props.deleteCapitalBlock}
                 {...v}
               ></Capital>
             ))}
@@ -130,6 +126,7 @@ CapitalsPage.propTypes = {
   setCapitalComponent: React.PropTypes.any,
   saveCapitalConfiguration: React.PropTypes.any,
   startSelectCapitalComponent: React.PropTypes.any,
+  deleteCapitalBlock: React.PropTypes.any,
 
 };
 

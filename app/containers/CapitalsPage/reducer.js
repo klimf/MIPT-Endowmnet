@@ -18,6 +18,7 @@ import {
   capitalsGridChange,
   toggleGridEditable,
   fetchCapitalsGrid,
+  deleteCapitalBlock,
 } from './actions';
 
 export const capitalsGridReducer = createReducer({
@@ -46,6 +47,24 @@ export const capitalsGridReducer = createReducer({
     : currentGrid.update(oldItemIndex, newDataGridItem, (old) => old.merge(newDataGridItem));
 
     return state.set('grid', newGrid).set('configureCapital', null).set('selectedGridComponent', null);
+  },
+
+  [deleteCapitalBlock]: (state, payload) => {
+    const currentGrid = state.get('grid');
+
+    if (!payload) {
+      return state;
+    }
+
+    const toDeleteIndex = currentGrid.findIndex((item) => item.get('id') === payload.get('id'));
+
+    if (toDeleteIndex < 1) {
+      return state;
+    }
+
+    const newGrid = currentGrid.delete(toDeleteIndex);
+
+    return state.set('grid', newGrid);
   },
 
   [capitalsGridChange]: (state, payload) => state.set('grid', fromJS(payload)),
