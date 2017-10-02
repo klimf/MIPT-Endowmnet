@@ -10,6 +10,7 @@ import Helmet from 'react-helmet';
 import { bindAll } from 'redux-act';
 import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
+import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import Title from 'components/Title';
@@ -22,6 +23,7 @@ import Capital from './components/Capital';
 import Button from '../../components/Button';
 import ComponentSetPopup from './components/SetCapitalComponent';
 import * as actions from './actions';
+import FlexBox from '../../components/FlexBox';
 
 const capitals = {
   lg: [
@@ -41,6 +43,7 @@ const capitalsData = [
   { id: 'g' },
 ];
 
+
 const mapCapitals = (data, layout) => data.map((item) => ({
   data: item,
   'data-grid': layout.find((grid) => grid.id === item.id),
@@ -50,6 +53,10 @@ const editableGridStyle = {
   border: '1px dotted #000',
 };
 
+const ToolBarWrap = styled(Content)`
+  padding: 0px 50px;
+`;
+
 const GridLayout = WidthProvider(Responsive);
 
 export class CapitalsPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
@@ -57,18 +64,27 @@ export class CapitalsPage extends React.PureComponent { // eslint-disable-line r
     super(props);
     this.state = {
       editable: false,
+      value: 'kek',
     };
     this.toggleEditable = this.toggleEditable.bind(this);
     this.capitals = mapCapitals(capitalsData, capitals.lg);
     this.onComponentSelect = this.onComponentSelect.bind(this);
+    this.onCapitalChange = this.onCapitalChange.bind(this);
+    this.onCapitalSelect = this.onCapitalSelect.bind(this);
   }
 
+  onCapitalChange(e) {
+    this.setState({ value: e.target.value });
+  }
 
   onComponentSelect(componentParams) {
     this.props.setCapitalComponent(componentParams);
     this.props.saveCapitalConfiguration();
   }
 
+  onCapitalSelect(val) {
+    this.setState({ value: val });
+  }
 
   toggleEditable() {
     this.setState({ editable: !this.state.editable });
@@ -84,9 +100,20 @@ export class CapitalsPage extends React.PureComponent { // eslint-disable-line r
           ]}
         />
         <Space size={4} />
+        <ToolBarWrap>
+          <FlexBox
+            horisontal={'space-between'}
+            vertical={'center'}
+          >
+            <Button onClick={this.toggleEditable}>{!this.state.editable ? 'Редактировать' : 'Сохранить'}</Button>
+            {this.state.editable &&
+            <div></div>
+            }
+          </FlexBox>
+        </ToolBarWrap>
         <Title><FormattedMessage {...messages.header} /></Title>
         <Content>
-          <Button onClick={this.toggleEditable}>{!this.state.editable ? 'Редактировать' : 'Сохранить'}</Button>
+
           <GridLayout
             layouts={capitals}
             style={this.state.editable ? editableGridStyle : {}}
@@ -109,12 +136,14 @@ export class CapitalsPage extends React.PureComponent { // eslint-disable-line r
           </GridLayout>
         </Content>
         <Space size={4} />
+
         <ComponentSetPopup
           onCancel={this.props.cancelCapitalComponentSelection}
           capitalData={this.props.CapitalsPage.capitalsGrid.configureCapital}
           onComponentSelect={this.onComponentSelect}
           selectedComponent={this.props.CapitalsPage.capitalsGrid.selectedGridComponent}
         ></ComponentSetPopup>
+
       </div>
     );
   }
@@ -140,3 +169,4 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CapitalsPage);
+

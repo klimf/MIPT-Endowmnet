@@ -6,9 +6,9 @@
 
 import { fromJS } from 'immutable';
 import { combineReducers } from 'redux-immutable';
+import { reducer as formReducer } from 'redux-form';
 import { createReducer } from 'redux-act';
 import { fetchReducerFactory } from '../../utils/api';
-
 import {
   fetchCapitals,
   startSelectCapitalComponent,
@@ -84,4 +84,5 @@ export default combineReducers({
   grid: fetchReducerFactory(fetchCapitalsGrid),
   capitalsGrid: capitalsGridReducer,
   capitals: fetchReducerFactory(fetchCapitals),
+  form: formReducer,
 }, fromJS({}));

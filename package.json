@@ -245,6 +245,7 @@
     "lodash": "4.17.2",
     "minimist": "1.2.0",
     "react": "15.4.1",
+    "react-autocomplete": "^1.7.1",
     "react-dom": "15.4.1",
     "react-grid-layout": "^0.15.3",
     "react-helmet": "3.2.2",

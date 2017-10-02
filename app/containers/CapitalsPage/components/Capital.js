@@ -8,7 +8,6 @@ import CapitalLargest from './СapitalLargest';
 import { palette, unit } from '../../../utils/constants';
 import Button from '../../../components/Button';
 
-
 const StyledLink = styled(Link)`
   color: ${palette.black};
   text-decoration: none;
