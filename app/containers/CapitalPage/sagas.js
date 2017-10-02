@@ -5,13 +5,14 @@ import api from '../../utils/api';
 export function* defaultSaga() {
   // See example in containers/HomePage/sagas.js
 }
+
 export function* getCapital() {
   while (true) {
     try {
       const action = yield take(actions.fetchCapital.types.start);
       const { capitalName } = action.payload;
       if (!capitalName) {
-        const err = new Error('id is not specified');
+        const err = new Error('capitalName is not specified');
         err.status = 600;
         yield put(actions.fetchCapital.failed(err));
       }

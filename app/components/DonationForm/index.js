@@ -15,7 +15,7 @@ import Column from 'components/Column';
 import FlexBox from 'components/FlexBox';
 import Title from 'components/Title';
 import { palette } from '../../utils/constants';
-import { formatMoney } from '../../utils/helpers';
+import { formatMoney, media } from '../../utils/helpers';
 import { Form } from '../Form';
 
 
@@ -45,7 +45,11 @@ const Info = styled.p`
 const MoneySelect = styled.div`
   width: 100%;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
+  ${media.medium`
+    justify-content: flex-start;
+  `}
 `;
 
 const MoneyButton = styled.div`
@@ -56,6 +60,7 @@ const MoneyButton = styled.div`
   color: ${palette.white};
   transition: 0.3s;
   font-size: 20px;
+  margin: 0 12px 12px 0;
   &:hover{
     background-color: ${(props) => props.active ? palette.primary : palette.gray};
   }
@@ -75,7 +80,7 @@ const MoneyInput = styled.input`
   text-align: center;
   &:hover{
     border-color: ${(props) => props.active ? palette.transparent : palette.gray};
-  }
+  } 
 `;
 
 export class DonationForm extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function

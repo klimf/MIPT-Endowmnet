@@ -8,8 +8,11 @@ import React from 'react';
 import styled from 'styled-components';
 import { hideOn } from '../../utils/helpers';
 import { shadow } from '../../utils/constants';
+import placeholder from '../../images/placeholder.png';
 
-const Img = styled.img`
+const Img = styled.img.attrs({
+  src: (props) => props.src || placeholder,
+})`
   width: 100%;
   height: auto;
   ${hideOn}
