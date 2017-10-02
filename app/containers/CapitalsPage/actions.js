@@ -18,7 +18,6 @@ export const fetchUpdateCapital = new FetchAction('UPDATE_CAPITAL');
 
 export const fetchDeleteCapital = new FetchAction('DELETE_CAPITAL');
 
-
 export const startSelectCapitalComponent = createAction('СAPITAL_COMOPENT_SELECT_START');
 
 export const setCapitalComponent = createAction('SET_CAPITAL_COMPONENT');
