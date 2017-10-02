@@ -131,6 +131,7 @@ export class CapitalsPage extends React.PureComponent { // eslint-disable-line r
           onCancel={this.props.cancelCapitalComponentSelection}
           capitalData={this.props.CapitalsPage.capitalsGrid.configureCapital}
           onComponentSelect={this.onComponentSelect}
+          selectedComponent={this.props.CapitalsPage.capitalsGrid.selectedGridComponent}
         ></ComponentSetPopup>
       </div>
     );

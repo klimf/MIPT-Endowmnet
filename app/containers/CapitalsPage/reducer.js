@@ -22,8 +22,8 @@ import {
 
 export const capitalsGridReducer = createReducer({
   [startSelectCapitalComponent]: (state, payload) => state
-  .set('configureCapital', fromJS(payload))
-  .set('selectedGridComponent', null),
+  .set('configureCapital', fromJS(payload.data))
+  .set('selectedGridComponent', fromJS(payload['data-grid'])),
 
   [cancelCapitalComponentSelection]: (state) => state
   .set('configureCapital', null),

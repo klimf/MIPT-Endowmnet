@@ -31,7 +31,11 @@ const Editable = (props) => (
       <Button
         onMouseDown={(e) => {
           e.stopPropagation();
-          props.onBlockEditStart(props.data);
+          const editParams = {
+            data: Object.assign({}, props.data),
+            'data-grid': Object.assign({}, props['data-grid']),
+          };
+          props.onBlockEditStart(editParams);
         }}
       >...</Button>
       <Button

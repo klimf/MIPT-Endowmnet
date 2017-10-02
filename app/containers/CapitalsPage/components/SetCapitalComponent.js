@@ -41,8 +41,8 @@ const ComponentWrap = styled.div`
 
 const capitalComponents = (capitalData) => Object.keys(capitalMap).map((componentParam) => {
   const dataGrid = {
-    w: componentParam.split(':')[0],
-    h: componentParam.split(':')[1],
+    w: parseInt(componentParam.split(':')[0], 0),
+    h: parseInt(componentParam.split(':')[1], 0),
   };
   return {
     'data-grid': dataGrid,
@@ -93,7 +93,7 @@ class SetCapitalComponent extends React.Component {
               <ComponentWrap
                 key={index}
                 onClick={() => this.onComponentClick(properties)}
-                selected={this.state.selected && this.state.selected['data-grid'].w === properties['data-grid'].w}
+                selected={this.props.selectedComponent.w === properties['data-grid'].w}
               >
                 <Capital type={'preview'} editable {...properties}></Capital>
               </ComponentWrap>
@@ -109,6 +109,7 @@ SetCapitalComponent.propTypes = {
   onComponentSelect: React.PropTypes.any.isRequired,
   onCancel: React.PropTypes.any.isRequired,
   capitalData: React.PropTypes.object.isRequired,
+  selectedComponent: React.PropTypes.any,
 };
 
 
