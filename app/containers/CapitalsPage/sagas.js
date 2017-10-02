@@ -30,8 +30,7 @@ export function* getСapitalsGrid() {
 export function* updateCapitalsGrid() {
   while (true) {
     try {
-      const action = yield take(actions.capitalsGridChange);
-      yield put(actions.fetchCapitalsGridUpdate.start(action.payload));
+      const action = yield take(actions.capitalsGridChange.getType());
       yield call(() => api.put('/capitals-layout', action.payload));
       yield put(actions.fetchCapitalsGridUpdate.success());
     } catch (e) {

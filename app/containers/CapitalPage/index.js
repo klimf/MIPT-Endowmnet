@@ -10,9 +10,10 @@ import Helmet from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import styled from 'styled-components';
 import { bindAll } from 'redux-act';
+import scrollToComponent from 'react-scroll-to-component';
+
 import makeSelectCapitalPage, { makeSelectCurrentCapital } from './selectors';
 import * as actions from './actions';
-
 import img from '../../images/CapitalImage.jpg';
 import face from '../../images/Face.jpg';
 import face1 from '../../images/Face1.jpg';
@@ -20,7 +21,7 @@ import face2 from '../../images/Face2.jpg';
 import face3 from '../../images/Face3.jpg';
 import Content from '../../components/Content/index';
 import Space from '../../components/Space/index';
-import { hideOn, media } from '../../utils/helpers';
+import { hideOn, media, formatMoney } from '../../utils/helpers';
 import Quotes from '../../components/Quotes/index';
 import { DonationForm } from '../../components/DonationForm/index';
 import WdH from '../../components/WdH/index';
@@ -97,6 +98,10 @@ export class CapitalPage extends React.PureComponent { // eslint-disable-line re
     this.props.fetchCapital.start({ capitalName: this.props.routeParams.capitalName });
   }
 
+  goToDonation() {
+    scrollToComponent(this.donationForm);
+  }
+
   render() {
     return (
       <div>
@@ -114,15 +119,15 @@ export class CapitalPage extends React.PureComponent { // eslint-disable-line re
           <Name noLarge>{this.props.capital.data.name}</Name>
           <Image noMedium noLarge rounded shadow src={this.props.capital.data.image && this.props.capital.data.image.small} />
           <Head horisontal="space-between" noWrap >
-            <WdH noSmall rounded shadow src={this.props.data.image} />
+            <WdH noSmall rounded shadow src={this.props.capital.data.image && this.props.capital.data.image.small} />
             <Info >
-              <Name noSmall noMedium>{this.props.data.name}</Name>
-              <ShortDesc>{this.props.data.shortdesc}</ShortDesc>
+              <Name noSmall noMedium>{this.props.capital.data.name}</Name>
+              <ShortDesc>{this.props.capital.data.description}</ShortDesc>
               <InfoAction>
                 <InfoText>
                   <h2>
                     <b>Собрано:</b>
-                    <i> 100 ₽</i>
+                    <i>{formatMoney(this.props.capital.data.given)}₽</i>
                   </h2>
                 </InfoText>
                 <BtnFix>
@@ -135,9 +140,11 @@ export class CapitalPage extends React.PureComponent { // eslint-disable-line re
           <Title>О фонде</Title>
           <ImgDesc image={this.props.data.image} description={this.props.data.description} />
           <Space size={3} />
-          <Quotes title="Получатели" items={this.props.data.receivers} />
+          <Quotes title="Основатели" items={this.props.capital.data.founders} />
+          <Space size={3} />
+          <Quotes title="Получатели" items={this.props.capital.data.receivers} />
           <Space size={2} />
-          <DonationForm title="Помочь капиталу" />
+          <DonationForm ref={(e) => (this.donationForm = e)} title="Пополнить капитал" />
         </Content>
       }
       </div>
