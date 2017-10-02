@@ -25,25 +25,11 @@ import * as actions from './actions';
 
 const capitals = {
   lg: [
-    { id: 'a', x: 0, y: 0, w: 4, h: 2, minW: 2 },
-    { id: 'b', x: 5, y: 0, w: 2, h: 1, minW: 2 },
-    { id: 'c', x: 5, y: 1, w: 2, h: 1, minW: 2 },
-    { id: 'f', x: 5, y: 0, w: 3, h: 2, minW: 2 },
-    { id: 'g', x: 5, y: 1, w: 3, h: 2, minW: 2 },
-  ],
-  md: [
-    { id: 'a', x: 0, y: 0, w: 4, h: 2, minW: 2 },
-    { id: 'b', x: 5, y: 0, w: 2, h: 1, minW: 2 },
-    { id: 'c', x: 5, y: 1, w: 2, h: 1, minW: 2 },
-    { id: 'f', x: 5, y: 0, w: 2, h: 1, minW: 2 },
-    { id: 'g', x: 5, y: 1, w: 2, h: 1, minW: 2 },
-  ],
-  sm: [
     { id: 'a', x: 0, y: 0, w: 4, h: 2 },
     { id: 'b', x: 5, y: 0, w: 2, h: 1 },
     { id: 'c', x: 5, y: 1, w: 2, h: 1 },
-    { id: 'f', x: 5, y: 0, w: 2, h: 1 },
-    { id: 'g', x: 5, y: 1, w: 2, h: 1 },
+    { id: 'f', x: 5, y: 0, w: 3, h: 2 },
+    { id: 'g', x: 5, y: 1, w: 3, h: 2 },
   ],
 };
 
@@ -109,8 +95,8 @@ export class CapitalsPage extends React.PureComponent { // eslint-disable-line r
           <GridLayout
             layouts={capitals}
             style={this.state.editable && editableGridStyle}
-            breakpoints={{ lg: 1024, md: 996, sm: 768, xs: 480, xxs: 0 }}
-            cols={{ lg: 6, md: 6, sm: 6, xs: 1, xxs: 3 }}
+            breakpoints={{ lg: 1200, md: 900, sm: 768 }}
+            cols={{ lg: 6, md: 6, sm: 1, xs: 1, xxs: 1 }}
             rowHeight={200}
             isDraggable={this.state.editable}
             isResizable={false}

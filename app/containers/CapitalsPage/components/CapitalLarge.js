@@ -27,7 +27,6 @@ const Wrapper = styled.div`
   `}
   ${media.small`
     width: 100%;
-    height: 300px;
   `}
   position: relative;
 `;
@@ -45,6 +44,7 @@ const Info = styled.div`
     width: 100%;
     height: auto;
     padding:0;
+    margin-left: 0;
   `}
 `;
 
@@ -70,6 +70,10 @@ const Name = styled.h2`
   margin: 0;
   font-size: 24px;
   font-weight: bold;
+  height: 60px;
+  ${media.small`
+  height: auto;
+`}
 `;
 
 const Stats = styled(FlexBox)`
@@ -131,7 +135,7 @@ function CapitalLarge(props) {
           </Info>
         </FlexBox>
         <Stats horisontal="space-between">
-          <Description noSmall>
+          <Description >
             {props.description}
           </Description>
         </Stats>

@@ -6,11 +6,10 @@
 
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router';
-import logo from '../../../images/MiptLogo.jpg';
 import FlexBox from 'components/FlexBox';
 
 import Button from 'components/Button';
+import logo from '../../../images/MiptLogo.jpg';
 
 import { palette } from '../../../utils/constants';
 import { formatMoney, hideOn, media } from '../../../utils/helpers';
@@ -32,14 +31,9 @@ const Wrapper = styled.div`
   `}
   ${media.small`
     width: 100%;
-    height: 300px;
   `}
 `;
 
-const StyledLink = styled(Link) `
-  text-decoration: none;
-  color: ${palette.black};
-`;
 
 const Info = styled.div`
   display: block;
@@ -55,6 +49,7 @@ const Info = styled.div`
     width: 100%;
     height: auto;
     padding:0;
+    margin-left: 0;
   `}
 `;
 
@@ -79,7 +74,11 @@ const More = styled.p`
 const Name = styled.h2`
   margin: 0;
   font-size: 20px;
+  height: 60px;
   font-weight: bold;
+  ${media.small`
+  height: auto;
+`}
 `;
 
 const Stats = styled(FlexBox) `
@@ -109,15 +108,6 @@ const ImgWrapper = styled.div`
   ${hideOn}
 `;
 
-// const Image = styled.div`
-//   position:relative;
-//   width: 100%;
-//   padding: 50% 0;
-//   overflow: hidden;
-//   background-color: ${palette.primary};
-//   background-size: cover;
-//   background-position: center;
-// `;
 
 const Money = styled.div`
   width: 100%;
@@ -131,19 +121,6 @@ const CollectedLabel = styled.span`
   font-weigh: 300 !important;
 `;
 
-const Bar = styled.div`
-  position:relative;
-  width: ${(props) => props.progress ? props.progress : '100'}%;
-  background-color: ${(props) => props.progress ? palette.primary : palette.disabled};
-  margin: 0;
-  padding: 0;
-  height: 24px;
-  border-radius: 12px;
-`;
-
-const HideableH2 = styled.h2`${hideOn}`;
-
-const InLine = styled.div`display: inline-block; white-space: nowrap;`;
 
 function MainCapital(props) {
   return (
@@ -164,7 +141,7 @@ function MainCapital(props) {
           </Info>
         </FlexBox>
         <Stats horisontal="space-between">
-          <Description noSmall>
+          <Description >
             { props.description }
           </Description>
         </Stats>
@@ -175,11 +152,11 @@ function MainCapital(props) {
 }
 
 MainCapital.propTypes = {
-  to: PropTypes.string,
   name: PropTypes.string,
   image: PropTypes.string,
-  purpose: PropTypes.number,
   collected: PropTypes.number,
+  preview: PropTypes.any,
+  description: PropTypes.any,
 };
 
 MainCapital.defaultProps = {
