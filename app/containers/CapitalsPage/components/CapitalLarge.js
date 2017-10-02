@@ -139,7 +139,7 @@ function CapitalLarge(props) {
             {props.description}
           </Description>
         </Stats>
-        <Button to={'/donation'} expanded type="border" margin="0 0 -28px 0">Пожертвовать</Button>
+        <Button to={'/donate'} expanded type="border" margin="0 0 -28px 0">Пожертвовать</Button>
       </Block>
     </Wrapper>
   );

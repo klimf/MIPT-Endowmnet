@@ -94,7 +94,7 @@ export class CapitalsPage extends React.PureComponent { // eslint-disable-line r
           <Button onClick={this.toggleEditable}>{!this.state.editable ? 'Редактировать' : 'Сохранить'}</Button>
           <GridLayout
             layouts={capitals}
-            style={this.state.editable && editableGridStyle}
+            style={this.state.editable ? editableGridStyle : {}}
             breakpoints={{ lg: 1200, md: 900, sm: 768 }}
             cols={{ lg: 6, md: 6, sm: 1, xs: 1, xxs: 1 }}
             rowHeight={200}

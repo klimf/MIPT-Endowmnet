@@ -86,7 +86,7 @@ class SetCapitalComponent extends React.Component {
       <Popup
         onCancel={this.props.onCancel}
         title={'Выберите типа блока'}
-        show={this.props.capitalData}
+        show={this.props.capitalData || false}
       >
         { this.props.capitalData &&
             capitalComponents(this.props.capitalData).map((properties, index) =>
@@ -108,7 +108,7 @@ class SetCapitalComponent extends React.Component {
 SetCapitalComponent.propTypes = {
   onComponentSelect: React.PropTypes.any.isRequired,
   onCancel: React.PropTypes.any.isRequired,
-  capitalData: React.PropTypes.object.isRequired,
+  capitalData: React.PropTypes.any,
   selectedComponent: React.PropTypes.any,
 };
 
