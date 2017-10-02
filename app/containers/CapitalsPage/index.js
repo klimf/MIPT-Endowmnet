@@ -113,7 +113,6 @@ export class CapitalsPage extends React.PureComponent { // eslint-disable-line r
         </ToolBarWrap>
         <Title><FormattedMessage {...messages.header} /></Title>
         <Content>
-
           <GridLayout
             layouts={capitals}
             style={this.state.editable ? editableGridStyle : {}}

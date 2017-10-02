@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { SimpleInput } from '../Input';
 import { palette, unit } from '../../utils/constants';
 
+
 const autocompleteMenu = {
   borderRadius: '3px',
   boxShadow: '0 2px 12px rgba(0, 0, 0, 0.1)',
@@ -58,3 +59,5 @@ AutoCompleteInput.propTypes = {
   label: React.PropTypes.string.isRequired,
   placeholder: React.PropTypes.any,
 };
+
+export default AutoCompleteInput;
