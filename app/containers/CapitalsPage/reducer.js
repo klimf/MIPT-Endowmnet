@@ -20,6 +20,7 @@ import {
   cancelDeleteCapitalBlock,
   startAddNewCapitalBlock,
   cancelAddNewCapitalBlock,
+  capitalsGridChange,
 } from './actions';
 import * as constants from './constants';
 
@@ -82,6 +83,7 @@ export const capitalsGridReducer = createReducer({
 
   [startAddNewCapitalBlock]: (state) => state.set('popup', constants.NEW_CAPITAL_POPUP),
   [cancelAddNewCapitalBlock]: (state) => state.set('popup', null),
+  [capitalsGridChange]: (state, payload) => state.set('grid', fromJS(payload)),
 
 }, fromJS({
   configureCapital: null,

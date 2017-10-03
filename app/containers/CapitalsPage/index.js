@@ -4,7 +4,7 @@
  *
  */
 
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { bindAll } from 'redux-act';
@@ -22,26 +22,49 @@ import messages from './messages';
 import Capital from './components/Capital';
 import Button from '../../components/Button';
 import ComponentSetPopup from './components/SetCapitalComponent';
-import * as actions from './actions';
+import {
+  fetchCapitalsGrid,
+  fetchCapitals,
+  fetchCapitalsGridUpdate,
+} from './actions';
 import FlexBox from '../../components/FlexBox';
 import NewCapitalPopup from './components/NewCapitalPopup';
 
 const capitals = {
   lg: [
-    { id: 'a', x: 0, y: 0, w: 4, h: 2 },
-    { id: 'b', x: 5, y: 0, w: 2, h: 1 },
-    { id: 'c', x: 5, y: 1, w: 2, h: 1 },
-    { id: 'f', x: 5, y: 0, w: 3, h: 2 },
-    { id: 'g', x: 5, y: 1, w: 3, h: 2 },
+    { id: '555555', x: 0, y: 0, w: 4, h: 2 },
+    { id: '123213123', x: 5, y: 0, w: 2, h: 1 },
+    { id: '14214123', x: 5, y: 1, w: 2, h: 1 },
+    { id: '333333', x: 5, y: 0, w: 3, h: 2 },
+    { id: 'a23231', x: 5, y: 1, w: 3, h: 2 },
   ],
 };
 
 const capitalsData = [
-  { id: 'a' },
-  { id: 'b' },
-  { id: 'c' },
-  { id: 'f' },
-  { id: 'g' },
+  { id: '555555',
+    name: 'Развитие adsadasd проблем физики и энергетики',
+    description: 'Ежегодно МФТИ выпускает более 2.5 тысяч студентов во взрослую жизнь. Одно из главных событий университетского учебного года - церемония вручения почетных наград МФТИ и красных дипломов. ',
+    collected: 1435000,
+    to: '/capital/kek' },
+  { id: '123213123',
+    name: 'asdadasdфакультета проблем физики и энергетики',
+    description: 'Ежегодно МФТИ выпускает более 2.5 тысяч студентов во взрослую жизнь. Одно из главных событий университетского учебного года - церемония вручения почетных наград МФТИ и красных дипломов. ',
+    collected: 1435000,
+    to: '/capital/kek' },
+  { id: '14214123',
+    name: 'Рalsdadasd физики и энергетики',
+    description: 'Еa;lsdsal;dl;ч студентов во взрослую жизнь. Одно из главных событий университетского учебного года - церемония вручения почетных наград МФТИ и красных дипломов. ',
+    collected: 21322,
+    to: '/capital/kek' },
+  { id: '333333',
+    name: 'Развитие факультета проблем физики и энергетики',
+    description: 'Ежегодно МФТИ выпускает более 2.5 тысяч студентов во взрослую жизнь. Одно из главных событий университетского учебного года - церемония вручения почетных наград МФТИ и красных дипломов. ',
+    collected: 33333 },
+  { id: 'a23231',
+    name: 'Развитие факультета проблем физики и энергетики',
+    description: 'Ежегодно МФТИ выпускает более 2.5 тысяч студентов во взрослую жизнь. Одно из главных событий университетского учебного года - церемония вручения почетных наград МФТИ и красных дипломов. ',
+    collected: 1435000,
+    to: '/capital/kek' },
 ];
 
 
@@ -65,27 +88,16 @@ export class CapitalsPage extends React.PureComponent { // eslint-disable-line r
     super(props);
     this.state = {
       editable: false,
-      value: 'kek',
     };
     this.toggleEditable = this.toggleEditable.bind(this);
     this.capitals = mapCapitals(capitalsData, capitals.lg);
-    this.onComponentSelect = this.onComponentSelect.bind(this);
-    this.onCapitalChange = this.onCapitalChange.bind(this);
-    this.onCapitalSelect = this.onCapitalSelect.bind(this);
   }
 
-  onCapitalChange(e) {
-    this.setState({ value: e.target.value });
+  componentWillMount = () => {
+    this.props.fetchCapitalsGrid.success(capitals);
+    this.props.fetchCapitals.success(capitalsData);
   }
 
-  onComponentSelect(componentParams) {
-    this.props.setCapitalComponent(componentParams);
-    this.props.saveCapitalConfiguration();
-  }
-
-  onCapitalSelect(val) {
-    this.setState({ value: val });
-  }
 
   toggleEditable() {
     this.setState({ editable: !this.state.editable });
@@ -115,7 +127,7 @@ export class CapitalsPage extends React.PureComponent { // eslint-disable-line r
         <Title><FormattedMessage {...messages.header} /></Title>
         <Content>
           <GridLayout
-            layouts={capitals}
+            layouts={{ lg: this.props.capitalsGrid }}
             style={this.state.editable ? editableGridStyle : {}}
             breakpoints={{ lg: 1200, md: 900, sm: 768 }}
             cols={{ lg: 6, md: 6, sm: 1, xs: 1, xxs: 1 }}
@@ -145,11 +157,11 @@ export class CapitalsPage extends React.PureComponent { // eslint-disable-line r
 }
 
 CapitalsPage.propTypes = {
-  setCapitalComponent: React.PropTypes.any,
-  saveCapitalConfiguration: React.PropTypes.any,
+  capitalsGrid: PropTypes.array,
   startSelectCapitalComponent: React.PropTypes.any,
   deleteCapitalBlock: React.PropTypes.any,
-
+  fetchCapitals: PropTypes.object,
+  fetchCapitalsGrid: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -158,7 +170,11 @@ const mapStateToProps = createStructuredSelector({
 });
 
 function mapDispatchToProps(dispatch) {
-  return bindAll(actions, dispatch);
+  return bindAll({
+    fetchCapitalsGrid,
+    fetchCapitals,
+    fetchCapitalsGridUpdate,
+  }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CapitalsPage);

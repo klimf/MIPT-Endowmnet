@@ -6,8 +6,7 @@ import { connect } from 'react-redux';
 import { palette, unit, rounded } from '../../../utils/constants';
 import Capital, { capitalMap } from './Capital';
 import Popup from '../../../components/Popup';
-import {
-  makeSelectCapitalsGrid,
+import makeSelectDomain, {
   makeSelectCurrentPopup,
 } from '../selectors';
 import {
@@ -66,15 +65,16 @@ class SetCapitalComponent extends React.PureComponent {
         title={'Выберите типа блока'}
         show={this.props.show}
       >
-        { this.props.capitalsGrid.configureCapital &&
-            capitalComponents(this.props.capitalsGrid.configureCapital).map((properties, index) =>
-              <ComponentWrap
-                key={index}
-                onClick={() => this.onComponentClick(properties)}
-                selected={this.props.capitalsGrid.selectedComponent.w === properties['data-grid'].w}
-              >
-                <Capital type={'preview'} editable {...properties}></Capital>
-              </ComponentWrap>
+        { this.props.CapitalsPage.capitalsGrid.configureCapital &&
+            capitalComponents(this.props.CapitalsPage.capitalsGrid.configureCapital).map((properties, index) =>
+            (<ComponentWrap
+              key={index}
+              onClick={() => this.onComponentClick(properties)}
+              selected={this.props.CapitalsPage.capitalsGrid.selectedGridComponent.w === properties['data-grid'].w}
+            >
+              <Capital type={'preview'} editable {...properties}></Capital>
+            </ComponentWrap>)
+
             )
         }
       </Popup>
@@ -89,11 +89,12 @@ SetCapitalComponent.propTypes = {
   cancelCapitalComponentSelection: PropTypes.func,
   show: PropTypes.bool,
   capitalsGrid: PropTypes.object,
+  CapitalsPage: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
   show: makeSelectCurrentPopup(constants.SELECT_BLOCK_POPUP),
-  capitalsGrid: makeSelectCapitalsGrid(),
+  CapitalsPage: makeSelectDomain(),
 });
 
 const mapDispatchToProps = (dispatch) => bindAll(
