@@ -114,9 +114,11 @@ function request(url, { method = 'GET', body = null, params = {} }) {
     body: bodyToSend || undefined,
   })
     .then((res) => {
-      if (responseValidation[res] === responseConstants.SUCCESS) {
-        res.ok = true; // eslint-disable-line
-        return res.json().catch((e) => (e.ok = true)); // eslint-disable-line
+      if (responseMapStatuses[res.status] === responseConstants.SUCCESS) {
+        return res.json().catch((e) => {
+          e.ok = true; // eslint-disable-line
+          return Promise.reject(e);
+        });
       }
       const errPromise = res.json ? res.json() : res.text();
       const error = new Error(res.statusText);
