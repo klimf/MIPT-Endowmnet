@@ -7,40 +7,24 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router';
-import { block, palette, shadow, unit } from '../../utils/constants';
+import { Block, palette } from '../../utils/constants';
 import { media } from '../../utils/helpers';
 import FlexBox from '../FlexBox';
+import ImgContent from '../ImgContent/index';
 
-const Wrapper = styled(FlexBox)`
-  display: flex;
-  flex-direction: ${(props) => props.isLeft ? 'row' : 'row-reverse'};
-  align-items: center;
-  position: relative;
-  width: 100%;
-  margin: ${3 * unit}px 0;
-  padding: 0;
-`;
 
 const StyledLink = styled(Link)`
   text-decoration: none;
   font-weight: 300;
 `;
 
-const TextBlock = styled.div`
-  position:relative;
-  margin: 0;
-  padding: 24px;
-  width: calc(100% - 280px);
-  min-height: 180px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  ${block}
-  ${media.small`
-    margin: 36px 0;
-    width: 100%;
-  `}
-`;
+// const Block = styled.div`
+//   position:absolute;
+//   margin: 0;
+//   height: 100%;
+//   padding: 24px;
+//   ${block}
+// `;
 
 const Quote = styled.h2`
   position: relative;
@@ -68,27 +52,6 @@ const Info = styled.p`
   }
 `;
 
-const ImgWrapper = styled.div`
-  width: 200px;
-  ${media.small`
-    width: 40%;
-    margin: 0 30%;
-  `}
-`;
-
-const Image = styled.div`
-  position:relative;
-  width: 100%;
-  padding: 50% 0;
-  border: 3px solid ${palette.gray};
-  border-radius: 50%;
-  overflow: hidden;
-  background-color: ${palette.primary};
-  background-size: cover;
-  background-position: center;
-  ${shadow}
-`;
-
 const Decoration = styled.div`
   position: absolute;
   ${(props) => props.isLeft ? 'left: 0' : 'right: 0'};
@@ -110,19 +73,15 @@ const Decoration = styled.div`
 function Item(props) {
   return (
     <StyledLink to={props.link}>
-      <Wrapper isLeft={props.index % 2 === 0} horisontal="space-between">
-        <ImgWrapper>
-          <Image style={{ backgroundImage: `url(${props.image})` }} />
-        </ImgWrapper>
-        <TextBlock>
-          <Quote>{props.quote}</Quote>
-          <FlexBox horisontal="space-between" vertical="center">
-            <More>Подробнее</More>
-            <Info>{props.status} - <b>{props.name}</b></Info>
-          </FlexBox>
-          <Decoration isLeft={props.index % 2 === 0} />
-        </TextBlock>
-      </Wrapper>
+      <ImgContent padding="24px" reverse={props.index % 2 !== 0} circle shadow image={props.image}>
+        <Block margin="0" />
+        <Quote>{props.quote}</Quote>
+        <FlexBox horisontal="space-between" vertical="center">
+          <More>Подробнее</More>
+          <Info>{props.status} - <b>{props.name}</b></Info>
+        </FlexBox>
+        <Decoration isLeft={props.index % 2 === 0} />
+      </ImgContent>
     </StyledLink>
   );
 }

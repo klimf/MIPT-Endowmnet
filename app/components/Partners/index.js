@@ -7,8 +7,6 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import Title from '../Title';
-import Button from '../Button';
-import Space from '../Space';
 import { unit } from '../../utils/constants';
 
 const List = styled.div`
@@ -37,8 +35,6 @@ function Partners(props) {
           <img key={index} src={href} alt="Partner" />
         ))}
       </List>
-      <Space size={2} />
-      <Button centred type="border" to="/partners">Все спонсоры</Button>
     </div>
   );
 }

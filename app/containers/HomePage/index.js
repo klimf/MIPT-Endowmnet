@@ -15,11 +15,12 @@ import Helmet from 'react-helmet';
 import Content from 'components/Content';
 import Masthead from 'components/Masthead';
 import Space from 'components/Space';
-import Image from 'components/Image';
+import Image from 'components/FullImage';
 import Title from 'components/Title';
 import News from 'components/News';
 import Quotes from 'components/Quotes';
 import Partners from 'components/Partners';
+import Button from 'components/Button';
 
 import howML from '../../images/how.png';
 import howS from '../../images/how_mobile.png';
@@ -55,10 +56,16 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
           <Image src={howS} noMedium noLarge />
           <Space size={5} />
           <News title="Последние новости и мероприятия" />
+          <Space size={1} />
+          <Button centred type="border" to="/news">Все новости</Button>
           <Space size={5} />
           <Quotes title="Почетные спонсоры" />
+          <Space size={1} />
+          <Button centred type="border" to="/stories">Все истории</Button>
           <Space size={2} />
           <Partners items={partners} title="Партнеры" />
+          <Space size={2} />
+          <Button centred type="border" to="/sponsors">Все спонсоры</Button>
           <Space size={5} />
         </Content>
       </div>

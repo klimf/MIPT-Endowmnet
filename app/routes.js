@@ -215,6 +215,46 @@ export default function createRoutes(store) {
         importModules.catch(errorLoading);
       },
     }, {
+      path: '/sponsors',
+      name: 'sponsorsPage',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          import('containers/SponsorsPage/reducer'),
+          import('containers/SponsorsPage/sagas'),
+          import('containers/SponsorsPage'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('sponsorsPage', reducer.default);
+          injectSagas(sagas.default);
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    }, {
+      path: '/companies',
+      name: 'companiesPage',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          import('containers/CompaniesPage/reducer'),
+          import('containers/CompaniesPage/sagas'),
+          import('containers/CompaniesPage'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('companiesPage', reducer.default);
+          injectSagas(sagas.default);
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    }, {
       path: '*',
       name: 'notfound',
       getComponent(nextState, cb) {

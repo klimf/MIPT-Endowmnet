@@ -19,7 +19,7 @@ import Content from '../../components/Content/index';
 
 import howML from '../../images/how.png';
 import howS from '../../images/how_mobile.png';
-import Image from '../../components/Image/index';
+import Image from '../../components/FullImage/index';
 
 const Navigation = styled.div`
   ${block}

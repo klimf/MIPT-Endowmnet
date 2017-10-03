@@ -43,7 +43,7 @@ export const block = css`
 `;
 
 export const image = css`
-  background: ${palette.primary} url(${(props) => props.src ? props.src : placeholder}) center no-repeat;
+  background: url(${(props) => props.src ? props.src : placeholder}) center no-repeat;
   background-size: cover;
 `;
 
@@ -52,10 +52,10 @@ export const Block = styled.div`
   flex-wrap: wrap;
   align-items: stretch;
   position: absolute;
-  top: 10px;
-  right: 10px;
-  bottom: 10px;
-  left: 10px;
+  top: ${(props) => props.margin ? props.margin : '10px'};
+  right: ${(props) => props.margin ? props.margin : '10px'};
+  bottom: ${(props) => props.margin ? props.margin : '10px'};
+  left: ${(props) => props.margin ? props.margin : '10px'};
   padding: ${(props) => props.padding ? props.padding : '24px'};
   ${block}
   ${media.small`

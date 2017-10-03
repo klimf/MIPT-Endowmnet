@@ -26,7 +26,7 @@ import FlexBox from '../../components/FlexBox';
 import InfoText from '../../components/InfoText/index';
 import Button from '../../components/Button/index';
 import Title from '../../components/Title/index';
-import Image from '../../components/Image/index';
+import Image from '../../components/FullImage/index';
 import ImgDesc from '../../components/ImgDesc/index';
 
 
@@ -105,7 +105,7 @@ export class CapitalPage extends React.PureComponent { // eslint-disable-line re
           <Name noLarge>{this.props.data.name}</Name>
           <Image noMedium noLarge rounded shadow src={this.props.data.image} />
           <Head horisontal="space-between" noWrap >
-            <WdH noSmall rounded shadow src={this.props.data.image} />
+            <WdH noSmall rounded shadow image={this.props.data.image} />
             <Info >
               <Name noSmall noMedium>{this.props.data.name}</Name>
               <ShortDesc>{this.props.data.shortdesc}</ShortDesc>

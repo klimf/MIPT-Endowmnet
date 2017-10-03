@@ -17,14 +17,14 @@ const Img = styled.img`
   ${(props) => props.shadow && shadow}
 `;
 
-function Image(props) {
+function FullImage(props) {
   return (
     <Img {...props} />
   );
 }
 
-Image.propTypes = {
+FullImage.propTypes = {
 
 };
 
-export default Image;
+export default FullImage;
