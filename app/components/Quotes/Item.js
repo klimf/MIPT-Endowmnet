@@ -7,7 +7,7 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router';
-import { Block, palette } from '../../utils/constants';
+import { palette } from '../../utils/constants';
 import { media } from '../../utils/helpers';
 import FlexBox from '../FlexBox';
 import ImgContent from '../ImgContent/index';
@@ -17,14 +17,6 @@ const StyledLink = styled(Link)`
   text-decoration: none;
   font-weight: 300;
 `;
-
-// const Block = styled.div`
-//   position:absolute;
-//   margin: 0;
-//   height: 100%;
-//   padding: 24px;
-//   ${block}
-// `;
 
 const Quote = styled.h2`
   position: relative;
@@ -73,8 +65,7 @@ const Decoration = styled.div`
 function Item(props) {
   return (
     <StyledLink to={props.link}>
-      <ImgContent padding="24px" reverse={props.index % 2 !== 0} circle shadow image={props.image}>
-        <Block margin="0" />
+      <ImgContent block padding="24px" reverse={props.index % 2 !== 0} circle shadow image={props.image}>
         <Quote>{props.quote}</Quote>
         <FlexBox horisontal="space-between" vertical="center">
           <More>Подробнее</More>

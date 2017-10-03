@@ -6,7 +6,7 @@
 
 import React, { PropTypes, Children } from 'react';
 import styled from 'styled-components';
-import { image, shadow, unit } from '../../utils/constants';
+import { block, image, shadow, unit } from '../../utils/constants';
 import { media } from '../../utils/helpers';
 import FlexBox from '../FlexBox';
 
@@ -20,7 +20,7 @@ const Wrapper = styled(FlexBox)`
   padding: 0;
 `;
 
-const contentSubstract = (props) => {
+const contentSubtract = (props) => {
   if (props.imgWidth && props.innerPadding) {
     return props.imgWidth + props.innerPadding;
   }
@@ -31,11 +31,12 @@ const ContentBlock = styled.div`
   position:relative;
   padding: ${(props) => props.padding ? props.padding : '0'};
   margin: 0;
-  width: calc(100% - ${(props) => contentSubstract(props)}px);
+  width: calc(100% - ${(props) => contentSubtract(props)}px);
   min-height: ${(props) => props.imgWidth && props.imgWidth}px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  ${(props) => props.block && block}
   ${media.small`
     margin: 36px 0;
     width: 100%;
@@ -76,7 +77,7 @@ function ImgContent(props) {
       <ImgWrapper imgWidth={props.imgWidth}>
         <Image circle={props.circle} rounded={props.rounded} shadow={props.shadow} style={{ backgroundImage: `url(${props.image})` }} />
       </ImgWrapper>
-      <ContentBlock padding={props.padding} imgWidth={props.imgWidth} innerPadding={props.innerPadding}>
+      <ContentBlock block={props.block} padding={props.padding} imgWidth={props.imgWidth} innerPadding={props.innerPadding}>
         { Children.toArray(props.children) }
       </ContentBlock>
     </Wrapper>
@@ -98,6 +99,7 @@ ImgContent.propTypes = {
   shadow: PropTypes.bool,
   circle: PropTypes.bool,
   rounded: PropTypes.bool,
+  block: PropTypes.bool,
 };
 
 export default ImgContent;
