@@ -24,6 +24,7 @@ import Button from '../../components/Button';
 import ComponentSetPopup from './components/SetCapitalComponent';
 import * as actions from './actions';
 import FlexBox from '../../components/FlexBox';
+import NewCapitalPopup from './components/NewCapitalPopup';
 
 const capitals = {
   lg: [
@@ -136,21 +137,14 @@ export class CapitalsPage extends React.PureComponent { // eslint-disable-line r
         </Content>
         <Space size={4} />
 
-        <ComponentSetPopup
-          onCancel={this.props.cancelCapitalComponentSelection}
-          capitalData={this.props.CapitalsPage.capitalsGrid.configureCapital}
-          onComponentSelect={this.onComponentSelect}
-          selectedComponent={this.props.CapitalsPage.capitalsGrid.selectedGridComponent}
-        ></ComponentSetPopup>
-
+        <ComponentSetPopup></ComponentSetPopup>
+        <NewCapitalPopup></NewCapitalPopup>
       </div>
     );
   }
 }
 
 CapitalsPage.propTypes = {
-  cancelCapitalComponentSelection: React.PropTypes.any,
-  CapitalsPage: React.PropTypes.any,
   setCapitalComponent: React.PropTypes.any,
   saveCapitalConfiguration: React.PropTypes.any,
   startSelectCapitalComponent: React.PropTypes.any,

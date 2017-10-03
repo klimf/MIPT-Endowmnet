@@ -6,7 +6,6 @@
 
 import { fromJS } from 'immutable';
 import { combineReducers } from 'redux-immutable';
-import { reducer as formReducer } from 'redux-form';
 import { createReducer } from 'redux-act';
 import { fetchReducerFactory } from '../../utils/api';
 import {
@@ -15,19 +14,25 @@ import {
   cancelCapitalComponentSelection,
   setCapitalComponent,
   saveCapitalConfiguration,
-  capitalsGridChange,
-  toggleGridEditable,
   fetchCapitalsGrid,
   deleteCapitalBlock,
+  startDeleteCapitalBlock,
+  cancelDeleteCapitalBlock,
+  startAddNewCapitalBlock,
+  cancelAddNewCapitalBlock,
 } from './actions';
+import * as constants from './constants';
 
 export const capitalsGridReducer = createReducer({
+
   [startSelectCapitalComponent]: (state, payload) => state
   .set('configureCapital', fromJS(payload.data))
-  .set('selectedGridComponent', fromJS(payload['data-grid'])),
+  .set('selectedGridComponent', fromJS(payload['data-grid']))
+  .set('popup', constants.SELECT_BLOCK_POPUP),
 
   [cancelCapitalComponentSelection]: (state) => state
-  .set('configureCapital', null),
+  .set('configureCapital', null)
+  .set('popup', null),
 
   [setCapitalComponent]: (state, payload) => state
   .set('selectedGridComponent', fromJS(payload)),
@@ -46,8 +51,16 @@ export const capitalsGridReducer = createReducer({
     ? currentGrid.push(newDataGridItem.setIn(['data-grid', 'x'], 0).setIn(['data-grid', 'y'], 0))
     : currentGrid.update(oldItemIndex, newDataGridItem, (old) => old.merge(newDataGridItem));
 
-    return state.set('grid', newGrid).set('configureCapital', null).set('selectedGridComponent', null);
+    return state
+    .set('grid', newGrid)
+    .set('configureCapital', null)
+    .set('selectedGridComponent', null)
+    .set('popup', null);
   },
+
+  [startDeleteCapitalBlock]: (state) => state.set('popup', constants.DELETE_BLOCK_POPUP),
+
+  [cancelDeleteCapitalBlock]: (state) => state.set('popup', constants.DELETE_BLOCK_POPUP),
 
   [deleteCapitalBlock]: (state, payload) => {
     const currentGrid = state.get('grid');
@@ -67,22 +80,20 @@ export const capitalsGridReducer = createReducer({
     return state.set('grid', newGrid);
   },
 
-  [capitalsGridChange]: (state, payload) => state.set('grid', fromJS(payload)),
-
-  [toggleGridEditable]: (state) => state.update('editable', (option) => !option),
-
-  [fetchCapitalsGrid.success]: (state, payload) => state.set('grid', fromJS(payload)),
+  [startAddNewCapitalBlock]: (state) => state.set('popup', constants.NEW_CAPITAL_POPUP),
+  [cancelAddNewCapitalBlock]: (state) => state.set('popup', null),
 
 }, fromJS({
   configureCapital: null,
   selectedGridComponent: null,
   editable: false,
   grid: [],
+  popup: null,
 }));
+
 
 export default combineReducers({
   grid: fetchReducerFactory(fetchCapitalsGrid),
   capitalsGrid: capitalsGridReducer,
   capitals: fetchReducerFactory(fetchCapitals),
-  form: formReducer,
 }, fromJS({}));

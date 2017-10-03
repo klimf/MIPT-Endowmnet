@@ -26,4 +26,17 @@ export const fetchCapitalsGrid = new FetchAction('FETCH_CAPITALS_GRID');
 
 export const capitalsGridChange = createAction('CAPITALS_GRID_CHANGED');
 
+export const startDeleteCapitalBlock = createAction('START_DELETE_CAPITAL_BLOCK');
+
 export const deleteCapitalBlock = createAction('DElETE_CAPITAL_BLOCK');
+
+export const cancelDeleteCapitalBlock = createAction('CANCEL_DELETE_CAPITAL_BLOCK');
+
+export const cancelAddNewCapital = createAction('CANCEL_ADD_NEW_CAPITAL');
+
+export const showPopup = createAction('SHOW_POPUP');
+
+export const cancelAddNewCapitalBlock = createAction('CANCEL_ADD_NEW_CAPITAL_BLOCK');
+
+export const startAddNewCapitalBlock = createAction('START_ADD_NEW_CAPITAL_BLOCK');
+

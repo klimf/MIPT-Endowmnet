@@ -1,8 +1,21 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import styled from 'styled-components';
+import { createStructuredSelector } from 'reselect';
+import { bindAll } from 'redux-act';
+import { connect } from 'react-redux';
 import { palette, unit, rounded } from '../../../utils/constants';
 import Capital, { capitalMap } from './Capital';
 import Popup from '../../../components/Popup';
+import {
+  makeSelectCapitalsGrid,
+  makeSelectCurrentPopup,
+} from '../selectors';
+import {
+  setCapitalComponent,
+  saveCapitalConfiguration,
+  cancelCapitalComponentSelection,
+} from '../actions';
+import * as constants from '../constants';
 
 const ComponentWrap = styled.div`
     background: ${palette.dark};
@@ -34,32 +47,31 @@ const capitalComponents = (capitalData) => Object.keys(capitalMap).map((componen
 });
 
 
-class SetCapitalComponent extends React.Component {
+class SetCapitalComponent extends React.PureComponent {
   constructor(props) {
     super(props);
-    this.state = {
-      selected: null,
-    };
+    this.onComponentClick = this.onComponentClick.bind(this);
   }
 
   onComponentClick(componentParam) {
     this.setState({ selected: componentParam });
-    this.props.onComponentSelect(componentParam);
+    this.props.setCapitalComponent(componentParam['data-grid']);
+    this.props.saveCapitalConfiguration();
   }
 
   render() {
     return (
       <Popup
-        onCancel={this.props.onCancel}
+        onCancel={this.props.cancelCapitalComponentSelection}
         title={'Выберите типа блока'}
-        show={this.props.capitalData || false}
+        show={this.props.show}
       >
-        { this.props.capitalData &&
-            capitalComponents(this.props.capitalData).map((properties, index) =>
+        { this.props.capitalsGrid.configureCapital &&
+            capitalComponents(this.props.capitalsGrid.configureCapital).map((properties, index) =>
               <ComponentWrap
                 key={index}
                 onClick={() => this.onComponentClick(properties)}
-                selected={this.props.selectedComponent.w === properties['data-grid'].w}
+                selected={this.props.capitalsGrid.selectedComponent.w === properties['data-grid'].w}
               >
                 <Capital type={'preview'} editable {...properties}></Capital>
               </ComponentWrap>
@@ -72,11 +84,22 @@ class SetCapitalComponent extends React.Component {
 
 
 SetCapitalComponent.propTypes = {
-  onComponentSelect: React.PropTypes.any.isRequired,
-  onCancel: React.PropTypes.any.isRequired,
-  capitalData: React.PropTypes.any,
-  selectedComponent: React.PropTypes.any,
+  saveCapitalConfiguration: PropTypes.func,
+  setCapitalComponent: PropTypes.func,
+  cancelCapitalComponentSelection: PropTypes.func,
+  show: PropTypes.bool,
+  capitalsGrid: PropTypes.object,
 };
 
+const mapStateToProps = createStructuredSelector({
+  show: makeSelectCurrentPopup(constants.SELECT_BLOCK_POPUP),
+  capitalsGrid: makeSelectCapitalsGrid(),
+});
 
-export default SetCapitalComponent;
+const mapDispatchToProps = (dispatch) => bindAll(
+  { setCapitalComponent,
+    saveCapitalConfiguration,
+    cancelCapitalComponentSelection,
+  }, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(SetCapitalComponent);

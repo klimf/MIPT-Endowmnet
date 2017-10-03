@@ -22,7 +22,6 @@ describe('capitalsPageReducer', () => {
     };
 
     state = capitalsGridReducer(state, actions.startSelectCapitalComponent(capitalToConfigure));
-    console.log(state);
     expect(state).toEqual(fromJS({
       configureCapital: capitalToConfigure,
       selectedGridComponent: null,
