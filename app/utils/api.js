@@ -43,16 +43,16 @@ export function fetchReducerFactory(Action, onSuccess = (state) => state, initSt
   return createReducer({
     [Action.start]: (state, payload) => state
     .set('pending', true)
-    .set('req', payload || null)
+    .set('req', fromJS(payload))
     .set('status', 'pending'),
     [Action.success]: (state, payload) => state
     .set('pending', false)
-    .set('data', payload || null)
+    .set('data', fromJS(payload))
     .set('status', 'success')
     .set('error', null),
     [Action.failed]: (state, payload) => state
     .set('pending', false)
-    .set('error', payload)
+    .set('error', fromJS(payload))
     .set('status', 'failed'),
   }, initialState);
 }
@@ -114,8 +114,9 @@ function request(url, { method = 'GET', body = null, params = {} }) {
     body: bodyToSend || undefined,
   })
     .then((res) => {
-      if (res.ok) {
-        return res.json ? res.json() : res.text();
+      if (responseValidation[res] === responseConstants.SUCCESS) {
+        res.ok = true; // eslint-disable-line
+        return res.json().catch((e) => (e.ok = true)); // eslint-disable-line
       }
       const errPromise = res.json ? res.json() : res.text();
       const error = new Error(res.statusText);
@@ -127,5 +128,13 @@ function request(url, { method = 'GET', body = null, params = {} }) {
         })
         .catch(() => Promise.reject(error));
     })
-    .catch((e) => e.status ? Promise.reject(e) : Promise.resolve({}));
+    .catch((e) => {
+      if (e.ok) {
+        return Promise.resolve({});
+      }
+      if (e.status) {
+        return Promise.reject(e);
+      }
+      return Promise.reject(Object.assign(e, responseStates.NETWORK_ERROR));
+    });
 }
