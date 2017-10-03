@@ -26,19 +26,19 @@ import {
   fetchCapitalsGrid,
   fetchCapitals,
   fetchCapitalsGridUpdate,
+  deleteCapitalBlock,
+  startSelectCapitalComponent,
 } from './actions';
 import FlexBox from '../../components/FlexBox';
 import NewCapitalPopup from './components/NewCapitalPopup';
 
-const capitals = {
-  lg: [
+const capitals = [
     { id: '555555', x: 0, y: 0, w: 4, h: 2 },
     { id: '123213123', x: 5, y: 0, w: 2, h: 1 },
     { id: '14214123', x: 5, y: 1, w: 2, h: 1 },
     { id: '333333', x: 5, y: 0, w: 3, h: 2 },
     { id: 'a23231', x: 5, y: 1, w: 3, h: 2 },
-  ],
-};
+];
 
 const capitalsData = [
   { id: '555555',
@@ -68,11 +68,6 @@ const capitalsData = [
 ];
 
 
-const mapCapitals = (data, layout) => data.map((item) => ({
-  data: item,
-  'data-grid': layout.find((grid) => grid.id === item.id),
-}));
-
 const editableGridStyle = {
   border: '1px dotted #000',
 };
@@ -90,7 +85,6 @@ export class CapitalsPage extends React.PureComponent { // eslint-disable-line r
       editable: false,
     };
     this.toggleEditable = this.toggleEditable.bind(this);
-    this.capitals = mapCapitals(capitalsData, capitals.lg);
   }
 
   componentWillMount = () => {
@@ -119,15 +113,13 @@ export class CapitalsPage extends React.PureComponent { // eslint-disable-line r
             vertical={'center'}
           >
             <Button onClick={this.toggleEditable}>{!this.state.editable ? 'Редактировать' : 'Сохранить'}</Button>
-            {this.state.editable &&
-            <div></div>
-            }
+
           </FlexBox>
         </ToolBarWrap>
         <Title><FormattedMessage {...messages.header} /></Title>
         <Content>
           <GridLayout
-            layouts={{ lg: this.props.capitalsGrid }}
+            layouts={{ lg: this.props.capitalsGrid.map((x) => x['data-grid']) }}
             style={this.state.editable ? editableGridStyle : {}}
             breakpoints={{ lg: 1200, md: 900, sm: 768 }}
             cols={{ lg: 6, md: 6, sm: 1, xs: 1, xxs: 1 }}
@@ -136,7 +128,7 @@ export class CapitalsPage extends React.PureComponent { // eslint-disable-line r
             isResizable={false}
             onLayoutChange={(layout) => console.log(layout)}
           >
-            { this.capitals.map((v) => (
+            { this.props.capitalsGrid.map((v) => (
               <Capital
                 key={v.data.id}
                 type={this.state.editable ? 'editable' : 'link'}
@@ -148,7 +140,6 @@ export class CapitalsPage extends React.PureComponent { // eslint-disable-line r
           </GridLayout>
         </Content>
         <Space size={4} />
-
         <ComponentSetPopup></ComponentSetPopup>
         <NewCapitalPopup></NewCapitalPopup>
       </div>
@@ -158,8 +149,8 @@ export class CapitalsPage extends React.PureComponent { // eslint-disable-line r
 
 CapitalsPage.propTypes = {
   capitalsGrid: PropTypes.array,
-  startSelectCapitalComponent: React.PropTypes.any,
-  deleteCapitalBlock: React.PropTypes.any,
+  startSelectCapitalComponent: React.PropTypes.func,
+  deleteCapitalBlock: React.PropTypes.func,
   fetchCapitals: PropTypes.object,
   fetchCapitalsGrid: PropTypes.object,
 };
@@ -174,6 +165,8 @@ function mapDispatchToProps(dispatch) {
     fetchCapitalsGrid,
     fetchCapitals,
     fetchCapitalsGridUpdate,
+    deleteCapitalBlock,
+    startSelectCapitalComponent,
   }, dispatch);
 }
 

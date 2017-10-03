@@ -27,6 +27,13 @@ export function* getСapitalsGrid() {
   }
 }
 
+export function* mergeFetchedGrid() {
+  while (true) {
+    const action = yield take(actions.fetchCapitalsGrid.types.success);
+    yield put(actions.capitalsGridChange(action.payload));
+  }
+}
+
 export function* updateCapitalsGrid() {
   while (true) {
     try {
@@ -45,4 +52,5 @@ export default [
   getAllCapitals,
   getСapitalsGrid,
   updateCapitalsGrid,
+  mergeFetchedGrid,
 ];

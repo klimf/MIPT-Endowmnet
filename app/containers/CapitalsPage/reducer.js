@@ -40,17 +40,18 @@ export const capitalsGridReducer = createReducer({
 
   [saveCapitalConfiguration]: (state) => {
     const currentGrid = state.get('grid');
-    const newDataGridItem = state.get('selectedGridComponent');
+    const itemId = state.get('configureCapital').get('id');
+    const newGridItem = state.get('selectedGridComponent').set('id', itemId);
 
-    if (!newDataGridItem) {
+    if (!newGridItem) {
       return state.set('configureCapital', null).set('selectedGridComponent', null);
     }
 
-    const oldItemIndex = currentGrid.findIndex((item) => item.get('id') === newDataGridItem.get('id'));
+    const oldItemIndex = currentGrid.findIndex((item) => item.get('id') === newGridItem.get('id'));
 
     const newGrid = oldItemIndex < 0
-    ? currentGrid.push(newDataGridItem.setIn(['data-grid', 'x'], 0).setIn(['data-grid', 'y'], 0))
-    : currentGrid.update(oldItemIndex, newDataGridItem, (old) => old.merge(newDataGridItem));
+    ? currentGrid.push(newGridItem.set('x', 0).setIn('y', 0))
+    : currentGrid.update(oldItemIndex, newGridItem, (old) => old.merge(newGridItem));
 
     return state
     .set('grid', newGrid)
@@ -70,9 +71,9 @@ export const capitalsGridReducer = createReducer({
       return state;
     }
 
-    const toDeleteIndex = currentGrid.findIndex((item) => item.get('id') === payload.get('id'));
+    const toDeleteIndex = currentGrid.findIndex((item) => item.get('id') === payload.id);
 
-    if (toDeleteIndex < 1) {
+    if (toDeleteIndex < 0) {
       return state;
     }
 
