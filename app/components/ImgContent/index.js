@@ -107,7 +107,7 @@ ImgContent.propTypes = {
   image: PropTypes.string,
   padding: PropTypes.string,
   margin: PropTypes.string,
-  styles: PropTypes.string,
+  styles: PropTypes.array,
   innerPadding: PropTypes.number,
   vertPadding: PropTypes.number,
   imgWidth: PropTypes.number,

@@ -33,6 +33,7 @@ import reportML from '../../images/report.png';
 import reportS from '../../images/report_mobile.png';
 import Faces from '../../components/Faces/index';
 import Attachments from '../../components/Attachments/index';
+import TabsBlock from '../../components/TabsBlock/index';
 
 const Navigation = styled.div`
   ${block}
@@ -109,7 +110,7 @@ export class AboutPage extends React.PureComponent { // eslint-disable-line reac
   constructor(props) {
     super(props);
     this.state = {
-      navIndex: 1,
+      navIndex: 2,
     };
   }
   handleSelectTab(index) {
@@ -193,6 +194,8 @@ AboutPage.defaultProps = {
           <Space size={2} />
           <Image src={reportML} noSmall />
           <Image src={reportS} noMedium noLarge />
+          <Space size={3} />
+          <TabsBlock />
         </Content>,
     },
     {
