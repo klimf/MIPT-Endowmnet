@@ -32,7 +32,7 @@ const ContentBlock = styled.div`
   padding: ${(props) => props.padding ? props.padding : '0'};
   margin: 0;
   width: calc(100% - ${(props) => contentSubtract(props)}px);
-  min-height: ${(props) => props.imgWidth && props.imgWidth}px;
+  min-height: ${(props) => props.imgWidth && props.imgWidth - props.innerPadding}px;
   display: flex;
   flex-direction: column;
   justify-content: ${(props) => props.centredColumn ? 'space-around' : 'space-between'};

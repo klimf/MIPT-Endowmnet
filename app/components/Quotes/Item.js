@@ -31,6 +31,7 @@ const More = styled.h4`
   color: ${palette.primary};
   text-decoration: underline;
   font-size: 20px;
+  ${(props) => props.noMore && 'visibility: hidden; opacity: 0;'}
 `;
 
 const Info = styled.h4`
@@ -65,10 +66,10 @@ const Decoration = styled.div`
 function Item(props) {
   return (
     <StyledLink to={props.link}>
-      <ImgContent block padding="24px" reverse={props.index % 2 !== 0} circle shadow image={props.image}>
+      <ImgContent margin="48px 0" block padding="24px" reverse={props.index % 2 !== 0} circle shadow image={props.image}>
         <Quote>{props.quote}</Quote>
         <FlexBox horisontal="space-between" vertical="center">
-          <More>Подробнее</More>
+          <More noMore={props.noMore}>Подробнее</More>
           <Info>{props.status} - <b>{props.name}</b></Info>
         </FlexBox>
         <Decoration isLeft={props.index % 2 === 0} />
@@ -84,6 +85,7 @@ Item.propTypes = {
   quote: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
   index: PropTypes.number,
+  noMore: PropTypes.bool,
 };
 
 export default Item;

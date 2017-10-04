@@ -123,7 +123,7 @@ export class CapitalPage extends React.PureComponent { // eslint-disable-line re
             </Info>
           </Head>
           <Space size={2} />
-          <Title>О фонде</Title>
+          <Title>О капитале</Title>
           <ImgDesc image={this.props.data.image} description={this.props.data.description} />
           <Space size={3} />
           <Quotes title="Получатели" items={this.props.data.receivers} />

@@ -7,10 +7,12 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
-import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import makeSelectSponsorsPage from './selectors';
-import messages from './messages';
+import Content from '../../components/Content/index';
+import Space from '../../components/Space/index';
+import Quotes from '../../components/Quotes/index';
+import Partners from '../../components/Partners/index';
 
 export class SponsorsPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
@@ -22,7 +24,12 @@ export class SponsorsPage extends React.PureComponent { // eslint-disable-line r
             { name: 'description', content: 'Description of SponsorsPage' },
           ]}
         />
-        <FormattedMessage {...messages.header} />
+        <Content>
+          <Space size={4} />
+          <Quotes title="Спонсоры" />
+          <Space size={2} />
+          <Partners />
+        </Content>
       </div>
     );
   }

@@ -26,18 +26,6 @@ import howML from '../../images/how.png';
 import howS from '../../images/how_mobile.png';
 
 
-import corp1 from '../../images/corps/1.png';
-import corp2 from '../../images/corps/2.png';
-import corp3 from '../../images/corps/3.png';
-import corp4 from '../../images/corps/4.png';
-import corp5 from '../../images/corps/5.png';
-import corp6 from '../../images/corps/6.png';
-import corp7 from '../../images/corps/7.png';
-import corp8 from '../../images/corps/8.png';
-import corp9 from '../../images/corps/9.png';
-
-const partners = [corp1, corp2, corp3, corp4, corp5, corp6, corp7, corp8, corp9];
-
 const purpose = 1000000000;
 const collected = 783400000;
 
@@ -63,7 +51,7 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
           <Space size={1} />
           <Button centred type="border" to="/stories">Все истории</Button>
           <Space size={2} />
-          <Partners items={partners} title="Партнеры" />
+          <Partners />
           <Space size={2} />
           <Button centred type="border" to="/sponsors">Все спонсоры</Button>
           <Space size={5} />

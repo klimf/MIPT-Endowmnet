@@ -55,7 +55,7 @@ class Header extends React.PureComponent { // eslint-disable-line react/prefer-s
               <div className="kekek">Залогинились</div>
             </ProtectedContent>
 
-            <Button to="/" type="header" margin="9px 0"><FormattedMessage {...messages.action} /></Button>
+            <Button to="/donate" type="header" margin="9px 0"><FormattedMessage {...messages.action} /></Button>
           </FlexBox>
           <Icon noLarge noMedium type="menu" onClick={this.handleMobileMenuClick} />
         </FlexBox>
