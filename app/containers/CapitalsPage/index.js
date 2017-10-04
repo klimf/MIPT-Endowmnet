@@ -61,9 +61,6 @@ export class CapitalsPage extends React.PureComponent { // eslint-disable-line r
     this.props.fetchCapitals.start();
   }
 
-  componentWillUpdate = () => {
-    console.log(this.props);
-  }
 
   onLayoutChange(current, allLayouts) {
     if (allLayouts.lg) {
@@ -117,7 +114,7 @@ export class CapitalsPage extends React.PureComponent { // eslint-disable-line r
             isResizable={false}
             onLayoutChange={this.onLayoutChange}
           >
-            {this.props.capitalsGrid && this.props.capitalsGrid.map((v) => (
+            { this.props.capitalsGrid.map((v) => (
               <Capital
                 key={v.data.id}
                 type={this.state.editable ? 'editable' : 'link'}
