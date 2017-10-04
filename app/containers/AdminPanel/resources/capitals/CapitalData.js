@@ -2,20 +2,18 @@ import React from 'react';
 import {
   List,
   Datagrid,
-  Edit,
   Create,
-  SimpleForm,
+  Edit,
   TextField,
   EditButton,
-  DisabledInput,
   TextInput,
   NumberField,
   TabbedForm,
   FormTab,
 } from 'admin-on-rest';
-import { required, onlyDigits, onlyLatin, currency } from '../validation';
-import PeopleSection from './PeopleSection';
 import RichTextInput from 'aor-rich-text-input';
+import { required, onlyLatin, currency } from '../validation';
+import PeopleSection from './PeopleSection';
 // import Editor from '../../Editor';
 // import { formatMoney, parseMoney } from '../../../../utils/helpers';
 
@@ -24,9 +22,10 @@ export const CapitalsList = (props) => (
     <Datagrid>
       <TextField label={'Название'} source="name" />
       <NumberField
-        label="Цель"
-        source="purpose" options={{ style: 'currency', currency: 'RUB' }}
+        label="Собрано"
+        source="given" options={{ style: 'currency', currency: 'RUB' }}
       />
+      <TextField label={'Короткое описание'} source="description" />
       <EditButton label={'Редактировать'} basePath="/capitals" />
     </Datagrid>
   </List>

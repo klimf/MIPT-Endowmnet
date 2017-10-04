@@ -1,40 +1,58 @@
 import {
   GET_LIST,
   GET_ONE,
-  GET_MANY,
-  GET_MANY_REFERENCE,
   CREATE,
   UPDATE,
   DELETE,
-  fetchUtils,
 } from 'admin-on-rest';
 import { createReducer } from 'redux-act';
 import { fromJS } from 'immutable';
 
-import api, { responseValidation, responseConstants } from '../../utils/api';
+import api from '../../utils/api';
 
 const requestReducer = createReducer({
-  [GET_ONE]: (params) =>
-    params.set('resource', `${params.get('resource')}/${params.id}`),
-  [CREATE]: (params) =>
-    params.set('method', 'post'),
-  [UPDATE]: (params) => params.set('resource', `${params.get('resource')}/${params.id}`)
+  [GET_LIST]: (request) => request,
+  [GET_ONE]: (request, params) =>
+    request.set('url', `${request.get('url')}/${params.id}`),
+  [CREATE]: (request) =>
+    request.set('method', 'post'),
+  [UPDATE]: (request, params) => request.set('url', `${request.get('url')}/${params.id}`)
     .set('method', 'put'),
-  [DELETE]: (params) => params.set('resource', `${params.get('resource')}/${params.id}`)
+  [DELETE]: (request, params) => request.set('url', `${request.get('url')}/${params.id}`)
     .set('method', 'delete'),
 }, null);
 
-const responseFormatReducer = (res) => res;
+const formatResponse = (response, requestType) => {
+  switch (requestType) {
+    case GET_LIST:
+      if (response.total && response.page && response.docs) {
+        return { data: response, total: response.total };
+      }
+      return { data: response, total: 1000000 };
+    default:
+      return { data: response };
+  }
+};
+
+const resolveQuery = (params) => Object.assign(
+  params.query || {},
+  params.pagination || {},
+  params.sort || {},
+  params.filter || {}
+);
 
 const createRequest = (type, resource, params) => {
+  console.log(params);
   const rawParams = fromJS({
-    resource,
-    params,
+    url: `/${resource}`,
+    query: resolveQuery(params),
     method: 'get',
+    body: params.data,
   });
 
   const requrestAction = {
     type,
+    payload: params,
   };
 
   const requestParams = requestReducer(rawParams, requrestAction);
@@ -45,30 +63,12 @@ const createRequest = (type, resource, params) => {
   return requestParams;
 };
 
-const formatResponse = (response, type, resource, params) => {
-  const responseData = responseFormatReducer(response);
-  if (!responseData) {
-    throw new Error('invalid response body');
-  }
-  return responseData;
-};
 
-
-export default (showNotification) =>
+export default () =>
   (type, resource, params) => {
-    const requestParams = createRequest(type, resource, params).toJS();
-    api.request({
-      method: requestParams.method,
-      url: requestParams.resource,
-      body: requestParams.params.data || null,
-      params: Object.assign(
-        requestParams.params.query || {},
-        requestParams.params.pagination || {},
-        requestParams.params.sort || {},
-        requestParams.params.filter || {}
-      ),
-    })
-      .then((response) => formatResponse(response, type, resource, params))
+    const { method, url, query, body } = createRequest(type, resource, params).toJS();
+    return api[method](url, method === 'get' || method === 'delete' ? query : body, query)
+      .then((response) => formatResponse(response, type))
       .catch((e) => {
         console.log(e);
         return Promise.reject(e);

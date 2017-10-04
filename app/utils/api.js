@@ -7,9 +7,9 @@ axios.defaults.baseURL = config.API_ADRESS;
 axios.defaults.withCredentials = true;
 export default {
   get: (url, params) => request(url, { method: 'GET', params }),
-  post: (url, data) => request(url, { method: 'POST', body: data }),
-  put: (url, data) => request(url, { method: 'PUT', body: data }),
-  delete: (url) => request(url, { method: 'DELETE' }),
+  post: (url, body, params) => request(url, { method: 'POST', body, params }),
+  put: (url, body, params) => request(url, { method: 'PUT', body, params }),
+  delete: (url, params) => request(url, { method: 'DELETE', params }),
   request: ({ url, ...options }) => request(url, options),
 };
 
