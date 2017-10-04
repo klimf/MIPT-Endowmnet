@@ -58,7 +58,7 @@ injectGlobal`
     font-weight: 400;
   }
   
-  p {
+  p, ul {
     font-size: 20px;
   }
 `;

@@ -17,6 +17,7 @@ import { palette } from '../../utils/constants';
 import Content from '../../components/Content/index';
 import Space from '../../components/Space/index';
 import FlexBox from '../../components/FlexBox/index';
+import Line from '../../components/Line/index';
 
 const Title = styled.h1`
   margin: 24px 0;
@@ -68,6 +69,8 @@ export class NewsItemPage extends React.PureComponent { // eslint-disable-line r
           <Description>
             {this.props.data.shortdesc}
           </Description>
+          <Space size={2} />
+          <Line />
           <Space size={2} />
           <ImgDesc image={this.props.data.image} description={this.props.data.description} />
         </Content>
