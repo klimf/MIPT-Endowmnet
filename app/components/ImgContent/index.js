@@ -6,7 +6,7 @@
 
 import React, { PropTypes, Children } from 'react';
 import styled from 'styled-components';
-import { block, image, shadow, unit } from '../../utils/constants';
+import { block, image, palette, shadow } from '../../utils/constants';
 import { media } from '../../utils/helpers';
 import FlexBox from '../FlexBox';
 
@@ -16,7 +16,7 @@ const Wrapper = styled(FlexBox)`
   align-items: center;
   position: relative;
   width: 100%;
-  margin: ${3 * unit}px 0;
+  margin: ${(props) => props.margin && props.margin};
   padding: 0;
 `;
 
@@ -35,9 +35,19 @@ const ContentBlock = styled.div`
   min-height: ${(props) => props.imgWidth && props.imgWidth}px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: ${(props) => props.centredColumn ? 'space-around' : 'space-between'};
   ${(props) => props.block && block}
-  ${media.small`
+  & p {
+    font-size: 20px;
+    margin: 0;
+    color: ${palette.gray};
+  }
+  & h2 {
+    font-size: 24px;
+    margin: 0;
+    color: ${palette.black};
+  }
+  ${(props) => !props.noAdaptive && media.small`
     margin: 36px 0;
     width: 100%;
   `}
@@ -45,7 +55,7 @@ const ContentBlock = styled.div`
 
 const ImgWrapper = styled.div`
   width: ${(props) => props.imgWidth ? props.imgWidth : 400}px;
-  ${media.small`
+  ${(props) => !props.noAdaptive && media.small`
     width: 40%;
     margin: 0 30%;
   `}
@@ -73,11 +83,11 @@ const Image = styled.div`
 
 function ImgContent(props) {
   return (
-    <Wrapper reverse={props.reverse} horisontal="space-between">
-      <ImgWrapper imgWidth={props.imgWidth}>
+    <Wrapper margin={props.margin} reverse={props.reverse} horisontal="space-between">
+      <ImgWrapper noAdaptive={props.noAdaptive} imgWidth={props.imgWidth}>
         <Image circle={props.circle} rounded={props.rounded} shadow={props.shadow} style={{ backgroundImage: `url(${props.image})` }} />
       </ImgWrapper>
-      <ContentBlock block={props.block} padding={props.padding} imgWidth={props.imgWidth} innerPadding={props.innerPadding}>
+      <ContentBlock noAdaptive={props.noAdaptive} centredColumn={props.centredColumn} block={props.block} padding={props.padding} imgWidth={props.imgWidth} innerPadding={props.innerPadding}>
         { Children.toArray(props.children) }
       </ContentBlock>
     </Wrapper>
@@ -87,19 +97,23 @@ function ImgContent(props) {
 ImgContent.defaultProps = {
   imgWidth: 200,
   innerPadding: 48,
+  margin: '36px 0',
 };
 
 ImgContent.propTypes = {
   children: PropTypes.node.isRequired,
   image: PropTypes.string,
   padding: PropTypes.string,
+  margin: PropTypes.string,
   innerPadding: PropTypes.number,
   imgWidth: PropTypes.number,
+  centredColumn: PropTypes.bool,
   reverse: PropTypes.bool,
   shadow: PropTypes.bool,
   circle: PropTypes.bool,
   rounded: PropTypes.bool,
   block: PropTypes.bool,
+  noAdaptive: PropTypes.bool,
 };
 
 export default ImgContent;

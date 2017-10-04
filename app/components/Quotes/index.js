@@ -7,7 +7,6 @@
 import React, { PropTypes } from 'react';
 
 import Title from 'components/Title';
-// import Button from 'components/Button';
 import Item from './Item';
 
 import face1 from '../../images/Face1.jpg';

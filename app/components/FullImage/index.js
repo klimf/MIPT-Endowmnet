@@ -10,8 +10,9 @@ import { hideOn } from '../../utils/helpers';
 import { shadow } from '../../utils/constants';
 
 const Img = styled.img`
-  width: 100%;
+  width: ${(props) => props.width ? props.width : '100%'};
   height: auto;
+  margin: 0 auto;
   ${hideOn}
   ${(props) => props.rounded && 'border-radius: 8px;'}
   ${(props) => props.shadow && shadow}

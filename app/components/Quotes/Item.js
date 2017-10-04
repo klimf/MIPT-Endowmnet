@@ -25,7 +25,7 @@ const Quote = styled.h2`
   font-size: 24px;
 `;
 
-const More = styled.p`
+const More = styled.h4`
   position: relative;
   margin: 16px 0 0 0;
   color: ${palette.primary};
@@ -33,7 +33,7 @@ const More = styled.p`
   font-size: 20px;
 `;
 
-const Info = styled.p`
+const Info = styled.h4`
   position: relative;
   margin: 16px 0 0 0;
   color: ${palette.gray};
