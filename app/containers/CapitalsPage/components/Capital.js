@@ -63,22 +63,36 @@ export const capitalMap = {
   '6:2': CapitalLargest,
 };
 
+
 const wrapMap = {
   preview: PreviewWrap,
   editable: Editable,
   link: StyledLink,
 };
 
+const resolveWrapProps = (props) => {
+  const { onBlockEditStart, onBlockDeleteStart, data, ...otherProps } = props; // eslint-disable-line
+  if (props.type === 'link') {
+    return {
+      to: `capital/${data.id}`,
+      ...otherProps,
+    };
+  } else if (props.type === 'editable') {
+    return props;
+  }
+  return otherProps;
+};
+
 function Capital(props) {
   const { w, h } = props['data-grid'];
   const Component = capitalMap[`${w}:${h}`];
   const Wrap = wrapMap[props.type] || wrapMap.link;
+  const wrapProps = resolveWrapProps(props);
   return (
     <Wrap
-      to={`capital/${props.data.id}`}
-      {...props}
+      {...wrapProps}
     >
-      <Component preview={props.type === 'preview'} data={props.data} />
+      <Component preview={props.type === 'preview'} {...props.data} />
     </Wrap>
   );
 }

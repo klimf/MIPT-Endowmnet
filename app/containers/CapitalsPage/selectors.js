@@ -21,6 +21,8 @@ const makeSelectCapitalsGrid = () => createSelector(
     }
     const dataItems = dataItemsState.get('data').toJS();
     const gridItems = gridItemsState.toJS();
+    console.log(gridItems);
+    console.log(dataItems);
     return gridItems.map((gridParams) => ({
       'data-grid': gridParams,
       data: dataItems.find((x) => x.id === gridParams.id),

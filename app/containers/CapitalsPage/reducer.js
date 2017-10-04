@@ -60,9 +60,11 @@ export const capitalsGridReducer = createReducer({
     .set('popup', null);
   },
 
-  [startDeleteCapitalBlock]: (state) => state.set('popup', constants.DELETE_BLOCK_POPUP),
+  [startDeleteCapitalBlock]: (state) => state
+  .set('popup', constants.DELETE_BLOCK_POPUP),
 
-  [cancelDeleteCapitalBlock]: (state) => state.set('popup', constants.DELETE_BLOCK_POPUP),
+  [cancelDeleteCapitalBlock]: (state) => state
+  .set('popup', constants.DELETE_BLOCK_POPUP),
 
   [deleteCapitalBlock]: (state, payload) => {
     const currentGrid = state.get('grid');
@@ -82,9 +84,12 @@ export const capitalsGridReducer = createReducer({
     return state.set('grid', newGrid);
   },
 
-  [startAddNewCapitalBlock]: (state) => state.set('popup', constants.NEW_CAPITAL_POPUP),
-  [cancelAddNewCapitalBlock]: (state) => state.set('popup', null),
-  [capitalsGridChange]: (state, payload) => state.set('grid', fromJS(payload.map((x) => !x.i ? x : Object.assign(x, { id: x.i })))),
+  [startAddNewCapitalBlock]: (state) => state
+  .set('popup', constants.NEW_CAPITAL_POPUP),
+  [cancelAddNewCapitalBlock]: (state) => state
+  .set('popup', null),
+  [capitalsGridChange]: (state, payload) => state
+  .set('grid', fromJS(payload.map((x) => !x.id ? Object.assign(x, { id: parseInt(x.i, 0) }) : x))),
 
 }, fromJS({
   configureCapital: null,

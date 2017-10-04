@@ -6,7 +6,7 @@ import { isUnauthorized, isLogged } from './selectors';
 
 const propTypes = {
   children: React.PropTypes.any,
-  UnauthorizedComponent: React.PropTypes.any,
+  UnauthorizedComponent: React.PropTypes.any.isRequired,
   isUnauthorized: React.PropTypes.any,
   stateSelector: React.PropTypes.any, // eslint-disable-line
   isLogged: React.PropTypes.any,
@@ -22,6 +22,9 @@ const ProtectedContent = (props) => {
 
 ProtectedContent.propTypes = propTypes;
 
+ProtectedContent.defaultProps = {
+  UnauthorizedComponent: () => (<span></span>),
+};
 
 const mapStateToProps = createStructuredSelector({
   isUnauthorized: isUnauthorized(),

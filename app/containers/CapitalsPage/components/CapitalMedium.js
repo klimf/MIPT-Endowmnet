@@ -127,7 +127,7 @@ function MainCapital(props) {
       <Block padding="30px">
         <FlexBox style={{ height: '120px' }} column >
           <ImgWrapper noSmall>
-            <Image style={{ height: '100%' }} rounded shadow src={props.image} />
+            <Image style={{ height: '100%' }} rounded shadow src={props.image && props.image.small} />
           </ImgWrapper>
           <Info>
             <Name>
@@ -136,7 +136,7 @@ function MainCapital(props) {
             <More>
                 Подробнее
               </More>
-            <Money><CollectedLabel>Собрано:</CollectedLabel> { formatMoney(props.collected) } ₽</Money>
+            <Money><CollectedLabel>Собрано:</CollectedLabel> { formatMoney(props.given) } ₽</Money>
           </Info>
         </FlexBox>
         <Stats horisontal="space-between">
@@ -152,8 +152,8 @@ function MainCapital(props) {
 
 MainCapital.propTypes = {
   name: PropTypes.string,
-  image: PropTypes.string,
-  collected: PropTypes.number,
+  image: PropTypes.object,
+  given: PropTypes.number,
   preview: PropTypes.any,
   description: PropTypes.any,
 };
@@ -163,7 +163,7 @@ MainCapital.defaultProps = {
   collected: 5430000,
   description: 'Ежегодно МФТИ выпускает более 2.5 тысяч студентов во взрослую жизнь. Одно из главных событий университетского учебного года - церемония вручения почетных наград МФТИ и красных дипломов. ',
   to: '/capital/kek',
-  image: logo,
+  image: { small: logo },
 };
 
 export default MainCapital;

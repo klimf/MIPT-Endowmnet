@@ -156,7 +156,7 @@ CapitalLargest.defaultProps = {
   collected: 5430000,
   description: 'Ежегодно МФТИ выпускает более 2.5 тысяч студентов во взрослую жизнь. Одно из главных событий университетского учебного года - церемония вручения почетных наград МФТИ и красных дипломов. ',
   to: '/capital/kek',
-  image: logo,
+  image: { small: logo },
 };
 
 export default CapitalLargest;

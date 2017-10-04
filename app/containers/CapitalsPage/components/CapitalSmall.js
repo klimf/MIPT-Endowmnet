@@ -60,7 +60,7 @@ function Capital(props) {
       <Block>
         <FlexBox>
           <Name>{props.name}</Name>
-          <Info>Собрано: <b>{formatMoney(props.collected)}</b> ₽</Info>
+          <Info>Собрано: <b>{formatMoney(props.given)}</b> ₽</Info>
           <More>Подробнее</More>
         </FlexBox>
       </Block>
@@ -70,9 +70,9 @@ function Capital(props) {
 
 
 Capital.propTypes = {
-  to: PropTypes.string,
+  preview: PropTypes.bool,
   name: PropTypes.string,
-  collected: PropTypes.number,
+  given: PropTypes.number,
 };
 
 Capital.defaultProps = {

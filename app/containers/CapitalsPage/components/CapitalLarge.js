@@ -18,6 +18,7 @@ import Block from '../../../components/Block';
 
 const Wrapper = styled.div`
   height: 100%;
+  width: 100%;
   ${(props) => props.preview && `
     width: 600px;
     height: 400px;
@@ -122,7 +123,7 @@ function CapitalLarge(props) {
       <Block padding="40px">
         <FlexBox style={{ height: '140px' }}>
           <ImgWrapper noSmall>
-            <Image style={{ height: '140px' }} rounded shadow src={props.image} />
+            <Image style={{ height: '140px' }} rounded shadow src={props.image && props.image.small} />
           </ImgWrapper>
           <Info>
             <Name>
@@ -131,7 +132,7 @@ function CapitalLarge(props) {
             <More>
                 Подробнее
               </More>
-            <Money><CollectedLabel>Собрано:</CollectedLabel> { formatMoney(props.collected) } ₽</Money>
+            <Money><CollectedLabel>Собрано:</CollectedLabel> { formatMoney(props.given) } ₽</Money>
           </Info>
         </FlexBox>
         <Stats horisontal="space-between">
@@ -149,8 +150,8 @@ CapitalLarge.propTypes = {
   preview: PropTypes.bool.isRequired,
   name: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  image: PropTypes.string.isRequired,
-  collected: PropTypes.number.isRequired,
+  image: PropTypes.object,
+  given: PropTypes.number.isRequired,
 };
 
 CapitalLarge.defaultProps = {
@@ -158,7 +159,7 @@ CapitalLarge.defaultProps = {
   collected: 5430000,
   description: 'Ежегодно МФТИ выпускает более 2.5 тысяч студентов во взрослую жизнь. Одно из главных событий университетского учебного года - церемония вручения почетных наград МФТИ и красных дипломов. ',
   to: '/capital/kek',
-  image: logo,
+  image: { small: logo },
 };
 
 export default CapitalLarge;
