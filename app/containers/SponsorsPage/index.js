@@ -13,6 +13,8 @@ import Content from '../../components/Content/index';
 import Space from '../../components/Space/index';
 import Quotes from '../../components/Quotes/index';
 import Partners from '../../components/Partners/index';
+import Faces from '../../components/Faces/index';
+import Table from '../../components/Table/index';
 
 export class SponsorsPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
@@ -27,7 +29,12 @@ export class SponsorsPage extends React.PureComponent { // eslint-disable-line r
         <Content>
           <Space size={4} />
           <Quotes title="Спонсоры" />
-          <Space size={2} />
+          <Faces />
+          <Space size={4} />
+          <Faces />
+          <Space size={4} />
+          <Table />
+          <Space size={4} />
           <Partners />
         </Content>
       </div>
