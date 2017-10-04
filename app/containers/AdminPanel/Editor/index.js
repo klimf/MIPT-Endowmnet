@@ -1,24 +1,27 @@
 import React, { Component } from 'react';
 import Editor from 'draft-js-plugins-editor';
 import { EditorState, convertFromRaw } from 'draft-js';
-import 'draft-js-image-plugin/lib/plugin.css';
-import 'draft-js-alignment-plugin/lib/plugin.css';
 import styled from 'styled-components';
+import 'last-draft-js-sidebar-plugin/lib/plugin.css';
 import plugins from './plugins';
-import { Toolbar } from './plugins/tollbar';
+import { InlineToolbar } from './plugins/tollbar';
 import { AlignmentTool } from './plugins/common';
 import placeholder from '../../../images/placeholder.png';
-console.log(plugins);
+import 'last-draft-js-toolbar-plugin/lib/plugin.css';
+
 
 export const EditorWrap = styled.div`
  padding: 17px;
  border: 1px solid #eee;
- position: relative;
+ figure {
+   margin: 0;
+ }
 `;
+
 
 const initialState = {
   entityMap: {
-    0: {
+    kek: {
       type: 'image',
       mutability: 'IMMUTABLE',
       data: {
@@ -43,7 +46,7 @@ const initialState = {
     entityRanges: [{
       offset: 0,
       length: 1,
-      key: 0,
+      key: 'kek',
     }],
     data: {},
   }, {
@@ -75,7 +78,7 @@ class EditorApp extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div >
         <EditorWrap onClick={this.focus}>
           <Editor
             editorState={this.state.editorState}
@@ -83,9 +86,10 @@ class EditorApp extends Component {
             plugins={plugins}
             ref={(element) => { this.editor = element; }}
           />
-          <Toolbar></Toolbar>
           <AlignmentTool></AlignmentTool>
+          <InlineToolbar></InlineToolbar>
         </EditorWrap>
+
       </div>
     );
   }

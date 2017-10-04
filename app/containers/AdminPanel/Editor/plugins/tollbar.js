@@ -13,6 +13,7 @@ import {
   CodeBlockButton,
 } from 'draft-js-buttons';
 import 'draft-js-inline-toolbar-plugin/lib/plugin.css';
+import createSidebarPlugin from 'last-draft-js-sidebar-plugin';
 
 
 const inlineToolbarPlugin = createInlineToolbarPlugin({
@@ -34,5 +35,7 @@ const inlineToolbarPlugin = createInlineToolbarPlugin({
   ],
 });
 
+export const sidebarPlugin = createSidebarPlugin();
 export default inlineToolbarPlugin;
-export const Toolbar = inlineToolbarPlugin.InlineToolbar;
+export const InlineToolbar = inlineToolbarPlugin.InlineToolbar;
+export const Sidebar = sidebarPlugin.sidebarPlugin;

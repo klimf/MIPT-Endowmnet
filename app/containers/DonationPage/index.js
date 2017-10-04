@@ -7,17 +7,14 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
-import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 
 
 import Content from 'components/Content';
 import Space from 'components/Space';
-import Title from 'components/Title';
 import DonationForm from 'components/DonationForm';
 
 import makeSelectDonationPage from './selectors';
-import messages from './messages';
 
 
 export class DonationPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
@@ -53,7 +50,6 @@ export class DonationPage extends React.PureComponent { // eslint-disable-line r
         />
         <Content>
           <Space size={4} />
-          <Title><FormattedMessage {...messages.header} /></Title>
           <DonationForm />
         </Content>
       </div>

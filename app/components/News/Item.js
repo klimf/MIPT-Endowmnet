@@ -7,7 +7,7 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router';
-import { block, palette, unit } from '../../utils/constants';
+import { block, palette, unit, image } from '../../utils/constants';
 import { hideOn, media } from '../../utils/helpers';
 // import FlexBox from '../FlexBox/index';
 
@@ -69,21 +69,21 @@ const Image = styled.div`
   left: 0;
   bottom: 0;
   background-color: ${palette.primary};
-  background-size: cover;
-  background-position: center;
   border-radius: 8px 0 0 8px;
+  ${image}
   ${media.small`
     width: 100%;
     height: 280px;
     bottom: auto;
-  `}
+    border-radius: 8px 8px 0 0;
+`}
 `;
 
 function Item(props) {
   return (
     <StyledLink to={props.link}>
       <Wrapper>
-        <Image style={{ backgroundImage: `url(${props.image})` }} />
+        <Image src={props.image} />
         <TextBlock>
           <Title>{props.title}</Title>
           <Description>{props.description}</Description>

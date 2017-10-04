@@ -7,7 +7,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
-import { Admin, Resource, Delete, showNotification } from 'admin-on-rest';
+import { Admin, Resource, Delete, showNotification, simpleRestClient } from 'admin-on-rest';
 import { createStructuredSelector } from 'reselect';
 import theme from './theme';
 import messages, { aorMessagesRu } from './messages';

@@ -16,7 +16,7 @@ const selectAnyFetchStatus = () => (state, { stateSelector }) => stateSelector(s
 
 const isLogged = () => createSelector(
   selectUser(),
-  (substate) => substate.toJS().data && true
+  (substate) => substate.toJS().data || false
 );
 
 const isUnauthorized = () => createSelector(
@@ -33,6 +33,10 @@ const isUnauthorized = () => createSelector(
   }
 );
 
+const user = () => createSelector(
+  selectUser(),
+  (substate) => substate.toJS()
+);
 
 /**
  * Default selector used by AuthProvider
@@ -49,4 +53,5 @@ export {
   selectAuthProviderDomain,
   isLogged,
   isUnauthorized,
+  user,
 };

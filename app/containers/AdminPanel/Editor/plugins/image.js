@@ -4,7 +4,6 @@ import { composeDecorators } from 'draft-js-plugins-editor';
 
 import { alignmentPlugin, resizeablePlugin, focusPlugin, blockDndPlugin } from './common';
 
-
 const decorator = composeDecorators(
   resizeablePlugin.decorator,
   alignmentPlugin.decorator,

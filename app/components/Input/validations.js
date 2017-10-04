@@ -8,12 +8,16 @@ const Hint = (message) => (
 );
 
 export default Object.assign(rules, {
+  nothing: {
+    rule: () => true,
+    hint: () => Hint(messages.requiredIsInvalid),
+  },
   required: {
     rule: (val) => val || false,
     hint: () => Hint(messages.requiredIsInvalid),
   },
   password: {
-    rule: (val) => val && (val.length < 16 && val.length > 8),
+    rule: (val) => val && (val.length <= 16 && val.length >= 8),
     hint: () => Hint(messages.passwordIsInvalid),
   },
   email: {
