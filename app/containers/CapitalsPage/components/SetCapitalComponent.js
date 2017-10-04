@@ -58,6 +58,11 @@ class SetCapitalComponent extends React.PureComponent {
     this.props.saveCapitalConfiguration();
   }
 
+  isSelectedComponent(properties) {
+    const selectedComponent = this.props.CapitalsPage.capitalsGrid.selectedGridComponent;
+    return selectedComponent ? selectedComponent.w === properties['data-grid'].w : false;
+  }
+
   render() {
     return (
       <Popup
@@ -70,7 +75,7 @@ class SetCapitalComponent extends React.PureComponent {
             (<ComponentWrap
               key={index}
               onClick={() => this.onComponentClick(properties)}
-              selected={this.props.CapitalsPage.capitalsGrid.selectedGridComponent.w === properties['data-grid'].w}
+              selected={this.isSelectedComponent(properties)}
             >
               <Capital type={'preview'} editable {...properties}></Capital>
             </ComponentWrap>)

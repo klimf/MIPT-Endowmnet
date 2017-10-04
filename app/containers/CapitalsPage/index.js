@@ -28,6 +28,8 @@ import {
   fetchCapitalsGridUpdate,
   deleteCapitalBlock,
   startSelectCapitalComponent,
+  startAddNewCapitalBlock,
+  capitalsGridChange,
 } from './actions';
 import FlexBox from '../../components/FlexBox';
 import NewCapitalPopup from './components/NewCapitalPopup';
@@ -65,6 +67,21 @@ const capitalsData = [
     description: 'Ежегодно МФТИ выпускает более 2.5 тысяч студентов во взрослую жизнь. Одно из главных событий университетского учебного года - церемония вручения почетных наград МФТИ и красных дипломов. ',
     collected: 1435000,
     to: '/capital/kek' },
+  { id: '1219990',
+    name: 'Развитие факультета проблем физики и энергетики',
+    description: 'Ежегодно МФТИ выпускает более 2.5 тысяч студентов во взрослую жизнь. Одно из главных событий университетского учебного года - церемония вручения почетных наград МФТИ и красных дипломов. ',
+    collected: 1435000,
+    to: '/capital/kek' },
+  { id: 'a2323----001',
+    name: 'Развитие факультета проблем физики и энергетики',
+    description: 'Ежегодно МФТИ выпускает более 2.5 тысяч студентов во взрослую жизнь. Одно из главных событий университетского учебного года - церемония вручения почетных наград МФТИ и красных дипломов. ',
+    collected: 1435000,
+    to: '/capital/kek' },
+  { id: '9328398000',
+    name: 'Развитие факультета проблем физики и энергетики',
+    description: 'Ежегодно МФТИ выпускает более 2.5 тысяч студентов во взрослую жизнь. Одно из главных событий университетского учебного года - церемония вручения почетных наград МФТИ и красных дипломов. ',
+    collected: 1435000,
+    to: '/capital/kek' },
 ];
 
 
@@ -94,6 +111,9 @@ export class CapitalsPage extends React.PureComponent { // eslint-disable-line r
 
 
   toggleEditable() {
+    if (this.state.editable) {
+      this.props.fetchCapitalsGridUpdate.start();
+    }
     this.setState({ editable: !this.state.editable });
   }
 
@@ -113,6 +133,10 @@ export class CapitalsPage extends React.PureComponent { // eslint-disable-line r
             vertical={'center'}
           >
             <Button onClick={this.toggleEditable}>{!this.state.editable ? 'Редактировать' : 'Сохранить'}</Button>
+            { this.state.editable &&
+              <Button onClick={this.props.startAddNewCapitalBlock}>Добавить</Button>
+            }
+
 
           </FlexBox>
         </ToolBarWrap>
@@ -126,7 +150,7 @@ export class CapitalsPage extends React.PureComponent { // eslint-disable-line r
             rowHeight={200}
             isDraggable={this.state.editable}
             isResizable={false}
-            onLayoutChange={(layout) => console.log(layout)}
+            onLayoutChange={this.props.capitalsGridChange}
           >
             { this.props.capitalsGrid.map((v) => (
               <Capital
@@ -153,6 +177,9 @@ CapitalsPage.propTypes = {
   deleteCapitalBlock: React.PropTypes.func,
   fetchCapitals: PropTypes.object,
   fetchCapitalsGrid: PropTypes.object,
+  startAddNewCapitalBlock: PropTypes.func,
+  capitalsGridChange: PropTypes.func,
+  fetchCapitalsGridUpdate: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -167,6 +194,8 @@ function mapDispatchToProps(dispatch) {
     fetchCapitalsGridUpdate,
     deleteCapitalBlock,
     startSelectCapitalComponent,
+    startAddNewCapitalBlock,
+    capitalsGridChange,
   }, dispatch);
 }
 

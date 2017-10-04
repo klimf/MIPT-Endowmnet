@@ -6,7 +6,6 @@ import { palette, unit, rounded } from '../../../utils/constants';
 import Popup from '../../../components/Popup';
 import {
   startSelectCapitalComponent,
-  startAddNewCapitalBlock,
   cancelAddNewCapitalBlock,
 } from '../actions';
 import {
@@ -71,7 +70,6 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = (dispatch) => ({
   startSelectCapitalComponent: startSelectCapitalComponent.bindTo(dispatch),
-  startAddNewCapitalBlock: startAddNewCapitalBlock.bindTo(dispatch),
   cancelAddNewCapitalBlock: cancelAddNewCapitalBlock.bindTo(dispatch),
 });
 

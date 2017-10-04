@@ -42,7 +42,7 @@ const notAddedCapitals = () => createSelector(
     }
     const dataItems = dataItemsState.get('data').toJS();
     const gridItems = gridItemsState.toJS();
-    return dataItems.filter((item) => gridItems.find((x) => x.id === item.id));
+    return dataItems.filter((item) => !gridItems.find((x) => x.id === item.id));
   }
 );
 

@@ -37,7 +37,7 @@ export function* mergeFetchedGrid() {
 export function* updateCapitalsGrid() {
   while (true) {
     try {
-      const action = yield take(actions.capitalsGridChange.getType());
+      const action = yield take(actions.fetchCapitalsGridUpdate.types.start);
       yield call(() => api.put('/capitals-layout', action.payload));
       yield put(actions.fetchCapitalsGridUpdate.success());
     } catch (e) {

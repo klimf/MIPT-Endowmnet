@@ -27,8 +27,8 @@ import * as constants from './constants';
 export const capitalsGridReducer = createReducer({
 
   [startSelectCapitalComponent]: (state, payload) => state
-  .set('configureCapital', fromJS(payload.data))
-  .set('selectedGridComponent', fromJS(payload['data-grid']))
+  .set('configureCapital', fromJS(payload.data || payload))
+  .set('selectedGridComponent', fromJS(payload['data-grid'] || { w: 0, h: 0 }))
   .set('popup', constants.SELECT_BLOCK_POPUP),
 
   [cancelCapitalComponentSelection]: (state) => state
@@ -84,7 +84,7 @@ export const capitalsGridReducer = createReducer({
 
   [startAddNewCapitalBlock]: (state) => state.set('popup', constants.NEW_CAPITAL_POPUP),
   [cancelAddNewCapitalBlock]: (state) => state.set('popup', null),
-  [capitalsGridChange]: (state, payload) => state.set('grid', fromJS(payload)),
+  [capitalsGridChange]: (state, payload) => state.set('grid', fromJS(payload.map((x) => !x.i ? x : Object.assign(x, { id: x.i })))),
 
 }, fromJS({
   configureCapital: null,
