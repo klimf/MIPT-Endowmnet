@@ -32,7 +32,7 @@ const ContentBlock = styled.div`
   padding: ${(props) => props.padding ? props.padding : '0'};
   margin: 0;
   width: calc(100% - ${(props) => contentSubtract(props)}px);
-  min-height: ${(props) => props.imgWidth && props.imgWidth - props.innerPadding}px;
+  min-height: ${(props) => props.imgWidth && props.imgWidth - props.vertPadding}px;
   display: flex;
   flex-direction: column;
   justify-content: ${(props) => props.centredColumn ? 'space-around' : 'space-between'};
@@ -51,6 +51,7 @@ const ContentBlock = styled.div`
     margin: 36px 0;
     width: 100%;
   `}
+  ${(props) => props.styles && props.styles}
 `;
 
 const ImgWrapper = styled.div`
@@ -87,7 +88,7 @@ function ImgContent(props) {
       <ImgWrapper noAdaptive={props.noAdaptive} imgWidth={props.imgWidth}>
         <Image circle={props.circle} rounded={props.rounded} shadow={props.shadow} style={{ backgroundImage: `url(${props.image})` }} />
       </ImgWrapper>
-      <ContentBlock noAdaptive={props.noAdaptive} centredColumn={props.centredColumn} block={props.block} padding={props.padding} imgWidth={props.imgWidth} innerPadding={props.innerPadding}>
+      <ContentBlock styles={props.styles} vertPadding={props.vertPadding} noAdaptive={props.noAdaptive} centredColumn={props.centredColumn} block={props.block} padding={props.padding} imgWidth={props.imgWidth} innerPadding={props.innerPadding}>
         { Children.toArray(props.children) }
       </ContentBlock>
     </Wrapper>
@@ -97,6 +98,7 @@ function ImgContent(props) {
 ImgContent.defaultProps = {
   imgWidth: 200,
   innerPadding: 48,
+  vertPadding: 48,
   margin: '36px 0',
 };
 
@@ -105,7 +107,9 @@ ImgContent.propTypes = {
   image: PropTypes.string,
   padding: PropTypes.string,
   margin: PropTypes.string,
+  styles: PropTypes.string,
   innerPadding: PropTypes.number,
+  vertPadding: PropTypes.number,
   imgWidth: PropTypes.number,
   centredColumn: PropTypes.bool,
   reverse: PropTypes.bool,
