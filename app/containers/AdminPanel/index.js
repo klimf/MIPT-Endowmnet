@@ -7,19 +7,28 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
-import { Admin, Resource, Delete, showNotification, simpleRestClient } from 'admin-on-rest';
+import { Admin, Resource, Delete } from 'admin-on-rest';
 import { createStructuredSelector } from 'reselect';
 import theme from './theme';
 import messages, { aorMessagesRu } from './messages';
 import makeSelectAdminPanel from './selectors';
 import * as CapitalResource from './resources/capitals/CapitalData';
 import restClient from './restClient';
+import { ADMIN_ROLE } from '../AuthProvider/constants';
+import { makeUserSelector } from '../AuthProvider/selectors';
 
 const aorMessages = {
   ru: aorMessagesRu,
 };
 
 export class AdminPanel extends React.Component { // eslint-disable-line react/prefer-stateless-function
+
+  componentWillMount = () => {
+    if (!this.props.user || this.props.user.role !== ADMIN_ROLE) {
+      this.props.router.replace('/forbidden');
+    }
+  }
+
   render() {
     return (
       <div>
@@ -48,11 +57,13 @@ export class AdminPanel extends React.Component { // eslint-disable-line react/p
 }
 
 AdminPanel.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  user: PropTypes.any,
+  router: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
   AdminPanel: makeSelectAdminPanel(),
+  user: makeUserSelector(),
 });
 
 function mapDispatchToProps(dispatch) {

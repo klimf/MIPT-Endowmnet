@@ -215,6 +215,24 @@ export default function createRoutes(store) {
         importModules.catch(errorLoading);
       },
     }, {
+      path: '/forbidden',
+      name: 'forbiddenPage',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          import('containers/ForbiddenPage/reducer'),
+          import('containers/ForbiddenPage'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([reducer, component]) => {
+          injectReducer('forbiddenPage', reducer.default);
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    }, {
       path: '*',
       name: 'notfound',
       getComponent(nextState, cb) {
