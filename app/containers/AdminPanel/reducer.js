@@ -4,20 +4,21 @@
  *
  */
 
+import { createReducer } from 'redux-act';
+import { combineReducers } from 'redux-immutable';
 import { fromJS } from 'immutable';
 import {
-  DEFAULT_ACTION,
-} from './constants';
+  addAttachment,
+  clearAttachments,
+  deleteAttachment,
+} from './actions';
 
-const initialState = fromJS({});
+const attachmentsReducer = createReducer({
+  [addAttachment]: (state, payload) => state.add(payload),
+  [deleteAttachment]: (state, payload) => state.remove(payload),
+  [clearAttachments]: (state) => state.clear(),
+}, fromJS([]));
 
-function adminPanelReducer(state = initialState, action) {
-  switch (action.type) {
-    case DEFAULT_ACTION:
-      return state;
-    default:
-      return state;
-  }
-}
-
-export default adminPanelReducer;
+export default combineReducers({
+  attachmets: attachmentsReducer,
+}, fromJS({}));

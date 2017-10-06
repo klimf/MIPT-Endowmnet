@@ -48,6 +48,13 @@ const makeSelectAuthProvider = () => createSelector(
   (substate) => substate.toJS()
 );
 
+const makeSelectUserPermissions = (role) => createSelector(
+  selectUser(),
+  (substate) => {
+    const user = substate.toJS().data;
+    return user && user.role === role;
+  }
+);
 
 export default makeSelectAuthProvider;
 export {
@@ -55,4 +62,5 @@ export {
   isLogged,
   isUnauthorized,
   makeUserSelector,
+  makeSelectUserPermissions,
 };

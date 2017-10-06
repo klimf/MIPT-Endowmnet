@@ -7,8 +7,15 @@ import {
 } from 'admin-on-rest';
 import { createReducer } from 'redux-act';
 import { fromJS } from 'immutable';
+import { UPLOAD } from '../actions';
 
-import api from '../../utils/api';
+import api from '../../../utils/api';
+
+const makeFileBody = (body) => {
+  const formData = new FormData();
+  formData.set('file', body.file);
+  return formData;
+};
 
 const requestReducer = createReducer({
   [GET_LIST]: (request) => request,
@@ -16,10 +23,16 @@ const requestReducer = createReducer({
     request.set('url', `${request.get('url')}/${params.id}`),
   [CREATE]: (request) =>
     request.set('method', 'post'),
-  [UPDATE]: (request, params) => request.set('url', `${request.get('url')}/${params.id}`)
+  [UPDATE]: (request, params) => request
+    .set('url', `${request.get('url')}/${params.id}`)
     .set('method', 'put'),
-  [DELETE]: (request, params) => request.set('url', `${request.get('url')}/${params.id}`)
-    .set('method', 'delete'),
+  [DELETE]: (request, params) => request
+  .set('url', `${request.get('url')}/${params.id}`)
+  .set('method', 'delete'),
+  [UPLOAD]: (request, params) => request
+    .set('url', `/${params.attachmentType}`)
+    .set('method', 'post')
+    .set('body', makeFileBody(request.get('body'))),
 }, null);
 
 const formatResponse = (response, requestType) => {
@@ -42,7 +55,6 @@ const resolveQuery = (params) => Object.assign(
 );
 
 const createRequest = (type, resource, params) => {
-  console.log(params);
   const rawParams = fromJS({
     url: `/${resource}`,
     query: resolveQuery(params),
@@ -64,13 +76,12 @@ const createRequest = (type, resource, params) => {
 };
 
 
-export default () =>
-  (type, resource, params) => {
-    const { method, url, query, body } = createRequest(type, resource, params).toJS();
-    return api[method](url, method === 'get' || method === 'delete' ? query : body, query)
+export default (type, resource, params) => {
+  const { method, url, query, body } = createRequest(type, resource, params).toJS();
+  return api[method](url, method === 'get' || method === 'delete' ? query : body, query)
       .then((response) => formatResponse(response, type))
       .catch((e) => {
-        console.log(e);
+        console.error(e);
         return Promise.reject(e);
       });
-  };
+};

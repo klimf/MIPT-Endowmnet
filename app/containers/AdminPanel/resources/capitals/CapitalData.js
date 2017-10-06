@@ -58,7 +58,7 @@ export const CapitalsCreate = (props) => (
         <TextInput label={'Название'} validate={[required]} source="name" />
         <TextInput label={'Короткое описание'} validate={[required]} source="description" />
         <TextInput label={'Название для ссылки'} validate={[required, onlyLatin]} source="linkName" />
-        <TextInput label={'Собрано'} validate={[required, currency]} source="purpose" />
+        <TextInput label={'Собрано'} validate={[required, currency]} source="given" />
         <RichTextInput source="content" validate={[required]} label="Полное описание" toolbar={[[{ header: [1, 2, 3, false] }], ['bold', 'italic', 'underline', 'strike'], [{ list: 'ordered' }, { list: 'bullet' }], [{ direction: 'rtl' }], [{ align: [] }], ['link', 'image']]} />
       </FormTab>
       <FormTab label="Основатели">

@@ -13,34 +13,41 @@ import theme from './theme';
 import messages, { aorMessagesRu } from './messages';
 import makeSelectAdminPanel from './selectors';
 import * as CapitalResource from './resources/capitals/CapitalData';
-import restClient from './restClient';
+import capitalsRestDecorator from './resources/capitals/restClientDecorator';
+import restClient, { decorate } from './restClient';
+import { makeSelectUserPermissions } from '../AuthProvider/selectors';
 import { ADMIN_ROLE } from '../AuthProvider/constants';
-import { makeUserSelector } from '../AuthProvider/selectors';
+import sagas from './sagas';
 
+const decoratedRestClient = decorate([capitalsRestDecorator])(restClient);
 const aorMessages = {
   ru: aorMessagesRu,
 };
 
 export class AdminPanel extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
-  componentWillMount = () => {
-    if (!this.props.user || this.props.user.role !== ADMIN_ROLE) {
-      this.props.router.replace('/forbidden');
-    }
+  componentDidMount = () => {
+    setTimeout(() => {
+      if (!this.props.isAdmin) {
+        this.props.router.replace('/forbidden');
+      }
+    }, 2000);
   }
 
+
   render() {
-    return (
+    return this.props.isAdmin && (
       <div>
         <Helmet
           title={messages.header.defaultMessage}
         />
         <Admin
+          customSagas={sagas}
           title={messages.header.defaultMessage}
           locale="ru"
           messages={aorMessages}
           theme={theme}
-          restClient={restClient()}
+          restClient={decoratedRestClient}
         >
           <Resource
             name="capitals"
@@ -57,13 +64,13 @@ export class AdminPanel extends React.Component { // eslint-disable-line react/p
 }
 
 AdminPanel.propTypes = {
-  user: PropTypes.any,
+  isAdmin: PropTypes.bool,
   router: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
   AdminPanel: makeSelectAdminPanel(),
-  user: makeUserSelector(),
+  isAdmin: makeSelectUserPermissions(ADMIN_ROLE),
 });
 
 function mapDispatchToProps(dispatch) {
