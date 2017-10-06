@@ -100,7 +100,6 @@ function request(url, { method = 'GET', body = null, params = {} }) {
   let bodyToSend = null;
 
   if (body && (body instanceof FormData)) {
-    headers = { 'Content-Type': 'multipart/form-data' };
     bodyToSend = body;
   } else if (body) {
     bodyToSend = JSON.stringify(body);

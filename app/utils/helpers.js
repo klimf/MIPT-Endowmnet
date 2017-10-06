@@ -1,5 +1,5 @@
 import { css } from 'styled-components';
-
+import config from './config';
 // const sizes = {
 //   extra: 1920,
 //   large: 1280,
@@ -13,6 +13,10 @@ export function formatMoney(value) {
     return number.toFixed().replace(/./g, (c, i, a) => (i && c !== '.' && ((a.length - i) % 3 === 0) ? ` ${c}` : c));
   }
   return '0';
+}
+
+export function resolveStatic(path) {
+  return `${config.API_ADRESS}/${path}`;
 }
 
 export function parseMoney(money) {

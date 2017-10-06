@@ -37,6 +37,9 @@ export const CapitalsEdit = (props) => (
   <Edit title={'Редактирование капитала'} {...props}>
     <TabbedForm>
       <FormTab label="Общая информация">
+        <ImageInput source="picture" label="Фотография" accept="image/png,image/jpg,image/jpeg">
+          <ImageField source="image.small" />
+        </ImageInput>
         <TextInput label={'Название'} validate={[required]} source="name" />
         <TextInput label={'Короткое описание'} validate={[required]} source="description" />
         <TextInput label={'Название для ссылки'} validate={[required, onlyLatin]} source="fullPageUri" />
