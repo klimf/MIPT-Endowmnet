@@ -14,12 +14,12 @@ import messages, { aorMessagesRu } from './messages';
 import makeSelectAdminPanel from './selectors';
 import * as CapitalResource from './resources/capitals/CapitalData';
 import capitalsRestDecorator from './resources/capitals/restClientDecorator';
-import restClient, { decorate } from './restClient';
+import restClient, { compose } from './restClient';
 import { makeSelectUserPermissions } from '../AuthProvider/selectors';
 import { ADMIN_ROLE } from '../AuthProvider/constants';
 import sagas from './sagas';
 
-const decoratedRestClient = decorate([capitalsRestDecorator])(restClient);
+const decoratedRestClient = compose([capitalsRestDecorator])(restClient);
 const aorMessages = {
   ru: aorMessagesRu,
 };

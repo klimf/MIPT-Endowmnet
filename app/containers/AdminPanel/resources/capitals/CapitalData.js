@@ -10,6 +10,8 @@ import {
   NumberField,
   TabbedForm,
   FormTab,
+  ImageInput,
+  ImageField,
 } from 'admin-on-rest';
 import RichTextInput from 'aor-rich-text-input';
 import { required, onlyLatin, currency } from '../validation';
@@ -55,6 +57,9 @@ export const CapitalsCreate = (props) => (
   <Create title={'Создание капитала'} {...props}>
     <TabbedForm>
       <FormTab label="Общая информация">
+        <ImageInput source="picture" label="Фотография" accept="image/png,image/jpg,image/jpeg">
+          <ImageField source="image.small" />
+        </ImageInput>
         <TextInput label={'Название'} validate={[required]} source="name" />
         <TextInput label={'Короткое описание'} validate={[required]} source="description" />
         <TextInput label={'Название для ссылки'} validate={[required, onlyLatin]} source="linkName" />

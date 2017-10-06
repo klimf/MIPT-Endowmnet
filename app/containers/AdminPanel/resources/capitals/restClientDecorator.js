@@ -17,16 +17,16 @@ export default function (restClient) {
       const arrayUpload = uploadArrayAttachemtsCurry(restClient);
 
       if (params.data.picture) {
-        generalPromise = restClient(UPLOAD, resource, setAttachment('image', params.data.picture))
+        generalPromise = restClient(UPLOAD, resource, setAttachment('image', params.data.picture[0].rawFile))
         .then((response) => Object.assign({}, params.data, { image: response.data }));
       }
 
       if (params.data.founders) {
-        foundersPromise = Promise.all(arrayUpload(params.data.founders, 'picture', 'image', 'image'));
+        foundersPromise = Promise.all(arrayUpload(params.data.founders, 'picture.file', 'image', 'image'));
       }
 
       if (params.data.sponsors) {
-        sponsorsPromise = Promise.all(arrayUpload(params.data.sponsors, 'picture', 'image', 'image'));
+        sponsorsPromise = Promise.all(arrayUpload(params.data.sponsors, 'picture.file', 'image', 'image'));
       }
 
       return Promise.all([generalPromise, foundersPromise, sponsorsPromise]).then((resolves) => {

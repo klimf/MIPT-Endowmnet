@@ -1,3 +1,3 @@
 export * from './helpers';
-export { default as decorate } from './decorate';
+export { default as compose } from './compose';
 export { default } from './restClient';

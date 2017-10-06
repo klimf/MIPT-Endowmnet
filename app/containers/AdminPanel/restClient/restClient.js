@@ -13,7 +13,7 @@ import api from '../../../utils/api';
 
 const makeFileBody = (body) => {
   const formData = new FormData();
-  formData.set('file', body.file);
+  formData.append('file', body);
   return formData;
 };
 
@@ -61,6 +61,8 @@ const createRequest = (type, resource, params) => {
     method: 'get',
     body: params.data,
   });
+
+  console.log(params);
 
   const requrestAction = {
     type,

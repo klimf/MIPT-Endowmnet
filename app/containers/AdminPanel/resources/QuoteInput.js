@@ -67,7 +67,7 @@ const DeleteButton = styled(RaisedButton) `
 
 const PeopleInput = (man, index, fields) => (
   <Wrapper key={index} isLeft horisontal="space-between">
-    <Field validate={[required]} name={`${man}.image`} component={ImageDrop} />
+    <Field validate={[required]} name={`${man}.picture`} component={ImageDrop} />
     <TextBlock>
       <Quote>
         <Field validate={[required]} name={`${man}.quote`} component={LongTextInput} label="Цитата" />
