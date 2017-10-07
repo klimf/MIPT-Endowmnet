@@ -22,7 +22,7 @@ import optionsRestDecorator from './resources/options/restClientDecorator';
 import restClient, { compose } from './restClient';
 import { makeSelectUserPermissions } from '../AuthProvider/selectors';
 import { ADMIN_ROLE } from '../AuthProvider/constants';
-import sagas from './sagas';
+import editorReducer from './Editor/reducer';
 
 const decoratedRestClient = compose([capitalsRestDecorator, optionsRestDecorator])(restClient);
 const aorMessages = {
@@ -47,7 +47,7 @@ export class AdminPanel extends React.Component { // eslint-disable-line react/p
           title={messages.header.defaultMessage}
         />
         <Admin
-          customSagas={sagas}
+          customReducers={{ editor: editorReducer }}
           title={messages.header.defaultMessage}
           locale="ru"
           messages={aorMessages}

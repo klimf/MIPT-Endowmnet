@@ -4,7 +4,7 @@ import { hideOn } from '../../utils/helpers';
 
 const Overlay = styled.div`
   position: fixed;
-  z-index: 1000;
+  z-index: 1500;
   top:0;
   right:0;
   bottom:0;

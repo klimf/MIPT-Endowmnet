@@ -2,7 +2,7 @@ import React from 'react';
 import { RaisedButton } from 'material-ui';
 import { FieldArray } from 'redux-form';
 import styled from 'styled-components';
-import PeopleInput from '../QuoteInput';
+import PeopleInput from './QuoteInput';
 
 
 const AddButton = styled(RaisedButton)`

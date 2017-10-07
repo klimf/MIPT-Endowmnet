@@ -82,10 +82,19 @@ Item.propTypes = {
   link: PropTypes.string,
   name: PropTypes.string,
   status: PropTypes.string,
-  quote: PropTypes.string.isRequired,
-  image: PropTypes.string.isRequired,
+  quote: PropTypes.string,
+  image: PropTypes.string,
   index: PropTypes.number,
   noMore: PropTypes.bool,
+};
+
+Item.defaultProps = {
+  link: '#',
+  name: 'Иванов Иван',
+  status: 'Руководитель фонда',
+  quote: 'Текст цитаты',
+  index: 1,
+  noMore: true,
 };
 
 export default Item;
