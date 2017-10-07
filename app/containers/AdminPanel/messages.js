@@ -27,6 +27,10 @@ export default defineMessages({
     id: 'app.containers.AdminPanel.optionsLabel',
     defaultMessage: 'Опции',
   },
+  pagesLabel: {
+    id: 'app.containers.AdminPanel.pagesLabel',
+    defaultMessage: 'Страницы',
+  },
 });
 
 russianMessages.aor.page.not_found = 'Страница не найдена';

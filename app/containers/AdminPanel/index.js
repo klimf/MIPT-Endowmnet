@@ -16,6 +16,7 @@ import * as CapitalResource from './resources/capitals/index';
 import * as NavigationResource from './resources/navigation';
 import * as NewsResource from './resources/news';
 import * as OptionsResource from './resources/options';
+import * as PagesResource from './resources/pages';
 import capitalsRestDecorator from './resources/capitals/restClientDecorator';
 import optionsRestDecorator from './resources/options/restClientDecorator';
 import restClient, { compose } from './restClient';
@@ -82,6 +83,13 @@ export class AdminPanel extends React.Component { // eslint-disable-line react/p
             options={{ label: messages.optionsLabel.defaultMessage }}
             list={OptionsResource.OptionsList}
             edit={OptionsResource.OptionsEdit}
+          />
+          <Resource
+            name="pages"
+            options={{ label: messages.pagesLabel.defaultMessage }}
+            list={PagesResource.PagesList}
+            edit={PagesResource.PagesEdit}
+            create={PagesResource.PagesCreate}
             remove={Delete}
           />
         </Admin>

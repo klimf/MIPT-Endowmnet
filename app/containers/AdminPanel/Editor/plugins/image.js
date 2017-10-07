@@ -12,6 +12,6 @@ const decorator = composeDecorators(
 );
 
 const imagePlugin = createImagePlugin({ decorator });
-
+console.log(imagePlugin);
 
 export default imagePlugin;
