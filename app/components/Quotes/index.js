@@ -18,7 +18,7 @@ function Quotes(props) {
     <div>
       <Title>{props.title}</Title>
       {props.items.map((item, index) => (
-        <Item key={index} index={index} {...item} />
+        <Item {...props} key={index} index={index} {...item} />
       ))}
     </div>
   );

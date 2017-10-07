@@ -9,7 +9,6 @@ import styled from 'styled-components';
 import { media } from '../../utils/helpers';
 import { image, rounded, shadow } from '../../utils/constants';
 
-import placeholder from '../../images/placeholder.png';
 
 const About = styled.div`
   position: relative;

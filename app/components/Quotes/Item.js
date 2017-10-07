@@ -18,14 +18,14 @@ export const StyledLink = styled(Link)`
   font-weight: 300;
 `;
 
-const Quote = styled.h2`
+export const Quote = styled.h2`
   position: relative;
   margin: 0;
   color: ${palette.black};
   font-size: 24px;
 `;
 
-const More = styled.h4`
+export const More = styled.h4`
   position: relative;
   margin: 16px 0 0 0;
   color: ${palette.primary};
@@ -34,7 +34,7 @@ const More = styled.h4`
   ${(props) => props.noMore && 'visibility: hidden; opacity: 0;'}
 `;
 
-const Info = styled.h4`
+export const Info = styled.h4`
   position: relative;
   margin: 16px 0 0 0;
   color: ${palette.gray};
@@ -45,7 +45,7 @@ const Info = styled.h4`
   }
 `;
 
-const Decoration = styled.div`
+export const Decoration = styled.div`
   position: absolute;
   ${(props) => props.isLeft ? 'left: 0' : 'right: 0'};
   top: 50%;

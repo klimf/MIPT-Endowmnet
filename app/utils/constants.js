@@ -1,6 +1,6 @@
-import placeholder from '../images/placeholder.png';
 import styled, { css } from 'styled-components';
-import { media } from './helpers';
+import placeholder from '../images/placeholder.png';
+import { media, resolveStatic } from './helpers';
 
 export const palette = {
   accent: '#B84646',
@@ -43,7 +43,7 @@ export const block = css`
 `;
 
 export const image = css`
-  background: url(${(props) => props.src ? props.src : placeholder}) center no-repeat;
+  background: url(${(props) => props.src ? resolveStatic(props.src) : placeholder}) center no-repeat;
   background-size: cover;
 `;
 

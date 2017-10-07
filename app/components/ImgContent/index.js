@@ -10,7 +10,7 @@ import { block, image, palette, shadow } from '../../utils/constants';
 import { media } from '../../utils/helpers';
 import FlexBox from '../FlexBox';
 
-const Wrapper = styled(FlexBox)`
+export const Wrapper = styled(FlexBox)`
   display: flex;
   flex-direction: ${(props) => props.reverse ? 'row-reverse' : 'row'};
   align-items: center;
@@ -27,7 +27,7 @@ const contentSubtract = (props) => {
   return 0;
 };
 
-const ContentBlock = styled.div`
+export const ContentBlock = styled.div`
   position:relative;
   padding: ${(props) => props.padding ? props.padding : '0'};
   margin: 0;
@@ -54,7 +54,7 @@ const ContentBlock = styled.div`
   ${(props) => props.styles && props.styles}
 `;
 
-const ImgWrapper = styled.div`
+export const ImgWrapper = styled.div`
   width: ${(props) => props.imgWidth ? props.imgWidth : 400}px;
   ${(props) => !props.noAdaptive && media.small`
     width: 40%;
@@ -71,7 +71,7 @@ const borderRadius = (props) => {
   return '0';
 };
 
-const Image = styled.div`
+export const Image = styled.div`
   position:relative;
   width: 100%;
   padding: 50% 0;

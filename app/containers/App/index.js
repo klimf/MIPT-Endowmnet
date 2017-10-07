@@ -15,8 +15,8 @@ import React, { PropTypes } from 'react';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
 
-import Header from '../Header';
 import Footer from 'components/Footer';
+import Header from '../Header';
 import AuthProvider from '../AuthProvider';
 
 import { palette } from '../../utils/constants';

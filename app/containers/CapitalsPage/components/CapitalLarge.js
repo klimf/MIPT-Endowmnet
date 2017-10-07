@@ -12,8 +12,8 @@ import FlexBox from 'components/FlexBox';
 import Button from 'components/Button';
 import logo from '../../../images/MiptLogo.jpg';
 import { palette } from '../../../utils/constants';
-import { formatMoney, hideOn, media, resolveStatic } from '../../../utils/helpers';
-import Image from '../../../components/Image/index';
+import { formatMoney, hideOn, media } from '../../../utils/helpers';
+import Image from '../../../components/FullImage';
 import Block from '../../../components/Block';
 
 const Wrapper = styled.div`
@@ -123,7 +123,7 @@ function CapitalLarge(props) {
       <Block padding="40px">
         <FlexBox style={{ height: '140px' }}>
           <ImgWrapper noSmall>
-            <Image style={{ height: '140px' }} rounded shadow src={props.image && resolveStatic(props.image.small)} />
+            <Image style={{ height: '140px' }} rounded shadow src={props.image && props.image.small} />
           </ImgWrapper>
           <Info>
             <Name>

@@ -4,10 +4,12 @@
 *
 */
 
-import React from 'react';
+import React, { PropTypes } from 'react';
 import styled from 'styled-components';
-import { hideOn } from '../../utils/helpers';
+import { hideOn, resolveStatic } from '../../utils/helpers';
 import { shadow } from '../../utils/constants';
+import placeholder from '../../images/placeholder.png';
+
 
 const Img = styled.img`
   width: ${(props) => props.width ? props.width : '100%'};
@@ -19,13 +21,14 @@ const Img = styled.img`
 `;
 
 function FullImage(props) {
+  const { src, ...otherProps } = props;
   return (
-    <Img {...props} />
+    <Img src={src ? resolveStatic(src) : placeholder} {...otherProps} />
   );
 }
 
 FullImage.propTypes = {
-
+  src: PropTypes.string,
 };
 
 export default FullImage;

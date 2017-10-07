@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import Editor from 'draft-js-plugins-editor';
 import { EditorState, convertFromRaw } from 'draft-js';
 import styled from 'styled-components';
+import 'last-draft-js-toolbar-plugin/lib/plugin.css';
 import 'last-draft-js-sidebar-plugin/lib/plugin.css';
 import plugins from './plugins';
 import { InlineToolbar } from './plugins/tollbar';
 import { AlignmentTool } from './plugins/common';
 import placeholder from '../../../images/placeholder.png';
-import 'last-draft-js-toolbar-plugin/lib/plugin.css';
 
 
 export const EditorWrap = styled.div`

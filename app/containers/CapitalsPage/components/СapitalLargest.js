@@ -14,7 +14,7 @@ import Button from 'components/Button';
 import logo from '../../../images/MiptLogo.jpg';
 import { palette } from '../../../utils/constants';
 import { formatMoney, hideOn, media } from '../../../utils/helpers';
-import Image from '../../../components/Image/index';
+import Image from '../../../components/FullImage';
 import Block from '../../../components/Block';
 
 const Wrapper = styled.div`

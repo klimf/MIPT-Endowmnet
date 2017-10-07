@@ -30,7 +30,6 @@ import InfoText from '../../components/InfoText/index';
 import Button from '../../components/Button/index';
 import Title from '../../components/Title/index';
 import Image from '../../components/FullImage/index';
-import ImgDesc from '../../components/ImgDesc/index';
 
 
 const Head = styled(FlexBox)`
@@ -51,6 +50,7 @@ const Info = styled.div`
   justify-content: space-between;
   height: 100%;
   padding: 0 0 0 48px;
+  width: 100%;
   ${media.small`
     padding: 24px 0 0 0;
   `}
@@ -119,7 +119,7 @@ export class CapitalPage extends React.PureComponent { // eslint-disable-line re
           <Name noLarge>{this.props.capital.data.name}</Name>
           <Image noMedium noLarge rounded shadow src={this.props.capital.data.image && this.props.capital.data.image.small} />
           <Head horisontal="space-between" noWrap >
-            <WdH noSmall rounded shadow src={this.props.capital.data.image && this.props.capital.data.image.small} />
+            <WdH noSmall rounded shadow image={this.props.capital.data.image && this.props.capital.data.image.small} />
             <Info >
               <Name noSmall noMedium>{this.props.capital.data.name}</Name>
               <ShortDesc>{this.props.capital.data.description}</ShortDesc>
@@ -138,11 +138,11 @@ export class CapitalPage extends React.PureComponent { // eslint-disable-line re
           </Head>
           <Space size={2} />
           <Title>О капитале</Title>
-          <ImgDesc image={this.props.data.image} description={this.props.data.description} />
+          <div dangerouslySetInnerHTML={this.props.data.content} />
           <Space size={3} />
-          <Quotes title="Основатели" items={this.props.capital.data.founders} />
+          <Quotes title="Основатели" noMore items={this.props.capital.data.founders || []} />
           <Space size={3} />
-          <Quotes title="Получатели" items={this.props.capital.data.receivers} />
+          <Quotes title="Получатели" noMore items={this.props.capital.data.receivers || []} />
           <Space size={2} />
           <DonationForm ref={(e) => (this.donationForm = e)} title="Пополнить капитал" />
         </Content>
