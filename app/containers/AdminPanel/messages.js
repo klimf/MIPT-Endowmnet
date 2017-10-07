@@ -17,7 +17,15 @@ export default defineMessages({
   },
   navigationLabel: {
     id: 'app.containers.AdminPanel.navigationLabel',
-    defaultMessage: 'Главная навигация',
+    defaultMessage: 'Панель навигации',
+  },
+  newsLabel: {
+    id: 'app.containers.AdminPanel.newsLabel',
+    defaultMessage: 'Новости',
+  },
+  optionsLabel: {
+    id: 'app.containers.AdminPanel.optionsLabel',
+    defaultMessage: 'Опции',
   },
 });
 

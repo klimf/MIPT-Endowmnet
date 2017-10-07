@@ -15,13 +15,15 @@ import makeSelectAdminPanel from './selectors';
 import * as CapitalResource from './resources/capitals/index';
 import * as NavigationResource from './resources/navigation';
 import * as NewsResource from './resources/news';
+import * as OptionsResource from './resources/options';
 import capitalsRestDecorator from './resources/capitals/restClientDecorator';
+import optionsRestDecorator from './resources/options/restClientDecorator';
 import restClient, { compose } from './restClient';
 import { makeSelectUserPermissions } from '../AuthProvider/selectors';
 import { ADMIN_ROLE } from '../AuthProvider/constants';
 import sagas from './sagas';
 
-const decoratedRestClient = compose([capitalsRestDecorator])(restClient);
+const decoratedRestClient = compose([capitalsRestDecorator, optionsRestDecorator])(restClient);
 const aorMessages = {
   ru: aorMessagesRu,
 };
@@ -69,10 +71,17 @@ export class AdminPanel extends React.Component { // eslint-disable-line react/p
           />
           <Resource
             name="news"
-            options={{ label: messages.navigationLabel.defaultMessage }}
+            options={{ label: messages.newsLabel.defaultMessage }}
             list={NewsResource.NewsList}
             edit={NewsResource.NewsEdit}
             create={NewsResource.NewsCreate}
+            remove={Delete}
+          />
+          <Resource
+            name="options"
+            options={{ label: messages.optionsLabel.defaultMessage }}
+            list={OptionsResource.OptionsList}
+            edit={OptionsResource.OptionsEdit}
             remove={Delete}
           />
         </Admin>

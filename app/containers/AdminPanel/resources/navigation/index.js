@@ -13,7 +13,7 @@ import {
 import { required, onlyLatin } from '../validation';
 
 export const NavigationList = (props) => (
-  <List title={'Новости'} {...props}>
+  <List title={'Панель навигации'} {...props}>
     <Datagrid>
       <TextField label={'Название'} source="name" />
       <TextField label={'Ссылка'} source="url" />
