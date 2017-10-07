@@ -13,7 +13,7 @@ import FlexBox from '../FlexBox';
 import ImgContent from '../ImgContent/index';
 
 
-const StyledLink = styled(Link)`
+export const StyledLink = styled(Link)`
   text-decoration: none;
   font-weight: 300;
 `;

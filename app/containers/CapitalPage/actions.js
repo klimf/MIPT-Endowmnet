@@ -4,12 +4,6 @@
  *
  */
 
-import {
-  DEFAULT_ACTION,
-} from './constants';
+import { FetchAction } from '../../utils/api';
 
-export function defaultAction() {
-  return {
-    type: DEFAULT_ACTION,
-  };
-}
+export const fetchCapital = new FetchAction('FETCH_CAPITAL');

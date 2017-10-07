@@ -23,7 +23,7 @@ class LoginForm extends Component {
   }
 
   onError() {
-    return this.props.authProviderState.login.error && [{ name: 'email', error: () => this.props.authProviderState.login.error.data }];
+    return this.props.authProviderState.login.error ? [{ name: 'email', error: () => this.props.authProviderState.login.error.data }] : [];
   }
 
   render() {

@@ -9,8 +9,11 @@ import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import styled from 'styled-components';
-import makeSelectCapitalPage from './selectors';
+import { bindAll } from 'redux-act';
+import scrollToComponent from 'react-scroll-to-component';
 
+import makeSelectCapitalPage, { makeSelectCurrentCapital } from './selectors';
+import * as actions from './actions';
 import img from '../../images/CapitalImage.jpg';
 import face from '../../images/Face.jpg';
 import face1 from '../../images/Face1.jpg';
@@ -18,7 +21,7 @@ import face2 from '../../images/Face2.jpg';
 import face3 from '../../images/Face3.jpg';
 import Content from '../../components/Content/index';
 import Space from '../../components/Space/index';
-import { hideOn, media } from '../../utils/helpers';
+import { hideOn, media, formatMoney } from '../../utils/helpers';
 import Quotes from '../../components/Quotes/index';
 import { DonationForm } from '../../components/DonationForm/index';
 import WdH from '../../components/WdH/index';
@@ -90,30 +93,41 @@ const BtnFix = styled.div`
 
 
 export class CapitalPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+
+  componentWillMount() {
+    this.props.fetchCapital.start({ capitalName: this.props.routeParams.capitalName });
+  }
+
+  goToDonation() {
+    scrollToComponent(this.donationForm);
+  }
+
   render() {
     return (
       <div>
+        {this.props.capital.data &&
         <Helmet
-          title="CapitalPage"
+          title={this.props.capital.data.name}
           meta={[
-            { name: 'description', content: 'Description of CapitalPage' },
+            { name: 'description', content: this.props.capital.data.description },
           ]}
         />
+      }
+        { this.props.capital.data &&
         <Content>
-          <Space size={4} />
-          <Space size={2} />
-          <Name noLarge>{this.props.data.name}</Name>
-          <Image noMedium noLarge rounded shadow src={this.props.data.image} />
+          <Space size={6} />
+          <Name noLarge>{this.props.capital.data.name}</Name>
+          <Image noMedium noLarge rounded shadow src={this.props.capital.data.image && this.props.capital.data.image.small} />
           <Head horisontal="space-between" noWrap >
-            <WdH noSmall rounded shadow image={this.props.data.image} />
+            <WdH noSmall rounded shadow src={this.props.capital.data.image && this.props.capital.data.image.small} />
             <Info >
-              <Name noSmall noMedium>{this.props.data.name}</Name>
-              <ShortDesc>{this.props.data.shortdesc}</ShortDesc>
+              <Name noSmall noMedium>{this.props.capital.data.name}</Name>
+              <ShortDesc>{this.props.capital.data.description}</ShortDesc>
               <InfoAction>
                 <InfoText>
                   <h2>
                     <b>Собрано:</b>
-                    <i> 100 ₽</i>
+                    <i>{formatMoney(this.props.capital.data.given)}₽</i>
                   </h2>
                 </InfoText>
                 <BtnFix>
@@ -126,10 +140,13 @@ export class CapitalPage extends React.PureComponent { // eslint-disable-line re
           <Title>О капитале</Title>
           <ImgDesc image={this.props.data.image} description={this.props.data.description} />
           <Space size={3} />
-          <Quotes title="Получатели" items={this.props.data.receivers} />
+          <Quotes title="Основатели" items={this.props.capital.data.founders} />
+          <Space size={3} />
+          <Quotes title="Получатели" items={this.props.capital.data.receivers} />
           <Space size={2} />
-          <DonationForm title="Помочь капиталу" />
+          <DonationForm ref={(e) => (this.donationForm = e)} title="Пополнить капитал" />
         </Content>
+      }
       </div>
     );
   }
@@ -142,12 +159,17 @@ CapitalPage.defaultProps = {
     description: 'Ежегодно МФТИ выпускает более 2.5 тысяч студентов во взрослую жизнь. Одно из главных событий университетского учебного года - церемония вручения почетных наград МФТИ и красных дипломов.\n\n День выпускника - это ряд зрелищных мероприятий, разработанных университетом для того, чтобы ребята запомнили этот день не только умом, но и душой, и сердцем! Весь вечер для молодых людей выступают почетные приглашенные гости. Одно из главных событий университетского учебного года - церемония вручения почетных наград МФТИ и красных дипломов.\n\n День выпускника - это ряд зрелищных мероприятий, разработанных университетом для того, чтобы ребята запомнили этот день не только умом, но и душой, и сердцем! Весь вечер для молодых людей выступают почетные приглашенные гости.',
     collected: 1435000,
     image: img,
-    founder: {
+    founders: [{
       name: 'Сергей Гуз',
       status: 'Зав. кафедры физики',
       quote: 'Развитие факультета проблем физики и энергетики - важная составляющая работы фонда университета МФТИ',
       image: face,
-    },
+    }, {
+      name: 'Сергей Гуз',
+      status: 'Зав. кафедры физики',
+      quote: 'Развитие факультета проблем физики и энергетики - важная составляющая работы фонда университета МФТИ',
+      image: face,
+    }],
     receivers: [
       {
         name: 'Сергей Гуз',
@@ -176,17 +198,18 @@ CapitalPage.defaultProps = {
 
 CapitalPage.propTypes = {
   data: PropTypes.object,
-  // dispatch: PropTypes.func.isRequired,
+  capital: PropTypes.any,
+  fetchCapital: PropTypes.any,
+  routeParams: PropTypes.any,
 };
 
 const mapStateToProps = createStructuredSelector({
   CapitalPage: makeSelectCapitalPage(),
+  capital: makeSelectCurrentCapital(),
 });
 
 function mapDispatchToProps(dispatch) {
-  return {
-    dispatch,
-  };
+  return bindAll(actions, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CapitalPage);

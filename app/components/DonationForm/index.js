@@ -178,7 +178,7 @@ export class DonationForm extends React.PureComponent { // eslint-disable-line r
 }
 
 DonationForm.defaultProps = {
-  title: 'Пожертвовать',
+  title: 'Пополнить фонд',
 };
 DonationForm.propTypes = {
   title: PropTypes.string,

@@ -14,13 +14,14 @@ import messages from './messages';
 import Wrapper from './Wrapper';
 import NavList from './NavList';
 import NavItem from './NavItem';
-import Icon from '../Icon';
+import Icon from '../../components/Icon';
 
-import Logo from '../Logo';
-import Button from '../Button';
-import FlexBox from '../FlexBox';
-import Overlay from '../Overlay';
-import { ProtectedContent } from '../../containers/AuthProvider';
+import Logo from '../../components/Logo';
+import Button from '../../components/Button';
+import FlexBox from '../../components/FlexBox';
+import Overlay from '../../components/Overlay';
+import { ProtectedContent } from '../AuthProvider';
+import AccountButton from '../AuthProvider/AccountButton';
 
 const LoginButton = () => (
   <Button to="/sign-in" type="border" margin="9px 24px" ><FormattedMessage {...messages.enter} /></Button>
@@ -52,7 +53,7 @@ class Header extends React.PureComponent { // eslint-disable-line react/prefer-s
               stateSelector={(state) => state.get('authProvider').get('user')}
               UnauthorizedComponent={LoginButton}
             >
-              <div className="kekek">Залогинились</div>
+              <AccountButton margin="9px 24px"></AccountButton>
             </ProtectedContent>
 
             <Button to="/donate" type="header" margin="9px 0"><FormattedMessage {...messages.action} /></Button>

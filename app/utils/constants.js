@@ -1,6 +1,6 @@
+import placeholder from '../images/placeholder.png';
 import styled, { css } from 'styled-components';
 import { media } from './helpers';
-import placeholder from '../images/placeholder.png';
 
 export const palette = {
   accent: '#B84646',
@@ -62,3 +62,4 @@ export const Block = styled.div`
     padding: ${(props) => props.paddingSmall ? props.paddingSmall : '24px'};
   `}
 `;
+
