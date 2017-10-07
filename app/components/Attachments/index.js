@@ -18,6 +18,7 @@ const StyledIcon = styled(Icon)`
   max-width: 42px;
   margin: 0 12px 0 0;
 `;
+
 const Text = styled(Link)`
   font-size: 20px;
   display: inline-block;

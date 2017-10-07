@@ -10,6 +10,7 @@ const selectAuthProviderDomain = () => (state) => state.get('authProvider');
 const selectUser = () => (state) => state.get('authProvider').get('user');
 const selectAnyFetchStatus = () => (state, { stateSelector }) => stateSelector(state);
 
+
 /**
  * Other specific selectors
  */
@@ -33,9 +34,9 @@ const isUnauthorized = () => createSelector(
   }
 );
 
-const user = () => createSelector(
+const makeUserSelector = () => createSelector(
   selectUser(),
-  (substate) => substate.toJS()
+  (substate) => substate.toJS().data
 );
 
 /**
@@ -47,11 +48,19 @@ const makeSelectAuthProvider = () => createSelector(
   (substate) => substate.toJS()
 );
 
+const makeSelectUserPermissions = (role) => createSelector(
+  selectUser(),
+  (substate) => {
+    const user = substate.toJS().data;
+    return user && user.role === role;
+  }
+);
 
 export default makeSelectAuthProvider;
 export {
   selectAuthProviderDomain,
   isLogged,
   isUnauthorized,
-  user,
+  makeUserSelector,
+  makeSelectUserPermissions,
 };

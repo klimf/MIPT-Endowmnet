@@ -1,13 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
+import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import Button from '../../components/Button';
-import { user } from './selectors';
-import { SimpleIcon } from '../../components//Icon/';
-import logoutIcon from '../../images/logout.svg';
-import { Link } from 'react-router';
+import { makeUserSelector } from './selectors';
 import { fetchLogout } from './actions';
-import styled from 'styled-components';
+import { ADMIN_ROLE } from './constants';
 
 const Wrapper = styled.div`
   display: flex;
@@ -21,7 +19,7 @@ const propTypes = {
 };
 
 const mapRoleToLink = {
-  2: {
+  [ADMIN_ROLE]: {
     link: '/admin',
     label: 'Кабинет администратора',
   },
@@ -42,7 +40,7 @@ class AccountButton extends React.PureComponent {
     this.props.fetchLogout.start();
   }
   render() {
-    const role = this.props.user.data ? this.props.user.data.role : null;
+    const role = this.props.user ? this.props.user.role : null;
     return (
       role ?
         <Wrapper className={this.props.className}>
@@ -60,7 +58,7 @@ AccountButton.propTypes = propTypes;
 AccountButton.defaultProps = defaultProps;
 
 const mapStateToProps = createStructuredSelector({
-  user: user(),
+  user: makeUserSelector(),
 });
 
 const mapDispatchToProps = (dispatch) => ({

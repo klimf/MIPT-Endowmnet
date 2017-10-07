@@ -16,10 +16,10 @@ import {
   TextBlock,
   Info,
   Decoration,
-} from '../../../../components/Quotes/Item';
-import { required } from '../validation';
+} from '../../../components/Quotes/Item';
+import { required } from './validation';
 
-import FlexBox from '../../../../components/FlexBox';
+import FlexBox from '../../../components/FlexBox';
 
 const HoverableImageWrapper = styled(Dropzone)`
   position: relative;
@@ -47,7 +47,14 @@ const HoverableImageWrapper = styled(Dropzone)`
 `;
 
 const ImageDrop = (field) => (
-  <HoverableImageWrapper onDrop={(files) => field.input.onChange({ preview: files[0].preview, file: files[0] })} >
+  <HoverableImageWrapper
+    onDrop={(files) => {
+      field.input.onChange({
+        preview: files[0].preview,
+        file: files[0] });
+    }
+    }
+  >
     <ImgWrapper>
       <Image src={field.input.value && field.input.value.preview} />
     </ImgWrapper>
@@ -57,7 +64,6 @@ const ImageDrop = (field) => (
 const DeleteButton = styled(RaisedButton) `
   right: 0;
 `;
-
 
 const PeopleInput = (man, index, fields) => (
   <Wrapper key={index} isLeft horisontal="space-between">
