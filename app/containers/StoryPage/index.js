@@ -44,7 +44,7 @@ export class StoryPage extends React.PureComponent { // eslint-disable-line reac
         <Content>
           <Space size={4} />
           <Title>{data.title}</Title>
-          <QuoteItem quote={data.quote} image={data.face} name={data.name} status={data.status} />
+          <QuoteItem noMore quote={data.quote} image={data.face} name={data.name} status={data.status} />
           <Space size={2} />
           <ImgDesc image={data.image} description={data.description} />
           <Space size={2} />

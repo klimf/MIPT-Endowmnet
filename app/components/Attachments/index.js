@@ -32,9 +32,9 @@ function Attachments(props) {
   return (
     <div>
       {props.items.map((item, index) => (
-        <div>
+        <div key={index}>
           <Space size={2} />
-          <FlexBox noWrap key={index}>
+          <FlexBox noWrap >
             <StyledIcon noBorder type="clip" viewBox="0 0 42 24" height="24px" />
             <Text href={item.link}>{item.text}</Text>
           </FlexBox>

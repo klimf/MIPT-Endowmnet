@@ -5,7 +5,7 @@ import { createSelector } from 'reselect';
  */
 const selectCapitalPageDomain = () => (state) => state.get('capitalPage');
 
-const selectCapital = () => (state) => state.get('currentCapital');
+const selectCapital = () => (state) => state.get('capitalPage').get('currentCapital');
 /**
  * Other specific selectors
  */
@@ -21,7 +21,6 @@ const makeSelectCapitalPage = () => createSelector(
 );
 
 const makeSelectCurrentCapital = () => createSelector(
-  selectCapitalPageDomain(),
   selectCapital(),
   (substate) => substate.toJS()
 );

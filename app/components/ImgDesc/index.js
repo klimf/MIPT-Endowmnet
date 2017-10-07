@@ -9,7 +9,6 @@ import styled from 'styled-components';
 import { media } from '../../utils/helpers';
 import { image, rounded, shadow } from '../../utils/constants';
 
-import placeholder from '../../images/placeholder.png';
 
 const About = styled.div`
   position: relative;
@@ -26,16 +25,14 @@ const Description = styled.p`
   height: 100%;
 `;
 
-const AboutImage = styled.div.attrs({
-  src: (props) => props.src || placeholder,
-})`
-  min-width: 400px;
+const AboutImage = styled.div`
+  min-width: ${(props) => props.width ? props.width : '400px'};
   margin: 0 0 0 24px;
   min-height: 100%;
   max-height: 400px;
   ${image}
-  ${rounded}
-  ${shadow}
+  ${(props) => !props.noDecor && rounded}
+  ${(props) => !props.noDecor && shadow}
   ${media.medium`
     min-width: 300px;
   `}
@@ -51,7 +48,7 @@ function ImgDesc(props) {
   return (
     <About>
       <Description>{props.description}</Description>
-      <AboutImage src={props.image} />
+      <AboutImage noDecor={props.noDecor} src={props.image} />
     </About>
   );
 }
@@ -59,6 +56,7 @@ function ImgDesc(props) {
 ImgDesc.propTypes = {
   description: PropTypes.string,
   image: PropTypes.string,
+  noDecor: PropTypes.bool,
 };
 
 export default ImgDesc;

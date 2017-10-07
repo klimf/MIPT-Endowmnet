@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { hideOn } from '../../utils/helpers';
 
 const FlexBox = styled.div`
+  position: ${(props) => props.relative ? 'relative' : 'static'};
   display: flex;
   width: ${(props) => props.expanded ? '100%' : 'auto'};
   flex-wrap: ${(props) => props.noWrap ? 'nowrap' : 'wrap'};

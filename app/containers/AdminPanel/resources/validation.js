@@ -1,4 +1,4 @@
-import { isEmpty, isEmail, isCurrency, isInt, isLength as length, isURL as url } from 'validator';
+import { isCurrency } from 'validator';
 export const required = (val) => val ? undefined : 'Обязательное поле';
 
 const digitsReg = /[0-9]+/;

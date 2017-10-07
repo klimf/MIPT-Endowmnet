@@ -9,14 +9,12 @@ import {
   TextInput,
 } from 'admin-on-rest';
 import {
-  Wrapper,
   Quote,
-  ImgWrapper,
-  Image,
-  TextBlock,
+
   Info,
   Decoration,
 } from '../../../components/Quotes/Item';
+import { Image, Wrapper, ContentBlock, ImgWrapper } from '../../../components/ImgContent';
 import { required } from './validation';
 
 import FlexBox from '../../../components/FlexBox';
@@ -55,8 +53,8 @@ const ImageDrop = (field) => (
     }
     }
   >
-    <ImgWrapper>
-      <Image src={field.input.value && field.input.value.preview} />
+    <ImgWrapper imgWidth={200}>
+      <Image circle shadow src={field.input.value && field.input.value.preview} />
     </ImgWrapper>
   </HoverableImageWrapper>
   );
@@ -65,10 +63,10 @@ const DeleteButton = styled(RaisedButton) `
   right: 0;
 `;
 
-const PeopleInput = (man, index, fields) => (
-  <Wrapper key={index} isLeft horisontal="space-between">
+export const PeopleInput = (man, index, fields) => (
+  <Wrapper margin="48px 0" horisontal="space-between" key={index} >
     <Field validate={[required]} name={`${man}.picture`} component={ImageDrop} />
-    <TextBlock>
+    <ContentBlock padding="24px" innerPadding={48} vertPadding={48} imgWidth={200} block>
       <Quote>
         <Field validate={[required]} name={`${man}.quote`} component={LongTextInput} label="Цитата" />
       </Quote>
@@ -81,7 +79,8 @@ const PeopleInput = (man, index, fields) => (
         </Info>
       </FlexBox>
       <Decoration isLeft />
-    </TextBlock>
+    </ContentBlock>
+
     <DeleteButton onClick={() => fields.remove(index)}>Удалить</DeleteButton>
   </Wrapper>
 );

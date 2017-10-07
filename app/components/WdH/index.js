@@ -21,13 +21,13 @@ function WdH(props) {
     left: 0;
     right: 0;
     border-radius: ${props.rounded ? '8px' : '0'};
-    ${props.src && image}
+    ${props.image && image}
     ${props.shadow && shadow}
   `;
   return (
     <Wrapper {...props}>
       <img role="presentation" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" />
-      <Content src={props.src}>
+      <Content src={props.image}>
         { Children.toArray(props.children) }
       </Content>
     </Wrapper>
@@ -44,8 +44,9 @@ WdH.propTypes = {
   rate: PropTypes.number,
   height: PropTypes.string,
   children: PropTypes.node,
-  src: PropTypes.string,
+  image: PropTypes.string,
   rounded: PropTypes.bool,
+  shadow: PropTypes.bool,
   float: PropTypes.string,
 };
 

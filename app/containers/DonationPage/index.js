@@ -50,7 +50,7 @@ export class DonationPage extends React.PureComponent { // eslint-disable-line r
         />
         <Content>
           <Space size={4} />
-          <DonationForm />
+          <DonationForm title="Пополнить фонд" />
         </Content>
       </div>
     );

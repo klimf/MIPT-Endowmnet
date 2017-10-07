@@ -98,7 +98,7 @@ function Masthead(props) {
       <Space size={2} />
       <FlexBox horisontal="space-between" vertical="center">
         <StyledLink to="/capitals"><FormattedMessage {...messages.link} /></StyledLink>
-        <Button to="/capitals"><FormattedMessage {...messages.button} /></Button>
+        <Button to="/donate"><FormattedMessage {...messages.button} /></Button>
       </FlexBox>
     </Wrapper>
   );

@@ -24,7 +24,7 @@ export default defineMessages({
     {
       id: 'app.components.Header.NavList.Item3',
       defaultMessage: 'Дарители',
-      link: '/stories',
+      link: '/sponsors',
     },
     {
       id: 'app.components.Header.NavList.Item4',

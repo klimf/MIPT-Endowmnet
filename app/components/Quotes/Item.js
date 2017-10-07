@@ -7,40 +7,15 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router';
-import { block, palette, shadow, unit } from '../../utils/constants';
+import { palette } from '../../utils/constants';
 import { media } from '../../utils/helpers';
 import FlexBox from '../FlexBox';
-import placeholder from '../../images/placeholder.png';
+import ImgContent from '../ImgContent/index';
 
-export const Wrapper = styled(FlexBox)`
-  display: flex;
-  flex-direction: ${(props) => props.isLeft ? 'row' : 'row-reverse'};
-  align-items: center;
-  position: relative;
-  width: 100%;
-  margin: ${3 * unit}px 0;
-  padding: 0;
-`;
 
 export const StyledLink = styled(Link)`
   text-decoration: none;
   font-weight: 300;
-`;
-
-export const TextBlock = styled.div`
-  position:relative;
-  margin: 0;
-  padding: 24px;
-  width: calc(100% - 280px);
-  min-height: 180px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  ${block}
-  ${media.small`
-    margin: 36px 0;
-    width: 100%;
-  `}
 `;
 
 export const Quote = styled.h2`
@@ -50,15 +25,16 @@ export const Quote = styled.h2`
   font-size: 24px;
 `;
 
-export const More = styled.p`
+export const More = styled.h4`
   position: relative;
   margin: 16px 0 0 0;
   color: ${palette.primary};
   text-decoration: underline;
   font-size: 20px;
+  ${(props) => props.noMore && 'visibility: hidden; opacity: 0;'}
 `;
 
-export const Info = styled.p`
+export const Info = styled.h4`
   position: relative;
   margin: 16px 0 0 0;
   color: ${palette.gray};
@@ -67,27 +43,6 @@ export const Info = styled.p`
     font-weight: 400;
     color: ${palette.black};
   }
-`;
-
-export const ImgWrapper = styled.div`
-  width: 200px;
-  ${media.small`
-    width: 40%;
-    margin: 0 30%;
-  `}
-`;
-
-export const Image = styled.div`
-  position:relative;
-  width: 100%;
-  padding: 50% 0;
-  border-radius: 50%;
-  overflow: hidden;
-  background-color: ${palette.primary};
-  background-size: cover;
-  background-position: center;
-  background-image: url(${(props) => props.src || placeholder});
-  ${shadow}
 `;
 
 export const Decoration = styled.div`
@@ -111,19 +66,14 @@ export const Decoration = styled.div`
 function Item(props) {
   return (
     <StyledLink to={props.link}>
-      <Wrapper isLeft={props.index % 2 === 0} horisontal="space-between">
-        <ImgWrapper>
-          <Image style={{ backgroundImage: `url(${props.image})` }} />
-        </ImgWrapper>
-        <TextBlock>
-          <Quote>{props.quote}</Quote>
-          <FlexBox horisontal="space-between" vertical="center">
-            <More>Подробнее</More>
-            <Info>{props.status} - <b>{props.name}</b></Info>
-          </FlexBox>
-          <Decoration isLeft={props.index % 2 === 0} />
-        </TextBlock>
-      </Wrapper>
+      <ImgContent margin="48px 0" block padding="24px" reverse={props.index % 2 !== 0} circle shadow image={props.image}>
+        <Quote>{props.quote}</Quote>
+        <FlexBox horisontal="space-between" vertical="center">
+          <More noMore={props.noMore}>Подробнее</More>
+          <Info>{props.status} - <b>{props.name}</b></Info>
+        </FlexBox>
+        <Decoration isLeft={props.index % 2 === 0} />
+      </ImgContent>
     </StyledLink>
   );
 }
@@ -135,6 +85,7 @@ Item.propTypes = {
   quote: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
   index: PropTypes.number,
+  noMore: PropTypes.bool,
 };
 
 export default Item;

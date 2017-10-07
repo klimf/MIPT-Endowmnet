@@ -7,7 +7,6 @@
 import React, { PropTypes } from 'react';
 
 import Title from 'components/Title';
-// import Button from 'components/Button';
 import Item from './Item';
 
 import face1 from '../../images/Face1.jpg';
@@ -19,7 +18,7 @@ function Quotes(props) {
     <div>
       <Title>{props.title}</Title>
       {props.items.map((item, index) => (
-        <Item key={index} index={index} {...item} />
+        <Item {...props} key={index} index={index} {...item} />
       ))}
     </div>
   );
@@ -32,21 +31,21 @@ Quotes.defaultProps = {
       status: 'Зав. кафедры физики',
       quote: 'Развитие факультета проблем физики и энергетики - важная составляющая работы фонда университета МФТИ',
       image: face1,
-      link: '/',
+      link: '/story',
     },
     {
       name: 'Сергей Гуз',
       status: 'Зав. кафедры физики',
       quote: 'Развитие факультета проблем физики и энергетики - важная составляющая работы фонда университета МФТИ',
       image: face2,
-      link: '/',
+      link: '/story',
     },
     {
       name: 'Сергей Гуз',
       status: 'Зав. кафедры физики',
       quote: 'Развитие факультета проблем физики и энергетики - важная составляющая работы фонда университета МФТИ',
       image: face3,
-      link: '/',
+      link: '/story',
     },
   ],
 };

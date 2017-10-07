@@ -15,8 +15,8 @@ import React, { PropTypes } from 'react';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
 
-import Header from '../Header';
 import Footer from 'components/Footer';
+import Header from '../Header';
 import AuthProvider from '../AuthProvider';
 
 import { palette } from '../../utils/constants';
@@ -31,9 +31,10 @@ const PageWrapper = styled.div`
   display: inline-block;
   width: 100%;
   background-color: ${palette.background};
-  min-height: 100%;
+  min-height: calc(100% - 364px);
   overflow: hidden;
   padding-bottom: 48px;
+  position: relative;
 `;
 
 export default class App extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
