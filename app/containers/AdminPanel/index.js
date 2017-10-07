@@ -12,7 +12,9 @@ import { createStructuredSelector } from 'reselect';
 import theme from './theme';
 import messages, { aorMessagesRu } from './messages';
 import makeSelectAdminPanel from './selectors';
-import * as CapitalResource from './resources/capitals/CapitalData';
+import * as CapitalResource from './resources/capitals/index';
+import * as NavigationResource from './resources/navigation';
+import * as NewsResource from './resources/news';
 import capitalsRestDecorator from './resources/capitals/restClientDecorator';
 import restClient, { compose } from './restClient';
 import { makeSelectUserPermissions } from '../AuthProvider/selectors';
@@ -55,6 +57,22 @@ export class AdminPanel extends React.Component { // eslint-disable-line react/p
             list={CapitalResource.CapitalsList}
             edit={CapitalResource.CapitalsEdit}
             create={CapitalResource.CapitalsCreate}
+            remove={Delete}
+          />
+          <Resource
+            name="navigation"
+            options={{ label: messages.navigationLabel.defaultMessage }}
+            list={NavigationResource.NavigationList}
+            edit={NavigationResource.NavigationEdit}
+            create={NavigationResource.NavigationCreate}
+            remove={Delete}
+          />
+          <Resource
+            name="news"
+            options={{ label: messages.navigationLabel.defaultMessage }}
+            list={NewsResource.NewsList}
+            edit={NewsResource.NewsEdit}
+            create={NewsResource.NewsCreate}
             remove={Delete}
           />
         </Admin>

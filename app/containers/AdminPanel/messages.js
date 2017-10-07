@@ -15,6 +15,10 @@ export default defineMessages({
     id: 'app.containers.AdminPanel.capitalsLabel',
     defaultMessage: 'Капиталы',
   },
+  navigationLabel: {
+    id: 'app.containers.AdminPanel.navigationLabel',
+    defaultMessage: 'Главная навигация',
+  },
 });
 
 russianMessages.aor.page.not_found = 'Страница не найдена';
