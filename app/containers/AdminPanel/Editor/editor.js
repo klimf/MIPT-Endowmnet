@@ -14,24 +14,44 @@ export const EditorWrap = styled.div`
 `;
 
 class EditorApp extends Component { // eslint-disable-line
+
+  renderEditor(additionalProps) {
+    return (<Editor
+      toolbar={toolbarOptions}
+      customBlockRenderFn={imagePlugin.blockRendererFn}
+      toolbarCustomButtons={[<AddComponent />]}
+      editorState={this.props.editorState}
+      onEditorStateChange={this.props.editorStateChange}
+      {...additionalProps}
+    />);
+  }
+
   render() {
     return (
       <div >
-        <EditorWrap >
-          <Editor
-            toolbar={toolbarOptions}
-            customBlockRenderFn={imagePlugin.blockRendererFn}
-            editorState={this.props.editorState}
-            onEditorStateChange={this.props.editorStateChange}
-            toolbarCustomButtons={[<AddComponent />]}
-          />
-        </EditorWrap>
+        { (this.props.editorState && this.props.editorStateChange) ?
+
+          <EditorWrap >
+            {this.renderEditor({
+              editorState: this.props.editorState,
+              onEditorStateChange: this.props.editorStateChange }
+                )}
+          </EditorWrap>
+
+          : this.renderEditor({
+            initialContentState: this.props.initialContentState,
+            toolbarHidden: true,
+          }
+            )
+        }
+
       </div>
     );
   }
 }
 
 EditorApp.propTypes = {
+  initialContentState: PropTypes.string,
   editorState: PropTypes.any,
   editorStateChange: PropTypes.func,
 };

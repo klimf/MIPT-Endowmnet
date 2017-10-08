@@ -10,6 +10,8 @@ import Helmet from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { makeSelectCurrentPage } from './selectors';
 import { fetchPage } from './actions';
+import Editor from '../AdminPanel/Editor/editor';
+import Content from '../../components/Content';
 
 export class GenericPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
@@ -27,6 +29,14 @@ export class GenericPage extends React.Component { // eslint-disable-line react/
           ]}
         />
         <div />
+        <Content>
+          {this.props.currentPage.data &&
+          <Editor
+            initialContentState={this.props.currentPage.data.content}
+          />
+          }
+        </Content>
+
       </div>
     );
   }

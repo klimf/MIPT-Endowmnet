@@ -11,7 +11,7 @@ export function* getPage() {
   while (true) {
     try {
       const action = yield take(actions.fetchPage.types.start);
-      const pageAddress = action.payload.replace('p/', '');
+      const pageAddress = action.payload.replace('/p/', '');
       const page = yield call(() => api.get(`/pages/${pageAddress}`));
       yield put(actions.fetchPage.success(page));
     } catch (e) {
