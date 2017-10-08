@@ -9,6 +9,8 @@ import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { Admin, Resource, Delete } from 'admin-on-rest';
 import { createStructuredSelector } from 'reselect';
+import CapitalsIcon from 'material-ui/svg-icons/action/view-quilt';
+
 import theme from './theme';
 import messages, { aorMessagesRu } from './messages';
 import makeSelectAdminPanel from './selectors';
@@ -16,14 +18,17 @@ import * as CapitalResource from './resources/capitals/index';
 import * as NavigationResource from './resources/navigation';
 import * as NewsResource from './resources/news';
 import * as OptionsResource from './resources/options';
+import * as PagesResource from './resources/pages';
 import capitalsRestDecorator from './resources/capitals/restClientDecorator';
 import optionsRestDecorator from './resources/options/restClientDecorator';
+import pagesRestClientDecorator from './resources/pages/pagesRestClientDecorator';
 import restClient, { compose } from './restClient';
 import { makeSelectUserPermissions } from '../AuthProvider/selectors';
 import { ADMIN_ROLE } from '../AuthProvider/constants';
 import sagas from './sagas';
 
-const decoratedRestClient = compose([capitalsRestDecorator, optionsRestDecorator])(restClient);
+
+const decoratedRestClient = compose([capitalsRestDecorator, optionsRestDecorator, pagesRestClientDecorator])(restClient);
 const aorMessages = {
   ru: aorMessagesRu,
 };
@@ -55,6 +60,7 @@ export class AdminPanel extends React.Component { // eslint-disable-line react/p
         >
           <Resource
             name="capitals"
+            icon={CapitalsIcon}
             options={{ label: messages.capitalsLabel.defaultMessage }}
             list={CapitalResource.CapitalsList}
             edit={CapitalResource.CapitalsEdit}
@@ -82,6 +88,13 @@ export class AdminPanel extends React.Component { // eslint-disable-line react/p
             options={{ label: messages.optionsLabel.defaultMessage }}
             list={OptionsResource.OptionsList}
             edit={OptionsResource.OptionsEdit}
+            remove={Delete}
+          />
+          <Resource
+            name="pages"
+            options={{ label: messages.pagesLabel.defaultMessage }}
+            list={PagesResource.PagesList}
+            edit={PagesResource.PagesEdit}
             remove={Delete}
           />
         </Admin>
