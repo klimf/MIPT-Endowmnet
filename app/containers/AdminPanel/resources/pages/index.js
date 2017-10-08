@@ -1,29 +1,48 @@
 import React from 'react';
 import {
   List,
-  Datagrid,
   Create,
   Edit,
-  TextField,
-  EditButton,
   SimpleForm,
   TextInput,
 } from 'admin-on-rest';
+import { FlatButton, ListItem } from 'material-ui';
+import PageIcon from 'material-ui/svg-icons/action/description';
+import EditIcon from 'material-ui/svg-icons/image/edit';
 import { required, onlyLatin } from '../validation';
 
 import Editor from '../../Editor';
 
+function renderTree(nodes) {
+  return nodes.map((item, index) =>
+    <ListItem
+      key={index}
+      leftIcon={<PageIcon />}
+      rightIconButton={<FlatButton
+        style={{ margin: 4 }}
+        icon={<EditIcon />} label="Редактиовать"
+      />}
+      primaryTogglesNestedList primaryText={item.pageName}
+      nestedItems={item.nodes.length > 0 ? renderTree(item.nodes) : []}
+    />
+    );
+}
+
+const NestedList = ({ ids, data, basePath }) => // eslint-disable-line
+  <div>
+    {renderTree(data[1].nodes)}
+  </div>;
+
+NestedList.defaultProps = {
+  data: {},
+  ids: [],
+};
 
 export const PagesList = (props) => (
-  <List title={'Страницы'} {...props}>
-    <Datagrid>
-      <TextField label={'Название'} source="name" />
-      <TextField label={'Описание'} source="description" />
-      <TextField label={'ссылка'} source="pageName" />
-      <EditButton label={'Редактировать'} basePath="/pages" />
-    </Datagrid>
+  <List title="Страницы" {...props}>
+    <NestedList />
   </List>
-);
+  );
 
 export const PagesEdit = (props) => (
   <Edit title={'Редактирование страницы'} {...props}>
@@ -46,3 +65,4 @@ export const PagesCreate = (props) => (
     </SimpleForm>
   </Create>
 );
+

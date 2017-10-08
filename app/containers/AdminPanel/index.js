@@ -9,6 +9,8 @@ import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { Admin, Resource, Delete } from 'admin-on-rest';
 import { createStructuredSelector } from 'reselect';
+import CapitalsIcon from 'material-ui/svg-icons/action/view-quilt';
+
 import theme from './theme';
 import messages, { aorMessagesRu } from './messages';
 import makeSelectAdminPanel from './selectors';
@@ -19,6 +21,7 @@ import * as OptionsResource from './resources/options';
 import * as PagesResource from './resources/pages';
 import capitalsRestDecorator from './resources/capitals/restClientDecorator';
 import optionsRestDecorator from './resources/options/restClientDecorator';
+import pagesRestClientDecorator from './resources/pages/pagesRestClientDecorator';
 import editorRestDecorator from './Editor/restClientDecorator';
 import restClient, { compose } from './restClient';
 import { makeSelectUserPermissions } from '../AuthProvider/selectors';
@@ -29,6 +32,7 @@ const decoratedRestClient = compose([
   capitalsRestDecorator,
   optionsRestDecorator,
   editorRestDecorator,
+  pagesRestClientDecorator,
 ])(restClient);
 
 const aorMessages = {
@@ -62,6 +66,7 @@ export class AdminPanel extends React.Component { // eslint-disable-line react/p
         >
           <Resource
             name="capitals"
+            icon={CapitalsIcon}
             options={{ label: messages.capitalsLabel.defaultMessage }}
             list={CapitalResource.CapitalsList}
             edit={CapitalResource.CapitalsEdit}
@@ -96,6 +101,13 @@ export class AdminPanel extends React.Component { // eslint-disable-line react/p
             list={PagesResource.PagesList}
             edit={PagesResource.PagesEdit}
             create={PagesResource.PagesCreate}
+            remove={Delete}
+          />
+          <Resource
+            name="pages"
+            options={{ label: messages.pagesLabel.defaultMessage }}
+            list={PagesResource.PagesList}
+            edit={PagesResource.PagesEdit}
             remove={Delete}
           />
         </Admin>
