@@ -19,12 +19,18 @@ import * as OptionsResource from './resources/options';
 import * as PagesResource from './resources/pages';
 import capitalsRestDecorator from './resources/capitals/restClientDecorator';
 import optionsRestDecorator from './resources/options/restClientDecorator';
+import editorRestDecorator from './Editor/restClientDecorator';
 import restClient, { compose } from './restClient';
 import { makeSelectUserPermissions } from '../AuthProvider/selectors';
 import { ADMIN_ROLE } from '../AuthProvider/constants';
 import editorReducer from './Editor/reducer';
 
-const decoratedRestClient = compose([capitalsRestDecorator, optionsRestDecorator])(restClient);
+const decoratedRestClient = compose([
+  capitalsRestDecorator,
+  optionsRestDecorator,
+  editorRestDecorator,
+])(restClient);
+
 const aorMessages = {
   ru: aorMessagesRu,
 };

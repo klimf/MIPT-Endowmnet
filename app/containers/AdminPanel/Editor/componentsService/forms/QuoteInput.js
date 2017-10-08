@@ -10,7 +10,6 @@ import {
 } from 'admin-on-rest';
 import {
   Quote,
-
   Info,
   Decoration,
 } from '../../../../../components/Quotes/Item';
