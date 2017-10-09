@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import { EditorState, convertFromRaw } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import styled from 'styled-components';
-import imagePlugin from './plugins/image';
 import toolbarOptions from './plugins/toolbar/options';
 import AddComponent from './componentsService';
 
@@ -11,40 +11,48 @@ export const EditorWrap = styled.div`
  padding: 17px;
  border: 1px solid #eee;
  background: #fff;
+ z-index: 50;
 `;
 
-class EditorApp extends Component { // eslint-disable-line
+class EditorApp extends Component { // eslint-disable-line}
+  constructor(props) {
+    super(props);
+    try {
+      this.state = {
+        editorState: (!(this.props.editorState instanceof EditorState) && this.props.editorState) ?
+        EditorState.createWithContent(convertFromRaw(JSON.parse(this.props.editorState)))
+        : this.props.editorState,
+      };
+    } catch (e) {
+      this.state = {
+        editorState: EditorState.createEmpty(),
+      };
+    }
+    this.onEditorStateChange = this.onEditorStateChange.bind(this);
+  }
 
-  renderEditor(additionalProps) {
-    return (<Editor
-      toolbar={toolbarOptions}
-      customBlockRenderFn={imagePlugin.blockRendererFn}
-      toolbarCustomButtons={[<AddComponent />]}
-      editorState={this.props.editorState}
-      onEditorStateChange={this.props.editorStateChange}
-      {...additionalProps}
-    />);
+  onEditorStateChange(editorState) {
+    try {
+      this.setState({ editorState });
+      this.props.editorStateChange(editorState);
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   render() {
     return (
       <div >
-        { (this.props.editorState && this.props.editorStateChange) ?
-
-          <EditorWrap >
-            {this.renderEditor({
-              editorState: this.props.editorState,
-              onEditorStateChange: this.props.editorStateChange }
-                )}
-          </EditorWrap>
-
-          : this.renderEditor({
-            initialContentState: this.props.initialContentState,
-            toolbarHidden: true,
-          }
-            )
-        }
-
+        <EditorWrap>
+          <Editor
+            toolbar={toolbarOptions}
+            toolbarCustomButtons={[<AddComponent />]}
+            editorState={this.state.editorState}
+            onEditorStateChange={this.onEditorStateChange}
+            initialContentState={this.props.initialContentState}
+            toolbarHidden={this.props.toolbarHidden}
+          />
+        </EditorWrap>
       </div>
     );
   }
@@ -54,6 +62,7 @@ EditorApp.propTypes = {
   initialContentState: PropTypes.string,
   editorState: PropTypes.any,
   editorStateChange: PropTypes.func,
+  toolbarHidden: PropTypes.bool,
 };
 
 

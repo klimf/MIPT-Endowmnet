@@ -12,10 +12,9 @@ import {
   ImageInput,
   ImageField,
 } from 'admin-on-rest';
-import RichTextInput from 'aor-rich-text-input';
 import { required } from '../validation';
 import { StaticImage } from '../customFields';
-// import Editor from '../../Editor';
+import Editor from '../../Editor';
 
 export const NewsList = (props) => (
   <List title={'Новости'} {...props}>
@@ -38,7 +37,7 @@ export const NewsEdit = (props) => (
       <TextInput label={'Название'} validate={[required]} source="name" />
       <TextInput label={'Короткое первью'} validate={[required]} source="description" />
       <DateInput source="date" label="Дата" />
-      <RichTextInput source="content" validate={[required]} label="Полное описание" toolbar={[[{ header: [1, 2, 3, false] }], ['bold', 'italic', 'underline', 'strike'], [{ list: 'ordered' }, { list: 'bullet' }], [{ direction: 'rtl' }], [{ align: [] }], ['link', 'image']]} />
+      <Editor source="content" label="Содержание"></Editor>
     </SimpleForm>
   </Edit>
 );
@@ -53,7 +52,7 @@ export const NewsCreate = (props) => (
       <TextInput label={'Название'} validate={[required]} source="name" />
       <TextInput label={'Короткое первью'} validate={[required]} source="description" />
       <DateInput source="date" label="Дата" />
-      <RichTextInput source="content" validate={[required]} label="Полное описание" toolbar={[[{ header: [1, 2, 3, false] }], ['bold', 'italic', 'underline', 'strike'], [{ list: 'ordered' }, { list: 'bullet' }], [{ direction: 'rtl' }], [{ align: [] }], ['link', 'image']]} />
+      <Editor source="content" label="Содержание"></Editor>
     </SimpleForm>
   </Create>
 );

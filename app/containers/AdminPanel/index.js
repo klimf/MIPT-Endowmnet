@@ -26,6 +26,7 @@ import capitalsRestDecorator from './resources/capitals/restClientDecorator';
 import optionsRestDecorator from './resources/options/restClientDecorator';
 import pagesRestClientDecorator from './resources/pages/pagesRestClientDecorator';
 import editorRestDecorator from './Editor/restClientDecorator';
+import uploadDecorator from './restClient/uploadDecorator';
 import restClient, { compose } from './restClient';
 import { makeSelectUserPermissions } from '../AuthProvider/selectors';
 import { ADMIN_ROLE } from '../AuthProvider/constants';
@@ -36,6 +37,7 @@ const decoratedRestClient = compose([
   optionsRestDecorator,
   editorRestDecorator,
   pagesRestClientDecorator,
+  uploadDecorator,
 ])(restClient);
 
 const aorMessages = {

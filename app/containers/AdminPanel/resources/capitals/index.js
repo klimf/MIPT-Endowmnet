@@ -13,11 +13,10 @@ import {
   ImageInput,
   ImageField,
 } from 'admin-on-rest';
-import RichTextInput from 'aor-rich-text-input';
 import { required, onlyLatin, currency } from '../validation';
 import PeopleSection from './PeopleSection';
 import { StaticImage } from '../customFields';
-// import Editor from '../../Editor';
+import Editor from '../../Editor';
 
 export const CapitalsList = (props) => (
   <List title={'Капиталы'} {...props}>
@@ -46,7 +45,7 @@ export const CapitalsEdit = (props) => (
         <TextInput label={'Короткое описание'} validate={[required]} source="description" />
         <TextInput label={'Название для ссылки'} validate={[required, onlyLatin]} source="fullPageUri" />
         <TextInput label={'Собрано'} validate={[required, currency]} source="given" />
-        <RichTextInput source="content" validate={[required]} label="Полное описание" toolbar={[[{ header: [1, 2, 3, false] }], ['bold', 'italic', 'underline', 'strike'], [{ list: 'ordered' }, { list: 'bullet' }], [{ direction: 'rtl' }], [{ align: [] }], ['link', 'image']]} />
+        <Editor source={'content'}></Editor>
       </FormTab>
       <FormTab label="Основатели">
         <PeopleSection name={'founders'}></PeopleSection>
@@ -70,7 +69,7 @@ export const CapitalsCreate = (props) => (
         <TextInput label={'Короткое описание'} validate={[required]} source="description" />
         <TextInput label={'Название для ссылки'} validate={[required, onlyLatin]} source="linkName" />
         <TextInput label={'Собрано'} validate={[required, currency]} source="given" />
-        <RichTextInput source="content" validate={[required]} label="Полное описание" toolbar={[[{ header: [1, 2, 3, false] }], ['bold', 'italic', 'underline', 'strike'], [{ list: 'ordered' }, { list: 'bullet' }], [{ direction: 'rtl' }], [{ align: [] }], ['link', 'image']]} />
+        <Editor source={'content'}></Editor>
       </FormTab>
       <FormTab label="Основатели">
         <PeopleSection name={'founders'}></PeopleSection>

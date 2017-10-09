@@ -3,9 +3,7 @@ import { Field } from 'redux-form';
 import { EditorState } from 'draft-js';
 import Editor from './editor';
 
-const EditorComponent = (field) =>
-  <Editor editorStateChange={field.input.onChange} editorState={field.input.value} />;
-
+const EditorComponent = (field) => <Editor editorStateChange={field.input.onChange} editorState={field.input.value} />;
 
 export default function EditorField({ source, validate }) {
   return (<Field defaultValue={EditorState.createEmpty()} name={source} validate={validate} component={EditorComponent} />);
