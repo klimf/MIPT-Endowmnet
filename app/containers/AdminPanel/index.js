@@ -90,7 +90,7 @@ export class AdminPanel extends React.Component { // eslint-disable-line react/p
             remove={Delete}
           />
           <Resource
-            name="options"
+            name="domainOptions"
             options={{ label: messages.optionsLabel.defaultMessage }}
             list={OptionsResource.OptionsList}
             edit={OptionsResource.OptionsEdit}
