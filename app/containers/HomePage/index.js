@@ -40,8 +40,8 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
           <Masthead purpose={purpose} collected={collected} />
           <Space size={5} />
           <Title>Как это работает?</Title>
-          <Image src={howML} noSmall />
-          <Image src={howS} noMedium noLarge />
+          <Image src={howML} local noSmall />
+          <Image src={howS} local noMedium noLarge />
           <Space size={5} />
           <News title="Последние новости и мероприятия" />
           <Space size={1} />

@@ -86,7 +86,7 @@ function ImgContent(props) {
   return (
     <Wrapper margin={props.margin} reverse={props.reverse} horisontal="space-between">
       <ImgWrapper noAdaptive={props.noAdaptive} imgWidth={props.imgWidth}>
-        <Image circle={props.circle} rounded={props.rounded} shadow={props.shadow} style={{ backgroundImage: `url(${props.image})` }} />
+        <Image local={props.local} circle={props.circle} rounded={props.rounded} shadow={props.shadow} style={{ backgroundImage: `url(${props.image})` }} />
       </ImgWrapper>
       <ContentBlock styles={props.styles} vertPadding={props.vertPadding} noAdaptive={props.noAdaptive} centredColumn={props.centredColumn} block={props.block} padding={props.padding} imgWidth={props.imgWidth} innerPadding={props.innerPadding}>
         { Children.toArray(props.children) }
@@ -117,6 +117,7 @@ ImgContent.propTypes = {
   circle: PropTypes.bool,
   rounded: PropTypes.bool,
   block: PropTypes.bool,
+  local: PropTypes.bool,
   noAdaptive: PropTypes.bool,
 };
 

@@ -19,11 +19,19 @@ const Img = styled.img`
   ${(props) => props.rounded && 'border-radius: 8px;'}
   ${(props) => props.shadow && shadow}
 `;
+const showSrc = (src, local) => {
+  if (src) {
+    return local ? src : resolveStatic(src);
+  }
+  return placeholder;
+};
 
 function FullImage(props) {
   const { src, ...otherProps } = props;
   return (
-    <Img src={src ? resolveStatic(src) : placeholder} {...otherProps} />
+    <Img
+      src={showSrc(src, otherProps.local)} {...otherProps}
+    />
   );
 }
 
