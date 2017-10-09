@@ -39,7 +39,7 @@ export const CapitalsEdit = (props) => (
     <TabbedForm>
       <FormTab label="Общая информация">
         <ImageInput source="picture" label="Фотография" accept="image/png,image/jpg,image/jpeg">
-          <ImageField source="picture"></ImageField>
+          <ImageField source="image.small"></ImageField>
         </ImageInput>
         <StaticImage source="image" />
         <TextInput label={'Название'} validate={[required]} source="name" />
@@ -65,6 +65,7 @@ export const CapitalsCreate = (props) => (
         <ImageInput source="picture" label="Фотография" accept="image/png,image/jpg,image/jpeg">
           <ImageField source="image.small" />
         </ImageInput>
+        <StaticImage source="image" />
         <TextInput label={'Название'} validate={[required]} source="name" />
         <TextInput label={'Короткое описание'} validate={[required]} source="description" />
         <TextInput label={'Название для ссылки'} validate={[required, onlyLatin]} source="linkName" />

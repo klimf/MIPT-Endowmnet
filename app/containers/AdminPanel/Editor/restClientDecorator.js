@@ -13,7 +13,7 @@ export default function (restClient) {
       const newData = Object.assign({}, params.data, { content: newContent });
       return restClient(type, resource, Object.assign({}, params, { data: newData }));
     }
-    if (type === GET_ONE && resource === 'pages') {
+    if (type === GET_ONE && (resource === 'pages' || resource === 'news')) {
       return restClient(type, resource, params).then((response) => {
         if (response.data.content) {
           const content = EditorState.createWithContent(convertFromRaw(response.data.content));
