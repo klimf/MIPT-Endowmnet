@@ -40,7 +40,7 @@ const Info = styled.div`
   width: 100%;
   flex-wrap: wrap;
   align-items: center;
-  width: calc(100% - 180px);
+  width: calc(100% - 140px);
   position: relative;
   margin-left: 20px;
   margin-bottom: 10px;
@@ -136,7 +136,7 @@ function MainCapital(props) {
             <More>
                 Подробнее
               </More>
-            <Money><CollectedLabel>Собрано:</CollectedLabel> { formatMoney(props.given) } ₽</Money>
+            <Money><CollectedLabel>Собрано:</CollectedLabel> {formatMoney(props.given)}₽</Money>
           </Info>
         </FlexBox>
         <Stats horisontal="space-between">

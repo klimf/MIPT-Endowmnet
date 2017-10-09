@@ -1,12 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router';
+import EditIcon from '../../../images/pencil-edit-button.svg';
+import CloseIcon from '../../../images/close-button.svg';
 import CapitalSmall from './CapitalSmall';
 import CapitalMedium from './CapitalMedium';
 import CapitalLarge from './CapitalLarge';
 import CapitalLargest from './СapitalLargest';
 import { palette, unit } from '../../../utils/constants';
-import Button from '../../../components/Button';
+
 
 const StyledLink = styled(Link)`
   color: ${palette.black};
@@ -24,10 +26,31 @@ const EditToolBarWrap = styled.div`
   display: flex;
 `;
 
+const ToolButton = styled.div`
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  background: ${palette.primary};
+  margin-left: 12px;
+  background-image: url(${(props) => props.icon});
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 18px !important;
+  padding: 5px;
+  transition: .3s ease-in-out;
+  box-shadow: 0 12px 24px ${palette.dark};
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+    box-shadow: 0 16px 28px ${palette.dark};
+  }
+`;
+
 const Editable = (props) => (
   <EditableWrap {...props}>
     <EditToolBarWrap>
-      <Button
+      <ToolButton
+        icon={EditIcon}
         onMouseDown={(e) => {
           e.stopPropagation();
           const editParams = {
@@ -36,13 +59,14 @@ const Editable = (props) => (
           };
           props.onBlockEditStart(editParams);
         }}
-      >...</Button>
-      <Button
+      ></ToolButton>
+      <ToolButton
+        icon={CloseIcon}
         onMouseDown={(e) => {
           e.stopPropagation();
           props.onBlockDeleteStart(props.data);
         }}
-      >/</Button>
+      ></ToolButton>
     </EditToolBarWrap>
     {props.children}
   </EditableWrap>
