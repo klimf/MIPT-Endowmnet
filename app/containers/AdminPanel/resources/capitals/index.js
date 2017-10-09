@@ -16,12 +16,13 @@ import {
 import RichTextInput from 'aor-rich-text-input';
 import { required, onlyLatin, currency } from '../validation';
 import PeopleSection from './PeopleSection';
+import { StaticImage } from '../customFields';
 // import Editor from '../../Editor';
-// import { formatMoney, parseMoney } from '../../../../utils/helpers';
 
 export const CapitalsList = (props) => (
   <List title={'Капиталы'} {...props}>
     <Datagrid>
+      <StaticImage source="image" label="Изображение" />
       <TextField label={'Название'} source="name" />
       <NumberField
         label="Собрано"
@@ -38,8 +39,9 @@ export const CapitalsEdit = (props) => (
     <TabbedForm>
       <FormTab label="Общая информация">
         <ImageInput source="picture" label="Фотография" accept="image/png,image/jpg,image/jpeg">
-          <ImageField source="image.small" />
+          <ImageField source="image.small"></ImageField>
         </ImageInput>
+        <StaticImage source="image" />
         <TextInput label={'Название'} validate={[required]} source="name" />
         <TextInput label={'Короткое описание'} validate={[required]} source="description" />
         <TextInput label={'Название для ссылки'} validate={[required, onlyLatin]} source="fullPageUri" />
@@ -63,6 +65,7 @@ export const CapitalsCreate = (props) => (
         <ImageInput source="picture" label="Фотография" accept="image/png,image/jpg,image/jpeg">
           <ImageField source="image.small" />
         </ImageInput>
+        <StaticImage source="image" />
         <TextInput label={'Название'} validate={[required]} source="name" />
         <TextInput label={'Короткое описание'} validate={[required]} source="description" />
         <TextInput label={'Название для ссылки'} validate={[required, onlyLatin]} source="linkName" />

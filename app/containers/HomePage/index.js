@@ -9,9 +9,10 @@
  * the linting exception.
  */
 
-import React from 'react';
+import React, { PropTypes } from 'react';
 import Helmet from 'react-helmet';
-
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 import Content from 'components/Content';
 import Masthead from 'components/Masthead';
 import Space from 'components/Space';
@@ -21,27 +22,31 @@ import News from 'components/News';
 import Quotes from 'components/Quotes';
 import Partners from 'components/Partners';
 import Button from 'components/Button';
-
+import makeSelectHomePage from './selectors';
 import howML from '../../images/how.png';
 import howS from '../../images/how_mobile.png';
+import { fetchFundVolume } from './actions';
 
 
-const purpose = 1000000000;
-const collected = 783400000;
+class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+  componentWillMount = () => {
+    this.props.fetchFundVolume.start();
+  }
 
-
-export default class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
       <div>
         <Helmet />
         <Content>
           <Space size={5} />
-          <Masthead purpose={purpose} collected={collected} />
+          <Masthead
+            purpose={this.props.homePage.fundVolume.data && this.props.homePage.fundVolume.data.need}
+            collected={this.props.homePage.fundVolume.data && this.props.homePage.fundVolume.data.given}
+          />
           <Space size={5} />
           <Title>Как это работает?</Title>
-          <Image src={howML} noSmall />
-          <Image src={howS} noMedium noLarge />
+          <Image src={howML} local noSmall />
+          <Image src={howS} local noMedium noLarge />
           <Space size={5} />
           <News title="Последние новости и мероприятия" />
           <Space size={1} />
@@ -60,3 +65,18 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
     );
   }
 }
+
+HomePage.propTypes = {
+  homePage: PropTypes.object,
+  fetchFundVolume: PropTypes.object,
+};
+
+const mapStateToProps = createStructuredSelector({
+  homePage: makeSelectHomePage(),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  fetchFundVolume: fetchFundVolume.bindTo(dispatch),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

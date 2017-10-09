@@ -23,12 +23,16 @@ export default function createRoutes(store) {
       name: 'home',
       getComponent(nextState, cb) {
         const importModules = Promise.all([
+          import('containers/HomePage/reducer.js'),
+          import('containers/HomePage/sagas.js'),
           import('containers/HomePage'),
         ]);
 
         const renderRoute = loadModule(cb);
 
-        importModules.then(([component]) => {
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('homePage', reducer.default);
+          injectSagas(sagas.default);
           renderRoute(component);
         });
 
@@ -307,6 +311,26 @@ export default function createRoutes(store) {
 
         importModules.then(([reducer, component]) => {
           injectReducer('forbiddenPage', reducer.default);
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    }, {
+      path: '/p/*',
+      name: 'genericPage',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          import('containers/GenericPage/reducer'),
+          import('containers/GenericPage/sagas'),
+          import('containers/GenericPage'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('genericPage', reducer.default);
+          injectSagas(sagas.default);
           renderRoute(component);
         });
 

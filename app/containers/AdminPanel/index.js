@@ -25,13 +25,19 @@ import * as PagesResource from './resources/pages';
 import capitalsRestDecorator from './resources/capitals/restClientDecorator';
 import optionsRestDecorator from './resources/options/restClientDecorator';
 import pagesRestClientDecorator from './resources/pages/pagesRestClientDecorator';
+import editorRestDecorator from './Editor/restClientDecorator';
 import restClient, { compose } from './restClient';
 import { makeSelectUserPermissions } from '../AuthProvider/selectors';
 import { ADMIN_ROLE } from '../AuthProvider/constants';
-import sagas from './sagas';
+import editorReducer from './Editor/reducer';
 
+const decoratedRestClient = compose([
+  capitalsRestDecorator,
+  optionsRestDecorator,
+  editorRestDecorator,
+  pagesRestClientDecorator,
+])(restClient);
 
-const decoratedRestClient = compose([capitalsRestDecorator, optionsRestDecorator, pagesRestClientDecorator])(restClient);
 const aorMessages = {
   ru: aorMessagesRu,
 };
@@ -54,7 +60,7 @@ export class AdminPanel extends React.Component { // eslint-disable-line react/p
           title={messages.header.defaultMessage}
         />
         <Admin
-          customSagas={sagas}
+          customReducers={{ editor: editorReducer }}
           title={messages.header.defaultMessage}
           locale="ru"
           messages={aorMessages}
@@ -88,12 +94,11 @@ export class AdminPanel extends React.Component { // eslint-disable-line react/p
             remove={Delete}
           />
           <Resource
-            name="options"
+            name="domainOptions"
             icon={OptionsIcon}
             options={{ label: messages.optionsLabel.defaultMessage }}
             list={OptionsResource.OptionsList}
             edit={OptionsResource.OptionsEdit}
-            remove={Delete}
           />
           <Resource
             name="pages"

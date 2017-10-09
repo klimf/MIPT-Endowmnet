@@ -63,10 +63,24 @@ export const Decoration = styled.div`
   `}
 `;
 
+
+const side = (left, right, index) => {
+  if (left) {
+    return false;
+  }
+  if (right) {
+    return true;
+  }
+  return index % 2 !== 0;
+};
+
 function Item(props) {
   return (
     <StyledLink to={props.link}>
-      <ImgContent margin="48px 0" block padding="24px" reverse={props.index % 2 !== 0} circle shadow image={props.image}>
+      <ImgContent
+        margin="48px 0" block padding="24px" reverse={side(props.left, props.right, props.index)} circle shadow
+        image={props.image && props.image.original ? props.image.small : props.image}
+      >
         <Quote>{props.quote}</Quote>
         <FlexBox horisontal="space-between" vertical="center">
           <More noMore={props.noMore}>Подробнее</More>
@@ -82,10 +96,21 @@ Item.propTypes = {
   link: PropTypes.string,
   name: PropTypes.string,
   status: PropTypes.string,
-  quote: PropTypes.string.isRequired,
-  image: PropTypes.string.isRequired,
+  quote: PropTypes.string,
+  image: PropTypes.string,
   index: PropTypes.number,
   noMore: PropTypes.bool,
+  left: PropTypes.bool,
+  right: PropTypes.bool,
+};
+
+Item.defaultProps = {
+  link: '#',
+  name: 'Иванов Иван',
+  status: 'Руководитель фонда',
+  quote: 'Текст цитаты',
+  index: 1,
+  noMore: true,
 };
 
 export default Item;

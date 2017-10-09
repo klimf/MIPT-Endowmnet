@@ -10,14 +10,13 @@ import {
 } from 'admin-on-rest';
 import {
   Quote,
-
   Info,
   Decoration,
-} from '../../../components/Quotes/Item';
-import { Image, Wrapper, ContentBlock, ImgWrapper } from '../../../components/ImgContent';
-import { required } from './validation';
+} from '../../../../../components/Quotes/Item';
+import { Image, Wrapper, ContentBlock, ImgWrapper } from '../../../../../components/ImgContent';
+import { required } from '../../../resources/validation';
 
-import FlexBox from '../../../components/FlexBox';
+import FlexBox from '../../../../../components/FlexBox';
 
 const HoverableImageWrapper = styled(Dropzone)`
   position: relative;

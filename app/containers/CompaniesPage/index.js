@@ -59,8 +59,8 @@ export class CompaniesPage extends React.PureComponent { // eslint-disable-line 
           <Space size={4} />
           <Title>Управляющие компании</Title>
           <Space size={1} />
-          <FullImage width="50%" noSmall noLarge src={logo} />
-          <FullImage noMedium noLarge src={logo} />
+          <FullImage width="50%" local noSmall noLarge src={logo} />
+          <FullImage noMedium local noLarge src={logo} />
           <Space noLarge size={2} />
           <Container horisontal="space-between" noWrap >
             <WdH noSmall noMedium image={logo} rate={2.564102564} />
@@ -71,7 +71,7 @@ export class CompaniesPage extends React.PureComponent { // eslint-disable-line 
           <Space size={4} />
           <Title>Сотрудники о «РОНИН Траст»</Title>
           <Column padding="0 48px 0 0" paddingSmall="0" all={6} small={12}>
-            <ImgContent margin="0" imgWidth={120} image={face1} circle shadow centredColumn noAdaptive>
+            <ImgContent local margin="0" imgWidth={120} image={face1} circle shadow centredColumn noAdaptive>
               <h2>Гаек Андрей</h2>
               <p>Управляющий партнер группы компаний "RONIN Partners"</p>
             </ImgContent>

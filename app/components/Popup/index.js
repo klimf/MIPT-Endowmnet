@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Button from '../Button';
 import Overlay from '../Overlay';
 import Title from '../Title';
+import { media } from '../../utils/helpers';
 
 const CancelButton = (props) => (
   <Button {...props} fake expanded>
@@ -13,9 +14,12 @@ const CancelButton = (props) => (
 const PopupWrap = styled.div`
       display: block;
       height: 400px;
-      max-width: 960px;
+      width: 960px;
       backgroud: #000;
       margin: 0 auto;
+      ${media.medium`
+        width: 100%;
+      `}
   `;
 
 const Popup = (props) => (

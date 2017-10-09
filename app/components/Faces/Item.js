@@ -44,7 +44,7 @@ const Image = styled.div`
 function Face(props) {
   return (
     <Wrapper>
-      <Image src={props.image} />
+      <Image local={props.local} src={props.image.original ? props.image.small : props.image} />
       <Space size={2} />
       <h2>{props.name}</h2>
       <p>{props.status}</p>
@@ -56,6 +56,7 @@ Face.propTypes = {
   image: PropTypes.string,
   name: PropTypes.string,
   status: PropTypes.string,
+  local: PropTypes.bool,
 };
 
 export default Face;

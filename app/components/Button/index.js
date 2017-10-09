@@ -46,7 +46,7 @@ function Button(props) {
   }
   if (props.fake) {
     button = (
-      <StyledDiv>
+      <StyledDiv >
         {Children.toArray(props.children)}
       </StyledDiv>
     );

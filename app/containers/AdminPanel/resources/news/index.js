@@ -8,18 +8,19 @@ import {
   EditButton,
   TextInput,
   SimpleForm,
-  DateField,
+  DateInput,
   ImageInput,
   ImageField,
 } from 'admin-on-rest';
 import RichTextInput from 'aor-rich-text-input';
 import { required } from '../validation';
+import { StaticImage } from '../customFields';
 // import Editor from '../../Editor';
-// import { formatMoney, parseMoney } from '../../../../utils/helpers';
 
 export const NewsList = (props) => (
   <List title={'Новости'} {...props}>
     <Datagrid>
+      <StaticImage source="image" label="Изображение" />
       <TextField label={'Название'} source="name" />
       <TextField label={'Короткое превью'} source="description" />
       <EditButton label={'Редактировать'} basePath="/news" />
@@ -33,9 +34,10 @@ export const NewsEdit = (props) => (
       <ImageInput source="picture" label="Фотография" accept="image/png,image/jpg,image/jpeg">
         <ImageField source="image.small" />
       </ImageInput>
+      <StaticImage source="image" />
       <TextInput label={'Название'} validate={[required]} source="name" />
       <TextInput label={'Короткое первью'} validate={[required]} source="description" />
-      <DateField label={'Дата'} validate={[]} source="date" />
+      <DateInput source="date" label="Дата" />
       <RichTextInput source="content" validate={[required]} label="Полное описание" toolbar={[[{ header: [1, 2, 3, false] }], ['bold', 'italic', 'underline', 'strike'], [{ list: 'ordered' }, { list: 'bullet' }], [{ direction: 'rtl' }], [{ align: [] }], ['link', 'image']]} />
     </SimpleForm>
   </Edit>
@@ -47,9 +49,10 @@ export const NewsCreate = (props) => (
       <ImageInput source="picture" label="Фотография" accept="image/png,image/jpg,image/jpeg">
         <ImageField source="image.small" />
       </ImageInput>
+      <StaticImage source="image" />
       <TextInput label={'Название'} validate={[required]} source="name" />
       <TextInput label={'Короткое первью'} validate={[required]} source="description" />
-      <DateField label={'Дата'} validate={[]} source="date" />
+      <DateInput source="date" label="Дата" />
       <RichTextInput source="content" validate={[required]} label="Полное описание" toolbar={[[{ header: [1, 2, 3, false] }], ['bold', 'italic', 'underline', 'strike'], [{ list: 'ordered' }, { list: 'bullet' }], [{ direction: 'rtl' }], [{ align: [] }], ['link', 'image']]} />
     </SimpleForm>
   </Create>

@@ -28,7 +28,7 @@ export default defineMessages({
     defaultMessage: 'Опции',
   },
   pagesLabel: {
-    id: 'app.containers.AdminPanel.pages',
+    id: 'app.containers.AdminPanel.pagesLabel',
     defaultMessage: 'Страницы',
   },
 });

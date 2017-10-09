@@ -13,9 +13,9 @@ import { required } from '../validation';
 export const OptionsList = (props) => (
   <List title={'Опции'} {...props}>
     <Datagrid>
-      <TextField label={'Название'} source="name" />
+      <TextField label={'Название'} source="id" />
       <TextField label={'Значение'} source="value" />
-      <EditButton label={'Редактировать'} basePath="/options" />
+      <EditButton label={'Редактировать'} basePath="/domainOptions" />
     </Datagrid>
   </List>
 );
@@ -23,8 +23,8 @@ export const OptionsList = (props) => (
 export const OptionsEdit = (props) => (
   <Edit title={'Редактирование опции'} {...props}>
     <SimpleForm>
-      <TextInput label={'Название'} validate={[required]} source="name" />
-      <TextInput label={'Короткое первью'} validate={[required]} source="description" />
+      <TextField label={'Название'} source="id" />
+      <TextInput label={'Значение'} validate={[required]} source="value" />
     </SimpleForm>
   </Edit>
 );

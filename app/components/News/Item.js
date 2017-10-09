@@ -83,7 +83,7 @@ function Item(props) {
   return (
     <StyledLink to={props.link}>
       <Wrapper>
-        <Image src={props.image} />
+        <Image local={props.local} src={props.image.original ? props.image.small : props.image} />
         <TextBlock>
           <Title>{props.title}</Title>
           <Description>{props.description}</Description>
@@ -101,6 +101,7 @@ Item.propTypes = {
   month: PropTypes.string,
   description: PropTypes.string,
   image: PropTypes.string.isRequired,
+  local: PropTypes.bool,
 };
 
 export default Item;
