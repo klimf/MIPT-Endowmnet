@@ -10,6 +10,9 @@ import Helmet from 'react-helmet';
 import { Admin, Resource, Delete } from 'admin-on-rest';
 import { createStructuredSelector } from 'reselect';
 import CapitalsIcon from 'material-ui/svg-icons/action/view-quilt';
+import OptionsIcon from 'material-ui/svg-icons/action/info';
+import PagesIcon from 'material-ui/svg-icons/action/description';
+import NewsIcon from 'material-ui/svg-icons/action/date-range';
 
 import theme from './theme';
 import messages, { aorMessagesRu } from './messages';
@@ -77,6 +80,7 @@ export class AdminPanel extends React.Component { // eslint-disable-line react/p
           />
           <Resource
             name="news"
+            icon={NewsIcon}
             options={{ label: messages.newsLabel.defaultMessage }}
             list={NewsResource.NewsList}
             edit={NewsResource.NewsEdit}
@@ -85,6 +89,7 @@ export class AdminPanel extends React.Component { // eslint-disable-line react/p
           />
           <Resource
             name="options"
+            icon={OptionsIcon}
             options={{ label: messages.optionsLabel.defaultMessage }}
             list={OptionsResource.OptionsList}
             edit={OptionsResource.OptionsEdit}
@@ -92,6 +97,7 @@ export class AdminPanel extends React.Component { // eslint-disable-line react/p
           />
           <Resource
             name="pages"
+            icon={PagesIcon}
             options={{ label: messages.pagesLabel.defaultMessage }}
             list={PagesResource.PagesList}
             edit={PagesResource.PagesEdit}
