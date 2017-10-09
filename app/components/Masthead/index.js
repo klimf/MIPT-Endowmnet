@@ -14,7 +14,7 @@ const formatProgressValue = (val) => {
   if (val < 1) {
     return val.toFixed(4);
   }
-  return val;
+  return Math.round(val);
 };
 
 function Masthead(props) {

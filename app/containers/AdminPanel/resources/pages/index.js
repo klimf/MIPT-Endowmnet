@@ -30,13 +30,13 @@ function renderTree(ids, nodes, lvl) {
         <Responsive
           small={
             <div>
-              <EditButton record={item} basePath="/pages" style={{ margin: 4 }} icon={<EditIcon />} />
+              <EditButton record={Object.assign({}, item, { id: item.pageName })} basePath="/pages" style={{ margin: 4 }} icon={<EditIcon />} />
               <FlatButton style={{ margin: 4 }} icon={<AddIcon />} />
             </div>
             }
           medium={
             <div>
-              <EditButton record={item} basePath="/pages" style={{ margin: 4 }} icon={<EditIcon />} label="Редактиовать" />
+              <EditButton record={Object.assign({}, item, { id: item.pageName })} basePath="/pages" style={{ margin: 4 }} icon={<EditIcon />} label="Редактиовать" />
               <FlatButton style={{ margin: 4 }} icon={<AddIcon />} label="Добавить подстраницу" />
             </div>
             }
