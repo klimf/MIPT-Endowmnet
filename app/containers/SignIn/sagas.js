@@ -3,6 +3,7 @@ import { push } from 'react-router-redux';
 import { ADMIN_ROLE } from '../AuthProvider/constants';
 import { fetchLogin, fetchUser } from '../AuthProvider/actions';
 // Individual exports for testing
+
 export function* defaultSaga() {
   while (true) {
     yield take(fetchLogin.success);

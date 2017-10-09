@@ -24,4 +24,9 @@ Masthead.propTypes = {
   collected: PropTypes.number,
 };
 
+Masthead.defaultProps = {
+  purpose: 1000000000,
+  collected: 783400000,
+};
+
 export default Masthead;
