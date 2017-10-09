@@ -13,6 +13,7 @@ import face1 from '../../images/Face1.jpg';
 import face2 from '../../images/Face2.jpg';
 import face3 from '../../images/Face3.jpg';
 
+
 function Quotes(props) {
   return (
     <div>

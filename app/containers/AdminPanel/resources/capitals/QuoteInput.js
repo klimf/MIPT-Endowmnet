@@ -43,7 +43,17 @@ const HoverableImageWrapper = styled(Dropzone)`
   }
 `;
 
-const ImageDrop = (field) => (
+const imageStrategy = (item, field) => {
+  if (!field.input.value && item.image) {
+    return item.image.small;
+  }
+  if (field.input.value) {
+    return field.input.value.preview;
+  }
+  return null;
+};
+
+const ImageDrop = (item) => (field) => (
   <HoverableImageWrapper
     onDrop={(files) => {
       field.input.onChange({
@@ -53,7 +63,7 @@ const ImageDrop = (field) => (
     }
   >
     <ImgWrapper imgWidth={200}>
-      <Image circle shadow src={field.input.value && field.input.value.preview} />
+      <Image local={field.input.value} circle shadow src={imageStrategy(item, field)} />
     </ImgWrapper>
   </HoverableImageWrapper>
   );
@@ -64,7 +74,7 @@ const DeleteButton = styled(RaisedButton) `
 
 export const PeopleInput = (man, index, fields) => (
   <Wrapper margin="48px 0" horisontal="space-between" key={index} >
-    <Field validate={[required]} name={`${man}.picture`} component={ImageDrop} />
+    <Field name={`${man}.picture`} component={ImageDrop(man)} />
     <ContentBlock padding="24px" innerPadding={48} vertPadding={48} imgWidth={200} block>
       <Quote>
         <Field validate={[required]} name={`${man}.quote`} component={LongTextInput} label="Цитата" />

@@ -126,8 +126,8 @@ export class CapitalPage extends React.PureComponent { // eslint-disable-line re
               <InfoAction>
                 <InfoText>
                   <h2>
-                    <b>Собрано:</b>
-                    <i>{formatMoney(this.props.capital.data.given)}₽</i>
+                    <b>Собрано: </b>
+                    <i>{formatMoney(this.props.capital.data.given)} ₽</i>
                   </h2>
                 </InfoText>
                 <BtnFix>
@@ -140,9 +140,9 @@ export class CapitalPage extends React.PureComponent { // eslint-disable-line re
           <Title>О капитале</Title>
           <div dangerouslySetInnerHTML={this.props.data.content} />
           <Space size={3} />
-          <Quotes title="Основатели" noMore items={this.props.capital.data.founders || []} />
+          <Quotes title="Основатели" left noMore items={this.props.capital.data.founders || []} />
           <Space size={3} />
-          <Quotes title="Получатели" noMore items={this.props.capital.data.receivers || []} />
+          <Quotes title="Получатели" right noMore items={this.props.capital.data.receivers || []} />
           <Space size={2} />
           <DonationForm ref={(e) => (this.donationForm = e)} title="Пополнить капитал" />
         </Content>
