@@ -1,8 +1,16 @@
-// import { take, call, put, select } from 'redux-saga/effects';
-
+import { take, put } from 'redux-saga/effects';
+import { push } from 'react-router-redux';
+import { ADMIN_ROLE } from '../AuthProvider/constants';
+import { fetchLogin, fetchUser } from '../AuthProvider/actions';
 // Individual exports for testing
 export function* defaultSaga() {
-  // See example in containers/HomePage/sagas.js
+  while (true) {
+    yield take(fetchLogin.success);
+    const action = yield take(fetchUser.success);
+    if (action.payload.role === ADMIN_ROLE) {
+      yield put(push('/admin'));
+    }
+  }
 }
 
 // All sagas to be loaded
