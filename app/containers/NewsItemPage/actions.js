@@ -1,15 +1,9 @@
 /*
  *
- * NewsItemPage actions
+ * CapitalPage actions
  *
  */
 
-import {
-  DEFAULT_ACTION,
-} from './constants';
+import { FetchAction } from '../../utils/api';
 
-export function defaultAction() {
-  return {
-    type: DEFAULT_ACTION,
-  };
-}
+export const fetchNewsData = new FetchAction('FETCH_NEWS_DATA');

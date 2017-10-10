@@ -159,6 +159,26 @@ export default function createRoutes(store) {
         importModules.catch(errorLoading);
       },
     }, {
+      path: '/news(/:id)',
+      name: 'newsPage',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          import('containers/NewsItemPage/reducer'),
+          import('containers/NewsItemPage/sagas'),
+          import('containers/NewsItemPage'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('newsItemPage', reducer.default);
+          injectSagas(sagas.default);
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    }, {
       path: '/about',
       name: 'aboutPage',
       getComponent(nextState, cb) {

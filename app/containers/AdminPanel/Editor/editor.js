@@ -28,6 +28,9 @@ class EditorApp extends Component { // eslint-disable-line}
         editorState: EditorState.createEmpty(),
       };
     }
+    this.state = Object.assign({}, this.state, {
+      contentState: this.props.initialContentState,
+    });
     this.onEditorStateChange = this.onEditorStateChange.bind(this);
   }
 
@@ -40,29 +43,36 @@ class EditorApp extends Component { // eslint-disable-line}
     }
   }
 
+
   render() {
     return (
       <div >
-        <EditorWrap>
-          <Editor
-            toolbar={toolbarOptions}
-            toolbarCustomButtons={[<AddComponent />]}
-            editorState={this.state.editorState}
-            onEditorStateChange={this.onEditorStateChange}
+        {!this.props.readOnly ?
+            (<Editor
+              toolbar={toolbarOptions}
+              toolbarCustomButtons={[<AddComponent />]}
+              editorState={!this.props.initialContentState && this.state.editorState}
+              onEditorStateChange={!this.props.initialContentState && this.onEditorStateChange}
+            />)
+          :
+          (<Editor
             initialContentState={this.props.initialContentState}
             toolbarHidden={this.props.toolbarHidden}
-          />
-        </EditorWrap>
+            readOnly
+          />)
+        }
+
       </div>
     );
   }
 }
 
 EditorApp.propTypes = {
-  initialContentState: PropTypes.string,
+  initialContentState: PropTypes.object,
   editorState: PropTypes.any,
   editorStateChange: PropTypes.func,
   toolbarHidden: PropTypes.bool,
+  readOnly: PropTypes.bool,
 };
 
 

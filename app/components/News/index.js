@@ -58,3 +58,4 @@ News.propTypes = {
 };
 
 export default News;
+export { default as NewsItem } from './Item';

@@ -65,6 +65,35 @@ export const padding = css`
   `}
 `;
 
+export function formatDateWithMonth(date) {
+  if (!date) {
+    return null;
+  }
+  const d = new Date();
+  d.setTime(Date.parse(date));
+  const month = [];
+
+  month[0] = 'Января';
+  month[1] = 'Февраля';
+  month[2] = 'Марта';
+  month[3] = 'Апреля';
+  month[4] = 'Мая';
+  month[5] = 'Июня';
+  month[6] = 'Июля';
+  month[7] = 'Августа';
+  month[8] = 'Сентября';
+  month[9] = 'Октября';
+  month[10] = 'Ноября';
+  month[11] = 'Декабря';
+
+  return {
+    day: d.getDate(),
+    month: month[d.getMonth()],
+    year: d.getFullYear(),
+    old: d.getTime() < new Date().getTime(),
+  };
+}
+
 // // iterate through the sizes and create a media template
 // export const media = Object.keys(sizes).reduce((accumulator, label) => {
 //   // use em in breakpoints to work properly cross-browser and support users
