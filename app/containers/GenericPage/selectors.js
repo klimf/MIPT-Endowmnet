@@ -22,7 +22,7 @@ const makeSelectGenericPage = () => createSelector(
 
 const makeSelectCurrentPage = () => createSelector(
   selectCurrentPage(),
-  (substate) => substate.toJS()
+  (substate) => substate.toJS().data || {}
 );
 
 export default makeSelectGenericPage;

@@ -10,7 +10,7 @@ import Helmet from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { makeSelectCurrentPage } from './selectors';
 import { fetchPage } from './actions';
-import Editor from '../AdminPanel/Editor/editor';
+import { ContentPresentor } from '../AdminPanel/Editor';
 import Content from '../../components/Content';
 
 export class GenericPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
@@ -23,20 +23,19 @@ export class GenericPage extends React.Component { // eslint-disable-line react/
     return (
       <div>
         <Helmet
-          title={this.props.currentPage.data && this.props.currentPage.data.title}
+          title={this.props.currentPage.title}
           meta={[
-            { name: 'description', content: this.props.currentPage.data && this.props.currentPage.data.description },
+            { name: 'description', content: this.props.currentPage.description },
           ]}
         />
         <div />
         <Content>
-          {this.props.currentPage.data &&
-          <Editor
-            initialContentState={this.props.currentPage.data.content}
+          {this.props.currentPage.content &&
+          <ContentPresentor
+            rawJSON={this.props.currentPage.content}
           />
           }
         </Content>
-
       </div>
     );
   }
