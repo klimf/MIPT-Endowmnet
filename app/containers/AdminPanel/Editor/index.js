@@ -18,9 +18,9 @@ const ContentPresentorWrap = styled.div`
 `;
 
 const EditorComponent = (field) =>
-  (<EditorWrap>
-    <Editor editorStateChange={field.input.onChange} editorState={field.input.value} />;
-  </EditorWrap>);
+  <EditorWrap>
+    <Editor editorStateChange={field.input.onChange} editorState={field.input.value} />
+  </EditorWrap>;
 
 
 export default function EditorField({ source, validate }) {

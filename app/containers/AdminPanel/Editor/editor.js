@@ -55,7 +55,6 @@ class EditorApp extends Component { // eslint-disable-line}
             readOnly
           />)
         }
-
       </div>
     );
   }
