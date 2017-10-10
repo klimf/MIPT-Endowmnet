@@ -2,17 +2,9 @@ import React, { Component, PropTypes } from 'react';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { EditorState, convertFromRaw } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
-import styled from 'styled-components';
 import toolbarOptions from './plugins/toolbar/options';
 import AddComponent from './componentsService';
 
-
-export const EditorWrap = styled.div`
- padding: 17px;
- border: 1px solid #eee;
- background: #fff;
- z-index: 50;
-`;
 
 class EditorApp extends Component { // eslint-disable-line}
   constructor(props) {
