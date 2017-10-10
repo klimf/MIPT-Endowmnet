@@ -22,14 +22,18 @@ export default function (restClient) {
     if (type === GET_ONE) {
       return restClient(type, resource, params).then((response) => {
         if (response.data.content || response.data.data) {
+          const editorStateField = response.data.content ? 'content' : 'data';
           try {
-            const contentState = convertFromRaw(JSON.parse(response.data.content));
+            const contentState = convertFromRaw(JSON.parse(response.data[editorStateField]));
             const content = EditorState.createWithContent(contentState);
             const formattedData = Object.assign({}, response.data);
-            formattedData.content = content;
+            formattedData[editorStateField] = content;
             return { data: formattedData };
           } catch (e) {
-            return { data: Object.assign({}, response.data, { content: EditorState.createEmpty() }) };
+            console.log(e);
+            const newData = {};
+            newData[editorStateField] = EditorState.createEmpty();
+            return { data: Object.assign({}, response.data, newData) };
           }
         }
         return response;

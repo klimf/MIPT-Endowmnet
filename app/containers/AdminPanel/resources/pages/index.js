@@ -13,8 +13,6 @@ import PageIcon from 'material-ui/svg-icons/action/description';
 import EditIcon from 'material-ui/svg-icons/content/create';
 import AddIcon from 'material-ui/svg-icons/content/add-box';
 import { required, onlyLatin } from '../validation';
-import Editor from '../../Editor';
-
 
 function renderTree(nodes, path) {
   function getId(name) {
@@ -68,8 +66,7 @@ export const PagesEdit = (props) => (
     <SimpleForm>
       <TextInput label={'Название'} validate={[required]} source="name" />
       <TextInput label={'Описание'} validate={[required]} source="description" />
-      <TextInput label={'ссылка'} validate={[required, onlyLatin]} source="pageName" />
-      <Editor source={'content'} validate={[required]}></Editor>
+      <TextInput label={'ссылка'} validate={[required, onlyLatin]} source="url" />
     </SimpleForm>
   </Edit>
 );
@@ -79,8 +76,7 @@ export const PagesCreate = (props) => (
     <SimpleForm>
       <TextInput label={'Название'} validate={[required]} source="name" />
       <TextInput label={'Описание'} validate={[required]} source="description" />
-      <TextInput label={'ссылка'} validate={[required, onlyLatin]} source="pageName" />
-      <Editor source={'content'} validate={[required]}></Editor>
+      <TextInput label={'ссылка'} validate={[required, onlyLatin]} source="url" />
     </SimpleForm>
   </Create>
 );
