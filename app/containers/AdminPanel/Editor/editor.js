@@ -9,6 +9,9 @@ import AddComponent from './componentsService';
 class EditorApp extends Component { // eslint-disable-line}
   constructor(props) {
     super(props);
+    const regularState = {
+      contentState: this.props.initialContentState,
+    };
     try {
       this.state = {
         editorState: (!(this.props.editorState instanceof EditorState) && this.props.editorState) ?
@@ -20,9 +23,8 @@ class EditorApp extends Component { // eslint-disable-line}
         editorState: EditorState.createEmpty(),
       };
     }
-    this.state = Object.assign({}, this.state, {
-      contentState: this.props.initialContentState,
-    });
+    this.state = Object.assign({}, this.state, regularState);
+
     this.onEditorStateChange = this.onEditorStateChange.bind(this);
   }
 

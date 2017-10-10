@@ -63,7 +63,7 @@ function Progress(props) {
 }
 
 Progress.propTypes = {
-  progress: PropTypes.number,
+  progress: PropTypes.any,
 };
 
 export default Progress;

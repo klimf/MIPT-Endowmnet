@@ -89,7 +89,9 @@ function Item(props) {
           <Title>{props.name}</Title>
           <Description>{props.description}</Description>
         </TextBlock>
-        <Date noAll={!date && 'noAll'}><b>{date.day} </b>{date.month}</Date>
+        {date &&
+          <Date noAll={!date}><b>{date.day} </b>{date.month}</Date>
+        }
       </Wrapper>
     </StyledLink>
   );
@@ -100,7 +102,7 @@ Item.propTypes = {
   name: PropTypes.string.isRequired,
   date: PropTypes.string,
   description: PropTypes.string,
-  image: PropTypes.string.isRequired,
+  image: PropTypes.object.isRequired,
 };
 
 export default Item;

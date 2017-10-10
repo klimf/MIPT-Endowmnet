@@ -30,6 +30,7 @@ import InfoText from '../../components/InfoText/index';
 import Button from '../../components/Button/index';
 import Title from '../../components/Title/index';
 import Image from '../../components/FullImage/index';
+import { ContentPresentor } from '../AdminPanel/Editor';
 
 
 const Head = styled(FlexBox)`
@@ -138,7 +139,10 @@ export class CapitalPage extends React.PureComponent { // eslint-disable-line re
           </Head>
           <Space size={2} />
           <Title>О капитале</Title>
-          <div dangerouslySetInnerHTML={this.props.data.content} />
+          {this.props.capital.data.content &&
+          <ContentPresentor rawJSON={this.props.capital.data.content} />
+          }
+
           <Space size={3} />
           <Quotes title="Основатели" left noMore items={this.props.capital.data.founders || []} />
           <Space size={3} />
