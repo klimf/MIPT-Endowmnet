@@ -38,13 +38,13 @@ class ContentService extends Component {
     this.addForm = this.addForm.bind(this);
   }
 
-  addForm(type) {
+  addForm(type) {//eslint-disable-line
     this.setState({
       fields: this.state.fields.concat({ type }),
     });
   }
 
-  setFieldValue(index, value) {
+  setFieldValue(index, value) { //eslint-disable-line
     this.setState({
 
     });
