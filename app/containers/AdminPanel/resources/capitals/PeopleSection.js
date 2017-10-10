@@ -31,3 +31,4 @@ PeopleSection.propTypes = {
 };
 
 export default PeopleSection;
+

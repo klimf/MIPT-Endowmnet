@@ -17,6 +17,7 @@ import { required, onlyLatin, currency } from '../validation';
 import PeopleSection from './PeopleSection';
 import { StaticImage } from '../customFields';
 import Editor from '../../Editor';
+import AddContent from '../../Editor/componentsService/forms';
 
 export const CapitalsList = (props) => (
   <List title={'Капиталы'} {...props}>
@@ -46,6 +47,7 @@ export const CapitalsEdit = (props) => (
         <TextInput label={'Название для ссылки'} validate={[required, onlyLatin]} source="fullPageUri" />
         <TextInput label={'Собрано'} validate={[required, currency]} source="given" />
         <Editor source={'content'}></Editor>
+        <AddContent source={'kek'}></AddContent>
       </FormTab>
       <FormTab label="Основатели">
         <PeopleSection name={'founders'}></PeopleSection>
