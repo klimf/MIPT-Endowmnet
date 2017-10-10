@@ -63,7 +63,7 @@ const renderPeopleFields = ({ fields }) => ( // eslint-disable-line
   </div>
     );
 
-export default function Faces() {
+export default function Faces({ name }) { // eslint-disable-line
   return (
     <div>
       <Title >
@@ -71,7 +71,7 @@ export default function Faces() {
       </Title>
       <Space size={2} />
       <ListWrapper>
-        <FieldArray name={'items'} component={renderPeopleFields}></FieldArray>
+        <FieldArray name={`${name}.items`} component={renderPeopleFields}></FieldArray>
       </ListWrapper>
     </div>
   );

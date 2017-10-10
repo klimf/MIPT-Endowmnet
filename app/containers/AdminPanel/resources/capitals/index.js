@@ -46,8 +46,8 @@ export const CapitalsEdit = (props) => (
         <TextInput label={'Короткое описание'} validate={[required]} source="description" />
         <TextInput label={'Название для ссылки'} validate={[required, onlyLatin]} source="fullPageUri" />
         <TextInput label={'Собрано'} validate={[required, currency]} source="given" />
-        <Editor source={'content'}></Editor>
-        <ContentService></ContentService>
+        <Editor ></Editor>
+        <ContentService name={'data'}></ContentService>
       </FormTab>
       <FormTab label="Основатели">
         <PeopleSection name={'founders'}></PeopleSection>

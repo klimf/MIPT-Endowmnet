@@ -39,7 +39,7 @@ function renderTree(nodes, path) {
         )}
     primaryTogglesNestedList
     initiallyOpen
-    primaryText={`${getId(item.pageName)}`}
+    primaryText={`${item.pageName}`}
     nestedItems={item.nodes.length > 0 ? renderTree(item.nodes, getId(item.pageName)) : []}
   />)
   );
