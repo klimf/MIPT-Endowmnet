@@ -10,7 +10,6 @@ import {
 } from 'admin-on-rest';
 import {
   Quote,
-
   Info,
   Decoration,
 } from '../../../../components/Quotes/Item';
@@ -55,6 +54,7 @@ const imageStrategy = (item, field) => {
 
 const ImageDrop = (item) => (field) => (
   <HoverableImageWrapper
+    accept={'image/*'}
     onDrop={(files) => {
       field.input.onChange({
         preview: files[0].preview,

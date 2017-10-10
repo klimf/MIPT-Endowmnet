@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import styled from 'styled-components';
 import plusIcon from 'images/add-plus-button.svg';
 import ComponentSelectModal from './ComponentSelectModal';
-import { Quote } from './components';
+
 
 const Button = styled.div`
     width: 24px;
@@ -28,7 +28,6 @@ export default class AddComponentButton extends Component {
           onCancel={this.props.cancelAddComponent}
           onComponentSelect={this.props.onComponentSelect}
         >
-          <Quote></Quote>
         </ComponentSelectModal>
         }
       </div>

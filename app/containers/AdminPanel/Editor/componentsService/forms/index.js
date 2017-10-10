@@ -1,74 +1,74 @@
 
-// import React, { Component } from 'react';
-// import { RaisedButton } from 'material-ui';
-// import { FieldArray } from 'redux-form';
-// import styled from 'styled-components';
-// import PeopleInput from './QuoteInput';
+import React, { Component } from 'react';
+import { RaisedButton } from 'material-ui';
+import styled from 'styled-components';
+import PeopleInput from './QuoteInput';
+import FacesInput from './PeopleRowInput';
+const AddButton = styled(RaisedButton)`
+  margin: 0 50%;
+`;
+
+const renderPeopleFields = ({ fields }) => (
+  <div>
+    { fields.map(PeopleInput) }
+    <AddButton
+      onClick={() => fields.push({
+        type: 'quote',
+      })}
+    >Добавить</AddButton>
+  </div>
+  );
+
+renderPeopleFields.propTypes = {
+  fields: React.PropTypes.object,
+};
+
+const mapFormsTypes = {
+  quote: PeopleInput,
+  faces: FacesInput,
+};
+
+class ContentService extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      fields: [],
+    };
+    this.addForm = this.addForm.bind(this);
+  }
+
+  addForm(type) {
+    this.setState({
+      fields: this.state.fields.concat({ type }),
+    });
+  }
+
+  setFieldValue(index, value) {
+    this.setState({
+
+    });
+  }
+
+  render() {
+    return (
+      <div>
+        { this.state.fields.map(({ type }, index) => {
+          const Item = mapFormsTypes[type];
+          return <Item name={`blocks[${index}]`} key={index}></Item>;
+        })}
+        <AddButton
+          onClick={() => this.addForm('quote')}
+        >Добавить</AddButton>
+        <AddButton
+          onClick={() => this.addForm('faces')}
+        >Добавить2</AddButton>
+      </div>
+    );
+  }
+}
+
+export default ContentService;
 
 
-// const AddButton = styled(RaisedButton)`
-//   margin: 0 50%;
-// `;
-
-// const renderPeopleFields = ({ fields }) => (
-//   <div>
-//     { fields.map(PeopleInput) }
-//     <AddButton
-//       onClick={() => fields.push({
-//         type: 'quote',
-//       })}
-//     >Добавить</AddButton>
-//   </div>
-//   );
-
-// renderPeopleFields.propTypes = {
-//   fields: React.PropTypes.object,
-// };
-
-// const PeopleSection = ({ name }) => (
-//   <div>
-//     <FieldArray name={name} component={renderPeopleFields}></FieldArray>
-//   </div>
-// );
-
-// PeopleSection.propTypes = {
-//   name: React.PropTypes.string.isRequired,
-// };
-
-// const mapFormsTypes = {
-//   quote: PeopleInput,
-// };
-
-// class ContentService extends Component {
-
-//   constructor(props) {
-//     super(props);
-//     this.state({
-//       fields: [],
-//     });
-//   }
-
-//   addForm() {
-//     this.this.setState({
-//       fields: this.state.fields.concat({ type: 'quote' }),
-//     });
-//   }
-
-//   render() {
-//     return (
-//       <div>
-//         { this.state.fields.map(({ type }) => {
-
-//         })}
-//         <AddButton
-//           onClick={this.addForm}
-//         >Добавить</AddButton>
-//       </div>
-//     );
-//   }
-// }
-
-// export default PeopleSection;
-
-
-// export { default as Quote } from './QuoteInput';
+export { default as Quote } from './QuoteInput';

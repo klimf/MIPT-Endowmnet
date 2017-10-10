@@ -15,7 +15,7 @@ import face3 from '../../images/Face3.jpg';
 import Title from '../Title/index';
 import Space from '../Space/index';
 
-const Wrapper = styled.div`
+export const Wrapper = styled.div`
   width: calc(100% + 48px);
   margin-left: -24px;
   display: flex;

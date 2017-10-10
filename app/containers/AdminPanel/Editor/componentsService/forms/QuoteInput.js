@@ -2,7 +2,6 @@ import React from 'react';
 import { Field } from 'redux-form';
 import Dropzone from 'react-dropzone';
 import styled from 'styled-components';
-import { RaisedButton } from 'material-ui';
 import { palette } from 'utils/constants';
 import {
   LongTextInput,
@@ -45,6 +44,7 @@ const HoverableImageWrapper = styled(Dropzone)`
 
 const ImageDrop = (field) => (
   <HoverableImageWrapper
+    accept={'image/*'}
     onDrop={(files) => {
       field.input.onChange({
         preview: files[0].preview,
@@ -58,29 +58,26 @@ const ImageDrop = (field) => (
   </HoverableImageWrapper>
   );
 
-const DeleteButton = styled(RaisedButton) `
-  right: 0;
-`;
 
-export const PeopleInput = (man, index, fields) => (
-  <Wrapper margin="48px 0" horisontal="space-between" key={index} >
-    <Field validate={[required]} name={`${man}.picture`} component={ImageDrop} />
+export const PeopleInput = ({ name, index, fields }) => ( //eslint-disable-line
+  <Wrapper margin="48px 0" horisontal="space-between" >
+    <Field name={`${name}.type`} value={'quote'} component={'span'} />
+    <Field validate={[required]} name={`${name}.picture`} component={ImageDrop} />
     <ContentBlock padding="24px" innerPadding={48} vertPadding={48} imgWidth={200} block>
       <Quote>
-        <Field validate={[required]} name={`${man}.quote`} component={LongTextInput} label="Цитата" />
+        <Field validate={[required]} name={`${name}.quote`} component={LongTextInput} label="Цитата" />
       </Quote>
       <FlexBox horisontal="space-between" vertical="center">
         <Info>
-          <Field validate={[required]} name={`${man}.status`} component={TextInput} label="Статус" />
+          <Field validate={[required]} name={`${name}.status`} component={TextInput} label="Статус" />
           <b>
-            <Field validate={[required]} name={`${man}.name`} component={TextInput} label="Имя" />
+            <Field validate={[required]} name={`${name}.name`} component={TextInput} label="Имя" />
           </b>
         </Info>
       </FlexBox>
       <Decoration isLeft />
     </ContentBlock>
-
-    <DeleteButton onClick={() => fields.remove(index)}>Удалить</DeleteButton>
+    {/* <DeleteButton onClick={() => fields.remove(index)}>Удалить</DeleteButton> */}
   </Wrapper>
 );
 

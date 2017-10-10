@@ -10,7 +10,7 @@ import { image, palette, shadow } from '../../utils/constants';
 import Space from '../Space/index';
 import { media } from '../../utils/helpers';
 
-const Wrapper = styled.div`
+export const Wrapper = styled.div`
   padding: 0 12px;
   width: 25%;
   display: inline-block;
@@ -30,7 +30,7 @@ const Wrapper = styled.div`
     width: 50%;
   `}
 `;
-const Image = styled.div`
+export const Image = styled.div`
     background-position: center;
     width: 80%;
     margin: 0 10% 12px 10%;
