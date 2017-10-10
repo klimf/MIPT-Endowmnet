@@ -16,44 +16,40 @@ import { required, onlyLatin } from '../validation';
 import Editor from '../../Editor';
 
 
-function renderTree(ids, nodes, lvl) {
-  const newLvl = lvl;
-  return nodes.map((item, index) => {
-    ids.push(item.pageName);
-    // eslint-disable-next-line no-param-reassign
-    item.ids = item.pageName;
-    return (<ListItem
-      key={index}
-      id={Number(`${newLvl}${index}`)}
-      leftIcon={<PageIcon />}
-      rightIconButton={(
-        <Responsive
-          small={
-            <div>
-              <EditButton record={Object.assign({}, item, { id: item.pageName })} basePath="/pages" style={{ margin: 4 }} icon={<EditIcon />} />
-              <FlatButton style={{ margin: 4 }} icon={<AddIcon />} />
-            </div>
-            }
-          medium={
-            <div>
-              <EditButton record={Object.assign({}, item, { id: item.pageName })} basePath="/pages" style={{ margin: 4 }} icon={<EditIcon />} label="Редактиовать" />
-              <FlatButton style={{ margin: 4 }} icon={<AddIcon />} label="Добавить подстраницу" />
-            </div>
-            }
-        />
-        )}
-      primaryTogglesNestedList
-      initiallyOpen
-      primaryText={`#${newLvl}${index} - ${item.pageName}`}
-      nestedItems={item.nodes.length > 0 ? renderTree(ids, item.nodes, `${newLvl}${index}`) : []}
-    />);
+function renderTree(nodes, path) {
+  function getId(name) {
+    return `${path}${(path === '') ? '' : '/'}${name}`;
   }
+  return nodes.map((item, index) => (<ListItem
+    key={index}
+    leftIcon={<PageIcon />}
+    rightIconButton={(
+      <Responsive
+        small={
+          <div>
+            <EditButton record={Object.assign({}, item, { id: getId(item.pageName) })} basePath="/pages" style={{ margin: 4 }} icon={<EditIcon />} />
+            <FlatButton record={Object.assign({}, item, { id: getId(item.pageName) })} style={{ margin: 4 }} icon={<AddIcon />} />
+          </div>
+            }
+        medium={
+          <div>
+            <EditButton record={Object.assign({}, item, { id: getId(item.pageName) })} basePath="/pages" style={{ margin: 4 }} icon={<EditIcon />} label="Редактиовать" />
+            <FlatButton record={Object.assign({}, item, { id: getId(item.pageName) })} style={{ margin: 4 }} icon={<AddIcon />} label="Добавить подстраницу" />
+          </div>
+            }
+      />
+        )}
+    primaryTogglesNestedList
+    initiallyOpen
+    primaryText={`${getId(item.pageName)}`}
+    nestedItems={item.nodes.length > 0 ? renderTree(item.nodes, getId(item.pageName)) : []}
+  />)
   );
 }
 
 const NestedList = ({ ids, data, basePath }) => // eslint-disable-line
   <div>
-    {renderTree(ids, data[1].nodes, 1)}
+    {renderTree(data[1].nodes, '')}
   </div>;
 
 NestedList.defaultProps = {
