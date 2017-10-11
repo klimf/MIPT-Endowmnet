@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import { reduxForm } from 'redux-form';
 import styled from 'styled-components';
 import Popup from '../../../../components/Popup';
 import { palette, unit, rounded } from '../../../../utils/constants';
@@ -16,20 +15,19 @@ function ComponentFormModal(props) {
       show
       onCancel={props.onCancel}
     >
-      {React.Children.map(props.children, (child) =>
-        <FormWrap onClick={props.onComponentSelect}>
-          {child}
+      {props.forms.map(({ preview, name }) =>
+        <FormWrap key={name} onClick={() => props.onComponentSelect(name)}>
+          <preview></preview>
         </FormWrap>
       )}
     </Popup>
   );
 }
 
-
 ComponentFormModal.propTypes = {
   onCancel: PropTypes.func,
-  children: PropTypes.any,
-  onComponentSelect: PropTypes.func,
+  forms: PropTypes.array.isRequired,
+  onComponentSelect: PropTypes.func, // eslint-disable-line
 };
 
-export default reduxForm({ form: 'componentForm' })(ComponentFormModal);
+export default ComponentFormModal;

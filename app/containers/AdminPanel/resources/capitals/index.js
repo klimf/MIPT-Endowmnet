@@ -17,7 +17,7 @@ import { required, onlyLatin, currency } from '../validation';
 import PeopleSection from './PeopleSection';
 import { StaticImage } from '../customFields';
 import Editor from '../../Editor';
-import ContentService from '../../Editor/componentsService/forms';
+import ContentService from '../../Editor/componentsService';
 
 export const CapitalsList = (props) => (
   <List title={'Капиталы'} {...props}>
