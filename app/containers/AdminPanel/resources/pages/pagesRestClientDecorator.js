@@ -13,7 +13,7 @@ export default function (restClient) {
           return Object.assign({}, response, { data: [formattedTree] });
         });
       }
-      if (type === GET_ONE) {
+      if (type === GET_ONE && params.id !== 'create') {
         return restClient(type, 'pages', params).then((response) => {
           const newData = Object.assign({}, response.data, { id: response.data.url });
           console.log(newData);

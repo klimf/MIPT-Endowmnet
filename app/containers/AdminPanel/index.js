@@ -31,6 +31,7 @@ import restClient, { compose } from './restClient';
 import { makeSelectUserPermissions } from '../AuthProvider/selectors';
 import { ADMIN_ROLE } from '../AuthProvider/constants';
 import editorReducer from './Editor/reducer';
+import pagesRoutes from './resources/pages/route';
 
 const decoratedRestClient = compose([
   capitalsRestDecorator,
@@ -43,6 +44,8 @@ const decoratedRestClient = compose([
 const aorMessages = {
   ru: aorMessagesRu,
 };
+
+const routes = [].concat(pagesRoutes);
 
 export class AdminPanel extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
@@ -68,6 +71,7 @@ export class AdminPanel extends React.Component { // eslint-disable-line react/p
           messages={aorMessages}
           theme={theme}
           restClient={decoratedRestClient}
+          customRoutes={routes}
         >
           <Resource
             name="capitals"
@@ -108,6 +112,7 @@ export class AdminPanel extends React.Component { // eslint-disable-line react/p
             options={{ label: messages.pagesLabel.defaultMessage }}
             list={PagesResource.PagesList}
             edit={PagesResource.PagesEdit}
+            create={PagesResource.PagesCreate}
             remove={Delete}
           />
         </Admin>
