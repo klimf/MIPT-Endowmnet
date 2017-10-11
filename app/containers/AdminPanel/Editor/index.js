@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 import { Field } from 'redux-form';
-import { EditorState } from 'draft-js';
 import styled from 'styled-components';
 import Editor from './editor';
 
@@ -17,14 +16,13 @@ const ContentPresentorWrap = styled.div`
  }
 `;
 
-const EditorComponent = (field) =>
-  <EditorWrap>
-    <Editor editorStateChange={field.input.onChange} editorState={field.input.value} />
-  </EditorWrap>;
+const EditorComponent = (field) => (<EditorWrap>
+  <Editor editorStateChange={field.input.onChange} editorState={field.input.value} />
+</EditorWrap>);
 
 
 export default function EditorField({ source, name, validate }) {
-  return (<Field defaultValue={EditorState.createEmpty()} name={name || source} validate={validate} component={EditorComponent} />);
+  return (<Field name={name || source} validate={validate} component={EditorComponent} />);
 }
 
 EditorField.propTypes = {

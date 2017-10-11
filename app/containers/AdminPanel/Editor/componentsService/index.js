@@ -8,19 +8,28 @@ import { AddButton, DeleteButton, FormWrap } from './components';
 
 
 function renderFormItem(name, fields) {
-  return fields.map((member, index, fieldsRef) => {
+  const content = fields.getAll();
+  if (!content.map) {
+    JSON.parse(content).forEach((item, index) => {
+      console.log(item);
+      fields.insert(index, item);
+    });
+    console.log(fields.getAll());
+  }
+
+  return content.map ? fields.map((member, index, fieldsRef) => {
     const type = fieldsRef.get([index]).type;
     const InputComponent = getFormByName(type);
     if (!InputComponent) {
       throw new Error('unsupported component type');
     }
     return (
-      <FormWrap>
-        <InputComponent key={index} name={`${member}.data`} />
+      <FormWrap key={index}>
+        <InputComponent name={`${member}.data`} />
         <DeleteButton onClick={() => fieldsRef.remove(index)}>удалить</DeleteButton>
       </FormWrap>
     );
-  });
+  }) : null;
 }
 
 function renderFieldsItems({ name, fields, types, addForm }) { //eslint-disable-line
@@ -59,7 +68,7 @@ class ContentService extends Component {
         <FieldArray name={`${this.props.source}`} component={renderFieldsItems} props={{ types: this.state.types, addForm: this.addForm }}></FieldArray>
         <AddButton
           onClick={this.toggleModal}
-        >Добавить2</AddButton>
+        >Добавить</AddButton>
         <ComponentFormModal
           onCancel={this.toggleModal}
           show={this.state.showPopup}

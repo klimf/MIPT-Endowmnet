@@ -3,36 +3,54 @@ import {
     UPDATE,
     GET_ONE,
 } from 'admin-on-rest';
-import { EditorState, convertToRaw, convertFromRaw } from 'draft-js';
+import { EditorState, convertToRaw } from 'draft-js';
 
-const findEditorStateField = (data) => Object.keys(data).find((key) => data[key] instanceof EditorState);
+const findContentField = (data) => {
+  if (data.content) {
+    return 'content';
+  }
+  if (data.data) {
+    return 'data';
+  }
+  return false;
+};
 
 export default function (restClient) {
   return (type, resource, params) => {
-    if (type === CREATE || type === UPDATE) {
-      const editorStateKey = findEditorStateField(params.data);
-      if (editorStateKey) {
-        const newContent = JSON.stringify(convertToRaw(params.data[editorStateKey].getCurrentContent()));
-        const newData = Object.assign({}, params.data);
-        newData[editorStateKey] = newContent;
-        return restClient(type, resource, Object.assign({}, params, { data: newData }));
+    if ((type === CREATE || type === UPDATE) && findContentField(params.data)) {
+      const contentKey = findContentField(params.data);
+      if (typeof params.data[contentKey].map !== 'function') {
+        return Promise.reject(new Error('invalid content field'));
       }
-      return restClient(type, resource, params);
+      console.log(params.data);
+      const formattedContentWithEditor = params.data[contentKey].map((block) => {
+        if (block.data instanceof EditorState) {
+          return Object.assign({}, block, { data: convertToRaw(block.data.getCurrentContent()) });
+        }
+        return block;
+      });
+      const stringContent = JSON.stringify(formattedContentWithEditor);
+      const formattedData = Object.assign({}, params.data);
+      formattedData[contentKey] = stringContent;
+      return restClient(type, resource, Object.assign({}, params, { data: formattedData }));
     }
+
     if (type === GET_ONE) {
       return restClient(type, resource, params).then((response) => {
-        if (response.data.content || response.data.data) {
-          const editorStateField = response.data.content ? 'content' : 'data';
+        if (findContentField(response.data)) {
+          const contentField = findContentField(response.data);
           try {
-            const contentState = convertFromRaw(JSON.parse(response.data[editorStateField]));
-            const content = EditorState.createWithContent(contentState);
-            const formattedData = Object.assign({}, response.data);
-            formattedData[editorStateField] = content;
-            return { data: formattedData };
+            // const contentState = convertFromRaw(JSON.parse(response.data[editorStateField]));
+            // const content = EditorState.createWithContent(contentState);
+            // const formattedData = Object.assign({}, response.data);
+            // formattedData[editorStateField] = content;
+            const parsedData = Object.assign({}, response.data);
+            parsedData[contentField] = JSON.parse(response.data[contentField]);
+            return { data: Object.assign({}, parsedData) };
           } catch (e) {
             console.log(e);
             const newData = {};
-            newData[editorStateField] = EditorState.createEmpty();
+            newData[contentField] = [];
             return { data: Object.assign({}, response.data, newData) };
           }
         }
