@@ -32,7 +32,8 @@ export default function (restClient) {
       const stringContent = JSON.stringify(formattedContentWithEditor);
       const formattedData = Object.assign({}, params.data);
       formattedData[contentKey] = stringContent;
-      return restClient(type, resource, Object.assign({}, params, { data: formattedData }));
+      return restClient(type, resource, Object.assign({}, params, { data: formattedData }))
+      .then((response) => ({ data: response.data.id }));
     }
 
     if (type === GET_ONE) {

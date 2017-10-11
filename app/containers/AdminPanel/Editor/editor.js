@@ -14,7 +14,7 @@ class EditorApp extends Component { // eslint-disable-line}
     try {
       this.state = {
         editorState: (!(this.props.editorState instanceof EditorState) && this.props.editorState) ?
-        EditorState.createWithContent(convertFromRaw(JSON.parse(this.props.editorState)))
+        EditorState.createWithContent(convertFromRaw(this.props.editorState))
         : this.props.editorState,
       };
     } catch (e) {
@@ -27,6 +27,10 @@ class EditorApp extends Component { // eslint-disable-line}
     this.onEditorStateChange = this.onEditorStateChange.bind(this);
   }
 
+
+  componentWillMount = () => {
+    console.log(this.state.editorState);
+  }
   onEditorStateChange(editorState) {
     try {
       this.setState({ editorState });

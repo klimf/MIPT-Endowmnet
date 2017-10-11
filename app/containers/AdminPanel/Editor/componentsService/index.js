@@ -9,16 +9,15 @@ import { AddButton, DeleteButton, FormWrap } from './components';
 
 function renderFormItem(name, fields) {
   const content = fields.getAll();
-  if (!content.map) {
+  if (!Array.isArray(content)) {
+    console.log(content);
     JSON.parse(content).forEach((item, index) => {
-      console.log(item);
       fields.insert(index, item);
     });
-    console.log(fields.getAll());
   }
 
-  return content.map ? fields.map((member, index, fieldsRef) => {
-    const type = fieldsRef.get([index]).type;
+  return Array.isArray(content) ? fields.map((member, index, fieldsRef) => {
+    const type = fieldsRef.get(index).type;
     const InputComponent = getFormByName(type);
     if (!InputComponent) {
       throw new Error('unsupported component type');
