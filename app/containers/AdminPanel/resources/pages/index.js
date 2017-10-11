@@ -7,6 +7,7 @@ import {
   Responsive,
   EditButton,
   TextInput,
+  TextField,
 } from 'admin-on-rest';
 import { FlatButton, ListItem } from 'material-ui';
 import PageIcon from 'material-ui/svg-icons/action/description';
@@ -73,7 +74,7 @@ export const PagesEdit = (props) => (
     <SimpleForm>
       <TextInput label={'Название'} validate={[required]} source="name" />
       <TextInput label={'Описание'} validate={[required]} source="description" />
-      <TextInput label={'ссылка'} validate={[required, onlyUrl, onlyOneNode]} source="url" />
+      <TextField label={'ссылка'} source="url" />
     </SimpleForm>
   </Edit>
 );
