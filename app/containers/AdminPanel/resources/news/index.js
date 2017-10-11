@@ -14,7 +14,7 @@ import {
 } from 'admin-on-rest';
 import { required } from '../validation';
 import { StaticImage } from '../customFields';
-import Editor from '../../Editor';
+import ContentService from '../../Editor/componentsService';
 
 export const NewsList = (props) => (
   <List title={'Новости'} {...props}>
@@ -37,7 +37,7 @@ export const NewsEdit = (props) => (
       <TextInput label={'Название'} validate={[required]} source="name" />
       <TextInput label={'Короткое первью'} validate={[required]} source="description" />
       <DateInput source="date" label="Дата" />
-      <Editor source="content" label="Содержание"></Editor>
+      <ContentService source={'content'}></ContentService>
     </SimpleForm>
   </Edit>
 );
@@ -52,7 +52,7 @@ export const NewsCreate = (props) => (
       <TextInput label={'Название'} validate={[required]} source="name" />
       <TextInput label={'Короткое первью'} validate={[required]} source="description" />
       <DateInput source="date" label="Дата" />
-      <Editor source="content" label="Содержание"></Editor>
+      <ContentService source={'content'}></ContentService>
     </SimpleForm>
   </Create>
 );

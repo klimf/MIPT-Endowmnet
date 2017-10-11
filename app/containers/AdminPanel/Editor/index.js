@@ -32,11 +32,12 @@ EditorField.propTypes = {
 };
 
 
-export function ContentPresentor({ rawJSON }) {
+export function ContentPresentor({ raw }) {
+  const contentState = typeof raw === 'string' ? JSON.parse(raw) : raw;
   return (
     <ContentPresentorWrap>
       <Editor
-        initialContentState={JSON.parse(rawJSON)}
+        initialContentState={contentState}
         toolbarHidden
         readOnly
       />
@@ -45,5 +46,5 @@ export function ContentPresentor({ rawJSON }) {
 }
 
 ContentPresentor.propTypes = {
-  rawJSON: PropTypes.string.isRequired,
+  raw: PropTypes.string.isRequired,
 };

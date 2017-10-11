@@ -120,7 +120,7 @@ function CapitalLargest(props) {
       <Block padding="40px">
         <FlexBox style={{ height: '140px' }}>
           <ImgWrapper noSmall>
-            <Image style={{ height: '140px' }} rounded shadow src={props.image.small} />
+            <Image style={{ height: '140px' }} rounded shadow src={props.image && props.image.small} />
           </ImgWrapper>
           <Info>
             <Name>

@@ -9,11 +9,14 @@ import { AddButton, DeleteButton, FormWrap } from './components';
 
 function renderFormItem(name, fields) {
   const content = fields.getAll();
-  if (!Array.isArray(content)) {
-    console.log(content);
-    JSON.parse(content).forEach((item, index) => {
-      fields.insert(index, item);
-    });
+  if (content && !Array.isArray(content)) {
+    try {
+      JSON.parse(content).forEach((item, index) => {
+        fields.insert(index, item);
+      });
+    } catch (e) {
+      return null;
+    }
   }
 
   return Array.isArray(content) ? fields.map((member, index, fieldsRef) => {

@@ -20,7 +20,7 @@ import Space from '../../components/Space/index';
 import FlexBox from '../../components/FlexBox/index';
 import Line from '../../components/Line/index';
 import { formatDateWithMonth } from '../../utils/helpers';
-import { ContentPresentor } from '../AdminPanel/Editor';
+import contentResolver from '../../components/ComponentResolver';
 
 
 const Title = styled.h1`
@@ -85,7 +85,7 @@ export class NewsItemPage extends React.PureComponent { // eslint-disable-line r
           <Space size={2} />
           <Image src={this.props.newsItem.image && this.props.newsItem.image.original} />
           {this.props.newsItem.content &&
-            <ContentPresentor rawJSON={this.props.newsItem.content} />
+           contentResolver(this.props.newsItem.content)
           }
         </Content>
       </div>

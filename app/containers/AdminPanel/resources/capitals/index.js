@@ -16,7 +16,6 @@ import {
 import { required, onlyLatin, currency } from '../validation';
 import PeopleSection from './PeopleSection';
 import { StaticImage } from '../customFields';
-import Editor from '../../Editor';
 import ContentService from '../../Editor/componentsService';
 
 export const CapitalsList = (props) => (
@@ -70,7 +69,7 @@ export const CapitalsCreate = (props) => (
         <TextInput label={'Короткое описание'} validate={[required]} source="description" />
         <TextInput label={'Название для ссылки'} validate={[required, onlyLatin]} source="linkName" />
         <TextInput label={'Собрано'} validate={[required, currency]} source="given" />
-        <Editor source={'content'}></Editor>
+        <ContentService source={'content'}></ContentService>
       </FormTab>
       <FormTab label="Основатели">
         <PeopleSection name={'founders'}></PeopleSection>
