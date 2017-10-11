@@ -7,6 +7,12 @@ export const AddButton = styled(RaisedButton)`
 margin: 0 50%;
 `;
 
+export const DeleteButton = styled(RaisedButton)`
+    position: absolute;
+    right: 0;
+    top: 0;
+`;
+
 export const HoverableImageWrapper = styled(Dropzone)`
 position: relative;
 border-radius: 50%;
@@ -30,4 +36,8 @@ border-radius: 50%;
   color: ${palette.white};
   background: rgba(0, 0, 0, .6);
 }
+`;
+
+export const FormWrap = styled.div`
+    position: relative;
 `;

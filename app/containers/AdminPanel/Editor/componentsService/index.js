@@ -1,15 +1,11 @@
 
 import React, { Component, PropTypes } from 'react';
-import { RaisedButton } from 'material-ui';
-import styled from 'styled-components';
 import { FieldArray, arrayPush } from 'redux-form'; // eslint-disable-line
 import { connect } from 'react-redux';
 import getFormByName, { config } from './formsConfig';
 import ComponentFormModal from './ComponentFormModal';
+import { AddButton, DeleteButton, FormWrap } from './components';
 
-const AddButton = styled(RaisedButton)`
-  margin: 0 50%;
-`;
 
 function renderFormItem(name, fields) {
   return fields.map((member, index, fieldsRef) => {
@@ -18,7 +14,12 @@ function renderFormItem(name, fields) {
     if (!InputComponent) {
       throw new Error('unsupported component type');
     }
-    return <InputComponent key={index} name={`${member}.data`} />;
+    return (
+      <FormWrap>
+        <InputComponent key={index} name={`${member}.data`} />
+        <DeleteButton onClick={() => fieldsRef.remove(index)}>удалить</DeleteButton>
+      </FormWrap>
+    );
   });
 }
 
@@ -26,11 +27,6 @@ function renderFieldsItems({ name, fields, types, addForm }) { //eslint-disable-
   return (
     <div>
       {renderFormItem(name, fields, types)}
-      <AddButton
-        onClick={() => {
-          fields.push({ type: 'quote' });
-        }}
-      >Добавить</AddButton>
     </div>
   );
 }
@@ -44,17 +40,17 @@ class ContentService extends Component {
       showPopup: false,
     };
     this.addForm = this.addForm.bind(this);
-  }
-
-  componentDidMount = () => {
-    // this.props.dispatch(arrayPush('record-form', `${this.props.source}`, { type: 'quote' }));
+    this.toggleModal = this.toggleModal.bind(this);
   }
 
 
-  addForm(type) {//eslint-disable-line
-    this.setState({
-      types: this.state.types.concat(type),
-    });
+  addForm(name) {//eslint-disable-line
+    this.props.dispatch(arrayPush('record-form', this.props.source, { type: name }));
+    this.setState({ showPopup: false });
+  }
+
+  toggleModal() {
+    this.setState({ showPopup: !this.state.showPopup });
   }
 
   render() {
@@ -62,9 +58,14 @@ class ContentService extends Component {
       <div>
         <FieldArray name={`${this.props.source}`} component={renderFieldsItems} props={{ types: this.state.types, addForm: this.addForm }}></FieldArray>
         <AddButton
-          onClick={() => this.addForm('faces')}
+          onClick={this.toggleModal}
         >Добавить2</AddButton>
-        <ComponentFormModal show={this.state.showPopup} forms={config} ></ComponentFormModal>
+        <ComponentFormModal
+          onCancel={this.toggleModal}
+          show={this.state.showPopup}
+          forms={config}
+          onComponentSelect={this.addForm}
+        />
       </div>
     );
   }

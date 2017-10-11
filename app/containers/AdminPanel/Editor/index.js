@@ -23,13 +23,14 @@ const EditorComponent = (field) =>
   </EditorWrap>;
 
 
-export default function EditorField({ source, validate }) {
-  return source && (<Field defaultValue={EditorState.createEmpty()} name={source} validate={validate} component={EditorComponent} />);
+export default function EditorField({ source, name, validate }) {
+  return (<Field defaultValue={EditorState.createEmpty()} name={name || source} validate={validate} component={EditorComponent} />);
 }
 
 EditorField.propTypes = {
   source: PropTypes.string,
   validate: PropTypes.array,
+  name: PropTypes.string,
 };
 
 
