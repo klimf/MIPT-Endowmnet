@@ -1,8 +1,5 @@
 import React from 'react';
 import { Field } from 'redux-form';
-import Dropzone from 'react-dropzone';
-import styled from 'styled-components';
-import { palette } from 'utils/constants';
 import {
   LongTextInput,
   TextInput,
@@ -16,53 +13,23 @@ import { Image, Wrapper, ContentBlock, ImgWrapper } from '../../../../../compone
 import { required } from '../../../resources/validation';
 
 import FlexBox from '../../../../../components/FlexBox';
+import { ImageDrop } from '../components';
 
-const HoverableImageWrapper = styled(Dropzone)`
-  position: relative;
-  border-radius: 50%;
-  &:hover {
-    cursor: pointer;
-    &:after {
-      opacity: 1;
-    }
-  }
-  &:after {
-    transition: 0.3s ease;
-    content: 'Загрузить фото';
-    position: absolute;
-    border-radius: 50%;
-    top: 0;
-    padding-top: 45%;
-    text-align: center;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    color: ${palette.white};
-    background: rgba(0, 0, 0, .6);
-  }
-`;
 
-const ImageDrop = (field) => (
-  <HoverableImageWrapper
-    accept={'image/*'}
-    onDrop={(files) => {
-      field.input.onChange({
-        preview: files[0].preview,
-        file: files[0] });
-    }
-    }
-  >
+const imageDropComponent = ({ field }) => { // eslint-disable-line
+  const image = field.input.value ? field.input.value.small || field.input.value.preview : null;
+  return (
     <ImgWrapper imgWidth={200}>
-      <Image circle shadow src={field.input.value && field.input.value.preview} />
+      <Image circle shadow src={image} />
     </ImgWrapper>
-  </HoverableImageWrapper>
   );
+};
 
 
 export const PeopleInput = ({ name, index, fields }) => ( //eslint-disable-line
   <Wrapper margin="48px 0" horisontal="space-between" >
     <Field name={`${name}.type`} value={'quote'} component={'span'} />
-    <Field validate={[required]} name={`${name}.picture`} component={ImageDrop} />
+    <Field validate={[required]} name={`${name}.image`} component={ImageDrop(imageDropComponent)} />
     <ContentBlock padding="24px" innerPadding={48} vertPadding={48} imgWidth={200} block>
       <Quote>
         <Field validate={[required]} name={`${name}.quote`} component={LongTextInput} label="Цитата" />

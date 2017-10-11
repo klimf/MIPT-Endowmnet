@@ -1,7 +1,10 @@
+import React from 'react';
 import { RaisedButton } from 'material-ui';
 import styled from 'styled-components';
 import Dropzone from 'react-dropzone';
 import { palette } from 'utils/constants';
+import restClient, { setAttachment } from '../../../restClient';
+import { UPLOAD } from '../../../actions';
 
 export const AddButton = styled(RaisedButton)`
 margin: 0 50%;
@@ -41,3 +44,18 @@ border-radius: 50%;
 export const FormWrap = styled.div`
     position: relative;
 `;
+
+
+export const ImageDrop = (Component) => (field) => (
+  <HoverableImageWrapper
+    accept={'image/png,image/jpg,image/jpeg'}
+    onDrop={(files) => {
+      restClient(UPLOAD, null, setAttachment('image', files[0]))
+      .then((response) => {
+        field.input.onChange(response.data);
+      });
+    }}
+  >
+    <Component field={field}></Component>
+  </HoverableImageWrapper>
+    );

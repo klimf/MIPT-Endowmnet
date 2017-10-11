@@ -86,3 +86,4 @@ export default (type, resource, params) => {
         return Promise.reject(e);
       });
 };
+
