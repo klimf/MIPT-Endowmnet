@@ -10,7 +10,6 @@ import { Link } from 'react-router';
 import { block, palette, unit, image } from '../../utils/constants';
 import { hideOn, media, formatDateWithMonth } from '../../utils/helpers';
 
-
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
@@ -28,7 +27,8 @@ const StyledLink = styled(Link)`
 `;
 
 const TextBlock = styled.div`
-  margin: 10px 10px 10px 180px;
+  margin: 10px 10px 10px 180px;    
+  width: 100%;
   ${media.small`
     margin: 280px 10px 10px 10px;
   `}
@@ -90,7 +90,7 @@ function Item(props) {
           <Description>{props.description}</Description>
         </TextBlock>
         {date &&
-          <Date noAll={!date}><b>{date.day} </b>{date.month}</Date>
+        <Date noAll={!date}><b>{date.day} </b>{date.month}</Date>
         }
       </Wrapper>
     </StyledLink>
