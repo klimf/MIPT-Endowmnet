@@ -24,7 +24,7 @@ const EditorComponent = (field) =>
 
 
 export default function EditorField({ source, validate }) {
-  return (<Field defaultValue={EditorState.createEmpty()} name={source} validate={validate} component={EditorComponent} />);
+  return source && (<Field defaultValue={EditorState.createEmpty()} name={source} validate={validate} component={EditorComponent} />);
 }
 
 EditorField.propTypes = {

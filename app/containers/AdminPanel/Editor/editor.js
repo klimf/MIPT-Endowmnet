@@ -3,7 +3,6 @@ import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { EditorState, convertFromRaw } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import toolbarOptions from './plugins/toolbar/options';
-import AddComponent from './componentsService';
 
 
 class EditorApp extends Component { // eslint-disable-line}
@@ -44,7 +43,6 @@ class EditorApp extends Component { // eslint-disable-line}
         {!this.props.readOnly ?
             (<Editor
               toolbar={toolbarOptions}
-              toolbarCustomButtons={[<AddComponent />]}
               editorState={!this.props.initialContentState && this.state.editorState}
               onEditorStateChange={!this.props.initialContentState && this.onEditorStateChange}
             />)

@@ -2,25 +2,19 @@
 import React, { Component, PropTypes } from 'react';
 import { RaisedButton } from 'material-ui';
 import styled from 'styled-components';
-import { FieldArray } from 'redux-form';
-import PeopleInput from './forms/QuoteInput';
-import FacesInput from './forms/PeopleRowInput';
+import { FieldArray, arrayPush } from 'redux-form'; // eslint-disable-line
+import { connect } from 'react-redux';
+import getFormByName, { config } from './formsConfig';
+import ComponentFormModal from './ComponentFormModal';
 
 const AddButton = styled(RaisedButton)`
   margin: 0 50%;
 `;
 
-
-const mapFormsTypes = {
-  quote: PeopleInput,
-  faces: FacesInput,
-};
-
-
 function renderFormItem(name, fields) {
   return fields.map((member, index, fieldsRef) => {
     const type = fieldsRef.get([index]).type;
-    const InputComponent = mapFormsTypes[type];
+    const InputComponent = getFormByName(type);
     if (!InputComponent) {
       throw new Error('unsupported component type');
     }
@@ -28,8 +22,7 @@ function renderFormItem(name, fields) {
   });
 }
 
-
-function renderFields({ name, fields, types, addForm }) { //eslint-disable-line
+function renderFieldsItems({ name, fields, types, addForm }) { //eslint-disable-line
   return (
     <div>
       {renderFormItem(name, fields, types)}
@@ -48,8 +41,13 @@ class ContentService extends Component {
     super(props);
     this.state = {
       types: [],
+      showPopup: false,
     };
     this.addForm = this.addForm.bind(this);
+  }
+
+  componentDidMount = () => {
+    // this.props.dispatch(arrayPush('record-form', `${this.props.source}`, { type: 'quote' }));
   }
 
 
@@ -62,20 +60,25 @@ class ContentService extends Component {
   render() {
     return (
       <div>
-        <FieldArray name={'blocks'} component={renderFields} props={{ types: this.state.types, addForm: this.addForm }}></FieldArray>
+        <FieldArray name={`${this.props.source}`} component={renderFieldsItems} props={{ types: this.state.types, addForm: this.addForm }}></FieldArray>
         <AddButton
           onClick={() => this.addForm('faces')}
         >Добавить2</AddButton>
+        <ComponentFormModal show={this.state.showPopup} forms={config} ></ComponentFormModal>
       </div>
     );
   }
 }
 
 ContentService.propTypes = {
-  name: PropTypes.string,
+  source: PropTypes.string,
+  dispatch: PropTypes.func, // eslint-disable-line
 };
 
-export default ContentService;
+const mapDispatchToProps = (dispatch) => ({
+  dispatch,
+});
 
 
-export { default as Quote } from './forms/QuoteInput';
+export default connect(null, mapDispatchToProps)(ContentService);
+

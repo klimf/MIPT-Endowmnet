@@ -7,27 +7,36 @@ const FormWrap = styled.div`
 background: ${palette.dark};
 padding: ${unit}px;
 ${rounded};
+margin-bottom: ${unit}px;
+transition: .3s all ease-in-out;
+&:hover {
+  cursor: pointer;
+  background: ${palette.gray};
+}
 `;
 
 function ComponentFormModal(props) {
   return (
     <Popup
-      show
+      title={'Выберите типа блока'}
+      show={props.show}
       onCancel={props.onCancel}
     >
-      {props.forms.map(({ preview, name }) =>
+      {props.forms.map(({ preview, name }) => (
         <FormWrap key={name} onClick={() => props.onComponentSelect(name)}>
-          <preview></preview>
+          {preview}
         </FormWrap>
+        )
       )}
     </Popup>
   );
 }
 
 ComponentFormModal.propTypes = {
-  onCancel: PropTypes.func,
+  onCancel: PropTypes.func.isRequired,
   forms: PropTypes.array.isRequired,
-  onComponentSelect: PropTypes.func, // eslint-disable-line
+  onComponentSelect: PropTypes.func.isRequired, // eslint-disable-line
+  show: PropTypes.bool.isRequired,
 };
 
 export default ComponentFormModal;
