@@ -15,7 +15,6 @@ const Overlay = styled.div`
   pointer-events: ${(props) => props.show ? 'auto' : 'none'};
   opacity: ${(props) => props.show ? '100' : '0'};
   transition: 0.3s ease;
-  display: flex;
   align-items: center;
   ${hideOn}
 `;

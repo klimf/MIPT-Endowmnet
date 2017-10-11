@@ -4,12 +4,11 @@
  *
  */
 
-import React, { PropTypes } from 'react';
-import styled from 'styled-components';
-import { Link } from 'react-router';
-import { block, palette, unit, image } from '../../utils/constants';
-import { hideOn, media, formatDateWithMonth } from '../../utils/helpers';
-
+import React, { PropTypes } from 'react'
+import styled from 'styled-components'
+import { Link } from 'react-router'
+import { block, palette, unit, image } from '../../utils/constants'
+import { hideOn, media, formatDateWithMonth } from '../../utils/helpers'
 
 const Wrapper = styled.div`
   display: flex;
@@ -20,29 +19,30 @@ const Wrapper = styled.div`
   padding: 0 ${2 * unit}px;
   overflow: hidden;
   ${block}
-`;
+`
 
 const StyledLink = styled(Link)`
   text-decoration: none;
   font-weight: 300;
-`;
+`
 
 const TextBlock = styled.div`
-  margin: 10px 10px 10px 180px;
+  margin: 10px 10px 10px 180px;    
+  width: 100%;
   ${media.small`
     margin: 280px 10px 10px 10px;
   `}
-`;
+`
 
 const Title = styled.h2`
   color: ${palette.primary};
   font-size: 24px;
-`;
+`
 
 const Description = styled.p`
   color: ${palette.black};
   font-size: 20px;
-`;
+`
 
 const Date = styled.h2`
   width: 280px;
@@ -60,7 +60,7 @@ const Date = styled.h2`
     margin-top: 280px;
   `}
   ${hideOn}
-`;
+`
 
 const Image = styled.div`
   position:absolute;
@@ -77,24 +77,24 @@ const Image = styled.div`
     bottom: auto;
     border-radius: 8px 8px 0 0;
 `}
-`;
+`
 
-function Item(props) {
-  const date = formatDateWithMonth(props.date);
+function Item (props) {
+  const date = formatDateWithMonth(props.date)
   return (
     <StyledLink to={props.link}>
       <Wrapper>
-        <Image src={props.image.small} />
+        <Image src={props.image.small}/>
         <TextBlock>
           <Title>{props.name}</Title>
           <Description>{props.description}</Description>
         </TextBlock>
         {date &&
-          <Date noAll={!date}><b>{date.day} </b>{date.month}</Date>
+        <Date noAll={!date}><b>{date.day} </b>{date.month}</Date>
         }
       </Wrapper>
     </StyledLink>
-  );
+  )
 }
 
 Item.propTypes = {
@@ -103,6 +103,6 @@ Item.propTypes = {
   date: PropTypes.string,
   description: PropTypes.string,
   image: PropTypes.object.isRequired,
-};
+}
 
-export default Item;
+export default Item
