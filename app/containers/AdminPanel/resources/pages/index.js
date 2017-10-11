@@ -85,6 +85,7 @@ export const PagesCreate = (props) => (
       <TextInput label={'Описание'} validate={[required]} source="description" />
       <TextInput
         defaultValue={`${props.match.params['0'] || ''}/`}
+        format={(val) => (val && val !== `${props.match.params['0'] || ''}/`) ? val : `${props.match.params['0'] || ''}/`}
         label={'ссылка'} validate={[required, onlyUrl, onlyOneNode(`${props.match.params['0']}/`)]} source="url"
       />
     </SimpleForm>
