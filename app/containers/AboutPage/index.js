@@ -35,7 +35,7 @@ import Faces from '../../components/Faces/index';
 import Attachments from '../../components/Attachments/index';
 import TabsBlock from '../../components/TabsBlock/index';
 
-const Navigation = styled.div`
+export const Navigation = styled.div`
   ${block}
   display: flex;
   flex-wrap: wrap;
@@ -45,7 +45,7 @@ const Navigation = styled.div`
   border-radius: 21px;
 `;
 
-const NavItem = styled.div`
+export const NavItem = styled.div`
   background-color: ${(props) => props.active ? palette.primary : palette.transparent};
   color: ${(props) => props.active ? palette.white : palette.black};
   cursor: pointer;

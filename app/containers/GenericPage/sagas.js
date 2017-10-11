@@ -22,7 +22,20 @@ export function* getPage() {
     }
   }
 }
+
+export function* getPagesTree() {
+  while (true) {
+    try {
+      yield take(actions.fetchPagesTree.types.start);
+      const tree = yield call(() => api.get('/pages/tree'));
+      yield put(actions.fetchPagesTree.success(tree));
+    } catch (e) {
+      yield put(actions.fetchPagesTree.failed(e));
+    }
+  }
+}
 // All sagas to be loaded
 export default [
   getPage,
+  getPagesTree,
 ];
