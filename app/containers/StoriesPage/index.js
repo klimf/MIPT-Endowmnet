@@ -14,21 +14,30 @@ import Content from 'components/Content';
 import Space from 'components/Space';
 
 import makeSelectStoriesPage from './selectors';
+import { fetchStories } from './actions';
 import messages from './messages';
 
 export class StoriesPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+
+  componentWillMount = () => {
+    this.props.fetchStories.start();
+  }
+
   render() {
     return (
       <div>
         <Helmet
           title="Истории"
           meta={[
-            { name: 'description', content: 'Description of StoriesPage' },
+            { name: 'description', content: 'Истории работы с фондом МФТИ' },
           ]}
         />
         <Content>
           <Space size={4} />
-          <Quotes title={messages.header.defaultMessage} />
+          {this.props.Stories &&
+          <Quotes items={this.props.Stories.map((x) => Object.assign({}, x.owner, { link: `stories/${x.id}` }))} title={messages.header.defaultMessage} />
+          }
+
         </Content>
       </div>
     );
@@ -36,16 +45,17 @@ export class StoriesPage extends React.PureComponent { // eslint-disable-line re
 }
 
 StoriesPage.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  Stories: PropTypes.array,
+  fetchStories: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
-  StoriesPage: makeSelectStoriesPage(),
+  Stories: makeSelectStoriesPage(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
+    fetchStories: fetchStories.bindTo(dispatch),
   };
 }
 

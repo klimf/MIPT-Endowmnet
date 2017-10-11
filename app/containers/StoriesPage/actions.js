@@ -1,15 +1,9 @@
 /*
  *
- * StoriesPage actions
+ * CapitalPage actions
  *
  */
 
-import {
-  DEFAULT_ACTION,
-} from './constants';
+import { FetchAction } from '../../utils/api';
 
-export function defaultAction() {
-  return {
-    type: DEFAULT_ACTION,
-  };
-}
+export const fetchStories = new FetchAction('FETCH_STORIES');

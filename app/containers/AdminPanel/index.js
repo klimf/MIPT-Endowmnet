@@ -22,6 +22,7 @@ import * as NavigationResource from './resources/navigation';
 import * as NewsResource from './resources/news';
 import * as OptionsResource from './resources/options';
 import * as PagesResource from './resources/pages';
+import * as StoriesResource from './resources/stories';
 import capitalsRestDecorator from './resources/capitals/restClientDecorator';
 import optionsRestDecorator from './resources/options/restClientDecorator';
 import pagesRestClientDecorator from './resources/pages/pagesRestClientDecorator';
@@ -80,6 +81,15 @@ export class AdminPanel extends React.Component { // eslint-disable-line react/p
             list={CapitalResource.CapitalsList}
             edit={CapitalResource.CapitalsEdit}
             create={CapitalResource.CapitalsCreate}
+            remove={Delete}
+          />
+          <Resource
+            name="stories"
+            icon={NewsIcon}
+            options={{ label: 'Истории' }}
+            list={StoriesResource.StoriesList}
+            edit={StoriesResource.StoriesEdit}
+            create={StoriesResource.StoriesCreate}
             remove={Delete}
           />
           <Resource

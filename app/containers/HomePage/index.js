@@ -52,7 +52,7 @@ class HomePage extends React.PureComponent { // eslint-disable-line react/prefer
           <Space size={1} />
           <Button centred type="border" to="/news">Все новости</Button>
           <Space size={5} />
-          <Quotes title="Почетные спонсоры" />
+          <Quotes title="Истории" />
           <Space size={1} />
           <Button centred type="border" to="/stories">Все истории</Button>
           <Space size={2} />

@@ -28,7 +28,6 @@ const imageDropComponent = ({ field }) => { // eslint-disable-line
 
 export const PeopleInput = ({ name, index, fields }) => ( //eslint-disable-line
   <Wrapper margin="48px 0" horisontal="space-between" >
-    <Field name={`${name}.type`} value={'quote'} component={'span'} />
     <Field validate={[required]} name={`${name}.image`} component={ImageDrop(imageDropComponent)} />
     <ContentBlock padding="24px" innerPadding={48} vertPadding={48} imgWidth={200} block>
       <Quote>

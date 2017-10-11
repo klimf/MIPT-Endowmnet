@@ -219,7 +219,7 @@ export default function createRoutes(store) {
         importModules.catch(errorLoading);
       },
     }, {
-      path: '/story',
+      path: '/stories(/:id)',
       name: 'storyPage',
       getComponent(nextState, cb) {
         const importModules = Promise.all([
