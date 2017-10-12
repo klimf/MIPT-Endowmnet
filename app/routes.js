@@ -25,13 +25,31 @@ export default function createRoutes(store) {
         const importModules = Promise.all([
           import('containers/HomePage/reducer.js'),
           import('containers/HomePage/sagas.js'),
+
+          import('containers/StoriesPage/reducer'),
+          import('containers/StoriesPage/sagas'),
+
+          import('containers/NewsPage/reducer'),
+          import('containers/NewsPage/sagas'),
+
           import('containers/HomePage'),
         ]);
 
         const renderRoute = loadModule(cb);
 
-        importModules.then(([reducer, sagas, component]) => {
+        importModules.then(([
+          reducer,
+          sagas,
+          storiesReducer,
+          storiesSagas,
+          newsReducer,
+          newsSagas,
+          component]) => {
           injectReducer('homePage', reducer.default);
+          injectReducer('storiesPage', storiesReducer.default);
+          injectReducer('newsPage', newsReducer.default);
+          injectSagas(storiesSagas.default);
+          injectSagas(newsSagas.default);
           injectSagas(sagas.default);
           renderRoute(component);
         });

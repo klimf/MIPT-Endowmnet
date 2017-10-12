@@ -24,5 +24,6 @@ const makeSelectNewsPage = () => createSelector(
 
 export default makeSelectNewsPage;
 export {
+  makeSelectNewsPage,
   selectNewsPageDomain,
 };

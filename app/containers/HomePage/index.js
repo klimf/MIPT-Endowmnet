@@ -23,14 +23,21 @@ import Quotes from 'components/Quotes';
 import Partners from 'components/Partners';
 import Button from 'components/Button';
 import makeSelectHomePage from './selectors';
+import { fetchNews } from '../NewsPage/actions';
+import { makeSelectNewsPage } from '../NewsPage/selectors';
+import { fetchStories } from '../StoriesPage/actions';
+import { makeSelectStoriesPage } from '../StoriesPage/selectors';
 import howML from '../../images/how.png';
 import howS from '../../images/how_mobile.png';
 import { fetchFundVolume } from './actions';
 
 
 class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+
   componentWillMount = () => {
     this.props.fetchFundVolume.start();
+    this.props.fetchStories.start();
+    this.props.fetchNews.start();
   }
 
   render() {
@@ -48,11 +55,17 @@ class HomePage extends React.PureComponent { // eslint-disable-line react/prefer
           <Image src={howML} local noSmall />
           <Image src={howS} local noMedium noLarge />
           <Space size={5} />
-          <News title="Последние новости и мероприятия" />
+          <News
+            title="Последние новости и мероприятия"
+            items={this.props.news.map((x) => Object.assign({}, x, { link: `news/${x.id}` }))}
+          />
           <Space size={1} />
           <Button centred type="border" to="/news">Все новости</Button>
           <Space size={5} />
-          <Quotes title="Истории" />
+          <Quotes
+            title="Истории"
+            items={this.props.stories.map((x) => Object.assign({}, x, { link: `news/${x.id}` }))}
+          />
           <Space size={1} />
           <Button centred type="border" to="/stories">Все истории</Button>
           <Space size={2} />
@@ -69,14 +82,22 @@ class HomePage extends React.PureComponent { // eslint-disable-line react/prefer
 HomePage.propTypes = {
   homePage: PropTypes.object,
   fetchFundVolume: PropTypes.object,
+  stories: PropTypes.array,
+  news: PropTypes.array,
+  fetchStories: PropTypes.object,
+  fetchNews: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
   homePage: makeSelectHomePage(),
+  news: makeSelectNewsPage(),
+  stories: makeSelectStoriesPage(),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   fetchFundVolume: fetchFundVolume.bindTo(dispatch),
+  fetchNews: fetchNews.bindTo(dispatch),
+  fetchStories: fetchStories.bindTo(dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

@@ -24,5 +24,6 @@ const makeSelectStoriesPage = () => createSelector(
 
 export default makeSelectStoriesPage;
 export {
+  makeSelectStoriesPage,
   selectStoriesPageDomain,
 };
