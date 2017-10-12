@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Faces from '../Faces';
 import Quote from '../Quotes/Item';
