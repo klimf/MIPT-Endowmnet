@@ -24,7 +24,7 @@ import { ProtectedContent } from '../AuthProvider';
 import AccountButton from '../AuthProvider/AccountButton';
 
 const LoginButton = () => (
-  <Button onClick={this.handleMobileMenuClick} to="/sign-in" type="border" margin="9px 24px" ><FormattedMessage {...messages.enter} /></Button>
+  <Button onMouseDown={this.handleMobileMenuClick} to="/sign-in" type="border" margin="9px 24px" ><FormattedMessage {...messages.enter} /></Button>
 );
 
 class Header extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
@@ -53,7 +53,7 @@ class Header extends React.PureComponent { // eslint-disable-line react/prefer-s
               stateSelector={(state) => state.get('authProvider').get('user')}
               UnauthorizedComponent={LoginButton}
             >
-              <AccountButton onClick={this.handleMobileMenuClick} margin="9px 24px" />
+              <AccountButton margin="9px 24px" />
             </ProtectedContent>
 
             <Button to="/donate" type="header" margin="9px 0"><FormattedMessage {...messages.action} /></Button>
@@ -83,7 +83,7 @@ class Header extends React.PureComponent { // eslint-disable-line react/prefer-s
               stateSelector={(state) => state.get('authProvider').get('user')}
               UnauthorizedComponent={LoginButton}
             >
-              <AccountButton onClick={this.handleMobileMenuClick} margin="9px 24px 9px 0" />
+              <AccountButton margin="9px 24px 9px 0" />
             </ProtectedContent>
           </FlexBox>
         </Overlay>

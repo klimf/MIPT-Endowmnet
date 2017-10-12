@@ -14,6 +14,7 @@ import PageIcon from 'material-ui/svg-icons/action/description';
 import EditIcon from 'material-ui/svg-icons/content/create';
 import AddIcon from 'material-ui/svg-icons/content/add-box';
 import { required, onlyUrl, onlyOneNode } from '../validation';
+import ContentService from '../../Editor/componentsService';
 
 function getId(name, path) {
   return `${path}${(path === '') ? '' : '/'}${name}`;
@@ -33,7 +34,7 @@ function renderTree(nodes, path, history) {
             }
         medium={
           <div>
-            <EditButton record={Object.assign({}, item, { id: getId(item.pageName, path) })} basePath="/pages" style={{ margin: 4 }} icon={<EditIcon />} label="Редактиовать" />
+            <EditButton record={Object.assign({}, item, { id: item.id })} basePath="/pages" style={{ margin: 4 }} icon={<EditIcon />} label="Редактиовать" />
             <FlatButton onClick={() => history.push(`pages/create/${getId(item.pageName, path)}`)} record={Object.assign({}, item, { id: getId(item.pageName, path) })} style={{ margin: 4 }} icon={<AddIcon />} label="Добавить подстраницу" />
           </div>
             }
@@ -75,6 +76,7 @@ export const PagesEdit = (props) => (
       <TextInput label={'Название'} validate={[required]} source="name" />
       <TextInput label={'Описание'} validate={[required]} source="description" />
       <TextField label={'ссылка'} source="url" />
+      <ContentService source={'content'}></ContentService>
     </SimpleForm>
   </Edit>
 );
@@ -89,6 +91,7 @@ export const PagesCreate = (props) => (
         format={(val) => (val && val !== `${props.match.params['0'] || ''}/`) ? val : `${props.match.params['0'] || ''}/`}
         label={'ссылка'} validate={[required, onlyUrl, onlyOneNode(`${props.match.params['0']}/`)]} source="url"
       />
+      <ContentService source={'content'}></ContentService>
     </SimpleForm>
   </Create>
   );

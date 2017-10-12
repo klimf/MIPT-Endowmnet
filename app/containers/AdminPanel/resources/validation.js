@@ -16,9 +16,10 @@ export const onlyOneNode = (prefix) => (val) => {
   const valSplit = val.split('/');
 
   if (Math.abs(valSplit.length - prefixSplit.length) >= 1) {
-    return (`Сначала нужно создать страницу ${valSplit[prefixSplit.length - 1]}`);
+    return (`Сначала нужно создать страницу ${valSplit[prefixSplit.length - 1] || val}`);
   }
-  const valPrefix = valSplit.slice(0, valSplit.length - 2);
+
+  const valPrefix = valSplit.slice(0, valSplit.length - 3);
   const notFoundPrefix = valPrefix.find((x) => !prefixSplit.includes(x));
   if (notFoundPrefix) {
     return (`Сначала нужно создать страницу ${notFoundPrefix}`);
