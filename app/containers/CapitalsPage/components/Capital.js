@@ -6,7 +6,6 @@ import CloseIcon from '../../../images/close-button.svg';
 import CapitalSmall from './CapitalSmall';
 import CapitalMedium from './CapitalMedium';
 import CapitalLarge from './CapitalLarge';
-import CapitalLargest from './СapitalLargest';
 import { palette, unit } from '../../../utils/constants';
 
 
@@ -84,7 +83,6 @@ export const capitalMap = {
   '2:1': CapitalSmall,
   '3:2': CapitalMedium,
   '4:2': CapitalLarge,
-  '6:2': CapitalLargest,
 };
 
 

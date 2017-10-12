@@ -6,8 +6,7 @@ import Editor from './editor';
 const EditorWrap = styled.div`
 padding: 17px;
 border: 1px solid #eee;
-background: #fff;
-z-index: 50;
+z-index: 150;
 `;
 
 const ContentPresentorWrap = styled.div`

@@ -64,7 +64,7 @@ class HomePage extends React.PureComponent { // eslint-disable-line react/prefer
           <Space size={5} />
           <Quotes
             title="Истории"
-            items={this.props.stories.map((x) => Object.assign({}, x, { link: `news/${x.id}` }))}
+            items={this.props.stories.map((x) => Object.assign({}, x.owner, { link: `stories/${x.id}` }))}
           />
           <Space size={1} />
           <Button centred type="border" to="/stories">Все истории</Button>
