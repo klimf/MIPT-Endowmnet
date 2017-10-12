@@ -98,7 +98,7 @@ const resolveWrapProps = (props) => {
   const { onBlockEditStart, onBlockDeleteStart, data, ...otherProps } = props; // eslint-disable-line
   if (props.type === 'link') {
     return {
-      to: `capital/${data.id}`,
+      to: `capitals/${data.id}`,
       ...otherProps,
     };
   } else if (props.type === 'editable') {

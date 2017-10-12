@@ -13,7 +13,7 @@ import {
   ImageInput,
   ImageField,
 } from 'admin-on-rest';
-import { required, onlyLatin, currency } from '../validation';
+import { required, currency } from '../validation';
 import PeopleSection from './PeopleSection';
 import { StaticImage } from '../customFields';
 import ContentService from '../../Editor/componentsService';
@@ -43,7 +43,6 @@ export const CapitalsEdit = (props) => (
         <StaticImage source="image" />
         <TextInput label={'Название'} validate={[required]} source="name" />
         <TextInput label={'Короткое описание'} validate={[required]} source="description" />
-        <TextInput label={'Название для ссылки'} validate={[required, onlyLatin]} source="fullPageUri" />
         <TextInput label={'Собрано'} validate={[required, currency]} source="given" />
         <ContentService source={'content'}></ContentService>
       </FormTab>
@@ -58,7 +57,7 @@ export const CapitalsEdit = (props) => (
 );
 
 export const CapitalsCreate = (props) => (
-  <Create title={'Создание капитала'} {...props}>
+  <Create title={'Создание капитала'} {...props} redirect={'capitals'} >
     <TabbedForm>
       <FormTab label="Общая информация">
         <ImageInput source="picture" label="Фотография" accept="image/png,image/jpg,image/jpeg">
@@ -67,7 +66,6 @@ export const CapitalsCreate = (props) => (
         <StaticImage source="image" />
         <TextInput label={'Название'} validate={[required]} source="name" />
         <TextInput label={'Короткое описание'} validate={[required]} source="description" />
-        <TextInput label={'Название для ссылки'} validate={[required, onlyLatin]} source="linkName" />
         <TextInput label={'Собрано'} validate={[required, currency]} source="given" />
         <ContentService source={'content'}></ContentService>
       </FormTab>

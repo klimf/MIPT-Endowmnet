@@ -23,7 +23,6 @@ import * as NewsResource from './resources/news';
 import * as OptionsResource from './resources/options';
 import * as PagesResource from './resources/pages';
 import * as StoriesResource from './resources/stories';
-import capitalsRestDecorator from './resources/capitals/restClientDecorator';
 import optionsRestDecorator from './resources/options/restClientDecorator';
 import pagesRestClientDecorator from './resources/pages/pagesRestClientDecorator';
 import editorRestDecorator from './Editor/restClientDecorator';
@@ -35,7 +34,6 @@ import editorReducer from './Editor/reducer';
 import pagesRoutes from './resources/pages/route';
 
 const decoratedRestClient = compose([
-  capitalsRestDecorator,
   optionsRestDecorator,
   editorRestDecorator,
   pagesRestClientDecorator,

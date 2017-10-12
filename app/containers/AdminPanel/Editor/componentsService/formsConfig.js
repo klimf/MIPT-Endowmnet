@@ -2,6 +2,7 @@ import React from 'react';
 import quotePreview from 'images/previews/quote-preview.jpg';
 import facesPreview from 'images/previews/faces-preview.png';
 import editorPreview from 'images/previews/editor-preview.png';
+import navPreview from 'images/previews/nav-preview.png';
 import * as Forms from './forms';
 import Image from '../../../../components/FullImage';
 
@@ -20,6 +21,11 @@ export const config = [
     name: 'editor',
     form: Forms.Editor,
     preview: <Image src={editorPreview} />,
+  },
+  {
+    name: 'navigation',
+    form: Forms.Navigation,
+    preview: <Image src={navPreview} />,
   },
 ];
 

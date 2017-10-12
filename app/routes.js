@@ -199,7 +199,7 @@ export default function createRoutes(store) {
         importModules.catch(errorLoading);
       },
     }, {
-      path: '/capital(/:capitalName)',
+      path: '/capitals(/:capitalName)',
       name: 'capitalPage',
       getComponent(nextState, cb) {
         const importModules = Promise.all([

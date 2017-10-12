@@ -1,7 +1,9 @@
+
 import React from 'react';
 import Faces from '../Faces';
 import Quote from '../Quotes/Item';
 import { ContentPresentor } from '../../containers/AdminPanel/Editor';
+import { Navigation, NavItem } from '../Navigation';
 
 export const config = [
   {
@@ -16,6 +18,17 @@ export const config = [
     name: 'editor',
     strategy: (data, key) => <ContentPresentor key={key} raw={data}></ContentPresentor>,
   },
+  {
+    name: 'navigation',
+    strategy: (data, key) =>
+      <Navigation key={key} >
+        {data.items.map((item, index) =>
+          <NavItem key={index} href={item.link}>
+            {item.name}
+          </NavItem>
+        )}
+      </Navigation>,
+  },
 ];
 
 export default (content) => {
@@ -27,12 +40,13 @@ export default (content) => {
     return parsedContent.map((block, index) => {
       const component = config.find((x) => x.name === block.type);
       if (!component) {
+        console.log(block);
         return null;
       }
       return component.strategy(block.data, index);
     });
   } catch (e) {
-    console.log(e);
+    console.error(e);
     return [];
   }
 };

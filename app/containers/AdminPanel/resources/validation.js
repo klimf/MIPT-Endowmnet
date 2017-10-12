@@ -1,4 +1,4 @@
-import { isCurrency } from 'validator';
+import { isCurrency, isURL } from 'validator'; //eslint-disable-line
 export const required = (val) => val ? undefined : 'Обязательное поле';
 
 const digitsReg = /[0-9]+/;
@@ -7,8 +7,7 @@ export const onlyDigits = (val) => digitsReg.test(val) ? undefined : 'Тольк
 const latinReg = /^[a-zA-Z0-9_\-+ ]*$/;
 export const onlyLatin = (val) => latinReg.test(val) ? undefined : 'Только латинские буквы';
 
-const urlReg = /^[a-zA-Z0-9_\-+/]*$/;
-export const onlyUrl = (val) => urlReg.test(val) ? undefined : 'Только валидный url';
+export const onlyUrl = (val) => undefined; //eslint-disable-line
 export const currency = (value) => value && isCurrency(value.toString()) ? false : 'Допустимы только цифры';
 
 export const onlyOneNode = (prefix) => (val) => {
