@@ -12,7 +12,6 @@ import { makeSelectCurrentPage } from './selectors';
 import { fetchPage, fetchPagesTree } from './actions';
 import contentResolver from '../../components/ComponentResolver';
 import Content from '../../components/Content';
-import { Navigation, NavItem } from '../AboutPage';
 
 
 export class GenericPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
@@ -43,18 +42,6 @@ export class GenericPage extends React.Component { // eslint-disable-line react/
         />
         <div />
         <Content>
-          {
-          this.props.currentPage.nodes &&
-          <Navigation noHover>
-            { this.props.currentPage.nodes.map((item, index) => (
-              <NavItem
-                active={() => this.isThatPage(item.pageName)}
-                key={index}
-                onClick={() => this.changePage(item.pageName)}
-              >{item.pageName}</NavItem>
-            ))}
-          </Navigation>
-        }
           {this.props.currentPage.content &&
             contentResolver(this.props.currentPage.content)
           }

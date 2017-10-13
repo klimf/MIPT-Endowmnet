@@ -82,12 +82,12 @@ export const PagesEdit = (props) => (
 );
 
 export const PagesCreate = (props) => (
-  <Create title={`Создание подстраницы для ${props.match.params['0'] || ''}/`} {...props}>
+  <Create title={`Создание подстраницы для ${props.match.params['0'] || ''}/`} {...props} redirect={'/pages'}>
     <SimpleForm>
       <TextInput label={'Название'} validate={[required]} source="name" />
       <TextInput label={'Описание'} validate={[required]} source="description" />
       <TextInput
-        defaultValue={`${props.match.params['0'] || ''}/`}
+        defaultValue={`${props.match.params['0']}/` || ''}
         format={(val) => (val && val !== `${props.match.params['0'] || ''}/`) ? val : `${props.match.params['0'] || ''}/`}
         label={'ссылка'} validate={[required, onlyUrl, onlyOneNode(`${props.match.params['0']}/`)]} source="url"
       />

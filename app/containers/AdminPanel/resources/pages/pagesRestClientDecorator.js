@@ -1,6 +1,5 @@
 import {
   GET_LIST,
-  UPDATE,
 } from 'admin-on-rest';
 
 
@@ -19,13 +18,6 @@ export default function (restClient) {
       //     return { data: newData };
       //   });
       // }
-      if (type === UPDATE) {
-        console.log(params);
-        // return restClient(type, 'pages', params).then((response) => {
-        //   const newData = Object.assign({}, response.data, { id: response.data.url });
-        //   return { data: newData };
-        // });
-      }
     }
     return restClient(type, resource, params);
   };

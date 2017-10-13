@@ -30,6 +30,7 @@ export const config = [
   },
 ];
 
+
 export default (content) => {
   try {
     const parsedContent = JSON.parse(content);

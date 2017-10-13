@@ -70,8 +70,9 @@ export const FormWrap = styled.div`
 `;
 
 
-export const ImageDrop = (Component) => (field) => (
+export const ImageDrop = (Component, props) => (field) => (
   <HoverableImageWrapper
+    {...props}
     accept={'image/png,image/jpg,image/jpeg'}
     onDrop={(files) => {
       restClient(UPLOAD, null, setAttachment('image', files[0]))
