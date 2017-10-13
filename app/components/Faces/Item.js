@@ -11,6 +11,7 @@ import Space from '../Space/index';
 import { media } from '../../utils/helpers';
 
 export const Wrapper = styled.div`
+  position: relative;
   padding: 0 12px 24px;
   width: 25%;
   display: inline-block;

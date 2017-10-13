@@ -14,6 +14,7 @@ export const AddButton = styled(RaisedButton).attrs({
   icon: <AddIcon color={palette.white} />,
 })`
   margin-top: 12px;
+  height: 36px;
 `;
 
 export const DeleteButton = styled(RaisedButton).attrs({

@@ -3,20 +3,14 @@ import { Field, FieldArray } from 'redux-form';
 import {
     TextInput,
   } from 'admin-on-rest';
-import { RaisedButton } from 'material-ui';
 import styled from 'styled-components';
 import { Wrapper, Image } from '../../../../../components/Faces/Item';
-// import { Wrapper as ListWrapper } from '../../../../../components/Faces';
 import Title from '../../../../../components/Title';
 import Space from '../../../../../components/Space';
 import { required } from '../../../resources/validation';
-import { AddButton, HoverableImageWrapper } from '../components';
+import { AddButton, DeleteButton, HoverableImageWrapper } from '../components';
+import Column from '../../../../../components/Column/index';
 
-const DeleteButton = styled(RaisedButton)`
-right: 0;
-`;
-
-// const CustomInput = (props) => ((field) => (<TextInput {...props} addfield={field}>));
 
 const ListWrapper = styled.div`
   &>div {
@@ -59,15 +53,17 @@ function Item(name, index, fields) {
       <Space size={2} />
       <Field validate={[required]} name={`${name}.name`} component={TextInput} label="Имя" />
       <Field validate={[required]} name={`${name}.description`} component={TextInput} label="Имя" />
-      <DeleteButton onClick={() => fields.remove(index)} />
+      <DeleteButton label="Удалить" style={{ position: 'static', margin: '12px 0' }} onClick={() => fields.remove(index)} />
     </Wrapper>
   );
 }
 
 const renderPeopleFields = ({ fields }) => ( // eslint-disable-line
   <div>
-    { fields.map(Item) }
-    <AddButton onClick={() => fields.push({})} />
+    <Column all={12}>
+      { fields.map(Item) }
+    </Column>
+    <AddButton label="Добавить человека" onClick={() => fields.push({})} />
   </div>
     );
 
@@ -75,7 +71,9 @@ export default function Faces({ name }) { // eslint-disable-line
   return (
     <div>
       <Title >
-        <Field validate={[required]} name={`${name}.title`} component={TextInput} label="Загловок" />
+        <Column all={6}>
+          <Field validate={[required]} name={`${name}.title`} component={(props) => (<TextInput options={{ fullWidth: true }} {...props} />)} label="Загловок" />
+        </Column>
       </Title>
       <Space size={2} />
       <ListWrapper>
