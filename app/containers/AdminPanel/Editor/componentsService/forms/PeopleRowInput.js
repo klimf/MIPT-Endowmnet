@@ -49,7 +49,7 @@ const ImageDrop = (item) => (field) => (
 function Item(name, index, fields) {
   return (
     <Wrapper>
-      <Field name={`${name}.picture`} component={ImageDrop(name)} />
+      <Field validate={[required]} name={`${name}.picture`} component={ImageDrop(name)} />
       <Space size={2} />
       <Field validate={[required]} name={`${name}.name`} component={TextInput} label="Имя" />
       <Field validate={[required]} name={`${name}.description`} component={TextInput} label="Имя" />
