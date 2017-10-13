@@ -14,14 +14,16 @@ export function* getPage() {
       const pageAddress = action.payload.replace('/p/', '');
       const pageAdressArr = pageAddress.split('/');
       const page = yield call(() => api.get(`/pages/${pageAddress}`));
-
-      if (pageAdressArr.length !== 1) {
+      console.log(pageAdressArr);
+      if (pageAdressArr.length > 1) {
         const parentAdress = pageAdressArr.slice(pageAdressArr.length - 2, pageAdressArr.length - 1);
         const parentPage = yield call(() => api.get(`/pages/${parentAdress}`));
-        const navigation = JSON.parse(parentPage.content).find((block) => block.name === 'navigation');
+        const navigation = JSON.parse(parentPage.content).find((block) => block.type === 'navigation');
         if (navigation) {
           const oldPageContent = JSON.parse(page.content);
-          const newPageContent = JSON.stringify(oldPageContent.unshift(navigation));
+
+          oldPageContent.unshift(navigation);
+          const newPageContent = JSON.stringify(oldPageContent);
           page.content = newPageContent;
         }
       }

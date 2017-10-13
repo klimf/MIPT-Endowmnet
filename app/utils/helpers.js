@@ -23,6 +23,14 @@ export function resolveStatic(path) {
   return `${config.API_ADRESS}/${path}`;
 }
 
+export function resolveLink(path) {
+  if (path.split('/').includes('http:')) {
+    return path;
+  }
+  return `/p/${path}`;
+}
+
+
 export function parseMoney(money) {
   return parseFloat(money.trim());
 }
