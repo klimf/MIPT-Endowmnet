@@ -1,5 +1,6 @@
 import { css } from 'styled-components';
 import config from './config';
+import placeholder from '../images/placeholder.png';
 // const sizes = {
 //   extra: 1920,
 //   large: 1280,
@@ -16,6 +17,9 @@ export function formatMoney(value) {
 }
 
 export function resolveStatic(path) {
+  if (!path) {
+    return placeholder;
+  }
   return `${config.API_ADRESS}/${path}`;
 }
 

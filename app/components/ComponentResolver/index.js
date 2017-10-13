@@ -3,6 +3,7 @@ import Faces from '../Faces';
 import Quote from '../Quotes/Item';
 import { ContentPresentor } from '../../containers/AdminPanel/Editor';
 import { Navigation, NavItem } from '../Navigation';
+import Partners from '../Partners';
 
 export const config = [
   {
@@ -27,6 +28,11 @@ export const config = [
           </NavItem>
         )}
       </Navigation>,
+  },
+  {
+    name: 'Images',
+    strategy: (data, key) =>
+      <Partners key={key} {...data} />,
   },
 ];
 
