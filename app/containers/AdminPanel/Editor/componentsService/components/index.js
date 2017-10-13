@@ -7,7 +7,7 @@ import restClient, { setAttachment } from '../../../restClient';
 import { UPLOAD } from '../../../actions';
 
 export const AddButton = styled(RaisedButton)`
-margin: 0 50%;
+margin: 0 auto;
 `;
 
 export const DeleteButton = styled(RaisedButton)`
@@ -48,6 +48,12 @@ border-radius: 50%;
 
 export const FormWrap = styled.div`
     position: relative;
+    background-color: #FFF;
+    margin: 12px 0;
+    box-shadow: 0 1px 0 #eee;
+    padding: 24px;
+    border-radius: 2px;
+    border: 1px solid #eee;
 `;
 
 

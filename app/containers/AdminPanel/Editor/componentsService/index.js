@@ -2,9 +2,11 @@
 import React, { Component, PropTypes } from 'react';
 import { FieldArray, arrayPush } from 'redux-form'; // eslint-disable-line
 import { connect } from 'react-redux';
+import AddIcon from 'material-ui/svg-icons/content/add';
 import getFormByName, { config } from './formsConfig';
 import ComponentFormModal from './ComponentFormModal';
 import { AddButton, DeleteButton, FormWrap } from './components';
+// import Button from 'components/Button';
 
 
 function renderFormItem(name, fields) {
@@ -68,9 +70,7 @@ class ContentService extends Component {
     return (
       <div>
         <FieldArray name={`${this.props.source}`} component={renderFieldsItems} props={{ types: this.state.types, addForm: this.addForm }} />
-        <AddButton
-          onClick={this.toggleModal}
-        >Добавить</AddButton>
+        <AddButton icon={<AddIcon />} label="Добавить блок" primary onClick={this.toggleModal} />
         <ComponentFormModal
           onCancel={this.toggleModal}
           show={this.state.showPopup}
