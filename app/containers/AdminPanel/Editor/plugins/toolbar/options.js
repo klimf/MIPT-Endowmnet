@@ -85,7 +85,7 @@ export default {
     ],
   },
   embedded: {
-    className: undefined,
+    className: 'img-block',
     component: undefined,
     popupClassName: undefined,
     defaultSize: {
@@ -94,7 +94,7 @@ export default {
     },
   },
   image: {
-    className: undefined,
+    className: 'img-block',
     component: undefined,
     popupClassName: undefined,
     urlEnabled: true,

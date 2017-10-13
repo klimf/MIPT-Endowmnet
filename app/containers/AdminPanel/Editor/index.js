@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Field } from 'redux-form';
 import styled from 'styled-components';
+import { media } from 'utils/helpers';
 import Editor from './editor';
 
 const EditorWrap = styled.div`
@@ -12,6 +13,37 @@ z-index: 150;
 const ContentPresentorWrap = styled.div`
  .rdw-editor-toolbar {
    height: 0;
+ }
+ figure {
+  ${media.small`
+   margin: 12px;
+`}
+ }
+ owerlay: hoidden;
+ .rdw-image-imagewrapper {
+   max-width: 100%;
+   display: block;
+     img {
+       max-width: 100%;
+       ${media.medium`
+          height: auto !important;
+       `}
+       ${media.small`
+        height: auto !important;
+        width: auto !important;
+    `}
+     
+     }
+ }
+ iframe {
+  max-width: 100%;
+  margin: 0 auto;
+  display: block;
+
+  ${media.small`
+  height: auto !important;
+  width: auto !important;
+  `}
  }
 `;
 
