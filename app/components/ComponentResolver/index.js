@@ -7,15 +7,15 @@ import { Navigation, NavItem } from '../Navigation';
 export const config = [
   {
     name: 'faces',
-    strategy: (data, key) => <Faces key={key} {...data}></Faces>,
+    strategy: (data, key) => <Faces key={key} {...data} />,
   },
   {
     name: 'quote',
-    strategy: (data, key) => <Quote key={key} {...data}></Quote>,
+    strategy: (data, key) => <Quote key={key} {...data} />,
   },
   {
     name: 'editor',
-    strategy: (data, key) => <ContentPresentor key={key} raw={data}></ContentPresentor>,
+    strategy: (data, key) => <ContentPresentor key={key} raw={data} />,
   },
   {
     name: 'navigation',

@@ -11,11 +11,13 @@ import Space from '../Space/index';
 import { media } from '../../utils/helpers';
 
 export const Wrapper = styled.div`
-  padding: 0 12px;
+  position: relative;
+  padding: 0 12px 24px;
   width: 25%;
   display: inline-block;
   text-align: center;
   margin: 0;
+  overflow: hidden;
   & h2 {
     font-weight: 400;
     margin: 0 0 12px 0;

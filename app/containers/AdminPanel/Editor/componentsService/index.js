@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import getFormByName, { config } from './formsConfig';
 import ComponentFormModal from './ComponentFormModal';
 import { AddButton, DeleteButton, FormWrap } from './components';
+// import Button from 'components/Button';
 
 
 function renderFormItem(name, fields) {
@@ -28,7 +29,7 @@ function renderFormItem(name, fields) {
     return (
       <FormWrap key={index}>
         <InputComponent name={`${member}.data`} />
-        <DeleteButton onClick={() => fieldsRef.remove(index)}>удалить</DeleteButton>
+        <DeleteButton label="удалить" onClick={() => fieldsRef.remove(index)} />
       </FormWrap>
     );
   }) : null;
@@ -67,10 +68,8 @@ class ContentService extends Component {
   render() {
     return (
       <div>
-        <FieldArray name={`${this.props.source}`} component={renderFieldsItems} props={{ types: this.state.types, addForm: this.addForm }}></FieldArray>
-        <AddButton
-          onClick={this.toggleModal}
-        >Добавить</AddButton>
+        <FieldArray name={`${this.props.source}`} component={renderFieldsItems} props={{ types: this.state.types, addForm: this.addForm }} />
+        <AddButton label="Добавить блок" onClick={this.toggleModal} />
         <ComponentFormModal
           onCancel={this.toggleModal}
           show={this.state.showPopup}

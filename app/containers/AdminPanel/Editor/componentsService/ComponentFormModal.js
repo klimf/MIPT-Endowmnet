@@ -18,7 +18,7 @@ transition: .3s all ease-in-out;
 function ComponentFormModal(props) {
   return (
     <Popup
-      title={'Выберите типа блока'}
+      title={'Выберите тип блока'}
       show={props.show}
       onCancel={props.onCancel}
     >
