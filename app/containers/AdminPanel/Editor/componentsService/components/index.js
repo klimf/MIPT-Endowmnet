@@ -38,6 +38,11 @@ border-radius: 50%;
   opacity: 0;
   color: ${palette.white};
   background: rgba(0, 0, 0, .6);
+  ${(props) => props.forFace && `
+    left: 10%;
+    width: 80%;
+    padding-top: 35%;
+  `}
 }
 `;
 

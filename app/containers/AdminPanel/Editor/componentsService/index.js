@@ -67,7 +67,7 @@ class ContentService extends Component {
   render() {
     return (
       <div>
-        <FieldArray name={`${this.props.source}`} component={renderFieldsItems} props={{ types: this.state.types, addForm: this.addForm }}></FieldArray>
+        <FieldArray name={`${this.props.source}`} component={renderFieldsItems} props={{ types: this.state.types, addForm: this.addForm }} />
         <AddButton
           onClick={this.toggleModal}
         >Добавить</AddButton>

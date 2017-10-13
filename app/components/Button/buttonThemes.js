@@ -34,6 +34,17 @@ const buttonThemes = {
     shadowHover: `0 12px 24px ${palette.dark}`,
     transformHover: 'scale(1.1)',
   },
+  noHover: {
+    bgColor: palette.primary,
+    borderColor: palette.transparent,
+    textColor: palette.white,
+    shadow: 'none',
+    bgColorHover: palette.primary,
+    textColorHover: palette.white,
+    borderColorHover: palette.transparent,
+    shadowHover: 'none',
+    transformHover: 'none',
+  },
 };
 
 export default buttonThemes;
