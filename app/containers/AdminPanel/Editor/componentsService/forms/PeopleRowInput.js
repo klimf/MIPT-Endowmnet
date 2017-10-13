@@ -59,7 +59,7 @@ function Item(name, index, fields) {
       <Space size={2} />
       <Field validate={[required]} name={`${name}.name`} component={TextInput} label="Имя" />
       <Field validate={[required]} name={`${name}.description`} component={TextInput} label="Имя" />
-      <DeleteButton onClick={() => fields.remove(index)}>Удалить</DeleteButton>
+      <DeleteButton onClick={() => fields.remove(index)} />
     </Wrapper>
   );
 }
@@ -67,7 +67,7 @@ function Item(name, index, fields) {
 const renderPeopleFields = ({ fields }) => ( // eslint-disable-line
   <div>
     { fields.map(Item) }
-    <AddButton onClick={() => fields.push({})}>Добавить</AddButton>
+    <AddButton onClick={() => fields.push({})} />
   </div>
     );
 

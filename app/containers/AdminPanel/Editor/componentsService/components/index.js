@@ -2,19 +2,31 @@ import React from 'react';
 import { RaisedButton } from 'material-ui';
 import styled from 'styled-components';
 import Dropzone from 'react-dropzone';
+import AddIcon from 'material-ui/svg-icons/content/add';
+import DeleteIcon from 'material-ui/svg-icons/action/delete-forever';
 import { palette } from 'utils/constants';
 import restClient, { setAttachment } from '../../../restClient';
 import { UPLOAD } from '../../../actions';
 
-export const AddButton = styled(RaisedButton)`
-margin: 0 auto;
+export const AddButton = styled(RaisedButton).attrs({
+  primary: true,
+  style: { minWidth: '48px' },
+  icon: <AddIcon color={palette.white} />,
+})`
+  margin-top: 12px;
 `;
 
-export const DeleteButton = styled(RaisedButton)`
+export const DeleteButton = styled(RaisedButton).attrs({
+  style: { minWidth: '48px' },
+  backgroundColor: palette.accent,
+  labelColor: palette.white,
+  icon: <DeleteIcon color={palette.white} />,
+})`
     position: absolute;
     right: 0;
     top: 0;
 `;
+
 
 export const HoverableImageWrapper = styled(Dropzone)`
 position: relative;
@@ -67,6 +79,6 @@ export const ImageDrop = (Component) => (field) => (
       });
     }}
   >
-    <Component field={field}></Component>
+    <Component field={field} />
   </HoverableImageWrapper>
     );

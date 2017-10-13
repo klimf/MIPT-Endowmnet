@@ -2,7 +2,6 @@
 import React, { Component, PropTypes } from 'react';
 import { FieldArray, arrayPush } from 'redux-form'; // eslint-disable-line
 import { connect } from 'react-redux';
-import AddIcon from 'material-ui/svg-icons/content/add';
 import getFormByName, { config } from './formsConfig';
 import ComponentFormModal from './ComponentFormModal';
 import { AddButton, DeleteButton, FormWrap } from './components';
@@ -30,7 +29,7 @@ function renderFormItem(name, fields) {
     return (
       <FormWrap key={index}>
         <InputComponent name={`${member}.data`} />
-        <DeleteButton onClick={() => fieldsRef.remove(index)}>удалить</DeleteButton>
+        <DeleteButton label="удалить" onClick={() => fieldsRef.remove(index)} />
       </FormWrap>
     );
   }) : null;
@@ -70,7 +69,7 @@ class ContentService extends Component {
     return (
       <div>
         <FieldArray name={`${this.props.source}`} component={renderFieldsItems} props={{ types: this.state.types, addForm: this.addForm }} />
-        <AddButton icon={<AddIcon />} label="Добавить блок" primary onClick={this.toggleModal} />
+        <AddButton label="Добавить блок" onClick={this.toggleModal} />
         <ComponentFormModal
           onCancel={this.toggleModal}
           show={this.state.showPopup}
