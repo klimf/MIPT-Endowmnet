@@ -16,8 +16,8 @@ export function formatMoney(value) {
   return '0';
 }
 
-export function resolveStatic(path) {
-  if (!path) {
+export function resolveStatic(path, nullable) {
+  if (!path && !nullable) {
     return placeholder;
   }
   return `${config.API_ADRESS}/${path}`;

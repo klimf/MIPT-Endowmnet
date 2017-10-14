@@ -7,7 +7,7 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import Title from '../Title';
-import { unit, image } from '../../utils/constants';
+import { unit } from '../../utils/constants';
 import { resolveStatic } from '../../utils/helpers';
 
 import corp1 from '../../images/corps/1.png';
@@ -33,7 +33,6 @@ export const List = styled.div`
       width: auto;    
       transition: 0.3s ease;
       filter: grayscale(100%) sepia(100%) hue-rotate(181deg);
-      ${image}
       &:hover {
         filter: none;
       }

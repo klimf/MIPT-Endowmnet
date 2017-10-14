@@ -14,7 +14,9 @@ export const onlyOneNode = (prefix) => (val) => {
   const prefixSplit = prefix.split('/');
   const valSplit = val.split('/');
 
-  if (Math.abs(valSplit.length - prefixSplit.length) >= 1) {
+  if (Math.abs(valSplit.length - prefixSplit.length) >= 1 && prefixSplit[0] !== 'undefined') {
+    console.log(prefixSplit);
+    console.log(valSplit);
     return (`Сначала нужно создать страницу ${valSplit[prefixSplit.length - 1] || val}`);
   }
 

@@ -91,7 +91,7 @@ export class AdminPanel extends React.Component { // eslint-disable-line react/p
             remove={Delete}
           />
           <Resource
-            name="navigation"
+            name="navigation-layout"
             options={{ label: messages.navigationLabel.defaultMessage }}
             list={NavigationResource.NavigationList}
             edit={NavigationResource.NavigationEdit}

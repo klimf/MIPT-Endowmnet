@@ -66,8 +66,7 @@ export const PagesList = (props) => (
 
 PagesList.propTypes = {
   history: PropTypes.any,
-}
-  ;
+};
 
 
 export const PagesEdit = (props) => (
@@ -81,20 +80,27 @@ export const PagesEdit = (props) => (
   </Edit>
 );
 
-export const PagesCreate = (props) => (
-  <Create title={`Создание подстраницы для ${props.match.params['0'] || ''}/`} {...props} redirect={'/pages'}>
-    <SimpleForm>
-      <TextInput label={'Название'} validate={[required]} source="name" />
-      <TextInput label={'Описание'} validate={[required]} source="description" />
-      <TextInput
-        defaultValue={`${props.match.params['0']}/` || ''}
-        format={(val) => (val && val !== `${props.match.params['0'] || ''}/`) ? val : `${props.match.params['0'] || ''}/`}
-        label={'ссылка'} validate={[required, onlyUrl, onlyOneNode(`${props.match.params['0']}/`)]} source="url"
-      />
-      <ContentService source={'content'}></ContentService>
-    </SimpleForm>
-  </Create>
-  );
+
+export const PagesCreate = (props) => {
+  const match = props.match.params['0'];
+  const preUrl = match ? `${match}/` : '';
+  return (
+    <Create title={`Создание подстраницы для ${props.match.params['0'] || ''}/`} {...props} redirect={'/pages'}>
+      <SimpleForm>
+        <TextInput label={'Название'} validate={[required]} source="name" />
+        <TextInput label={'Описание'} validate={[required]} source="description" />
+        <TextInput
+          defaultValue={preUrl}
+          format={(val) => (val && val !== preUrl ? val : preUrl)}
+          label={'ссылка'} validate={[required, onlyUrl, onlyOneNode(`${props.match.params['0']}/`)]}
+          source="url"
+        />
+        <ContentService source={'content'}></ContentService>
+      </SimpleForm>
+    </Create>
+  )
+ ;
+};
 
 PagesCreate.propTypes = {
   match: PropTypes.any,

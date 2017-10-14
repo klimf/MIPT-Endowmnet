@@ -12,7 +12,7 @@ import QuoteInput from '../../Editor/componentsService/forms/QuoteInput';
 import ContentService from '../../Editor/componentsService';
 
 export const StoriesList = (props) => (
-  <List title={'Истории'} {...props}>
+  <List title={'Истории'} {...props} pagination={null}>
     <Datagrid>
       <TextField label={'Имя'} source="owner.name" />
       <EditButton label={'Редактировать'} basePath="/capitals" />

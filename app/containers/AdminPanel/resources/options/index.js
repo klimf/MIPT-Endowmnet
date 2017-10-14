@@ -11,7 +11,7 @@ import {
 import { required } from '../validation';
 
 export const OptionsList = (props) => (
-  <List title={'Опции'} {...props}>
+  <List title={'Опции'} {...props} pagination={null}>
     <Datagrid>
       <TextField label={'Название'} source="id" />
       <TextField label={'Значение'} source="value" />

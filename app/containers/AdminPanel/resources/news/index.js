@@ -17,7 +17,7 @@ import { StaticImage } from '../customFields';
 import ContentService from '../../Editor/componentsService';
 
 export const NewsList = (props) => (
-  <List title={'Новости'} {...props}>
+  <List title={'Новости'} {...props} pagination={null}>
     <Datagrid>
       <StaticImage source="image" label="Изображение" />
       <TextField label={'Название'} source="name" />

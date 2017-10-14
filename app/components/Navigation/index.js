@@ -5,7 +5,7 @@ import { palette, block, unit } from '../../utils/constants';
 export const Navigation = styled.div`
 ${block}
 display: flex;
-margin: ${unit * 4}px;
+margin-top: ${unit * 4}px;
 flex-wrap: wrap;
 justify-content: space-around;
 min-height: 42px;
@@ -18,7 +18,7 @@ const isThatPage = (props) => (props.href === location.href || props.href === lo
 export const NavItem = styled(Link)`
 text-decoration: none;
 background-color: ${(props) => isThatPage(props) ? palette.primary : palette.transparent};
-color: ${(props) => isThatPage(props) ? palette.white : palette.black};
+color: ${(props) => isThatPage(props) ? palette.white : palette.primary};
 cursor: pointer;
 font-size: 20px;
 flex-grow: 1;

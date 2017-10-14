@@ -16,13 +16,28 @@ import Content from '../../components/Content';
 
 export class GenericPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      path: this.props.location.pathname,
+    };
+  }
+
   componentWillMount = () => {
     this.changePage(this.props.location.pathname);
   }
 
+
+  componentDidUpdate = () => {
+    if (this.state.path !== this.props.location.pathname) {
+      this.changePage(this.props.location.pathname);
+      this.setState({ path: this.props.location.pathname });
+    }
+  }
+
   changePage(pageName) {
-    this.props.router.push(pageName);
-    this.props.fetchPage.start(this.props.location.pathname);
+    // this.props.router.push(pageName);
+    this.props.fetchPage.start(pageName);
     this.props.fetchPagesTree.start();
   }
 
@@ -56,7 +71,6 @@ GenericPage.propTypes = {
   currentPage: PropTypes.object,
   location: PropTypes.object,
   fetchPagesTree: PropTypes.object,
-  router: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
