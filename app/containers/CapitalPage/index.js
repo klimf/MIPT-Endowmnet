@@ -11,7 +11,6 @@ import { createStructuredSelector } from 'reselect';
 import styled from 'styled-components';
 import { bindAll } from 'redux-act';
 import scrollToComponent from 'react-scroll-to-component';
-
 import makeSelectCapitalPage, { makeSelectCurrentCapital } from './selectors';
 import * as actions from './actions';
 import img from '../../images/CapitalImage.jpg';
@@ -21,7 +20,7 @@ import face2 from '../../images/Face2.jpg';
 import face3 from '../../images/Face3.jpg';
 import Content from '../../components/Content/index';
 import Space from '../../components/Space/index';
-import { hideOn, media, formatMoney } from '../../utils/helpers';
+import { hideOn, media, formatMoney, resolveStatic } from '../../utils/helpers';
 import Quotes from '../../components/Quotes/index';
 import { DonationForm } from '../../components/DonationForm/index';
 import WdH from '../../components/WdH/index';
@@ -111,6 +110,11 @@ export class CapitalPage extends React.PureComponent { // eslint-disable-line re
           title={this.props.capital.data.name}
           meta={[
             { name: 'description', content: this.props.capital.data.description },
+            { name: 'og:url', content: window.location.href },
+            { name: 'og:type', content: 'profile' },
+            { name: 'og:title', content: this.props.capital.data.name },
+            { name: 'og:description', content: this.props.capital.data.description },
+            { name: 'og:image', content: resolveStatic(this.props.capital.data.image.small) },
           ]}
         />
       }
@@ -148,6 +152,7 @@ export class CapitalPage extends React.PureComponent { // eslint-disable-line re
           <Space size={3} />
           <Quotes title="Получатели" right noMore items={this.props.capital.data.receivers || []} />
           <Space size={2} />
+
           <DonationForm ref={(e) => (this.donationForm = e)} title="Пополнить капитал" />
         </Content>
       }
