@@ -53,7 +53,6 @@ function renderFormItem(name, fields) {
             }
         </div>
 
-
       </FormWrap>
     );
   }) : null;
