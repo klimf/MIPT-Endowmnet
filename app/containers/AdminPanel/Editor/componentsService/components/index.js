@@ -28,6 +28,8 @@ export const DeleteButton = styled(RaisedButton).attrs({
     top: 0;
 `;
 
+export const OrderButton = RaisedButton;
+
 
 export const HoverableImageWrapper = styled(Dropzone)`
 position: relative;

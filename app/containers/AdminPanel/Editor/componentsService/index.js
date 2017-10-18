@@ -4,7 +4,7 @@ import { FieldArray, arrayPush } from 'redux-form'; // eslint-disable-line
 import { connect } from 'react-redux';
 import getFormByName, { config } from './formsConfig';
 import ComponentFormModal from './ComponentFormModal';
-import { AddButton, DeleteButton, FormWrap } from './components';
+import { AddButton, DeleteButton, FormWrap, OrderButton } from './components';
 // import Button from 'components/Button';
 
 
@@ -30,6 +30,30 @@ function renderFormItem(name, fields) {
       <FormWrap key={index}>
         <InputComponent name={`${member}.data`} />
         <DeleteButton label="удалить" onClick={() => fieldsRef.remove(index)} />
+
+        <div>
+          {index > 0 &&
+            <OrderButton
+              onClick={() => {
+                fieldsRef.swap(index, index - 1);
+              }}
+            >
+            Вверх
+            </OrderButton>
+            }
+
+          {index < (fieldsRef.length - 1) &&
+          <OrderButton
+            onClick={() => {
+              fieldsRef.swap(index, index + 1);
+            }}
+          >
+             Вниз
+            </OrderButton>
+            }
+        </div>
+
+
       </FormWrap>
     );
   }) : null;
