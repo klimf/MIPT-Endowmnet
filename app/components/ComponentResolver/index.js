@@ -4,6 +4,7 @@ import Quote from '../Quotes/Item';
 import { ContentPresentor } from '../../containers/AdminPanel/Editor';
 import { Navigation, NavItem } from '../Navigation';
 import Partners from '../Partners';
+import Share from '../Share';
 import { resolveLink } from '../../utils/helpers';
 
 export const config = [
@@ -24,7 +25,7 @@ export const config = [
     strategy: (data, key) =>
       <Navigation key={key} >
         {data.items.map((item, index) =>
-          <NavItem key={index} href={resolveLink(item.link)}>
+          <NavItem key={index} to={resolveLink(item.link)}>
             {item.name}
           </NavItem>
         )}
@@ -34,6 +35,11 @@ export const config = [
     name: 'Images',
     strategy: (data, key) =>
       <Partners key={key} {...data} />,
+  },
+  {
+    name: 'share',
+    strategy: (data, key) =>
+      <Share key={key} {...data} />,
   },
 ];
 

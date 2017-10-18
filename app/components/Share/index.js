@@ -30,6 +30,9 @@ const ShareWrapper = styled.div`
   justify-content: space-around;
   svg {
     fill: white !important;
+    &:hover {
+      cursor: pointer;
+    }
   }
 `;
 
@@ -37,7 +40,7 @@ function Share(props) {
   return (
     <div>
       <Title>Поделиться</Title>
-      <Space size={2}></Space>
+      <Space size={1}></Space>
       <ShareWrapper>
         <FacebookShareButton {...props} url={window.location.href}>
           <FacebookIcon size={32} round logoFillColor={'white'}></FacebookIcon>
@@ -61,7 +64,7 @@ function Share(props) {
           <OKIcon size={32} round logoFillColor={'white'}></OKIcon>
         </OKShareButton>
       </ShareWrapper>
-      <Space size={2}></Space>
+      <Space size={1}></Space>
     </div>
 
   );

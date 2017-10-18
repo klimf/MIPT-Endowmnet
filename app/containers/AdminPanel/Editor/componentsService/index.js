@@ -24,7 +24,7 @@ function renderFormItem(name, fields) {
     const type = fieldsRef.get(index).type;
     const InputComponent = getFormByName(type);
     if (!InputComponent) {
-      throw new Error('unsupported component type');
+      throw new Error(`unsupported component type ${type}`);
     }
     return (
       <FormWrap key={index}>

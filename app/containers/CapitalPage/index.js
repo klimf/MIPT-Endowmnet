@@ -30,7 +30,6 @@ import Button from '../../components/Button/index';
 import Title from '../../components/Title/index';
 import Image from '../../components/FullImage/index';
 import componentResolver from '../../components/ComponentResolver';
-import Share from '../../components/Share';
 
 const Head = styled(FlexBox)`
   position: relative;
@@ -152,7 +151,6 @@ export class CapitalPage extends React.PureComponent { // eslint-disable-line re
           <Space size={3} />
           <Quotes title="Получатели" right noMore items={this.props.capital.data.receivers || []} />
           <Space size={2} />
-          <Share></Share>
           <DonationForm ref={(e) => (this.donationForm = e)} title="Пополнить капитал" />
         </Content>
       }

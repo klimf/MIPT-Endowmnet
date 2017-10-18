@@ -29,12 +29,12 @@ export class StoryPage extends React.PureComponent { // eslint-disable-line reac
         <Helmet
           title="StoryPage"
           meta={[
-            { name: 'description', content: this.props.story.owner.quote },
+            { name: 'description', content: this.props.story.owner && this.props.story.owner.quote },
             { name: 'og:url', content: window.location.href },
             { name: 'og:type', content: 'website' },
-            { name: 'og:title', content: this.props.story.owner.name },
-            { name: 'og:description', content: this.props.story.owner.quote },
-            { name: 'og:image', content: resolveStatic(this.props.story.owner.image ? this.props.story.owner.image.small : null) },
+            { name: 'og:title', content: this.props.story.owner && this.props.story.owner.name },
+            { name: 'og:description', content: this.props.story.owner && this.props.story.owner.quote },
+            { name: 'og:image', content: resolveStatic(this.props.story.owner ? this.props.story.owner.image.small : null) },
           ]}
         />
         <Content>

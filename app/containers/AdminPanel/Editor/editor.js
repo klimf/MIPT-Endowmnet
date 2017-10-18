@@ -28,9 +28,6 @@ class EditorApp extends Component { // eslint-disable-line}
   }
 
 
-  componentWillMount = () => {
-    console.log(this.state.editorState);
-  }
   onEditorStateChange(editorState) {
     try {
       this.setState({ editorState });
@@ -52,7 +49,7 @@ class EditorApp extends Component { // eslint-disable-line}
             />)
           :
           (<Editor
-            initialContentState={this.props.initialContentState}
+            editorState={this.props.editorState}
             toolbarHidden={this.props.toolbarHidden}
             readOnly
           />)

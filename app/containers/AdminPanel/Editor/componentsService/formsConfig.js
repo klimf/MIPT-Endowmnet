@@ -4,6 +4,7 @@ import facesPreview from 'images/previews/faces-preview.png';
 import editorPreview from 'images/previews/editor-preview.png';
 import navPreview from 'images/previews/nav-preview.png';
 import imgsPreview from 'images/previews/images-prev.png';
+import sharePreview from 'images/previews/share-preview.png';
 import * as Forms from './forms';
 import Image from '../../../../components/FullImage';
 
@@ -32,6 +33,11 @@ export const config = [
     name: 'Images',
     form: Forms.Images,
     preview: <Image src={imgsPreview} />,
+  },
+  {
+    name: 'share',
+    form: Forms.Share,
+    preview: <Image src={sharePreview} />,
   },
 ];
 

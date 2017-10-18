@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { makeSelectCurrentPage } from './selectors';
-import { fetchPage, fetchPagesTree } from './actions';
+import { fetchPage } from './actions';
 import contentResolver from '../../components/ComponentResolver';
 import Content from '../../components/Content';
 
@@ -20,31 +20,23 @@ export class GenericPage extends React.Component { // eslint-disable-line react/
     super(props);
     this.state = {
       path: this.props.location.pathname,
+      content: [],
     };
   }
 
   componentWillMount = () => {
-    this.changePage(this.props.location.pathname);
+    this.props.router.listen((location) => {
+      this.changePage(location ? location.pathname : this.props.location.pathname);
+    });
   }
 
 
-  componentDidUpdate = () => {
-    if (this.state.path !== this.props.location.pathname) {
-      this.changePage(this.props.location.pathname);
-      this.setState({ path: this.props.location.pathname });
+  changePage(pageName) {
+    if (pageName && pageName.split('/').includes('p')) {
+      this.props.fetchPage.start(pageName);
     }
   }
 
-  changePage(pageName) {
-    // this.props.router.push(pageName);
-    this.props.fetchPage.start(pageName);
-    this.props.fetchPagesTree.start();
-  }
-
-  isThatPage(pageName) {
-    const path = this.this.props.location.pathname.split('/');
-    return path.lastIndexOf(pageName) === (path.length);
-  }
 
   render() {
     return (
@@ -59,9 +51,7 @@ export class GenericPage extends React.Component { // eslint-disable-line react/
         />
         <div />
         <Content>
-          {this.props.currentPage.content &&
-            contentResolver(this.props.currentPage.content)
-          }
+          {contentResolver(this.props.currentPage.content)}
         </Content>
       </div>
     );
@@ -72,7 +62,7 @@ GenericPage.propTypes = {
   fetchPage: PropTypes.object,
   currentPage: PropTypes.object,
   location: PropTypes.object,
-  fetchPagesTree: PropTypes.object,
+  router: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -82,7 +72,6 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     fetchPage: fetchPage.bindTo(dispatch),
-    fetchPagesTree: fetchPagesTree.bindTo(dispatch),
   };
 }
 

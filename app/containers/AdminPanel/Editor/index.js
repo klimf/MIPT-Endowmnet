@@ -3,6 +3,7 @@ import { Field } from 'redux-form';
 import styled from 'styled-components';
 import { media } from 'utils/helpers';
 import { palette } from 'utils/constants';
+import { EditorState, convertFromRaw } from 'draft-js';
 import Editor from './editor';
 
 const EditorWrap = styled.div`
@@ -98,10 +99,11 @@ EditorField.propTypes = {
 
 export function ContentPresentor({ raw }) {
   const contentState = typeof raw === 'string' ? JSON.parse(raw) : raw;
+  const editorState = EditorState.createWithContent(convertFromRaw(contentState));
   return (
     <ContentPresentorWrap>
       <Editor
-        initialContentState={contentState}
+        editorState={editorState}
         toolbarHidden
         readOnly
       />

@@ -13,7 +13,7 @@ overflow: hidden;
 border-radius: 21px;
 `;
 
-const isThatPage = (props) => (props.href === location.href || props.href === location.pathname);
+const isThatPage = (props) => (props.to === location.href || props.to === location.pathname);
 
 export const NavItem = styled(Link)`
 text-decoration: none;
