@@ -52,7 +52,9 @@ export class GenericPage extends React.Component { // eslint-disable-line react/
         <Helmet
           title={this.props.currentPage.name}
           meta={[
-            { name: 'description', content: this.props.currentPage.description },
+            { name: 'og:url', content: window.location.href },
+            { name: 'og:type', content: 'website' },
+            { name: 'og:title', content: this.props.currentPage.name },
           ]}
         />
         <div />

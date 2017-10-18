@@ -43,7 +43,13 @@ class HomePage extends React.PureComponent { // eslint-disable-line react/prefer
   render() {
     return (
       <div>
-        <Helmet />
+        <Helmet
+          title={'Эндаумент-фонд МФТИ'}
+          meta={[
+            { name: 'og:url', content: window.location.href },
+            { name: 'og:type', content: 'website' },
+          ]}
+        />
         <Content>
           <Space size={5} />
           <Masthead

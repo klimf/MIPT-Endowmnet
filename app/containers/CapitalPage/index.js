@@ -30,7 +30,7 @@ import Button from '../../components/Button/index';
 import Title from '../../components/Title/index';
 import Image from '../../components/FullImage/index';
 import componentResolver from '../../components/ComponentResolver';
-
+import Share from '../../components/Share';
 
 const Head = styled(FlexBox)`
   position: relative;
@@ -111,10 +111,10 @@ export class CapitalPage extends React.PureComponent { // eslint-disable-line re
           meta={[
             { name: 'description', content: this.props.capital.data.description },
             { name: 'og:url', content: window.location.href },
-            { name: 'og:type', content: 'profile' },
+            { name: 'og:type', content: 'website' },
             { name: 'og:title', content: this.props.capital.data.name },
             { name: 'og:description', content: this.props.capital.data.description },
-            { name: 'og:image', content: resolveStatic(this.props.capital.data.image.small) },
+            { name: 'og:image', content: resolveStatic(this.props.capital.data.image ? this.props.capital.data.image.small : null) },
           ]}
         />
       }
@@ -152,7 +152,7 @@ export class CapitalPage extends React.PureComponent { // eslint-disable-line re
           <Space size={3} />
           <Quotes title="Получатели" right noMore items={this.props.capital.data.receivers || []} />
           <Space size={2} />
-
+          <Share></Share>
           <DonationForm ref={(e) => (this.donationForm = e)} title="Пополнить капитал" />
         </Content>
       }

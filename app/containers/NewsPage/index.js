@@ -29,9 +29,13 @@ export class NewsPage extends React.PureComponent { // eslint-disable-line react
     return (
       <div>
         <Helmet
-          title="Истории"
+          title="Новости"
           meta={[
-            { name: 'description', content: 'Description of StoriesPage' },
+            { name: 'description', content: 'Наши новости' },
+            { name: 'og:url', content: window.location.href },
+            { name: 'og:type', content: 'website' },
+            { name: 'og:title', content: 'Новости' },
+            { name: 'og:description', content: 'Наши новости' },
           ]}
         />
         <Content>

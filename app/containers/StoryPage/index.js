@@ -13,7 +13,7 @@ import { makeSelectStoriesItem } from './selectors';
 import QuoteItem from '../../components/Quotes/Item';
 import Content from '../../components/Content/index';
 import Title from '../../components/Title/index';
-
+import { resolveStatic } from '../../utils/helpers';
 
 import Space from '../../components/Space/index';
 import { fetchStoriesData } from './actions';
@@ -29,7 +29,12 @@ export class StoryPage extends React.PureComponent { // eslint-disable-line reac
         <Helmet
           title="StoryPage"
           meta={[
-            { name: 'description', content: 'Description of StoryPage' },
+            { name: 'description', content: this.props.story.owner.quote },
+            { name: 'og:url', content: window.location.href },
+            { name: 'og:type', content: 'website' },
+            { name: 'og:title', content: this.props.story.owner.name },
+            { name: 'og:description', content: this.props.story.owner.quote },
+            { name: 'og:image', content: resolveStatic(this.props.story.owner.image ? this.props.story.owner.image.small : null) },
           ]}
         />
         <Content>

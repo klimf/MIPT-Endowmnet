@@ -19,7 +19,7 @@ import Content from '../../components/Content/index';
 import Space from '../../components/Space/index';
 import FlexBox from '../../components/FlexBox/index';
 import Line from '../../components/Line/index';
-import { formatDateWithMonth } from '../../utils/helpers';
+import { formatDateWithMonth, resolveStatic } from '../../utils/helpers';
 import contentResolver from '../../components/ComponentResolver';
 
 
@@ -64,6 +64,11 @@ export class NewsItemPage extends React.PureComponent { // eslint-disable-line r
           title={this.props.newsItem.name}
           meta={[
             { name: 'description', content: this.props.newsItem.description },
+            { name: 'og:url', content: window.location.href },
+            { name: 'og:type', content: 'website' },
+            { name: 'og:title', content: this.props.newsItem.name },
+            { name: 'og:description', content: this.props.newsItem.description },
+            { name: 'og:image', content: resolveStatic(this.props.newsItem.image ? this.props.newsItem.image.small : null) },
           ]}
         />
         <Content>

@@ -83,7 +83,11 @@ export class CapitalsPage extends React.PureComponent { // eslint-disable-line r
         <Helmet
           title={'Капиталы'}
           meta={[
-            { name: 'description', content: 'Капиталы фонда МФТИ' },
+            { name: 'description', content: 'Наши целевые капиталы' },
+            { name: 'og:url', content: window.location.href },
+            { name: 'og:type', content: 'website' },
+            { name: 'og:title', content: 'Целевые капиталы' },
+            { name: 'og:description', content: 'Наши целевые капиталы' },
           ]}
         />
         <Space size={4} />

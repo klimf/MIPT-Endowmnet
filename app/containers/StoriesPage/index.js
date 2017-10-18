@@ -29,7 +29,11 @@ export class StoriesPage extends React.PureComponent { // eslint-disable-line re
         <Helmet
           title="Истории"
           meta={[
-            { name: 'description', content: 'Истории работы с фондом МФТИ' },
+            { name: 'description', content: 'Истории о работе с фондом' },
+            { name: 'og:url', content: window.location.href },
+            { name: 'og:type', content: 'website' },
+            { name: 'og:title', content: 'Истории' },
+            { name: 'og:description', content: 'Истории о работе с фондом' },
           ]}
         />
         <Content>
