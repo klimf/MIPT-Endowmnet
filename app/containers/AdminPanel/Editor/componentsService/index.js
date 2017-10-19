@@ -34,12 +34,11 @@ function renderFormItem(name, fields) {
         <div>
           {index > 0 &&
             <OrderButton
+              up
               onClick={() => {
                 fieldsRef.swap(index, index - 1);
               }}
-            >
-            Вверх
-            </OrderButton>
+            />
             }
 
           {index < (fieldsRef.length - 1) &&
@@ -47,9 +46,7 @@ function renderFormItem(name, fields) {
             onClick={() => {
               fieldsRef.swap(index, index + 1);
             }}
-          >
-             Вниз
-            </OrderButton>
+          />
             }
         </div>
 

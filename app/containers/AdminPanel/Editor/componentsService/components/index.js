@@ -3,6 +3,8 @@ import { RaisedButton } from 'material-ui';
 import styled from 'styled-components';
 import Dropzone from 'react-dropzone';
 import AddIcon from 'material-ui/svg-icons/content/add';
+import ArrowUp from 'material-ui/svg-icons/navigation/arrow-upward';
+import ArrowDown from 'material-ui/svg-icons/navigation/arrow-downward';
 import DeleteIcon from 'material-ui/svg-icons/action/delete-forever';
 import { palette } from 'utils/constants';
 import restClient, { setAttachment } from '../../../restClient';
@@ -28,7 +30,16 @@ export const DeleteButton = styled(RaisedButton).attrs({
     top: 0;
 `;
 
-export const OrderButton = RaisedButton;
+export const OrderButton = styled(RaisedButton).attrs({
+  style: { minWidth: '48px' },
+  backgroundColor: palette.primary,
+  labelColor: palette.white,
+  icon: (props) => props.up ? // eslint-disable-line
+    <ArrowUp color={palette.white} />
+   : <ArrowDown color={palette.white} />,
+})`
+  display: inline-block;
+`;
 
 
 export const HoverableImageWrapper = styled(Dropzone)`
