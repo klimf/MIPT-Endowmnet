@@ -59,7 +59,7 @@ export const NavItem = styled.div`
   }
 `;
 
-const ImgContentCss = css`
+export const ImgContentCss = css`
   & p {
     font-size: 20px;
     margin: 0;

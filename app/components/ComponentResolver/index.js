@@ -6,6 +6,8 @@ import { Navigation, NavItem } from '../Navigation';
 import Partners from '../Partners';
 import Share from '../Share';
 import { resolveLink } from '../../utils/helpers';
+import ImgContent from '../ImgContent/index';
+import { ImgContentCss } from '../../containers/AboutPage/index';
 
 export const config = [
   {
@@ -40,6 +42,14 @@ export const config = [
     name: 'share',
     strategy: (data, key) =>
       <Share key={key} {...data} />,
+  },
+  {
+    name: 'imageText',
+    strategy: (data, key) =>
+      <ImgContent reverse={!data.isLeft} styles={ImgContentCss} vertPadding={8} key={key} image={data.image.small} imgWidth={200} shadow rounded>
+        <h2>{data.title}</h2>
+        <p>{data.description}</p>
+      </ImgContent>,
   },
 ];
 

@@ -6,7 +6,7 @@ import navPreview from 'images/previews/nav-preview.png';
 import imgsPreview from 'images/previews/images-prev.png';
 import sharePreview from 'images/previews/share-preview.png';
 // import listBlocksPreview from 'images/previews/list-blocks-preview.png';
-// import imageTextPreview from 'images/previews/image-text-preview.png';
+import imageTextPreview from 'images/previews/image-text-preview.png';
 // import tabsPreview from 'images/previews/tabs-preview.png';
 // import chatPreview from 'images/previews/chat-preview.png';
 import * as Forms from './forms';
@@ -48,11 +48,11 @@ export const config = [
   //   form: Forms.ListBlocks,
   //   preview: <Image src={listBlocksPreview} />,
   // },
-  // {
-  //   name: 'imageText',
-  //   form: Forms.Images,
-  //   preview: <Image src={imageTextPreview} />,
-  // },
+  {
+    name: 'imageText',
+    form: Forms.ImageText,
+    preview: <Image src={imageTextPreview} />,
+  },
   // {
   //   name: 'tabs',
   //   form: Forms.Images,

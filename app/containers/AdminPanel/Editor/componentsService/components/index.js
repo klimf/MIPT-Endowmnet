@@ -44,7 +44,7 @@ export const OrderButton = styled(RaisedButton).attrs({
 
 export const HoverableImageWrapper = styled(Dropzone)`
 position: relative;
-border-radius: 50%;
+border-radius: ${(props) => props.rounded ? '8px' : '50%'};
 &:hover {
   cursor: pointer;
   &:after {
@@ -55,7 +55,7 @@ border-radius: 50%;
   transition: 0.3s ease;
   content: 'Загрузить фото';
   position: absolute;
-  border-radius: 50%;
+  border-radius: ${(props) => props.rounded ? '8px' : '50%'};
   top: 0;
   padding-top: 45%;
   text-align: center;
