@@ -44,14 +44,18 @@ class EditorApp extends Component { // eslint-disable-line}
   }
 
   componentDidMount() {
-    window.addEventListener('scroll', this.onScroll, false);
-    window.addEventListener('resize', this.onResize, false);
-    this.onResize();
+    if (this.stickyWrap) {
+      window.addEventListener('scroll', this.onScroll, false);
+      window.addEventListener('resize', this.onResize, false);
+      this.onResize();
+    }
   }
 
   componentWillUnmount() {
-    window.removeEventListener('scroll', this.onScroll, false);
-    window.removeEventListener('resize', this.onResize, false);
+    if (this.stickyWrap) {
+      window.removeEventListener('scroll', this.onScroll, false);
+      window.removeEventListener('resize', this.onResize, false);
+    }
   }
 
 
@@ -95,7 +99,6 @@ class EditorApp extends Component { // eslint-disable-line}
               />
             </EditorStickyWrap>
           </div>
-
 
           :
           (<Editor
