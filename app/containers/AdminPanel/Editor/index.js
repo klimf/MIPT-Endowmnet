@@ -16,6 +16,7 @@ figure {
    margin: 12px;
 `}
  }
+
  owerlay: hoidden;
  .rdw-image-imagewrapper {
    max-width: 100%;
