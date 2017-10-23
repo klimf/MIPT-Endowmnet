@@ -5,10 +5,9 @@ import { EditorState, convertFromRaw } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import toolbarOptions from './plugins/toolbar/options';
 
-const toolbarHeight = 60;
 const EditorStickyWrap = styled.div`
 position: relative;
-padding-top: ${toolbarHeight + 20}px;
+padding-top: ${(props) => props.toolbarHeight + 10}px;
 .rdw-editor-toolbar {
   position: absolute;
   ${(props) => props.sticky ? 'position: fixed;' : 'position: absolute;'}
@@ -24,6 +23,7 @@ class EditorApp extends Component { // eslint-disable-line}
     const regularState = {
       contentState: this.props.initialContentState,
       sticky: false,
+      toolbarHeight: 0,
     };
     try {
       this.state = {
@@ -40,15 +40,20 @@ class EditorApp extends Component { // eslint-disable-line}
 
     this.onEditorStateChange = this.onEditorStateChange.bind(this);
     this.onScroll = this.onScroll.bind(this);
+    this.onResize = this.onResize.bind(this);
   }
 
   componentDidMount() {
     window.addEventListener('scroll', this.onScroll, false);
+    window.addEventListener('resize', this.onResize, false);
+    this.onResize();
   }
 
   componentWillUnmount() {
     window.removeEventListener('scroll', this.onScroll, false);
+    window.removeEventListener('resize', this.onResize, false);
   }
+
 
   onEditorStateChange(editorState) {
     try {
@@ -60,8 +65,8 @@ class EditorApp extends Component { // eslint-disable-line}
   }
 
   onScroll() {
-    const topPoint = this.editor.getClientRects()['0'].y + toolbarHeight;
-    const bottomPoint = topPoint + this.editor.getClientRects()['0'].height;
+    const topPoint = this.stickyWrap.getClientRects()['0'].y + this.state.toolbarHeight;
+    const bottomPoint = (topPoint + this.stickyWrap.getClientRects()['0'].height) - this.state.toolbarHeight;
     if (topPoint <= 0 && bottomPoint >= 0 && !this.state.sticky) {
       this.setState({ sticky: true });
     } else if ((topPoint > 0 || bottomPoint < 0) && this.state.sticky) {
@@ -69,14 +74,21 @@ class EditorApp extends Component { // eslint-disable-line}
     }
   }
 
+  onResize() {
+    const toolbar = this.stickyWrap.querySelector('.rdw-editor-toolbar');
+    this.setState({ toolbarHeight: toolbar.getClientRects()['0'].height });
+  }
+
   render() {
     return (
       <div >
         {!this.props.readOnly ?
-          <div ref={(c) => (this.editor = c)}>
-            <EditorStickyWrap sticky={this.state.sticky} >
+          <div ref={(c) => (this.stickyWrap = c)}>
+            <EditorStickyWrap
+              sticky={this.state.sticky}
+              toolbarHeight={this.state.toolbarHeight}
+            >
               <Editor
-                editorClassName={'rwd-editor'}
                 toolbar={toolbarOptions}
                 editorState={!this.props.initialContentState && this.state.editorState}
                 onEditorStateChange={!this.props.initialContentState && this.onEditorStateChange}
