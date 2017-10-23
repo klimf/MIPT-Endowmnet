@@ -55,7 +55,11 @@ injectGlobal`
   
   h1, h2, h3, h4, p {
     line-height: 100%;
-    font-weight: 400;
+    font-weight: 300;
+  }
+  
+  h1 {
+    font-size: 36px;
   }
   
   p, ul {

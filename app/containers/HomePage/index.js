@@ -16,20 +16,20 @@ import { createStructuredSelector } from 'reselect';
 import Content from 'components/Content';
 import Masthead from 'components/Masthead';
 import Space from 'components/Space';
-import Image from 'components/FullImage';
-import Title from 'components/Title';
 import News from 'components/News';
 import Quotes from 'components/Quotes';
-import Partners from 'components/Partners';
 import Button from 'components/Button';
 import makeSelectHomePage from './selectors';
 import { fetchNews } from '../NewsPage/actions';
 import { makeSelectNewsPage } from '../NewsPage/selectors';
 import { fetchStories } from '../StoriesPage/actions';
 import { makeSelectStoriesPage } from '../StoriesPage/selectors';
-import howML from '../../images/how.png';
-import howS from '../../images/how_mobile.png';
-import { fetchFundVolume } from './actions';
+import {
+  fetchFundVolume,
+  fetchHomeSection,
+  fetchHomeBottomSection,
+ } from './actions';
+import componentResolver from '../../components/ComponentResolver';
 
 
 class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
@@ -38,6 +38,8 @@ class HomePage extends React.PureComponent { // eslint-disable-line react/prefer
     this.props.fetchFundVolume.start();
     this.props.fetchStories.start();
     this.props.fetchNews.start();
+    this.props.fetchHomeSection.start();
+    this.props.fetchHomeBottomSection.start();
   }
 
   render() {
@@ -56,11 +58,10 @@ class HomePage extends React.PureComponent { // eslint-disable-line react/prefer
             purpose={this.props.homePage.fundVolume.data && this.props.homePage.fundVolume.data.need}
             collected={this.props.homePage.fundVolume.data && this.props.homePage.fundVolume.data.given}
           />
-          <Space size={5} />
-          <Title>Как это работает?</Title>
-          <Image src={howML} local noSmall />
-          <Image src={howS} local noMedium noLarge />
-          <Space size={5} />
+          <Space size={2} />
+
+          {componentResolver(this.props.homePage.section1.data ? this.props.homePage.section1.data.content : null)}
+
           <News
             title="Последние новости и мероприятия"
             items={this.props.news.map((x) => Object.assign({}, x, { link: `news/${x.id}` }))}
@@ -75,7 +76,7 @@ class HomePage extends React.PureComponent { // eslint-disable-line react/prefer
           <Space size={1} />
           <Button centred type="border" to="/stories">Все истории</Button>
           <Space size={2} />
-          <Partners />
+          {componentResolver(this.props.homePage.section2.data ? this.props.homePage.section2.data.content : null)}
           <Space size={2} />
           <Button centred type="border" to="/sponsors">Все спонсоры</Button>
           <Space size={5} />
@@ -92,6 +93,8 @@ HomePage.propTypes = {
   news: PropTypes.array,
   fetchStories: PropTypes.object,
   fetchNews: PropTypes.object,
+  fetchHomeSection: PropTypes.object,
+  fetchHomeBottomSection: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -104,6 +107,8 @@ const mapDispatchToProps = (dispatch) => ({
   fetchFundVolume: fetchFundVolume.bindTo(dispatch),
   fetchNews: fetchNews.bindTo(dispatch),
   fetchStories: fetchStories.bindTo(dispatch),
+  fetchHomeSection: fetchHomeSection.bindTo(dispatch),
+  fetchHomeBottomSection: fetchHomeBottomSection.bindTo(dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
