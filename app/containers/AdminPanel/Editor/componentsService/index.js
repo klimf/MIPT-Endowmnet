@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import getFormByName, { config } from './formsConfig';
 import ComponentFormModal from './ComponentFormModal';
 import { AddButton, DeleteButton, FormWrap, OrderButton } from './components';
-// import Button from 'components/Button';
 
 
 function renderFormItem(name, fields) {

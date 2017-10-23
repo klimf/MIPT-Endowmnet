@@ -71,7 +71,9 @@ const side = (left, right, index) => {
 function Item(props) {
   return (
     <ImgContent
-      margin="48px 0" block padding="24px" reverse={side(props.left, props.right, props.index)} circle shadow
+      margin="48px 0" block padding="24px" reverse={side(props.isLeft, props.right, props.index)}
+      circle
+      shadow
       image={props.image && props.image.original ? props.image.small : props.image}
     >
       <Quote>{props.quote}</Quote>
@@ -91,7 +93,7 @@ Item.propTypes = {
   image: PropTypes.string,
   index: PropTypes.number,
   noMore: PropTypes.bool,
-  left: PropTypes.bool,
+  isLeft: PropTypes.bool,
   right: PropTypes.bool,
 };
 
