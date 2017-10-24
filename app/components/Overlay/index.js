@@ -4,7 +4,7 @@ import { hideOn } from '../../utils/helpers';
 
 const Overlay = styled.div`
   position: fixed;
-  z-index: 1000;
+  z-index: 1500;
   top:0;
   right:0;
   bottom:0;
@@ -15,7 +15,6 @@ const Overlay = styled.div`
   pointer-events: ${(props) => props.show ? 'auto' : 'none'};
   opacity: ${(props) => props.show ? '100' : '0'};
   transition: 0.3s ease;
-  display: flex;
   align-items: center;
   ${hideOn}
 `;

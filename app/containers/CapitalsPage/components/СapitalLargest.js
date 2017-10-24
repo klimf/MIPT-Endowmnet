@@ -20,7 +20,7 @@ import Block from '../../../components/Block';
 const Wrapper = styled.div`
   height: 100%;
   ${(props) => props.preview && `
-    width: 600px;
+    width: 100%;
     height: 400px;
   `}
  
@@ -120,7 +120,7 @@ function CapitalLargest(props) {
       <Block padding="40px">
         <FlexBox style={{ height: '140px' }}>
           <ImgWrapper noSmall>
-            <Image style={{ height: '140px' }} rounded shadow src={props.image} />
+            <Image style={{ height: '140px' }} rounded shadow src={props.image && props.image.small} />
           </ImgWrapper>
           <Info>
             <Name>

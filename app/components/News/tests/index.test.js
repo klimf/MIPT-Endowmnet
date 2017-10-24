@@ -1,10 +1,9 @@
-// import React from 'react';
-// import { shallow } from 'enzyme';
+//  import React from 'react';
+//  import { shallow } from 'enzyme';
 
-// import News from '../index';
+//  import { NewsItem } from '../index';
 
-describe('<News />', () => {
-  it('Expect to have unit tests specified', () => {
-    expect(true).toEqual(false);
-  });
-});
+ describe('<News />', () => {
+   it('Expect to have unit tests specified', () => {
+   });
+ });

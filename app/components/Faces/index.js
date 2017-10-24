@@ -15,7 +15,7 @@ import face3 from '../../images/Face3.jpg';
 import Title from '../Title/index';
 import Space from '../Space/index';
 
-const Wrapper = styled.div`
+export const Wrapper = styled.div`
   width: calc(100% + 48px);
   margin-left: -24px;
   display: flex;
@@ -29,7 +29,7 @@ function Faces(props) {
       <Space size={2} />
       <Wrapper>
         {props.items.map((item, index) => (
-          <Item key={index} image={item.image} name={item.name} status={item.status} />
+          <Item key={index} {...item} />
       ))}
       </Wrapper>
     </div>
@@ -42,21 +42,25 @@ Faces.defaultProps = {
       image: face,
       name: 'Сергей Гуз',
       status: 'Председатель правления',
+      local: true,
     },
     {
       image: face1,
       name: 'Дмитрий Быкадоров',
       status: 'Заместитель председателя правления',
+      local: true,
     },
     {
       image: face2,
       name: 'Николай Кудрявцев',
       status: 'Сотрудник',
+      local: true,
     },
     {
       image: face3,
       name: 'Юрий Алашеев',
       status: 'Сотрудник',
+      local: true,
     },
   ],
   title: 'Крупные спонсоры',

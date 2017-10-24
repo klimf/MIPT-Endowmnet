@@ -1,98 +1,117 @@
-import React, { Component } from 'react';
-import Editor from 'draft-js-plugins-editor';
-import { EditorState, convertFromRaw } from 'draft-js';
+import React, { PropTypes } from 'react';
+import { Field } from 'redux-form';
 import styled from 'styled-components';
-import 'last-draft-js-toolbar-plugin/lib/plugin.css';
-import 'last-draft-js-sidebar-plugin/lib/plugin.css';
-import plugins from './plugins';
-import { InlineToolbar } from './plugins/tollbar';
-import { AlignmentTool } from './plugins/common';
-import placeholder from '../../../images/placeholder.png';
+import { media } from 'utils/helpers';
+import { palette } from 'utils/constants';
+import { EditorState, convertFromRaw } from 'draft-js';
+import Editor from './editor';
 
+const EditorWrap = styled.div`
+padding: 17px;
+border: 1px solid #eee;
+z-index: 150;
+background: ${palette.background};
+figure {
+  ${media.small`
+   margin: 12px;
+`}
+ }
 
-export const EditorWrap = styled.div`
- padding: 17px;
- border: 1px solid #eee;
- figure {
-   margin: 0;
+ owerlay: hoidden;
+ .rdw-image-imagewrapper {
+   max-width: 100%;
+   display: block;
+     img {
+       max-width: 100%;
+       ${media.medium`
+          height: auto !important;
+       `}
+       ${media.small`
+        height: auto !important;
+        width: auto !important;
+    `}
+     
+     }
+ }
+ iframe {
+  max-width: 100%;
+  margin: 0 auto;
+  display: block;
+
+  ${media.small`
+  height: auto !important;
+  width: auto !important;
+  `}
  }
 `;
 
+const ContentPresentorWrap = styled.div`
+ .rdw-editor-toolbar {
+   height: 0;
+ }
+ figure {
+  ${media.small`
+   margin: 12px;
+`}
+ }
+ owerlay: hoidden;
+ .rdw-image-imagewrapper {
+   max-width: 100%;
+   display: block;
+     img {
+       max-width: 100%;
+       ${media.medium`
+          height: auto !important;
+       `}
+       ${media.small`
+        height: auto !important;
+        width: auto !important;
+    `}
+     
+     }
+ }
+ iframe {
+  max-width: 100%;
+  margin: 0 auto;
+  display: block;
 
-const initialState = {
-  entityMap: {
-    kek: {
-      type: 'image',
-      mutability: 'IMMUTABLE',
-      data: {
-        src: placeholder,
-      },
-    },
-  },
-  blocks: [{
-    key: '9gm3s',
-    text: 'You can have images in your text field. This is a very rudimentary example, but you can enhance the image plugin with resizing, focus or alignment plugins.',
-    type: 'unstyled',
-    depth: 0,
-    inlineStyleRanges: [],
-    entityRanges: [],
-    data: {},
-  }, {
-    key: 'ov7r',
-    text: ' ',
-    type: 'atomic',
-    depth: 0,
-    inlineStyleRanges: [],
-    entityRanges: [{
-      offset: 0,
-      length: 1,
-      key: 'kek',
-    }],
-    data: {},
-  }, {
-    key: 'e23a8',
-    text: 'See advanced examples further down …',
-    type: 'unstyled',
-    depth: 0,
-    inlineStyleRanges: [],
-    entityRanges: [],
-    data: {},
-  }],
-};
+  ${media.small`
+  height: auto !important;
+  width: auto !important;
+  `}
+ }
+`;
 
-class EditorApp extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      editorState: EditorState.createWithContent(convertFromRaw(initialState)),
-    };
-    this.onEditorChange = this.onEditorChange.bind(this);
-  }
-  onEditorChange(editorState) {
-    this.setState({ editorState });
-  }
+const EditorComponent = (field) => (<EditorWrap>
+  <Editor editorStateChange={field.input.onChange} editorState={field.input.value} />
+</EditorWrap>);
 
-  focus = () => {
-    this.editor.focus();
-  };
 
-  render() {
-    return (
-      <div >
-        <EditorWrap onClick={this.focus}>
-          <Editor
-            editorState={this.state.editorState}
-            onChange={this.onEditorChange}
-            plugins={plugins}
-            ref={(element) => { this.editor = element; }}
-          />
-          <AlignmentTool></AlignmentTool>
-          <InlineToolbar></InlineToolbar>
-        </EditorWrap>
-
-      </div>
-    );
-  }
+export default function EditorField({ source, name, validate }) {
+  return (<Field name={name || source} validate={validate} component={EditorComponent} />);
 }
 
-export default EditorApp;
+EditorField.propTypes = {
+  source: PropTypes.string,
+  validate: PropTypes.array,
+  name: PropTypes.string,
+};
+
+
+export function ContentPresentor({ raw }) {
+  const contentState = typeof raw === 'string' ? JSON.parse(raw) : raw;
+  const editorState = EditorState.createWithContent(convertFromRaw(contentState));
+  return (
+    <ContentPresentorWrap>
+      <Editor
+        editorState={editorState}
+        toolbarHidden
+        readOnly
+      />
+    </ContentPresentorWrap>
+  );
+}
+
+ContentPresentor.propTypes = {
+  raw: PropTypes.string.isRequired,
+};

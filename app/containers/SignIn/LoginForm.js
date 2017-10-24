@@ -35,8 +35,8 @@ class LoginForm extends Component {
           actionLabel={messages.signIButton.defaultMessage}
           handleSubmit={this.onSubmit}
         >
-          <Input name={'email'} label={messages.loginLabel.defaultMessage} validations={['required', 'email']} placeholder={'jambul@mail.ru'}></Input>
-          <Input name={'password'} validations={['required', 'password']} label={messages.passwordLabel.defaultMessage} type="password" placeholder={'jambul@mail.ru'}></Input>
+          <Input name={'email'} label={messages.loginLabel.defaultMessage} validations={['required', 'email']} placeholder={'jambul@mail.ru'} />
+          <Input name={'password'} validations={['required', 'password']} label={messages.passwordLabel.defaultMessage} type="password" placeholder={'jambul@mail.ru'} />
         </SimpleForm>
       </div>
     );

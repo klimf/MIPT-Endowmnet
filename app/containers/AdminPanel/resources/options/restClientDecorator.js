@@ -7,9 +7,10 @@ import {
 
 export default function (restClient) {
   return (type, resource, params) => {
-    if (resource === 'options') {
+    if (resource === 'domainOptions') {
       if (type === GET_LIST) {
         return restClient(type, resource, params).then((response) => {
+          delete response.data['id']; // eslint-disable-line
           const formattedOptions = Object.keys(response.data).map((key) => ({ id: key, value: response.data[key] }));
           return Object.assign({}, response, { data: formattedOptions });
         });

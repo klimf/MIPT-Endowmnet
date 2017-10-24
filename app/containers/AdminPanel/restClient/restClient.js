@@ -62,7 +62,6 @@ const createRequest = (type, resource, params) => {
     body: params.data,
   });
 
-  console.log(params);
 
   const requrestAction = {
     type,
@@ -83,7 +82,8 @@ export default (type, resource, params) => {
   return api[method](url, method === 'get' || method === 'delete' ? query : body, query)
       .then((response) => formatResponse(response, type))
       .catch((e) => {
-        console.error(e);
+        console.log(e);
         return Promise.reject(e);
       });
 };
+

@@ -1,9 +1,11 @@
 import { createSelector } from 'reselect';
 
+
 /**
- * Direct selector to the storyPage state domain
+ * Direct selector to the StoriesItemPage state domain
  */
-const selectStoryPageDomain = () => (state) => state.get('storyPage');
+const selectStoriesItemPageDomain = () => (state) => state.get('StoryPage');
+const selectStoriesItem = () => (state) => state.get('storyPage').get('StoriesData');
 
 /**
  * Other specific selectors
@@ -11,15 +13,21 @@ const selectStoryPageDomain = () => (state) => state.get('storyPage');
 
 
 /**
- * Default selector used by StoryPage
+ * Default selector used by StoriesItemPage
  */
 
-const makeSelectStoryPage = () => createSelector(
-  selectStoryPageDomain(),
+const makeSelectStoriesItemPage = () => createSelector(
+  selectStoriesItemPageDomain(),
   (substate) => substate.toJS()
 );
 
-export default makeSelectStoryPage;
+const makeSelectStoriesItem = () => createSelector(
+  selectStoriesItem(),
+  (substate) => substate.toJS().data || {}
+);
+
+export default makeSelectStoriesItemPage;
 export {
-  selectStoryPageDomain,
+  selectStoriesItemPageDomain,
+  makeSelectStoriesItem,
 };

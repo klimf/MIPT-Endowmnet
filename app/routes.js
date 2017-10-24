@@ -23,12 +23,34 @@ export default function createRoutes(store) {
       name: 'home',
       getComponent(nextState, cb) {
         const importModules = Promise.all([
+          import('containers/HomePage/reducer.js'),
+          import('containers/HomePage/sagas.js'),
+
+          import('containers/StoriesPage/reducer'),
+          import('containers/StoriesPage/sagas'),
+
+          import('containers/NewsPage/reducer'),
+          import('containers/NewsPage/sagas'),
+
           import('containers/HomePage'),
         ]);
 
         const renderRoute = loadModule(cb);
 
-        importModules.then(([component]) => {
+        importModules.then(([
+          reducer,
+          sagas,
+          storiesReducer,
+          storiesSagas,
+          newsReducer,
+          newsSagas,
+          component]) => {
+          injectReducer('homePage', reducer.default);
+          injectReducer('storiesPage', storiesReducer.default);
+          injectReducer('newsPage', newsReducer.default);
+          injectSagas(storiesSagas.default);
+          injectSagas(newsSagas.default);
+          injectSagas(sagas.default);
           renderRoute(component);
         });
 
@@ -155,6 +177,26 @@ export default function createRoutes(store) {
         importModules.catch(errorLoading);
       },
     }, {
+      path: '/news(/:id)',
+      name: 'newsPage',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          import('containers/NewsItemPage/reducer'),
+          import('containers/NewsItemPage/sagas'),
+          import('containers/NewsItemPage'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('newsItemPage', reducer.default);
+          injectSagas(sagas.default);
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    }, {
       path: '/about',
       name: 'aboutPage',
       getComponent(nextState, cb) {
@@ -175,7 +217,7 @@ export default function createRoutes(store) {
         importModules.catch(errorLoading);
       },
     }, {
-      path: '/capital(/:capitalName)',
+      path: '/capitals(/:capitalName)',
       name: 'capitalPage',
       getComponent(nextState, cb) {
         const importModules = Promise.all([
@@ -195,7 +237,7 @@ export default function createRoutes(store) {
         importModules.catch(errorLoading);
       },
     }, {
-      path: '/story',
+      path: '/stories(/:id)',
       name: 'storyPage',
       getComponent(nextState, cb) {
         const importModules = Promise.all([
@@ -307,6 +349,26 @@ export default function createRoutes(store) {
 
         importModules.then(([reducer, component]) => {
           injectReducer('forbiddenPage', reducer.default);
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    }, {
+      path: '/p/*',
+      name: 'genericPage',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          import('containers/GenericPage/reducer'),
+          import('containers/GenericPage/sagas'),
+          import('containers/GenericPage'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('genericPage', reducer.default);
+          injectSagas(sagas.default);
           renderRoute(component);
         });
 

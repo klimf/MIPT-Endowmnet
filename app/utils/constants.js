@@ -43,9 +43,15 @@ export const block = css`
 `;
 
 export const image = css`
-  background: url(${(props) => props.src ? resolveStatic(props.src) : placeholder}) center no-repeat;
+  background: url(${(props) => {
+    if (props.src) {
+      return (props.src.indexOf('image/') === -1) ? props.src : resolveStatic(props.src);
+    }
+    return placeholder;
+  }}) center no-repeat;
   background-size: cover;
 `;
+
 
 export const Block = styled.div`
   display: flex;

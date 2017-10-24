@@ -10,12 +10,14 @@ import { image, palette, shadow } from '../../utils/constants';
 import Space from '../Space/index';
 import { media } from '../../utils/helpers';
 
-const Wrapper = styled.div`
-  padding: 0 12px;
+export const Wrapper = styled.div`
+  position: relative;
+  padding: 0 12px 24px;
   width: 25%;
   display: inline-block;
   text-align: center;
   margin: 0;
+  overflow: hidden;
   & h2 {
     font-weight: 400;
     margin: 0 0 12px 0;
@@ -30,7 +32,7 @@ const Wrapper = styled.div`
     width: 50%;
   `}
 `;
-const Image = styled.div`
+export const Image = styled.div`
     background-position: center;
     width: 80%;
     margin: 0 10% 12px 10%;
@@ -44,7 +46,7 @@ const Image = styled.div`
 function Face(props) {
   return (
     <Wrapper>
-      <Image src={props.image} />
+      <Image local={props.local} src={props.image.original ? props.image.small : props.image} />
       <Space size={2} />
       <h2>{props.name}</h2>
       <p>{props.status}</p>
@@ -56,6 +58,7 @@ Face.propTypes = {
   image: PropTypes.string,
   name: PropTypes.string,
   status: PropTypes.string,
+  local: PropTypes.bool,
 };
 
 export default Face;

@@ -5,22 +5,32 @@
 */
 
 import React, { PropTypes } from 'react';
-
+import { Link } from 'react-router';
+import styled from 'styled-components';
 import Title from 'components/Title';
 import Item from './Item';
-
 import face1 from '../../images/Face1.jpg';
 import face2 from '../../images/Face2.jpg';
 import face3 from '../../images/Face3.jpg';
 
+
+export const StyledLink = styled(Link)`
+text-decoration: none;
+font-weight: 300;
+`;
+
 function Quotes(props) {
   return (
+
     <div>
       <Title>{props.title}</Title>
       {props.items.map((item, index) => (
-        <Item {...props} key={index} index={index} {...item} />
+        <StyledLink to={item.link}>
+          <Item {...props} key={index} index={index} {...item} />
+        </StyledLink>
       ))}
     </div>
+
   );
 }
 

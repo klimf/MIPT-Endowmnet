@@ -91,7 +91,7 @@ export class SimpleForm extends React.PureComponent { // eslint-disable-line
           <Space size={3} />
           <Form {...this.props} >
             { React.Children.map(this.props.children, Field) }
-            <Button expanded submit >
+            <Button type="noHover" expanded submit >
               { this.props.actionLabel }
             </Button>
           </Form >

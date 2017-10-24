@@ -13,6 +13,8 @@ import makeSelectAchievementsPage from './selectors';
 import Title from '../../components/Title/index';
 import Content from '../../components/Content/index';
 import { palette } from '../../utils/constants';
+import { hideOn, media } from '../../utils/helpers';
+import Space from '../../components/Space/index';
 
 const Line = styled.div`
   position: absolute;
@@ -21,6 +23,7 @@ const Line = styled.div`
   left: 140px;
   width: 3px;
   background-color: ${palette.disabled};
+  ${hideOn}
 `;
 
 const StyledContent = styled(Content)`
@@ -31,7 +34,10 @@ const StyledContent = styled(Content)`
 const Item = styled.div`
   position: relative;
   display: flex;
-  margin-bottom: 36px;
+  margin-bottom: 42px;
+  ${media.small`
+    display: block;
+  `}
 `;
 const Year = styled.div`    
   font-size: 36px;
@@ -39,13 +45,18 @@ const Year = styled.div`
   width: 140px;
   display: inline-block;
   padding: 10px 0;
+  margin-bottom: 12px;
   color: ${palette.primary};
 `;
 const Description = styled.div`
   font-size: 20px;   
+  line-height: 24px;
   width: calc(100% - 140px);
   display: inline-block;
   color: ${palette.black};
+  ${media.small`
+    width: 100%;
+  `}
 `;
 const Dot = styled.div`
   position: absolute;
@@ -56,6 +67,7 @@ const Dot = styled.div`
   background-color: ${palette.primary};
   border: 3px solid ${palette.background};
   border-radius: 50%;
+  ${hideOn}
 `;
 
 export class AchievementsPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
@@ -69,14 +81,16 @@ export class AchievementsPage extends React.PureComponent { // eslint-disable-li
           ]}
         />
         <StyledContent>
-          <Line />
+          <Line noSmall />
+          <Space size={4} />
           <Title>Достижения</Title>
+          <Space size={1} />
           {this.props.items.map((item, index) => (
             <Item key={index}>
               <Year>
                 {item.year}
               </Year>
-              <Dot />
+              <Dot noSmall />
               <Description>
                 {item.description}
               </Description>

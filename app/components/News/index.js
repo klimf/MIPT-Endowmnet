@@ -27,24 +27,25 @@ function News(props) {
 News.defaultProps = {
   items: [
     {
-      title: 'Заголовок новости',
+      name: 'Заголовок новости',
       description: 'Краткое описание этой новости. Краткое описание этой новости. Краткое описание этой новости. Краткое описание этой новости. ',
-      image: img1,
+      image: { small: img1 },
       link: '/newsitem',
+      local: true,
     },
     {
-      title: 'Заголовок новости',
+      name: 'Заголовок новости',
       description: 'Краткое описание этой новости. Краткое описание этой новости. Краткое описание Краткое описание Краткое описание этой новости. Краткое описание этой новости. ',
-      image: img2,
+      image: { small: img2 },
       link: '/newsitem',
+      local: true,
     },
     {
-      title: 'Заголовок новости',
+      name: 'Заголовок новости',
       description: 'Краткое описание этой новости. Краткое описание этой новости. Краткое описание этой новости. Краткое описание этой новости. ',
-      image: img3,
+      image: { small: img3 },
       link: '/newsitem',
-      date: '14',
-      month: 'Сентября',
+      local: true,
     },
   ],
 };
@@ -55,3 +56,4 @@ News.propTypes = {
 };
 
 export default News;
+export { default as NewsItem } from './Item';

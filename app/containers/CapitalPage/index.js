@@ -11,7 +11,6 @@ import { createStructuredSelector } from 'reselect';
 import styled from 'styled-components';
 import { bindAll } from 'redux-act';
 import scrollToComponent from 'react-scroll-to-component';
-
 import makeSelectCapitalPage, { makeSelectCurrentCapital } from './selectors';
 import * as actions from './actions';
 import img from '../../images/CapitalImage.jpg';
@@ -21,7 +20,7 @@ import face2 from '../../images/Face2.jpg';
 import face3 from '../../images/Face3.jpg';
 import Content from '../../components/Content/index';
 import Space from '../../components/Space/index';
-import { hideOn, media, formatMoney } from '../../utils/helpers';
+import { hideOn, media, formatMoney, resolveStatic } from '../../utils/helpers';
 import Quotes from '../../components/Quotes/index';
 import { DonationForm } from '../../components/DonationForm/index';
 import WdH from '../../components/WdH/index';
@@ -30,7 +29,7 @@ import InfoText from '../../components/InfoText/index';
 import Button from '../../components/Button/index';
 import Title from '../../components/Title/index';
 import Image from '../../components/FullImage/index';
-
+import componentResolver from '../../components/ComponentResolver';
 
 const Head = styled(FlexBox)`
   position: relative;
@@ -110,6 +109,11 @@ export class CapitalPage extends React.PureComponent { // eslint-disable-line re
           title={this.props.capital.data.name}
           meta={[
             { name: 'description', content: this.props.capital.data.description },
+            { name: 'og:url', content: window.location.href },
+            { name: 'og:type', content: 'website' },
+            { name: 'og:title', content: this.props.capital.data.name },
+            { name: 'og:description', content: this.props.capital.data.description },
+            { name: 'og:image', content: resolveStatic(this.props.capital.data.image ? this.props.capital.data.image.small : null) },
           ]}
         />
       }
@@ -126,8 +130,8 @@ export class CapitalPage extends React.PureComponent { // eslint-disable-line re
               <InfoAction>
                 <InfoText>
                   <h2>
-                    <b>Собрано:</b>
-                    <i>{formatMoney(this.props.capital.data.given)}₽</i>
+                    <b>Собрано: </b>
+                    <i>{formatMoney(this.props.capital.data.given)} ₽</i>
                   </h2>
                 </InfoText>
                 <BtnFix>
@@ -138,11 +142,14 @@ export class CapitalPage extends React.PureComponent { // eslint-disable-line re
           </Head>
           <Space size={2} />
           <Title>О капитале</Title>
-          <div dangerouslySetInnerHTML={this.props.data.content} />
+          {this.props.capital.data.content &&
+            componentResolver(this.props.capital.data.content)
+          }
+
           <Space size={3} />
-          <Quotes title="Основатели" noMore items={this.props.capital.data.founders || []} />
+          <Quotes title="Основатели" left noMore items={this.props.capital.data.founders || []} />
           <Space size={3} />
-          <Quotes title="Получатели" noMore items={this.props.capital.data.receivers || []} />
+          <Quotes title="Получатели" right noMore items={this.props.capital.data.receivers || []} />
           <Space size={2} />
           <DonationForm ref={(e) => (this.donationForm = e)} title="Пополнить капитал" />
         </Content>

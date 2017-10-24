@@ -8,7 +8,9 @@ import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 
 
+import { createStructuredSelector } from 'reselect';
 import { FormattedMessage } from 'react-intl';
+import { connect } from 'react-redux';
 import messages from './messages';
 
 import Wrapper from './Wrapper';
@@ -22,9 +24,12 @@ import FlexBox from '../../components/FlexBox';
 import Overlay from '../../components/Overlay';
 import { ProtectedContent } from '../AuthProvider';
 import AccountButton from '../AuthProvider/AccountButton';
+import { makeSelectNavItems } from './selectors';
+import { fetchNav } from './actions';
+
 
 const LoginButton = () => (
-  <Button to="/sign-in" type="border" margin="9px 24px" ><FormattedMessage {...messages.enter} /></Button>
+  <Button onMouseDown={this.handleMobileMenuClick} to="/sign-in" type="border" margin="9px 24px" ><FormattedMessage {...messages.enter} /></Button>
 );
 
 class Header extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
@@ -35,6 +40,11 @@ class Header extends React.PureComponent { // eslint-disable-line react/prefer-s
     };
     this.handleMobileMenuClick = this.handleMobileMenuClick.bind(this);
   }
+
+  componentWillMount() {
+    this.props.fetchNav.start();
+  }
+
 
   handleMobileMenuClick() {
     this.setState({
@@ -53,16 +63,15 @@ class Header extends React.PureComponent { // eslint-disable-line react/prefer-s
               stateSelector={(state) => state.get('authProvider').get('user')}
               UnauthorizedComponent={LoginButton}
             >
-              <AccountButton margin="9px 24px"></AccountButton>
+              <AccountButton margin="9px 24px" />
             </ProtectedContent>
-
             <Button to="/donate" type="header" margin="9px 0"><FormattedMessage {...messages.action} /></Button>
           </FlexBox>
           <Icon noLarge noMedium type="menu" onClick={this.handleMobileMenuClick} />
         </FlexBox>
         <NavList noSmall>
-          {messages.navigation.map((item, index) => (
-            <NavItem key={index} to={item.link}><FormattedMessage {...item} /></NavItem>
+          {this.props.nav.map((item, index) => (
+            <NavItem key={index} to={item.url}>{item.name}</NavItem>
           ))}
         </NavList>
         <Overlay noMedium noLarge show={this.state.menuIsOpen}>
@@ -73,13 +82,18 @@ class Header extends React.PureComponent { // eslint-disable-line react/prefer-s
             </FlexBox>
           </Wrapper>
           <NavList>
-            {messages.navigation.map((item, index) => (
-              <NavItem onClick={this.handleMobileMenuClick} key={index} to={item.link}><FormattedMessage {...item} /></NavItem>
+            {this.props.nav.map((item, index) => (
+              <NavItem onClick={this.handleMobileMenuClick} key={index} to={item.url}>{item.name}</NavItem>
             ))}
           </NavList>
           <FlexBox horisontal="space-between" padding="0 4%">
             <Button to="/donate" type="header" onClick={this.handleMobileMenuClick} ><FormattedMessage {...messages.action} /></Button>
-            <Button onClick={this.handleLoginClick} type="border" ><FormattedMessage {...messages.enter} /></Button>
+            <ProtectedContent
+              stateSelector={(state) => state.get('authProvider').get('user')}
+              UnauthorizedComponent={LoginButton}
+            >
+              <AccountButton margin="9px 24px 9px 0" />
+            </ProtectedContent>
           </FlexBox>
         </Overlay>
       </Wrapper>
@@ -87,14 +101,18 @@ class Header extends React.PureComponent { // eslint-disable-line react/prefer-s
   }
 }
 
-// Container.propTypes = {
-//   theme: {
-//     color: PropTypes.string,
-//   },
-// };
 
 Header.propTypes = {
-  dark: PropTypes.bool,
+  nav: PropTypes.array,
+  fetchNav: PropTypes.object,
 };
 
-export default Header;
+const mapStateToProps = createStructuredSelector({
+  nav: makeSelectNavItems(),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  fetchNav: fetchNav.bindTo(dispatch),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

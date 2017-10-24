@@ -72,9 +72,11 @@ const { injectReducer, injectSagas } = getAsyncInjectors(store);
 const commonStoreExtensions = {
   reducers: [
     import('./containers/AuthProvider/reducer'),
+    import('./containers/Header/reducer.js'),
   ],
   sagas: [
     import('./containers/AuthProvider/sagas'),
+    import('./containers/Header/sagas'),
   ],
 };
 

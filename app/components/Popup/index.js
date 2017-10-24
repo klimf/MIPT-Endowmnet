@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import Button from '../Button';
 import Overlay from '../Overlay';
 import Title from '../Title';
+import { media } from '../../utils/helpers';
+import Space from '../Space/index';
 
 const CancelButton = (props) => (
   <Button {...props} fake expanded>
@@ -13,16 +15,21 @@ const CancelButton = (props) => (
 const PopupWrap = styled.div`
       display: block;
       height: 400px;
-      max-width: 960px;
-      backgroud: #000;
+      width: 960px;
       margin: 0 auto;
+      ${media.medium`
+        width: 100%;
+      `}
   `;
 
 const Popup = (props) => (
   <Overlay show={props.show}>
     <PopupWrap>
+      <Space size={4} />
       <Title>{props.title}</Title>
-      <CancelButton onClick={props.onCancel}></CancelButton>
+      <Space size={1} />
+      <CancelButton type="noHover" onClick={props.onCancel} />
+      <Space size={1} />
       {props.children}
     </PopupWrap>
   </Overlay>

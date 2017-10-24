@@ -1,23 +1,23 @@
 /*
  *
- * StoryPage reducer
+ * CapitalPage reducer
+ *
+ */
+/*
+ *
+ * CapitalsPage reducer
  *
  */
 
 import { fromJS } from 'immutable';
+import { combineReducers } from 'redux-immutable';
+import { fetchReducerFactory } from '../../utils/api';
 import {
-  DEFAULT_ACTION,
-} from './constants';
+  fetchStoriesData,
+} from './actions';
 
-const initialState = fromJS({});
 
-function storyPageReducer(state = initialState, action) {
-  switch (action.type) {
-    case DEFAULT_ACTION:
-      return state;
-    default:
-      return state;
-  }
-}
+export default combineReducers({
+  StoriesData: fetchReducerFactory(fetchStoriesData),
+}, fromJS({}));
 
-export default storyPageReducer;

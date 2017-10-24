@@ -31,35 +31,35 @@ import img3 from '../../images/Bitmap3.jpg';
 
 import reportML from '../../images/report.png';
 import reportS from '../../images/report_mobile.png';
-import Faces from '../../components/Faces/index';
-import Attachments from '../../components/Attachments/index';
 import TabsBlock from '../../components/TabsBlock/index';
 
-const Navigation = styled.div`
+export const Navigation = styled.div`
   ${block}
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-around;
   min-height: 42px;
   overflow: hidden;
   border-radius: 21px;
 `;
 
-const NavItem = styled.div`
+export const NavItem = styled.div`
   background-color: ${(props) => props.active ? palette.primary : palette.transparent};
   color: ${(props) => props.active ? palette.white : palette.black};
   cursor: pointer;
   font-size: 20px;
+  flex-grow: 1;
+  text-align: center;
   padding: 11px 24px 0;
   min-height: 42px;
   transition: 0.3s ease;
-  border-radius: 21px;
+  border-left: 1px solid ${palette.dark};
   &:hover {
     background-color: ${(props) => props.active ? palette.primary : palette.dark};
   }
 `;
 
-const ImgContentCss = css`
+export const ImgContentCss = css`
   & p {
     font-size: 20px;
     margin: 0;
@@ -185,8 +185,7 @@ AboutPage.defaultProps = {
             </ImgContent>
           ))}
         </Content>,
-    },
-    {
+    }, {
       name: 'reports',
       label: 'Отчетность',
       content:
@@ -199,19 +198,15 @@ AboutPage.defaultProps = {
         </Content>,
     },
     {
-      name: 'team',
-      label: 'Команда',
+      name: 'reports',
+      label: 'Отчетность',
       content:
         <Content>
-          <Faces title="" />
-        </Content>,
-    },
-    {
-      name: 'docks',
-      label: 'Документы',
-      content:
-        <Content>
-          <Attachments />
+          <Space size={2} />
+          <Image src={reportML} noSmall />
+          <Image src={reportS} noMedium noLarge />
+          <Space size={3} />
+          <TabsBlock />
         </Content>,
     },
   ],
